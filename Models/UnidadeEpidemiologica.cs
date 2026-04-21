@@ -1,13 +1,13 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 
-using SilvaData.Utilities;
+using SilvaData_MAUI.Utilities;
 
 using Newtonsoft.Json;
 
 using SQLite;
 
-namespace SilvaData.Models
+namespace SilvaData_MAUI.Models
 {
     public class UpdateDataParametrosUnidadeEpidemiologica : UpdateDataParametros
     {
@@ -120,10 +120,10 @@ namespace SilvaData.Models
         }
 
         // REMOVIDO: Propriedades computadas que dependiam de DadosStatic
-        // Agora ser�o resolvidas no ViewModel ou CacheService
+        // Agora serão resolvidas no ViewModel ou CacheService
 
         /// <summary>
-        /// MIGRADO: Retorna a lista ao inv�s de modificar est�tico
+        /// MIGRADO: Retorna a lista ao invés de modificar estático
         /// </summary>
         public static async Task<List<UnidadeEpidemiologica>> PegaListaUE()
         {
@@ -160,7 +160,7 @@ namespace SilvaData.Models
                 await Db.InsertAsync(item).ConfigureAwait(false);
             }
 
-            // MUDAN�A: Notifica o CacheService para atualizar
+            // MUDANÇA: Notifica o CacheService para atualizar
             WeakReferenceMessenger.Default.Send(new RefreshCacheMessage(CacheType.UnidadesEpidemiologicas));
         }
 
@@ -220,8 +220,8 @@ namespace SilvaData.Models
                 }
                 else
                 {
-                    await SentryHelper.LogErrorAsync("Unidades Epidemiol�gicas", "UnidadeEpidemiologica", result.mensagem).ConfigureAwait(false);
-                    throw new Exception(!string.IsNullOrEmpty(result.mensagem) ? result.mensagem : "Erro desconhecido ao enviar unidades epidemiol�gicas");
+                    await SentryHelper.LogErrorAsync("Unidades Epidemiológicas", "UnidadeEpidemiologica", result.mensagem).ConfigureAwait(false);
+                    throw new Exception(!string.IsNullOrEmpty(result.mensagem) ? result.mensagem : "Erro desconhecido ao enviar unidades epidemiológicas");
                 }
             }
             catch (Exception ex)
@@ -238,7 +238,7 @@ namespace SilvaData.Models
         public string? PropriedadeNome { get; set; }
 
         /// <summary>
-        /// MIGRADO: Retorna a lista ao inv�s de modificar est�tico
+        /// MIGRADO: Retorna a lista ao invés de modificar estático
         /// </summary>
         public static async Task<List<UnidadeEpidemiologicaComDetalhes>> PegaListaUnidadesComDetalhesAsync()
         {

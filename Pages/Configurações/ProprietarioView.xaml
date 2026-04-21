@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <utils:ContentPageWithLocalization
-    x:Class="SilvaData.Controls.ProprietarioView"
+    x:Class="SilvaData_MAUI.Controls.ProprietarioView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
-    xmlns:controls="clr-namespace:SilvaData.Controls"
-    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:controls="clr-namespace:SilvaData_MAUI.Controls"
+    xmlns:fontawesome="clr-namespace:SilvaData_MAUI.FontAwesome"
     xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
     xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
-    xmlns:models="clr-namespace:SilvaData.Models"
-    xmlns:utils="clr-namespace:SilvaData.Utils"
+    xmlns:models="clr-namespace:SilvaData_MAUI.Models"
+    xmlns:utils="clr-namespace:SilvaData_MAUI.Utils"
     x:Name="proprietarioView"
     x:DataType="controls:ProprietarioView"
     Shell.TabBarIsVisible="false">
@@ -44,7 +44,7 @@
                         FontFamily="Nunito"
                         FontSize="Large"
                         HorizontalOptions="Start"
-                        Text="{localization:Translate Propriet�rios}"
+                        Text="{localization:Translate Proprietários}"
                         TextColor="White" />
                 </StackLayout>
 
@@ -64,7 +64,7 @@
                     Grid.Row="1"
                     Padding="15,0"
                     FontSize="Small"
-                    Text="{localization:Translate GerencieSeusPropriet�rios}"
+                    Text="{localization:Translate GerencieSeusProprietários}"
                     TextColor="White" />
             </Grid>
 
@@ -135,7 +135,7 @@
             </listView:SfListView>
         </Grid>
 
-        <!--  Bot�o Adicionar  -->
+        <!--  Botão Adicionar  -->
         <buttons:SfButton
             Grid.Row="0"
             Command="{Binding AddNewCommand, Source={x:Reference proprietarioView}}"

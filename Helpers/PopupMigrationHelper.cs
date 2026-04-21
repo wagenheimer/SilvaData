@@ -1,7 +1,7 @@
 using System.Windows.Input;
 using CommunityToolkit.Maui.Views;
 
-namespace SilvaData.Pages.PopUps
+namespace SilvaData_MAUI.Pages.PopUps
 {
     /// <summary>
     /// Como migrar os demais popups para MAUI
@@ -16,7 +16,7 @@ namespace SilvaData.Pages.PopUps
             return new[]
             {
                 "1. Alterar a heran�a de PopupPage para Popup (CommunityToolkit.Maui.Views)",
-                "2. Alterar o namespace de ISIInstitute.Views.PopUps para SilvaData.Pages.PopUps",
+                "2. Alterar o namespace de ISIInstitute.Views.PopUps para SilvaData_MAUI.Pages.PopUps",
                 "3. Remover o atributo [XamlCompilation(XamlCompilationOptions.Compile)]",
                 "4. Alterar os m�todos de navega��o:",
                 "   - Navigation.PushPopupAsync() -> page.ShowPopupAsync()",

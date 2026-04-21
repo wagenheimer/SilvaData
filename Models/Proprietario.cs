@@ -1,7 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 
-using SilvaData.Utilities;
+using SilvaData_MAUI.Utilities;
 
 using Newtonsoft.Json;
 
@@ -9,7 +9,7 @@ using SQLite;
 
 using System.Security.AccessControl;
 
-namespace SilvaData.Models
+namespace SilvaData_MAUI.Models
 {
     public class ProprietarioFromWebServiceParametro
     {
@@ -41,7 +41,7 @@ namespace SilvaData.Models
         }
 
         /// <summary>
-        /// MIGRADO: Retorna a lista ao inv�s de modificar est�tico
+        /// MIGRADO: Retorna a lista ao invés de modificar estático
         /// </summary>
         public static async Task<List<Proprietario>> PegaListaProprietarioAsync()
         {
@@ -66,7 +66,7 @@ namespace SilvaData.Models
                 await Db.InsertAsync(item).ConfigureAwait(false);
             }
 
-            // MUDAN�A: Notifica o CacheService
+            // MUDANÇA: Notifica o CacheService
             WeakReferenceMessenger.Default.Send(new RefreshCacheMessage(CacheType.Proprietarios));
         }
 
@@ -121,7 +121,7 @@ namespace SilvaData.Models
             else
             {
                 await SentryHelper.LogErrorAsync(UpdateJson, "Proprietario", result.mensagem);
-                throw new Exception(!string.IsNullOrEmpty(result.mensagem) ? result.mensagem : "Erro desconhecido ao enviar propriet�rios");
+                throw new Exception(!string.IsNullOrEmpty(result.mensagem) ? result.mensagem : "Erro desconhecido ao enviar proprietários");
             }
         }
 

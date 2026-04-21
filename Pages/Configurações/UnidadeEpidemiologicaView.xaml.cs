@@ -1,19 +1,19 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 
-using SilvaData.Infrastructure;
-using SilvaData.Models;
-using SilvaData.Utilities;
-using SilvaData.ViewModels;
+using SilvaData_MAUI.Infrastructure;
+using SilvaData_MAUI.Models;
+using SilvaData_MAUI.Utilities;
+using SilvaData_MAUI.ViewModels;
 
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace SilvaData.Controls
+namespace SilvaData_MAUI.Controls
 {
     /// <summary>
-    /// P�gina para visualiza��o e gerenciamento de Unidades Epidemiol�gicas (UE).
-    /// MIGRADO: Usa CacheService ao inv�s de DadosStatic.
+    /// Página para visualização e gerenciamento de Unidades Epidemiológicas (UE).
+    /// MIGRADO: Usa CacheService ao invés de DadosStatic.
     /// </summary>
     public partial class UnidadeEpidemiologicaView : ContentPageWithLocalization
     {
@@ -42,7 +42,7 @@ namespace SilvaData.Controls
         #region Ciclo de Vida (Loaded/Unloaded/Appearing)
 
         /// <summary>
-        /// Chamado quando a p�gina � carregada. Registra mensagens persistentes.
+        /// Chamado quando a página é carregada. Registra mensagens persistentes.
         /// </summary>
         private void OnPageLoaded(object? sender, EventArgs e)
         {
@@ -50,13 +50,13 @@ namespace SilvaData.Controls
             WeakReferenceMessenger.Default.Register<UnidadeEpidemiologicaView, UEAdicionadaMessage>(this, OnUEAdicionadaMessage);
             WeakReferenceMessenger.Default.Register<UnidadeEpidemiologicaView, UESalvaMessage>(this, OnUESalvaMessage);
 
-            // Mensagens de depend�ncias (que podem ser abertas por modais)
+            // Mensagens de dependências (que podem ser abertas por modais)
             WeakReferenceMessenger.Default.Register<PropriedadeAdicionadaMessage>(this, (r, m) => RefreshDataOnMainThread());
             WeakReferenceMessenger.Default.Register<RegionalAdicionadaMessage>(this, (r, m) => RefreshDataOnMainThread());
         }
 
         /// <summary>
-        /// Chamado quando a p�gina � descarregada (destru�da).
+        /// Chamado quando a página é descarregada (destruída).
         /// Limpa os registros de mensagens.
         /// </summary>
         private void OnPageUnloaded(object? sender, EventArgs e)
@@ -68,21 +68,21 @@ namespace SilvaData.Controls
         }
 
         /// <summary>
-        /// Chamado quando a p�gina est� prestes a se tornar vis�vel.
+        /// Chamado quando a página está prestes a se tornar visível.
         /// Recarrega os dados da lista.
         /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            // MIGRADO: Usa CacheService ao inv�s de DadosStatic
+            // MIGRADO: Usa CacheService ao invés de DadosStatic
             ListaUE = new ObservableCollection<UnidadeEpidemiologica>(_cacheService.UEList);
             OnPropertyChanged(nameof(ListaUE));
             RefreshData();
         }
 
         /// <summary>
-        /// Substitui o comportamento do bot�o "Voltar" do dispositivo.
+        /// Substitui o comportamento do botão "Voltar" do dispositivo.
         /// </summary>
         protected override bool OnBackButtonPressed()
         {
@@ -130,7 +130,7 @@ namespace SilvaData.Controls
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {
-                // MIGRADO: Usa CacheService ao inv�s de DadosStatic
+                // MIGRADO: Usa CacheService ao invés de DadosStatic
                 ListaUE = new ObservableCollection<UnidadeEpidemiologica>(_cacheService.UEList);
                 OnPropertyChanged(nameof(ListaUE));
                 RefreshData();
@@ -186,17 +186,17 @@ namespace SilvaData.Controls
 
         #endregion
 
-        #region Permiss�es
+        #region Permissões
 
         public bool PodeEditar => Permissoes.UsuarioPermissoes?.regionais.atualizar ?? false;
         public bool PodeAdicionar => Permissoes.UsuarioPermissoes?.regionais.cadastrar ?? false;
 
         #endregion
 
-        #region L�gica de Filtro e Dados
+        #region Lógica de Filtro e Dados
 
         /// <summary>
-        /// Aplica o filtro atual � fonte de dados da SfListView.
+        /// Aplica o filtro atual à fonte de dados da SfListView.
         /// </summary>
         public void RefreshData()
         {
@@ -208,7 +208,7 @@ namespace SilvaData.Controls
         }
 
         /// <summary>
-        /// M�todo de predicado de filtro para a SfListView.
+        /// Método de predicado de filtro para a SfListView.
         /// </summary>
         private bool filterData(object obj)
         {
@@ -227,7 +227,7 @@ namespace SilvaData.Controls
         }
 
         /// <summary>
-        /// Manipulador de evento para altera��o de texto na barra de pesquisa.
+        /// Manipulador de evento para alteração de texto na barra de pesquisa.
         /// </summary>
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -236,7 +236,7 @@ namespace SilvaData.Controls
         }
 
         /// <summary>
-        /// Navega para a p�gina de edi��o de uma UE espec�fica.
+        /// Navega para a página de edição de uma UE específica.
         /// </summary>
         public async Task Editar(UnidadeEpidemiologica ue)
         {

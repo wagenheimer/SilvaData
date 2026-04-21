@@ -1,8 +1,8 @@
 using Microsoft.Maui.Graphics;
 
-using SilvaData.Models;
+using SilvaData_MAUI.Models;
 
-namespace SilvaData.Controls
+namespace SilvaData_MAUI.Controls
 {
     public partial class CirculoScoreLote : ContentView
     {
@@ -34,7 +34,7 @@ namespace SilvaData.Controls
 
         /// <summary>
         /// Garante que o valor recebido esteja sempre dentro do limite esperado.
-        /// Substitui a l�gica manual de Math.Min dentro da propriedade.
+        /// Substitui a lógica manual de Math.Min dentro da propriedade.
         /// </summary>
         private static object CoerceValor(BindableObject bindable, object value)
         {
@@ -49,7 +49,7 @@ namespace SilvaData.Controls
         {
             if (bindable is CirculoScoreLote control)
             {
-                // Dispara a atualiza��o das propriedades calculadas que a UI consome
+                // Dispara a atualização das propriedades calculadas que a UI consome
                 control.OnPropertyChanged(nameof(ValorGauge));
                 control.OnPropertyChanged(nameof(ValorColor));
                 control.OnPropertyChanged(nameof(ValorColorBackground));

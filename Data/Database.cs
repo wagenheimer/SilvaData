@@ -1,52 +1,52 @@
 using SQLite;
 
-namespace SilvaData.Models
+namespace SilvaData_MAUI.Models
 {
     /// <summary>
-    /// Gerencia a conex�o singleton ass�ncrona com o banco de dados SQLite.
+    /// Gerencia a conexão singleton assíncrona com o banco de dados SQLite.
     /// </summary>
     public class Database
     {
         private static Database? _database;
 
-        // Lock s�ncrono para a cria��o da inst�ncia
+        // Lock síncrono para a criação da instância
         private static readonly object _lockObject = new object();
 
-        // Lock ass�ncrono para garantir que a inicializa��o ocorra apenas uma vez
+        // Lock assíncrono para garantir que a inicialização ocorra apenas uma vez
         private static readonly SemaphoreSlim _asyncLock = new SemaphoreSlim(1, 1);
 
         private static bool _isInitialized = false;
 
         /// <summary>
-        /// Conex�o ass�ncrona com o banco de dados.
+        /// Conexão assíncrona com o banco de dados.
         /// </summary>
         public SQLiteAsyncConnection sqlConnection { get; private set; }
 
         /// <summary>
-        /// Obt�m o caminho completo para o arquivo de banco de dados no armazenamento local do aplicativo.
+        /// Obtém o caminho completo para o arquivo de banco de dados no armazenamento local do aplicativo.
         /// </summary>
         public static string PathDB => Path.Combine(FileSystem.AppDataDirectory, "ISIDatabase.db3");
 
         /// <summary>
-        /// Construtor privado para for�ar o padr�o singleton.
+        /// Construtor privado para forçar o padrão singleton.
         /// </summary>
         /// <param name="dbPath">Caminho para o arquivo de banco de dados.</param>
         private Database(string dbPath)
         {
-            // SharedCache removido: incompat�vel com WAL mode (causa serializa��o inesperada)
+            // SharedCache removido: incompatível com WAL mode (causa serialização inesperada)
             sqlConnection = new SQLiteAsyncConnection(dbPath,
                 SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create);
         }
 
         /// <summary>
-        /// Obt�m a inst�ncia singleton do banco de dados, inicializando-a se necess�rio.
-        /// Esta � a forma correta de acessar o banco de dados.
+        /// Obtém a instância singleton do banco de dados, inicializando-a se necessário.
+        /// Esta é a forma correta de acessar o banco de dados.
         /// </summary>
         /// <example>
         /// var db = await Database.GetInstanceAsync();
         /// var conexao = db.sqlConnection;
         /// </example>
-        /// <returns>A inst�ncia do banco de dados inicializada.</returns>
+        /// <returns>A instância do banco de dados inicializada.</returns>
         public static async Task<Database> GetInstanceAsync()
         {
             if (_database == null)
@@ -58,19 +58,19 @@ namespace SilvaData.Models
                 }
             }
 
-            // Garante que a inicializa��o (cria��o de tabelas) seja executada
+            // Garante que a inicialização (criação de tabelas) seja executada
             await _database.InitializeDatabaseAsync();
 
             return _database;
         }
 
         /// <summary>
-        /// Inicializa o banco de dados (cria tabelas, etc.) de forma ass�ncrona e segura (thread-safe).
+        /// Inicializa o banco de dados (cria tabelas, etc.) de forma assíncrona e segura (thread-safe).
         /// </summary>
         /// <summary>
-        /// Inicializa o banco de dados (configura��es de conex�o, etc.) 
-        /// de forma ass�ncrona e segura (thread-safe).
-        /// A cria��o de tabelas � gerenciada por 'ManutencaoTabelas'.
+        /// Inicializa o banco de dados (configurações de conexão, etc.) 
+        /// de forma assíncrona e segura (thread-safe).
+        /// A criação de tabelas é gerenciada por 'ManutencaoTabelas'.
         /// </summary>
         private async Task InitializeDatabaseAsync()
         {
@@ -83,7 +83,7 @@ namespace SilvaData.Models
                 if (_isInitialized)
                     return;
 
-                // Apenas habilita o WAL. A cria��o de tabelas foi movida para ManutencaoTabelas.
+                // Apenas habilita o WAL. A criação de tabelas foi movida para ManutencaoTabelas.
                 await sqlConnection.EnableWriteAheadLoggingAsync();
 
                 _isInitialized = true;
@@ -95,7 +95,7 @@ namespace SilvaData.Models
         }
 
         /// <summary>
-        /// Fecha a conex�o com o banco de dados e limpa a inst�ncia singleton.
+        /// Fecha a conexão com o banco de dados e limpa a instância singleton.
         /// </summary>
         public static async Task CloseDatabaseAsync()
         {
@@ -121,12 +121,12 @@ namespace SilvaData.Models
         /// </summary>
         public static async Task ReopenDatabaseAsync()
         {
-            // GetInstanceAsync j� lida com a l�gica de cria��o e inicializa��o
+            // GetInstanceAsync já lida com a lógica de criação e inicialização
             await GetInstanceAsync();
         }
 
         /// <summary>
-        /// Obt�m a conex�o de escrita pronta para uso.
+        /// Obtém a conexão de escrita pronta para uso.
         /// </summary>
         public static async Task<SQLiteAsyncConnection> GetConnectionAsync()
         {
@@ -134,25 +134,26 @@ namespace SilvaData.Models
             return db.sqlConnection;
         }
 
-        // Conex�o read-only separada da de escrita.
-        // Com WAL ativo na conex�o de escrita, o SQLite garante que leituras e escritas
-        // em conex�es distintas n�o se bloqueiam � readers n�o ficam na fila do writer.
+        // Conexão read-only separada da de escrita.
+        // Com WAL ativo na conexão de escrita, o SQLite garante que leituras e escritas
+        // em conexões distintas não se bloqueiam — readers não ficam na fila do writer.
         private static SQLiteAsyncConnection? _readConnection;
 
         /// <summary>
-        /// Obt�m a conex�o read-only para queries de leitura da UI.
+        /// Obtém a conexão read-only para queries de leitura da UI.
         /// </summary>
         public static async Task<SQLiteAsyncConnection> GetReadConnectionAsync()
         {
             if (_readConnection != null) return _readConnection;
 
-            // Garante WAL habilitado antes de abrir a segunda conex�o
+            // Garante WAL habilitado antes de abrir a segunda conexão
             await GetInstanceAsync().ConfigureAwait(false);
 
             lock (_lockObject)
             {
                 _readConnection ??= new SQLiteAsyncConnection(PathDB, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create);
             }
+
             return _readConnection;
         }
     }

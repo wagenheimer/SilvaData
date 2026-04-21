@@ -1,9 +1,9 @@
 using CommunityToolkit.Maui.Views;
 
-using SilvaData.Infrastructure; // Para ServiceHelper
-using SilvaData.ViewModels;
+using SilvaData_MAUI.Infrastructure; // Para ServiceHelper
+using SilvaData_MAUI.ViewModels;
 
-namespace SilvaData.Pages.PopUps
+namespace SilvaData_MAUI.Pages.PopUps
 {
     /// <summary>
     /// PopUp que exibe o menu do usu�rio (Minha Conta, Privacidade, Sair).

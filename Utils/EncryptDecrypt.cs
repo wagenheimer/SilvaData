@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Diagnostics;
 
-namespace SilvaData.Utils
+namespace SilvaData_MAUI.Utils
 {
     public static class EncryptDecrypt
     {
@@ -9,7 +9,7 @@ namespace SilvaData.Utils
 
         public static byte[] StringToByteArray(string hex)
         {
-            // ? Defensive programming: Add null check
+            // ✅ Defensive programming: Add null check
             if (string.IsNullOrEmpty(hex))
                 return Array.Empty<byte>();
 
@@ -28,7 +28,7 @@ namespace SilvaData.Utils
 
         public static string Encrypt(string textToEncrypt)
         {
-            // ? Defensive programming: Add null checks
+            // ✅ Defensive programming: Add null checks
             if (string.IsNullOrEmpty(textToEncrypt))
                 return string.Empty;
 
@@ -81,7 +81,7 @@ namespace SilvaData.Utils
 
         public static string Decrypt(string textToDecrypt)
         {
-            // ? Defensive programming: Add null checks
+            // ✅ Defensive programming: Add null checks
             if (string.IsNullOrEmpty(textToDecrypt))
                 return string.Empty;
 
@@ -125,7 +125,7 @@ namespace SilvaData.Utils
             }
             catch (ArgumentException ex)
             {
-                Debug.WriteLine($"[EncryptDecrypt] Argumento inv�lido: {ex.Message}");
+                Debug.WriteLine($"[EncryptDecrypt] Argumento inválido: {ex.Message}");
                 return string.Empty; // Retorna vazio em caso de erro
             }
             catch (Exception ex)

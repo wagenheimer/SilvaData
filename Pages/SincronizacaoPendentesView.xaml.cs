@@ -1,6 +1,6 @@
-using SilvaData.ViewModels;
+using SilvaData_MAUI.ViewModels;
 
-namespace SilvaData.Controls
+namespace SilvaData_MAUI.Controls
 {
     public partial class SincronizacaoPendentesView : ContentView
     {
@@ -8,21 +8,21 @@ namespace SilvaData.Controls
         {
             InitializeComponent();
 
-            // ??? Usa ServiceHelper para obter ViewModel do DI ???
+            // ★★★ Usa ServiceHelper para obter ViewModel do DI ★★★
             BindingContext = ServiceHelper.GetRequiredService<SincronizacaoPendentesViewModel>();
         }
 
         protected override void OnParentSet()
         {
             base.OnParentSet();
-            // Auto-atualiza sempre que a view entra na �rvore visual
+            // Auto-atualiza sempre que a view entra na árvore visual
             TryRefresh();
         }
 
         protected override void OnHandlerChanged()
         {
             base.OnHandlerChanged();
-            // Garantia extra para cen�rios de recria��o do handler
+            // Garantia extra para cenários de recriação do handler
             TryRefresh();
         }
 
@@ -33,7 +33,7 @@ namespace SilvaData.Controls
                 var cmd = vm.AtualizaListaAlteracoesCommand;
                 if (cmd?.CanExecute(null) == true)
                 {
-                    // dispara ass�ncrono sem bloquear a UI
+                    // dispara assíncrono sem bloquear a UI
                     _ = vm.AtualizaListaAlteracoesCommand.ExecuteAsync(null);
                 }
             }

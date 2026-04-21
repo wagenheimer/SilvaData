@@ -1,22 +1,22 @@
-namespace SilvaData.Models
+namespace SilvaData_MAUI.Models
 {
     /// <summary>
-    /// Resultado da avalia��o NPS.
+    /// Resultado da avaliação NPS.
     /// </summary>
     public class NPSResult
     {
         /// <summary>
-        /// Nota dada pelo usu�rio (0-10).
+        /// Nota dada pelo usuário (0-10).
         /// </summary>
         public int Rating { get; set; }
 
         /// <summary>
-        /// Coment�rios adicionais fornecidos pelo usu�rio.
+        /// Comentários adicionais fornecidos pelo usuário.
         /// </summary>
         public string Comments { get; set; } = string.Empty;
 
         /// <summary>
-        /// Cria um novo resultado NPS com valores padr�o.
+        /// Cria um novo resultado NPS com valores padrão.
         /// </summary>
         public static NPSResult Default() => new()
         {

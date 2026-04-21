@@ -1,5 +1,5 @@
-using SilvaData.Models;
-using SilvaData.Utils;
+using SilvaData_MAUI.Models;
+using SilvaData_MAUI.Utils;
 
 using System.IO.Compression;
 
@@ -11,7 +11,7 @@ namespace ISIInstitute.Views
         {
             await Database.CloseDatabaseAsync();
 
-            //Salva Informa��o de Login
+            //Salva Informação de Login
             var loginInfo = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "logininfo.txt");
             var user = Preferences.Get("user", null);
             await File.WriteAllTextAsync(loginInfo, user);

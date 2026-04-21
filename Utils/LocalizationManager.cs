@@ -7,7 +7,7 @@ using LocalizationResourceManager.Maui;
 
 using Microsoft.Maui.Controls;
 
-namespace SilvaData.Utils
+namespace SilvaData_MAUI.Utils
 {
     public class LocalizationManager : ObservableObject
     {
@@ -69,18 +69,18 @@ namespace SilvaData.Utils
 
             Preferences.Set("newlanguage", linguagem);
 
-            // Obter o servi�o de localiza��o e definir a cultura
+            // Obter o serviço de localização e definir a cultura
             var localizationResourceManager = Application.Current?.Handler?.MauiContext?.Services?.GetService<ILocalizationResourceManager>();
             if (localizationResourceManager != null)
             {
                 localizationResourceManager.CurrentCulture = new CultureInfo(linguagem);
             }
 
-            // MUDAN�A MAUI: Usando Thread.CurrentThread.CurrentCulture, que � o padr�o .NET Core/MAUI
+            // MUDANÇA MAUI: Usando Thread.CurrentThread.CurrentCulture, que é o padrão .NET Core/MAUI
             Thread.CurrentThread.CurrentCulture = new CultureInfo(linguagem);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(linguagem);
 
-            // Notificar mudan�as nas propriedades
+            // Notificar mudanças nas propriedades
             OnPropertyChanged(nameof(CurrentLanguage));
             OnPropertyChanged(nameof(IdiomaParaWebService));
             OnPropertyChanged(nameof(IdiomaParaCalendario));

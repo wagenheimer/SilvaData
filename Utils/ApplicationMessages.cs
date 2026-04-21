@@ -1,75 +1,75 @@
-using SilvaData.Models;
+using SilvaData_MAUI.Models;
 
 using Microsoft.Maui.Controls;
 
 using System.Diagnostics;
 
-namespace SilvaData.Utilities
+namespace SilvaData_MAUI.Utilities
 {
-    // -------------------------------------------------------------------------------
-    // SE��O 1: NAVEGA��O E INTERFACE (MainPage Tabs)
-    // -------------------------------------------------------------------------------
-    // Mensagens que controlam mudan�as de abas na MainPage.
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // SEÇÃO 1: NAVEGAÇÃO E INTERFACE (MainPage Tabs)
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // Mensagens que controlam mudanças de abas na MainPage.
     // Enviadas por: ViewModels que precisam navegar entre telas principais.
     // Recebidas por: MainPageViewModel.
-    // -------------------------------------------------------------------------------
+    // ═══════════════════════════════════════════════════════════════════════════════
 
     /// <summary>
-    /// Solicita mudan�a para a aba Dashboard.
+    /// Solicita mudança para a aba Dashboard.
     /// </summary>
     public class ShowDashboardMessage { }
 
     /// <summary>
-    /// Solicita mudan�a para a aba Lotes.
+    /// Solicita mudança para a aba Lotes.
     /// </summary>
     public class ShowLotesMessage { }
 
     /// <summary>
-    /// Solicita mudan�a para a aba Sincroniza��o.
+    /// Solicita mudança para a aba Sincronização.
     /// </summary>
     public class ShowSyncMessage { }
 
     /// <summary>
-    /// Solicita mudan�a para a aba Configura��es.
+    /// Solicita mudança para a aba Configurações.
     /// </summary>
     public class ShowSettingsMessage { }
 
     /// <summary>
-    /// Solicita mudan�a para a aba Suporte.
+    /// Solicita mudança para a aba Suporte.
     /// </summary>
     public class ShowSuporteMessage { }
 
-    // -------------------------------------------------------------------------------
-    // SE��O 2: ORIENTA��O DE TELA
-    // -------------------------------------------------------------------------------
-    // Controla rota��o da tela (Portrait/Landscape).
-    // Enviadas por: ViewModels de formul�rios complexos.
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // SEÇÃO 2: ORIENTAÇÃO DE TELA
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // Controla rotação da tela (Portrait/Landscape).
+    // Enviadas por: ViewModels de formulários complexos.
     // Recebidas por: App.xaml.cs ou AppShell.xaml.cs.
-    // -------------------------------------------------------------------------------
+    // ═══════════════════════════════════════════════════════════════════════════════
 
     /// <summary>
-    /// ? For�a orienta��o Paisagem (Landscape).
-    /// Usada em formul�rios que precisam de mais espa�o horizontal.
+    /// ★ Força orientação Paisagem (Landscape).
+    /// Usada em formulários que precisam de mais espaço horizontal.
     /// </summary>
     public class SetLandscapeModeOnMessage { }
 
     /// <summary>
-    /// ? Restaura orienta��o padr�o (destravar).
+    /// ★ Restaura orientação padrão (destravar).
     /// </summary>
     public class SetLandscapeModeOffMessage { }
 
-    // -------------------------------------------------------------------------------
-    // SE��O 3: CRUD - ENTIDADES PRINCIPAIS (Create/Update)
-    // -------------------------------------------------------------------------------
-    // Mensagens disparadas ap�s opera��es de cria��o ou altera��o de entidades.
-    // Padr�o: NomeEntidadeAdicionadaMessage (novo) / NomeEntidadeSalvaMessage (edi��o).
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // SEÇÃO 3: CRUD - ENTIDADES PRINCIPAIS (Create/Update)
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // Mensagens disparadas após operações de criação ou alteração de entidades.
+    // Padrão: NomeEntidadeAdicionadaMessage (novo) / NomeEntidadeSalvaMessage (edição).
     // Recebidas por: ViewModels de listagem (para atualizar lista).
-    // -------------------------------------------------------------------------------
+    // ═══════════════════════════════════════════════════════════════════════════════
 
     #region CRUD - Lote
 
     /// <summary>
-    /// ? Disparado quando um NOVO Lote � criado.
+    /// ★ Disparado quando um NOVO Lote é criado.
     /// Enviada por: LoteEditViewModel.Salvar().
     /// Recebida por: LoteViewModel (adiciona item na lista).
     /// </summary>
@@ -80,7 +80,7 @@ namespace SilvaData.Utilities
     }
 
     /// <summary>
-    /// ? Disparado quando um Lote EXISTENTE � alterado.
+    /// ★ Disparado quando um Lote EXISTENTE é alterado.
     /// Enviada por: LoteEditViewModel.Salvar().
     /// Recebida por: LoteViewModel (atualiza item na lista).
     /// </summary>
@@ -92,10 +92,10 @@ namespace SilvaData.Utilities
 
     #endregion
 
-    #region CRUD - Unidade Epidemiol�gica (UE)
+    #region CRUD - Unidade Epidemiológica (UE)
 
     /// <summary>
-    /// ? Disparado quando uma NOVA Unidade Epidemiol�gica � criada.
+    /// ★ Disparado quando uma NOVA Unidade Epidemiológica é criada.
     /// Enviada por: UnidadeEpidemiologicaEditViewModel.Salvar().
     /// Recebida por: UnidadeEpidemiologicaViewModel, LoteEditView (recarrega combo).
     /// </summary>
@@ -106,7 +106,7 @@ namespace SilvaData.Utilities
     }
 
     /// <summary>
-    /// ? Disparado quando uma UE EXISTENTE � salva.
+    /// ★ Disparado quando uma UE EXISTENTE é salva.
     /// Enviada por: UnidadeEpidemiologicaEditViewModel.Salvar().
     /// Recebida por: UnidadeEpidemiologicaViewModel (atualiza item).
     /// </summary>
@@ -121,7 +121,7 @@ namespace SilvaData.Utilities
     #region CRUD - Propriedade
 
     /// <summary>
-    /// ? Disparado quando uma NOVA Propriedade � criada.
+    /// ★ Disparado quando uma NOVA Propriedade é criada.
     /// Enviada por: PropriedadeEditViewModel.Salvar().
     /// Recebida por: PropriedadeViewModel, UEEditView (recarrega combo).
     /// </summary>
@@ -132,7 +132,7 @@ namespace SilvaData.Utilities
     }
 
     /// <summary>
-    /// ? Disparado quando uma Propriedade EXISTENTE � salva.
+    /// ★ Disparado quando uma Propriedade EXISTENTE é salva.
     /// Enviada por: PropriedadeEditViewModel.Salvar().
     /// Recebida por: PropriedadeViewModel (atualiza item).
     /// </summary>
@@ -144,10 +144,10 @@ namespace SilvaData.Utilities
 
     #endregion
 
-    #region CRUD - Propriet�rio
+    #region CRUD - Proprietário
 
     /// <summary>
-    /// ? Disparado quando um NOVO Propriet�rio � criado.
+    /// ★ Disparado quando um NOVO Proprietário é criado.
     /// Enviada por: ProprietarioEditViewModel.Salvar().
     /// Recebida por: ProprietarioViewModel, UEEditView (recarrega combo).
     /// </summary>
@@ -158,7 +158,7 @@ namespace SilvaData.Utilities
     }
 
     /// <summary>
-    /// ? Disparado quando um Propriet�rio EXISTENTE � salvo.
+    /// ★ Disparado quando um Proprietário EXISTENTE é salvo.
     /// Enviada por: ProprietarioEditViewModel.Salvar().
     /// Recebida por: ProprietarioViewModel (atualiza item).
     /// </summary>
@@ -173,7 +173,7 @@ namespace SilvaData.Utilities
     #region CRUD - Regional
 
     /// <summary>
-    /// ? Disparado quando uma NOVA Regional � criada.
+    /// ★ Disparado quando uma NOVA Regional é criada.
     /// Enviada por: RegionalEditViewModel.Salvar().
     /// Recebida por: RegionalViewModel, PropriedadeEditView (recarrega combo).
     /// </summary>
@@ -184,7 +184,7 @@ namespace SilvaData.Utilities
     }
 
     /// <summary>
-    /// ? Disparado quando uma Regional EXISTENTE � salva.
+    /// ★ Disparado quando uma Regional EXISTENTE é salva.
     /// Enviada por: RegionalEditViewModel.Salvar().
     /// Recebida por: RegionalViewModel (atualiza item).
     /// </summary>
@@ -199,7 +199,7 @@ namespace SilvaData.Utilities
     #region CRUD - Atividade
 
     /// <summary>
-    /// ? Disparado quando uma NOVA Atividade � criada.
+    /// ★ Disparado quando uma NOVA Atividade é criada.
     /// Enviada por: AtividadeEditViewModel.Salvar().
     /// Recebida por: AtividadeViewModel (atualiza lista).
     /// </summary>
@@ -210,7 +210,7 @@ namespace SilvaData.Utilities
     }
 
     /// <summary>
-    /// ? Disparado quando uma Atividade EXISTENTE � salva.
+    /// ★ Disparado quando uma Atividade EXISTENTE é salva.
     /// Enviada por: AtividadeEditViewModel.Salvar().
     /// Recebida por: AtividadeViewModel (atualiza item).
     /// </summary>
@@ -222,18 +222,18 @@ namespace SilvaData.Utilities
 
     #endregion
 
-    // -------------------------------------------------------------------------------
-    // SE��O 4: FORMUL�RIOS E AVALIA��ES (LoteForm)
-    // -------------------------------------------------------------------------------
-    // Mensagens relacionadas ao fluxo de preenchimento de formul�rios de lote.
-    // Inclui: ISI Macro, Avalia��es do Galp�o, Scores, etc.
-    // -------------------------------------------------------------------------------
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // SEÇÃO 4: FORMULÁRIOS E AVALIAÇÕES (LoteForm)
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // Mensagens relacionadas ao fluxo de preenchimento de formulários de lote.
+    // Inclui: ISI Macro, Avaliações do Galpão, Scores, etc.
+    // ═══════════════════════════════════════════════════════════════════════════════
 
-    #region Formul�rios - Configura��o e Estado
+    #region Formulários - Configuração e Estado
 
     /// <summary>
-    /// ??? Define o estado inicial do formul�rio (novo ou edi��o) ???
-    /// Passa todos os par�metros necess�rios para inicializar corretamente.
+    /// ★★★ Define o estado inicial do formulário (novo ou edição) ★★★
+    /// Passa todos os parâmetros necessários para inicializar corretamente.
     /// Enviada por: NavigationUtils.OpenLoteFormularioAsync().
     /// Recebida por: LoteFormularioView (OnNavigatedTo ou via Message).
     /// </summary>
@@ -270,9 +270,9 @@ namespace SilvaData.Utilities
     }
 
     /// <summary>
-    /// ? Sinaliza que LoteFormularioView deve fazer refresh dos dados.
-    /// Utilizado ap�s salvar ou quando dados externos mudam.
-    /// Enviada por: ViewModels ap�s opera��es que afetam o formul�rio.
+    /// ★ Sinaliza que LoteFormularioView deve fazer refresh dos dados.
+    /// Utilizado após salvar ou quando dados externos mudam.
+    /// Enviada por: ViewModels após operações que afetam o formulário.
     /// Recebida por: LoteFormularioView (recarrega dados).
     /// </summary>
     public class RefreshLoteFormularioMessage
@@ -290,7 +290,7 @@ namespace SilvaData.Utilities
     }
 
     /// <summary>
-    /// ? Sinaliza que o formul�rio ser� fechado e loading deve ser mostrado.
+    /// ★ Sinaliza que o formulário será fechado e loading deve ser mostrado.
     /// Enviada por: LoteFormularioView.OnDisappearing().
     /// Recebida por: LoadingView ou MainPage (mostra overlay).
     /// </summary>
@@ -301,9 +301,9 @@ namespace SilvaData.Utilities
     }
 
     /// <summary>
-    /// ? Define qual modelo ISI Macro foi selecionado.
-    /// Utilizado para pr�-preencher formul�rio com template espec�fico.
-    /// Enviada por: Popup/Modal de sele��o de modelo.
+    /// ★ Define qual modelo ISI Macro foi selecionado.
+    /// Utilizado para pré-preencher formulário com template específico.
+    /// Enviada por: Popup/Modal de seleção de modelo.
     /// Recebida por: LoteFormularioViewModel (carrega template).
     /// </summary>
     public class SetModeloISIMacroMessage
@@ -314,22 +314,22 @@ namespace SilvaData.Utilities
 
     #endregion
 
-    #region Formul�rios - Score e Avalia��es
+    #region Formulários - Score e Avaliações
 
     /// <summary>
-    /// ??? Solicita rec�lculo do score total de um formul�rio ???
-    /// Disparado quando par�metros, alternativas ou valores s�o alterados.
+    /// ★★★ Solicita recálculo do score total de um formulário ★★★
+    /// Disparado quando parâmetros, alternativas ou valores são alterados.
     /// Enviada por: Controles de entrada, LoteFormAvaliacaoGalpao, ParametroComAlternativas.
     /// Recebida por: LoteFormularioViewModel.UpdateTotal().
     /// </summary>
     public class UpdateScoreMessage { }
 
     /// <summary>
-    /// ??? Recalcula totais e m�dia de avalia��es do galp�o ???
-    /// Disparado quando uma resposta (quantitativa ou qualitativa) � alterada.
+    /// ★★★ Recalcula totais e média de avaliações do galpão ★★★
+    /// Disparado quando uma resposta (quantitativa ou qualitativa) é alterada.
     /// O LoteFormularioViewModel escuta e recalcula:
-    /// - Total de avalia��es respondidas
-    /// - M�dia dos valores quantitativos
+    /// - Total de avaliações respondidas
+    /// - Média dos valores quantitativos
     /// 
     /// Enviada por: LoteFormAvaliacaoGalpao.OnRespostaQtdeChanged().
     /// Recebida por: LoteFormularioViewModel.RecalculaTotaisAvaliacaoGalpao().
@@ -341,15 +341,15 @@ namespace SilvaData.Utilities
         public RecalcularAvaliacaoGalpaoMessage()
         {
             Timestamp = DateTime.Now;
-            Debug.WriteLine($"[RecalcularAvaliacaoGalpaoMessage] ? Enviada �s {Timestamp:HH:mm:ss.fff}");
+            Debug.WriteLine($"[RecalcularAvaliacaoGalpaoMessage] ★ Enviada às {Timestamp:HH:mm:ss.fff}");
         }
     }
 
     /// <summary>
-    /// ? Notifica que o score m�dio (ISI Macro) de um lote foi recalculado.
-    /// Dispara atualiza��o da UI com novo score.
+    /// ★ Notifica que o score médio (ISI Macro) de um lote foi recalculado.
+    /// Dispara atualização da UI com novo score.
     /// Enviada por: Lote.AtualizaISIMacroScoreMedio().
-    /// Recebida por: LoteViewModel, DashboardViewModel (atualiza cards/gr�ficos).
+    /// Recebida por: LoteViewModel, DashboardViewModel (atualiza cards/gráficos).
     /// </summary>
     public class ISIMacroScoreMedioAtualizadoMessage
     {
@@ -364,8 +364,8 @@ namespace SilvaData.Utilities
     }
 
     /// <summary>
-    /// ? Notifica que um ISIMacro foi salvo com sucesso.
-    /// Utilizado para atualizar dados do lote ap�s avalia��o de necropsia.
+    /// ★ Notifica que um ISIMacro foi salvo com sucesso.
+    /// Utilizado para atualizar dados do lote após avaliação de necropsia.
     /// Enviada por: ISIMacroViewModel.Salvar().
     /// Recebida por: LoteViewModel (recarrega score do lote).
     /// </summary>
@@ -376,7 +376,7 @@ namespace SilvaData.Utilities
     }
 
     /// <summary>
-    /// ? Notifica que um LoteForm foi salvo com sucesso.
+    /// ★ Notifica que um LoteForm foi salvo com sucesso.
     /// Dispara recarregamento de dados relacionados.
     /// Enviada por: LoteFormularioViewModel.Salvar().
     /// Recebida por: LoteViewModel, LoteAvaliacaoGalpaoView (recarrega lista).
@@ -389,13 +389,13 @@ namespace SilvaData.Utilities
 
     #endregion
 
-    #region Formul�rios - Avalia��es do Galp�o (Espec�fico)
+    #region Formulários - Avaliações do Galpão (Específico)
 
     /// <summary>
-    /// ? Notifica que uma avalia��o qualitativa (com foto) foi selecionada.
-    /// Passa a avalia��o completa para permitir edi��o.
+    /// ★ Notifica que uma avaliação qualitativa (com foto) foi selecionada.
+    /// Passa a avaliação completa para permitir edição.
     /// Enviada por: LoteAvaliacaoGalpaoView (item tapped).
-    /// Recebida por: Modal de edi��o de avalia��o qualitativa.
+    /// Recebida por: Modal de edição de avaliação qualitativa.
     /// </summary>
     public class SelecionouAvaliacaoQualitativaMessage
     {
@@ -404,10 +404,10 @@ namespace SilvaData.Utilities
     }
 
     /// <summary>
-    /// ? Solicita navega��o at� um registro espec�fico na lista de avalia��es.
-    /// Utilizado para avalia��o quantitativa.
-    /// Enviada por: VerRegistrosPopup (ap�s sele��o).
-    /// Recebida por: LoteFormularioView (faz scroll at� o item).
+    /// ★ Solicita navegação até um registro específico na lista de avaliações.
+    /// Utilizado para avaliação quantitativa.
+    /// Enviada por: VerRegistrosPopup (após seleção).
+    /// Recebida por: LoteFormularioView (faz scroll até o item).
     /// </summary>
     public class NavigateToRegistroMessage
     {
@@ -417,21 +417,21 @@ namespace SilvaData.Utilities
 
     #endregion
 
-    #region Formul�rios - Datas e Mudan�as
+    #region Formulários - Datas e Mudanças
 
     /// <summary>
-    /// ? Notifica que a data de um LoteForm foi alterada.
-    /// Dispara rec�lculo de idade do lote.
+    /// ★ Notifica que a data de um LoteForm foi alterada.
+    /// Dispara recálculo de idade do lote.
     /// Enviada por: LoteForm.data (setter).
     /// Recebida por: LoteFormularioView, controles que exibem idade.
     /// </summary>
     public class MudouDataLoteMessage { }
 
     /// <summary>
-    /// ? Notifica que uma LoteVisita foi alterada.
-    /// Dispara recarregamento de formul�rios relacionados.
+    /// ★ Notifica que uma LoteVisita foi alterada.
+    /// Dispara recarregamento de formulários relacionados.
     /// Enviada por: LoteVisitaViewModel.Salvar().
-    /// Recebida por: LoteViewModel (recarrega formul�rios da visita).
+    /// Recebida por: LoteViewModel (recarrega formulários da visita).
     /// </summary>
     public class MudouVisitaMessage
     {
@@ -441,15 +441,15 @@ namespace SilvaData.Utilities
 
     #endregion
 
-    // -------------------------------------------------------------------------------
-    // SE��O 5: VALIDA��O E CONTROLE DE FORMUL�RIOS (Base)
-    // -------------------------------------------------------------------------------
-    // Mensagens de valida��o e controle de fluxo de formul�rios.
-    // Usadas pelo BaseEditViewModel para comunica��o com a View.
-    // -------------------------------------------------------------------------------
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // SEÇÃO 5: VALIDAÇÃO E CONTROLE DE FORMULÁRIOS (Base)
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // Mensagens de validação e controle de fluxo de formulários.
+    // Usadas pelo BaseEditViewModel para comunicação com a View.
+    // ═══════════════════════════════════════════════════════════════════════════════
 
     /// <summary>
-    /// ? Solicita que a View execute valida��o dos campos.
+    /// ★ Solicita que a View execute validação dos campos.
     /// A View deve responder com ValidationCompleteMessage.
     /// Enviada por: BaseEditViewModel.SaveAndReturn().
     /// Recebida por: ContentPageEdit (code-behind).
@@ -465,7 +465,7 @@ namespace SilvaData.Utilities
     }
 
     /// <summary>
-    /// ? Resposta da View com resultado da valida��o.
+    /// ★ Resposta da View com resultado da validação.
     /// Enviada por: ContentPageEdit.OnValidateFormRequest().
     /// Recebida por: BaseEditViewModel.ValidateViewAsync() (aguarda resultado).
     /// </summary>
@@ -482,35 +482,35 @@ namespace SilvaData.Utilities
     }
 
     /// <summary>
-    /// ? Solicita que a View feche a p�gina modal.
-    /// Enviada por: BaseEditViewModel.SaveAndReturn() ap�s salvar com sucesso.
+    /// ★ Solicita que a View feche a página modal.
+    /// Enviada por: BaseEditViewModel.SaveAndReturn() após salvar com sucesso.
     /// Recebida por: ContentPageEdit (chama Navigation.PopModalAsync()).
     /// </summary>
     public class ClosePageRequestMessage { }
 
     /// <summary>
-    /// ? Solicita confirma��o de sa�da quando h� dados n�o salvos (para popup de 3 op��es).
+    /// ★ Solicita confirmação de saída quando há dados não salvos (para popup de 3 opções).
     /// Enviada por: BaseEditViewModel.BackNow() quando DataSaved == false.
     /// Recebida por: ContentPageEdit (mostra PopUpThreeOptions).
     /// </summary>
     public class ConfirmExitRequestMessage { }
 
     /// <summary>
-    /// ? A��es poss�veis ao sair de uma tela com dados n�o salvos.
-    /// Usado pelo PopUpThreeOptions para determinar a a��o do usu�rio.
+    /// ★ Ações possíveis ao sair de uma tela com dados não salvos.
+    /// Usado pelo PopUpThreeOptions para determinar a ação do usuário.
     /// </summary>
     public enum ExitAction
     {
-        /// <summary>Salva as altera��es e fecha a p�gina</summary>
+        /// <summary>Salva as alterações e fecha a página</summary>
         Save,
-        /// <summary>Descarta as altera��es e fecha a p�gina</summary>
+        /// <summary>Descarta as alterações e fecha a página</summary>
         Discard,
-        /// <summary>Cancela a a��o de sair e permanece na p�gina</summary>
+        /// <summary>Cancela a ação de sair e permanece na página</summary>
         Cancel
     }
 
     /// <summary>
-    /// ? Solicita confirma��o de sa�da quando h� dados n�o salvos (vers�o com 3 op��es).
+    /// ★ Solicita confirmação de saída quando há dados não salvos (versão com 3 opções).
     /// Enviada por: BaseEditViewModel.BackNow() quando DataSaved == false.
     /// Recebida por: ContentPageEdit (mostra PopUpThreeOptions).
     /// </summary>
@@ -525,29 +525,29 @@ namespace SilvaData.Utilities
     }
 
     /// <summary>
-    /// ? Notifica que o usu�rio escolheu salvar e fechar.
-    /// Enviada por: ContentPageEdit ap�s confirma��o no PopUpThreeOptions.
+    /// ★ Notifica que o usuário escolheu salvar e fechar.
+    /// Enviada por: ContentPageEdit após confirmação no PopUpThreeOptions.
     /// Recebida por: BaseEditViewModel (dispara SaveAndReturn).
     /// </summary>
     public class SaveAndCloseMessage { }
 
     /// <summary>
-    /// ? Notifica que o usu�rio escolheu descartar e fechar.
-    /// Enviada por: ContentPageEdit ap�s confirma��o no PopUpThreeOptions.
-    /// Recebida por: BaseEditViewModel (fecha p�gina sem salvar).
+    /// ★ Notifica que o usuário escolheu descartar e fechar.
+    /// Enviada por: ContentPageEdit após confirmação no PopUpThreeOptions.
+    /// Recebida por: BaseEditViewModel (fecha página sem salvar).
     /// </summary>
     public class DiscardAndCloseMessage { }
 
     /// <summary>
-    /// ? Notifica que o usu�rio cancelou a a��o de sair.
-    /// Enviada por: ContentPageEdit quando usu�rio clica Cancelar no PopUpThreeOptions.
+    /// ★ Notifica que o usuário cancelou a ação de sair.
+    /// Enviada por: ContentPageEdit quando usuário clica Cancelar no PopUpThreeOptions.
     /// </summary>
     public class CancelExitMessage { }
 
     /// <summary>
-    /// ? Sinal global: destaca campos obrigat�rios vazios em vermelho.
-    /// Enviada por: ViewModel ao clicar Salvar com campos obrigat�rios vazios.
-    /// Recebida por: Controles customizados (Entry, ComboBox) que implementam valida��o visual.
+    /// ★ Sinal global: destaca campos obrigatórios vazios em vermelho.
+    /// Enviada por: ViewModel ao clicar Salvar com campos obrigatórios vazios.
+    /// Recebida por: Controles customizados (Entry, ComboBox) que implementam validação visual.
     /// </summary>
     public class HighlightRequiredFieldsMessage
     {
@@ -560,8 +560,8 @@ namespace SilvaData.Utilities
     }
 
     /// <summary>
-    /// Solicita que todos os controles obrigat�rios limpem seu estado de erro visual.
-    /// Enviada por: ContentPageEdit.OnAppearing ao reabrir a p�gina.
+    /// Solicita que todos os controles obrigatórios limpem seu estado de erro visual.
+    /// Enviada por: ContentPageEdit.OnAppearing ao reabrir a página.
     /// Recebida por: Controles customizados (ISITextField, ComboBox, etc.) que mostram erro visual.
     /// </summary>
     public class ClearValidationErrorsMessage
@@ -574,16 +574,16 @@ namespace SilvaData.Utilities
         }
     }
 
-    // -------------------------------------------------------------------------------
-    // SE��O 6: NAVEGA��O E FOCO
-    // -------------------------------------------------------------------------------
-    // Mensagens que controlam foco e navega��o entre campos.
-    // ?? ACOPLAMENTO: Algumas mensagens passam objetos View (n�o ideal).
-    // -------------------------------------------------------------------------------
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // SEÇÃO 6: NAVEGAÇÃO E FOCO
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // Mensagens que controlam foco e navegação entre campos.
+    // ⚠️ ACOPLAMENTO: Algumas mensagens passam objetos View (não ideal).
+    // ═══════════════════════════════════════════════════════════════════════════════
 
     /// <summary>
-    /// ? Solicita que o foco mova para o pr�ximo campo.
-    /// ?? ACOPLAMENTO: Passa View diretamente (n�o ideal, melhor usar code-behind).
+    /// ★ Solicita que o foco mova para o próximo campo.
+    /// ⚠️ ACOPLAMENTO: Passa View diretamente (não ideal, melhor usar code-behind).
     /// Enviada por: Entry ao pressionar Enter.
     /// Recebida por: View code-behind (move foco programaticamente).
     /// </summary>
@@ -594,10 +594,10 @@ namespace SilvaData.Utilities
     }
 
     /// <summary>
-    /// ? Solicita abertura de modal de sele��o de foto para ISI Macro.
-    /// Passa o par�metro que precisa de foto.
-    /// Enviada por: ISIMacroNota control (bot�o de foto).
-    /// Recebida por: LoteFormularioView (abre modal de c�mera/galeria).
+    /// ★ Solicita abertura de modal de seleção de foto para ISI Macro.
+    /// Passa o parâmetro que precisa de foto.
+    /// Enviada por: ISIMacroNota control (botão de foto).
+    /// Recebida por: LoteFormularioView (abre modal de câmera/galeria).
     /// </summary>
     public class ISIMacroFotoRequestedMessage
     {
@@ -611,23 +611,23 @@ namespace SilvaData.Utilities
         }
     }
 
-    // -------------------------------------------------------------------------------
-    // SE��O 7: CACHE E SINCRONIZA��O
-    // -------------------------------------------------------------------------------
-    // Mensagens relacionadas ao gerenciamento de cache e sincroniza��o de dados.
-    // -------------------------------------------------------------------------------
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // SEÇÃO 7: CACHE E SINCRONIZAÇÃO
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // Mensagens relacionadas ao gerenciamento de cache e sincronização de dados.
+    // ═══════════════════════════════════════════════════════════════════════════════
 
     /// <summary>
-    /// ? Enumera��o dos tipos de cache dispon�veis.
-    /// Utilizado para controlar qual se��o do cache ser� recarregada.
+    /// ★ Enumeração dos tipos de cache disponíveis.
+    /// Utilizado para controlar qual seção do cache será recarregada.
     /// </summary>
     public enum CacheType
     {
-        /// <summary>Cache de Unidades Epidemiol�gicas</summary>
+        /// <summary>Cache de Unidades Epidemiológicas</summary>
         UnidadesEpidemiologicas,
         /// <summary>Cache de Propriedades</summary>
         Propriedades,
-        /// <summary>Cache de Propriet�rios</summary>
+        /// <summary>Cache de Proprietários</summary>
         Proprietarios,
         /// <summary>Cache de Regionais</summary>
         Regionais,
@@ -636,9 +636,9 @@ namespace SilvaData.Utilities
     }
 
     /// <summary>
-    /// ? Solicita recarga de um setor espec�fico do cache.
-    /// Utilizado ap�s opera��es de CRUD para sincronizar dados em mem�ria.
-    /// Enviada por: ViewModels ap�s criar/editar/deletar entidades.
+    /// ★ Solicita recarga de um setor específico do cache.
+    /// Utilizado após operações de CRUD para sincronizar dados em memória.
+    /// Enviada por: ViewModels após criar/editar/deletar entidades.
     /// Recebida por: CacheService (recarrega dados do banco).
     /// </summary>
     public class RefreshCacheMessage
@@ -652,53 +652,53 @@ namespace SilvaData.Utilities
     }
 
     /// <summary>
-    /// ? Notifica que sincroniza��o (Download) completa foi finalizada.
+    /// ★ Notifica que sincronização (Download) completa foi finalizada.
     /// Todos os controles devem recarregar seus dados do CacheService.
     /// Utilizado por ComboBoxes e listas que dependem de dados baixados.
-    /// Enviada por: SincronizacaoViewModel.BaixarDados() (ap�s sucesso).
-    /// Recebida por: M�ltiplos ViewModels (recarregam combos e listas).
+    /// Enviada por: SincronizacaoViewModel.BaixarDados() (após sucesso).
+    /// Recebida por: Múltiplos ViewModels (recarregam combos e listas).
     /// </summary>
     public class UpdateDadosIniciaisMessage { }
 
-    // -------------------------------------------------------------------------------
-    // SE��O 8: DASHBOARD E GR�FICOS
-    // -------------------------------------------------------------------------------
-    // Mensagens relacionadas � Dashboard e visualiza��o de gr�ficos.
-    // -------------------------------------------------------------------------------
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // SEÇÃO 8: DASHBOARD E GRÁFICOS
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // Mensagens relacionadas à Dashboard e visualização de gráficos.
+    // ═══════════════════════════════════════════════════════════════════════════════
 
     /// <summary>
-    /// N�vel de detalhamento do gr�fico exibido (drilldown) dentro de "ISI Score Total".
+    /// Nível de detalhamento do gráfico exibido (drilldown) dentro de "ISI Score Total".
     /// Foi renomeado de TipoGrafico para evitar conflito com DashboardTipoGrafico.
     /// </summary>
     public enum GraficoNivel
     {
-        /// <summary>Gr�fico de SuperCategoria (agrupamento maior)</summary>
+        /// <summary>Gráfico de SuperCategoria (agrupamento maior)</summary>
         SuperCategoria,
-        /// <summary>Gr�fico de Categoria (n�vel intermedi�rio)</summary>
+        /// <summary>Gráfico de Categoria (nível intermediário)</summary>
         Categoria,
-        /// <summary>Gr�fico de Par�metro (mais detalhado)</summary>
+        /// <summary>Gráfico de Parâmetro (mais detalhado)</summary>
         Parametro,
-        /// <summary>Gr�fico de Dispers�o (scatter plot, fora do drilldown)</summary>
+        /// <summary>Gráfico de Dispersão (scatter plot, fora do drilldown)</summary>
         Dispersao
     }
 
     /// <summary>
-    /// Tipo de gr�fico principal da Dashboard (abas superiores), controla qual conjunto de visualiza��es mostrar.
+    /// Tipo de gráfico principal da Dashboard (abas superiores), controla qual conjunto de visualizações mostrar.
     /// </summary>
     public enum DashboardTipoGrafico
     {
-        /// <summary>Conjunto ISI Score Total (SuperCategoria ? Categoria ? Par�metro)</summary>
+        /// <summary>Conjunto ISI Score Total (SuperCategoria → Categoria → Parâmetro)</summary>
         ISIScoreTotal,
-        /// <summary>Conjunto Acometimento (s�ries de linhas por SuperCategoria)</summary>
+        /// <summary>Conjunto Acometimento (séries de linhas por SuperCategoria)</summary>
         Acometimento,
-        /// <summary>Conjunto Dispers�o (Scatter plot por dia)</summary>
+        /// <summary>Conjunto Dispersão (Scatter plot por dia)</summary>
         ISIDispersaoScore
     }
 
     /// <summary>
-    /// ? Solicita mudan�a para aba de gr�ficos e exibe gr�fico espec�fico.
-    /// Enviada por: Bot�es/Cards em home que querem mostrar an�lise visual.
-    /// Recebida por: DashboardViewModel (muda aba e renderiza gr�fico).
+    /// ★ Solicita mudança para aba de gráficos e exibe gráfico específico.
+    /// Enviada por: Botões/Cards em home que querem mostrar análise visual.
+    /// Recebida por: DashboardViewModel (muda aba e renderiza gráfico).
     /// </summary>
     public class ShowGraficoMessage
     {
@@ -711,8 +711,8 @@ namespace SilvaData.Utilities
     }
 
     /// <summary>
-    /// Notifica mudan�a no total de altera��es pendentes de sincroniza��o.
-    /// Enviada por: SincronizacaoPendentesViewModel (ap�s buscar/alterar a lista).
+    /// Notifica mudança no total de alterações pendentes de sincronização.
+    /// Enviada por: SincronizacaoPendentesViewModel (após buscar/alterar a lista).
     /// Recebida por: MainPageModel (para exibir badge/contador na aba de Sync).
     ///
     /// Exemplo de envio:
@@ -728,14 +728,14 @@ namespace SilvaData.Utilities
     public class SyncPendentesTotalChangedMessage
     {
         /// <summary>
-        /// Quantidade total de mudan�as pendentes para sincronizar.
+        /// Quantidade total de mudanças pendentes para sincronizar.
         /// </summary>
         public int Total { get; }
 
         /// <summary>
-        /// Cria a mensagem com o total de pend�ncias.
+        /// Cria a mensagem com o total de pendências.
         /// </summary>
-        /// <param name="total">N�mero de registros pendentes (>= 0).</param>
+        /// <param name="total">Número de registros pendentes (>= 0).</param>
         public SyncPendentesTotalChangedMessage(int total)
         {
             Total = total;
@@ -744,38 +744,38 @@ namespace SilvaData.Utilities
 
 
     /// <summary>
-    /// ? Solicita atualiza��o completa dos dados da Dashboard.
-    /// Dispara recarregamento de gr�ficos, cards e estat�sticas.
+    /// ★ Solicita atualização completa dos dados da Dashboard.
+    /// Dispara recarregamento de gráficos, cards e estatísticas.
     /// Enviada por: HomeViewModel quando dados ficam obsoletos.
     /// Recebida por: DashboardViewModel (dispara carregamento).
     /// </summary>
     public class RequestDashboardRefreshMessage { }
 
-    // -------------------------------------------------------------------------------
-    // SE��O 9: AUTENTICA��O E SESS�O
-    // -------------------------------------------------------------------------------
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // SEÇÃO 9: AUTENTICAÇÃO E SESSÃO
+    // ═══════════════════════════════════════════════════════════════════════════════
     // Mensagens relacionadas ao fluxo de login/logout.
-    // -------------------------------------------------------------------------------
+    // ═══════════════════════════════════════════════════════════════════════════════
 
     /// <summary>
-    /// ? Notifica que o usu�rio fez logout com sucesso.
-    /// O AppShell deve limpar navega��o e retornar ao Login.
+    /// ★ Notifica que o usuário fez logout com sucesso.
+    /// O AppShell deve limpar navegação e retornar ao Login.
     /// Enviada por: MinhaContaViewModel.LogOff().
-    /// Recebida por: AppShell (fecha sess�o e volta ao LoginPage).
+    /// Recebida por: AppShell (fecha sessão e volta ao LoginPage).
     /// </summary>
     public class LogoutSuccessMessage { }
 
-    // -------------------------------------------------------------------------------
-    // SE��O 10: MENSAGENS GEN�RICAS E UTILIT�RIAS
-    // -------------------------------------------------------------------------------
-    // Mensagens de prop�sito geral que n�o se encaixam em categorias espec�ficas.
-    // -------------------------------------------------------------------------------
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // SEÇÃO 10: MENSAGENS GENÉRICAS E UTILITÁRIAS
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // Mensagens de propósito geral que não se encaixam em categorias específicas.
+    // ═══════════════════════════════════════════════════════════════════════════════
 
     /// <summary>
-    /// ? Mensagem gen�rica para notificar mudan�a em qualquer propriedade.
-    /// Utilizada para rastrear altera��es e disparar a��es reativas.
+    /// ★ Mensagem genérica para notificar mudança em qualquer propriedade.
+    /// Utilizada para rastrear alterações e disparar ações reativas.
     /// Enviada por: Qualquer ViewModel/Model quando uma propriedade muda.
-    /// Recebida por: Listeners interessados em rastrear mudan�as espec�ficas.
+    /// Recebida por: Listeners interessados em rastrear mudanças específicas.
     /// 
     /// Exemplo de uso:
     /// <code>
@@ -797,37 +797,37 @@ namespace SilvaData.Utilities
         }
     }
 
-    // -------------------------------------------------------------------------------
-    // DOCUMENTA��O DE PADR�ES DE USO
-    // -------------------------------------------------------------------------------
+    // ═══════════════════════════════════════════════════════════════════════════════
+    // DOCUMENTAÇÃO DE PADRÕES DE USO
+    // ═══════════════════════════════════════════════════════════════════════════════
     /*
-     * PADR�O DE ENVIO:
+     * PADRÃO DE ENVIO:
      * ----------------
      * WeakReferenceMessenger.Default.Send(new NomeDaMensagem(parametros));
      * 
-     * PADR�O DE RECEBIMENTO:
+     * PADRÃO DE RECEBIMENTO:
      * ----------------------
      * // No construtor ou OnAppearing:
      * WeakReferenceMessenger.Default.Register<NomeDaMensagem>(this, (recipient, message) =>
      * {
-     *     // L�gica de tratamento
+     *     // Lógica de tratamento
      * });
      * 
      * // No OnDisappearing ou Cleanup:
      * WeakReferenceMessenger.Default.Unregister<NomeDaMensagem>(this);
      * 
-     * BOAS PR�TICAS:
+     * BOAS PRÁTICAS:
      * --------------
-     * 1. ? SEMPRE Unregister no OnDisappearing/Cleanup (evita memory leak)
-     * 2. ? Use WeakReferenceMessenger (n�o mant�m refer�ncias fortes)
-     * 3. ? Prefira mensagens espec�ficas a gen�ricas (ex: LoteAlteradoMessage vs PropriedadeMudouMessage)
-     * 4. ? Documente QUEM envia e QUEM recebe
-     * 5. ?? Evite passar objetos View em mensagens (acoplamento)
-     * 6. ? Use try-catch nos handlers (previne crashes)
+     * 1. ✅ SEMPRE Unregister no OnDisappearing/Cleanup (evita memory leak)
+     * 2. ✅ Use WeakReferenceMessenger (não mantém referências fortes)
+     * 3. ✅ Prefira mensagens específicas a genéricas (ex: LoteAlteradoMessage vs PropriedadeMudouMessage)
+     * 4. ✅ Documente QUEM envia e QUEM recebe
+     * 5. ⚠️ Evite passar objetos View em mensagens (acoplamento)
+     * 6. ✅ Use try-catch nos handlers (previne crashes)
      * 
      * EXEMPLO COMPLETO:
      * -----------------
-     * // Envio (no ViewModel ap�s salvar):
+     * // Envio (no ViewModel após salvar):
      * WeakReferenceMessenger.Default.Send(new LoteAlteradoMessage(lote));
      * 
      * // Recebimento (no LoteViewModel):

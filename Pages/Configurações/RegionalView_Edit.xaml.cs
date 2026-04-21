@@ -1,34 +1,34 @@
-using SilvaData.Infrastructure;
-using SilvaData.Models;
-using SilvaData.Utilities;
-using SilvaData.ViewModels;
+using SilvaData_MAUI.Infrastructure;
+using SilvaData_MAUI.Models;
+using SilvaData_MAUI.Utilities;
+using SilvaData_MAUI.ViewModels;
 
-namespace SilvaData.Controls
+namespace SilvaData_MAUI.Controls
 {
     /// <summary>
     /// View para editar ou criar uma Regional.
-    /// Herda de <see cref="ContentPageEdit"/> para compatibilidade de navega��o
-    /// e delega toda a l�gica para <see cref="RegionalEditViewModel"/>.
+    /// Herda de <see cref="ContentPageEdit"/> para compatibilidade de navegação
+    /// e delega toda a lógica para <see cref="RegionalEditViewModel"/>.
     /// </summary>
     public partial class RegionalView_Edit : ContentPageEdit
     {
         private new readonly RegionalEditViewModel ViewModel;
 
         /// <summary>
-        /// Inicializa uma nova inst�ncia da classe <see cref="RegionalView_Edit"/>.
+        /// Inicializa uma nova instância da classe <see cref="RegionalView_Edit"/>.
         /// </summary>
         /// <param name="regional">A regional a ser editada, ou null para criar uma nova.</param>
         public RegionalView_Edit(Regional? regional = null)
         {
             InitializeComponent();
 
-            // Obt�m o ViewModel (Regra 2)
+            // Obtém o ViewModel (Regra 2)
             ViewModel = ServiceHelper.GetRequiredService<RegionalEditViewModel>();
 
-            // Passa o par�metro para o ViewModel
+            // Passa o parâmetro para o ViewModel
             ViewModel.SetInitialState(regional);
 
-            // Define o BindingContext da p�gina
+            // Define o BindingContext da página
             BindingContext = ViewModel;
 
             var campoNome = this.FindByName<ISITextField>("nome");

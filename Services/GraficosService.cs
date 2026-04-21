@@ -1,16 +1,16 @@
-using SilvaData.Models;
-using SilvaData.Utilities;
-using SilvaData.ViewModels;
+using SilvaData_MAUI.Models;
+using SilvaData_MAUI.Utilities;
+using SilvaData_MAUI.ViewModels;
 
 using Newtonsoft.Json;
 
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
-namespace SilvaData.Services
+namespace SilvaData_MAUI.Services
 {
     /// <summary>
-    /// Servi�o respons�vel por baixar, processar e cachear dados de gr�ficos.
+    /// Serviço responsável por baixar, processar e cachear dados de gráficos.
     /// </summary>
     public class GraficosService
     {
@@ -66,7 +66,7 @@ namespace SilvaData.Services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Falha ao carregar gr�ficos do cache: {ex.Message}");
+                Debug.WriteLine($"Falha ao carregar gráficos do cache: {ex.Message}");
                 Graficos.ListaSuperCategorias = new List<ObservableCollection<GraficoSuperCategoriaAgrupado>>();
                 Graficos.DadosGraficosDispersao = new ObservableCollection<GraficoDispersao>();
             }
@@ -84,7 +84,7 @@ namespace SilvaData.Services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Falha ao salvar gr�ficos no cache: {ex.Message}");
+                Debug.WriteLine($"Falha ao salvar gráficos no cache: {ex.Message}");
             }
         }
     }

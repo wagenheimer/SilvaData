@@ -1,6 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 
-using SilvaData.Infrastructure;
+using SilvaData_MAUI.Infrastructure;
 
 using Newtonsoft.Json;
 
@@ -9,10 +9,10 @@ using System.Diagnostics;
 using Microsoft.Maui.Controls; // for Brush, SolidColorBrush
 using Microsoft.Maui.Graphics;
 
-namespace SilvaData.Models
+namespace SilvaData_MAUI.Models
 {
     /// <summary>
-    /// Classe de L�gica de Neg�cios para buscar e processar dados de gr�ficos.
+    /// Classe de Lógica de Negócios para buscar e processar dados de gráficos.
     /// MIGRADO: Injecta CacheService e ISIWebService.
     /// </summary>
     public partial class Graficos : ObservableObject
@@ -47,7 +47,7 @@ namespace SilvaData.Models
         }
 
         /// <summary>
-        /// Construtor padr�o com fallback (para desserializa��o, se necess�rio).
+        /// Construtor padrão com fallback (para desserialização, se necessário).
         /// </summary>
         public Graficos()
         {
@@ -56,14 +56,14 @@ namespace SilvaData.Models
         }
 
         /// <summary>
-        /// Download de dados dos gr�ficos da API.
+        /// Download de dados dos gráficos da API.
         /// </summary>
         public async Task<string> DownloadDadosGraficos()
         {
             try
             {
                 if (_webService.LoggedUser == null)
-                    return "Usu�rio n�o logado.";
+                    return "Usuário não logado.";
 
                 var pegaGraficosParametros = new pegaGraficosParametros
                 {
@@ -116,7 +116,7 @@ namespace SilvaData.Models
                 result = await _webService.ExecutePostAndWaitResult(requestBody2, "getGraficoDispersao", "parametros")
                     .ConfigureAwait(false);
 
-                if (!result.sucesso) return result.mensagem ?? "Erro ao buscar dispers�o";
+                if (!result.sucesso) return result.mensagem ?? "Erro ao buscar dispersão";
 
                 DadosDispersaoSemFiltros = JsonConvert.DeserializeObject<List<GraficoDispersao>>(result.data) ?? new();
 
@@ -141,7 +141,7 @@ namespace SilvaData.Models
         }
 
         /// <summary>
-        /// Gera gr�fico de dispers�o filtrado.
+        /// Gera gráfico de dispersão filtrado.
         /// </summary>
         public void GeraGraficoDispersao(string RegionalSelecionada, string UESelecionada)
         {
@@ -181,7 +181,7 @@ namespace SilvaData.Models
         }
 
         /// <summary>
-        /// Gera gr�fico de acometimento filtrado.
+        /// Gera gráfico de acometimento filtrado.
         /// </summary>
         public void GeraGraficoAcometimento(string RegionalSelecionada, string UESelecionada)
         {
@@ -287,7 +287,7 @@ namespace SilvaData.Models
         }
 
         /// <summary>
-        /// Calcula a quantidade de aves por dia para uma UE espec�fica.
+        /// Calcula a quantidade de aves por dia para uma UE específica.
         /// </summary>
         public float CalcularQuantidadeAvesPorDiaUE(DateTime date, int unidadeEpidemiologicaId)
         {
@@ -305,7 +305,7 @@ namespace SilvaData.Models
         }
 
         /// <summary>
-        /// Gera gr�fico de SuperCategoria filtrado.
+        /// Gera gráfico de SuperCategoria filtrado.
         /// </summary>
         public void GeraGraficoSuperCategoria(string RegionalSelecionada, string UESelecionada)
         {
@@ -397,7 +397,7 @@ namespace SilvaData.Models
         }
 
         /// <summary>
-        /// Gera gr�fico de Categoria com m�dias.
+        /// Gera gráfico de Categoria com médias.
         /// </summary>
         public IEnumerable<GraficoCategoriaAgrupado> GeraGraficoCategoriaComMedias(string superCategoria)
         {
@@ -437,7 +437,7 @@ namespace SilvaData.Models
         }
 
         /// <summary>
-        /// Atualiza o gr�fico de Categoria.
+        /// Atualiza o gráfico de Categoria.
         /// </summary>
         internal void AtualizaGraficoCategoria(string superCategoria)
         {
@@ -483,7 +483,7 @@ namespace SilvaData.Models
         }
 
         /// <summary>
-        /// Atualiza o gr�fico de Par�metro.
+        /// Atualiza o gráfico de Parâmetro.
         /// </summary>
         internal void AtualizaGraficoParametro(string parametroCategoria)
         {
@@ -535,7 +535,7 @@ namespace SilvaData.Models
             }
             if (parametroAtual.Any()) ListaParametros.Add(parametroAtual);
 
-            #region Par�metro Datas
+            #region Parâmetro Datas
             var listaDatas = ListaGraficoParametroAgrupado.GroupBy(p => p.dataLote).Select(p => p.First().dataLote);
             for (int i = 0; i < ListaParametros.Count; i++)
             {
@@ -559,7 +559,7 @@ namespace SilvaData.Models
         }
 
         /// <summary>
-        /// Limpa todos os dados de gr�ficos salvos em Preferences.
+        /// Limpa todos os dados de gráficos salvos em Preferences.
         /// </summary>
         public static void ZeraDadosGraficos()
         {
@@ -569,28 +569,28 @@ namespace SilvaData.Models
         }
 
         /// <summary>
-        /// Dictionary com scores m�ximos por SuperCategoria.
+        /// Dictionary com scores máximos por SuperCategoria.
         /// </summary>
         private readonly Dictionary<string, double> ScoreMaximoSuperCategoria = new Dictionary<string, double>
         {
-            {"2", 15},   // Respirat�rio
+            {"2", 15},   // Respiratório
             {"5", 30},   // Coccidiose
             {"4", 54},   // Intestino            
             {"1", 12},   // Locomotor
-            {"3", 51},   // Outros �rg�os
+            {"3", 51},   // Outros órgãos
         };
 
         /// <summary>
-        /// Obt�m o score m�ximo para uma SuperCategoria.
+        /// Obtém o score máximo para uma SuperCategoria.
         /// </summary>
         public double PegaScoreMaximoSuperCategoria(string id, string name)
         {
             if (!string.IsNullOrEmpty(id) && ScoreMaximoSuperCategoria.ContainsKey(id))
                 return ScoreMaximoSuperCategoria[id];
 
-            // Fallback caso o ID n�o seja encontrado (evita crash)
-            Debug.WriteLine($"[AVISO] ScoreMaximoSuperCategoria n�o encontrado para ID: {id} (Nome: {name})");
-            return 100; // Retorna um padr�o seguro
+            // Fallback caso o ID não seja encontrado (evita crash)
+            Debug.WriteLine($"[AVISO] ScoreMaximoSuperCategoria não encontrado para ID: {id} (Nome: {name})");
+            return 100; // Retorna um padrão seguro
         }
     }
 }

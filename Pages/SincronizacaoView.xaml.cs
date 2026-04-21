@@ -1,9 +1,9 @@
-using SilvaData.Infrastructure;
-using SilvaData.ViewModels;
+using SilvaData_MAUI.Infrastructure;
+using SilvaData_MAUI.ViewModels;
 
 using Microsoft.Maui.Controls;
 
-namespace SilvaData.Controls
+namespace SilvaData_MAUI.Controls
 {
     /// <summary>
     /// View (ContentView) para exibir o progresso do Download.

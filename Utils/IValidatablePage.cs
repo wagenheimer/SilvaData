@@ -1,4 +1,4 @@
-namespace SilvaData.Controls
+namespace SilvaData_MAUI.Controls
 {
     /// <summary>
     /// Define uma interface para uma View que pode validar a si mesma.
@@ -6,7 +6,7 @@ namespace SilvaData.Controls
     public interface IValidatablePage
     {
         /// <summary>
-        /// Executa a valida��o da UI e retorna true se for v�lida.
+        /// Executa a validação da UI e retorna true se for válida.
         /// </summary>
         Task<bool> ValidateFormAsync();
     }

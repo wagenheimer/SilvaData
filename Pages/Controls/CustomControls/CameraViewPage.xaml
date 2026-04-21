@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
-    x:Class="SilvaData.Controls.CameraViewPage"
+    x:Class="SilvaData_MAUI.Controls.CameraViewPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
-    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:fontawesome="clr-namespace:SilvaData_MAUI.FontAwesome"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     BackgroundColor="{StaticResource DarkBackground}"
     NavigationPage.HasNavigationBar="False">
@@ -29,7 +29,7 @@
                     WidthRequest="180" />
             </Grid>
 
-            <!--  Bot�o de voltar no canto superior esquerdo  -->
+            <!--  Botão de voltar no canto superior esquerdo  -->
             <buttons:SfButton
                 Margin="16"
                 Clicked="BackButton_Clicked"
@@ -48,7 +48,7 @@
             ColumnSpacing="16"
             RowDefinitions="Auto">
 
-            <!--  Bot�o Flash  -->
+            <!--  Botão Flash  -->
             <buttons:SfButton
                 Grid.Column="0"
                 Clicked="FlashButton_Clicked"
@@ -71,7 +71,7 @@
                 </buttons:SfButton.Content>
             </buttons:SfButton>
 
-            <!--  Bot�o principal de captura  -->
+            <!--  Botão principal de captura  -->
             <buttons:SfButton
                 x:Name="captureButton"
                 Grid.Column="1"
@@ -99,7 +99,7 @@
                 </buttons:SfButton.Shadow>
             </buttons:SfButton>
 
-            <!--  Bot�o trocar c�mera  -->
+            <!--  Botão trocar câmera  -->
             <buttons:SfButton
                 Grid.Column="2"
                 Clicked="SwitchCameraButton_Clicked"

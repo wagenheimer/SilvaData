@@ -4,19 +4,19 @@ using CommunityToolkit.Mvvm.Input;
 
 using ISIInstitute.Views;
 
-using SilvaData.Controls;
-using SilvaData.Models;
-using SilvaData.Pages.PopUps;
-using SilvaData.Utilities;
-using SilvaData.Utils;
+using SilvaData_MAUI.Controls;
+using SilvaData_MAUI.Models;
+using SilvaData_MAUI.Pages.PopUps;
+using SilvaData_MAUI.Utilities;
+using SilvaData_MAUI.Utils;
 
 using System;
 using System.Threading.Tasks;
 
-namespace SilvaData.ViewModels
+namespace SilvaData_MAUI.ViewModels
 {
     /// <summary>
-    /// ViewModel para o PopUp do Menu do Usu�rio (Minha Conta, Privacidade, Sair).
+    /// ViewModel para o PopUp do Menu do Usuário (Minha Conta, Privacidade, Sair).
     /// </summary>
     public partial class PopUpUsuarioViewModel : ObservableObject
     {
@@ -77,7 +77,7 @@ namespace SilvaData.ViewModels
         }
 
         /// <summary>
-        /// Fecha o popup e pergunta se o usu�rio quer deslogar.
+        /// Fecha o popup e pergunta se o usuário quer deslogar.
         /// </summary>
         [RelayCommand]
         private async Task LogOffAsync()

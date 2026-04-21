@@ -1,15 +1,15 @@
-using SilvaData.Models;
-using SilvaData.ViewModels;
+using SilvaData_MAUI.Models;
+using SilvaData_MAUI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-// MUDAN�A: Substituindo Xamarin.Forms por Microsoft.Maui.Controls
+// MUDANÇA: Substituindo Xamarin.Forms por Microsoft.Maui.Controls
 using Microsoft.Maui.Controls;
 
 namespace ISIInstitute.Views.Templates
 {
-    // A l�gica do DataTemplateSelector � 100% compat�vel com MAUI
+    // A lógica do DataTemplateSelector é 100% compatível com MAUI
     public class AvaliacaoGalpaoTemplateSelector : DataTemplateSelector
     {
         public DataTemplate Quantitativo { get; set; }
@@ -18,7 +18,7 @@ namespace ISIInstitute.Views.Templates
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
-            // O tipo do item (LoteFormAvaliacaoGalpao) e a l�gica do switch s�o mantidos
+            // O tipo do item (LoteFormAvaliacaoGalpao) e a lógica do switch são mantidos
             switch (((LoteFormAvaliacaoGalpao)item).Parametro?.campoTipo)
             {
                 case null:
@@ -31,7 +31,7 @@ namespace ISIInstitute.Views.Templates
         }
     }
 
-    // A l�gica do DataTemplateSelector � 100% compat�vel com MAUI
+    // A lógica do DataTemplateSelector é 100% compatível com MAUI
     public class AvaliacaoGalpaoListagemGridTemplateSelector : DataTemplateSelector
     {
         public DataTemplate Quantitativo { get; set; }
@@ -40,7 +40,7 @@ namespace ISIInstitute.Views.Templates
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
-            // O tipo do item (AvaliacaoGalpaoButton) e a l�gica do switch s�o mantidos
+            // O tipo do item (AvaliacaoGalpaoButton) e a lógica do switch são mantidos
             switch (((AvaliacaoGalpaoButton)item).CampoTipo)
             {
                 case null:

@@ -1,22 +1,22 @@
-using SilvaData.Infrastructure;
-using SilvaData.ViewModels;
+using SilvaData_MAUI.Infrastructure;
+using SilvaData_MAUI.ViewModels;
 
-namespace SilvaData.Controls
+namespace SilvaData_MAUI.Controls
 {
     /// <summary>
-    /// View (P�gina) para Login. Esta p�gina � modal e n�o pode ser fechada
-    /// pelo usu�rio (ex: bot�o "Voltar" do Android).
+    /// View (Página) para Login. Esta página é modal e não pode ser fechada
+    /// pelo usuário (ex: botão "Voltar" do Android).
     /// </summary>
     public partial class Login : ContentPage
     {
         /// <summary>
-        /// Flag est�tica usada pelo MainPageModel para saber
-        /// que o app deve rodar a sincroniza��o inicial.
+        /// Flag estática usada pelo MainPageModel para saber
+        /// que o app deve rodar a sincronização inicial.
         /// </summary>
         public static bool AcabouDeLogar;
 
         /// <summary>
-        /// Inicializa uma nova inst�ncia da classe <see cref="Login"/>.
+        /// Inicializa uma nova instância da classe <see cref="Login"/>.
         /// </summary>
         public Login(LoginViewModel viewModel)
         {
@@ -29,16 +29,16 @@ namespace SilvaData.Controls
         }
 
         /// <summary>
-        /// Chamado quando a p�gina � exibida.
+        /// Chamado quando a página é exibida.
         /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            // Define a flag est�tica que o MainPageModel usar�
+            // Define a flag estática que o MainPageModel usará
             AcabouDeLogar = true;
 
-            // Anima��o de Fade-in (l�gica de View)
+            // Animação de Fade-in (lógica de View)
             // Assumindo que o Grid no XAML tem x:Name="loginPanel"
             var loginPanel = this.FindByName<Grid>("loginPanel");
             if (loginPanel != null)
@@ -48,14 +48,14 @@ namespace SilvaData.Controls
         }
 
         /// <summary>
-        /// CORRE��O: Impede que o bot�o "Voltar" do hardware (Android)
-        /// feche a p�gina de login.
+        /// CORREÇÃO: Impede que o botão "Voltar" do hardware (Android)
+        /// feche a página de login.
         /// </summary>
         /// <returns>Sempre <c>true</c> para indicar que o evento foi tratado.</returns>
         protected override bool OnBackButtonPressed()
         {
             // Retorna 'true' para "consumir" o evento e impedir
-            // que a p�gina seja fechada.
+            // que a página seja fechada.
             return true;
         }
     }

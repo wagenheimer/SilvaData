@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SilvaData.Models
+namespace SilvaData_MAUI.Models
 {
     /// <summary>
-    /// Classe que cont�m as informa��es do fechamento de lote.
+    /// Classe que contém as informações do fechamento de lote.
     /// (Mantida como classe interna)
     /// </summary>
     public class LoginInfo

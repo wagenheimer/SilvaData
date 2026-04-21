@@ -1,18 +1,18 @@
 using DateChangedEventArgs = Microsoft.Maui.Controls.DateChangedEventArgs;
 
-using SilvaData.ViewModels;
+using SilvaData_MAUI.ViewModels;
 
-namespace SilvaData.Controls
+namespace SilvaData_MAUI.Controls
 {
     public partial class LoteFormHeader : ContentView
     {
-        // Construtor sem par�metros necess�rio para instancia��o via XAML
+        // Construtor sem parâmetros necessário para instanciação via XAML
         public LoteFormHeader()
         {
             InitializeComponent();
         }
 
-        // Construtor opcional com ViewModel para cen�rios de DI
+        // Construtor opcional com ViewModel para cenários de DI
         public LoteFormHeader(LoteFormularioViewModel loteFormViewModel)
         {
             InitializeComponent();

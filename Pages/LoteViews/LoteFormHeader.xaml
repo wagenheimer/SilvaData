@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ContentView
-    x:Class="SilvaData.Controls.LoteFormHeader"
+    x:Class="SilvaData_MAUI.Controls.LoteFormHeader"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:controls="clr-namespace:SilvaData_MAUI.Controls"
     xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
-    xmlns:viewmodels="clr-namespace:SilvaData.ViewModels">
+    xmlns:viewmodels="clr-namespace:SilvaData_MAUI.ViewModels">
 
     <ContentView.Content>
         <VerticalStackLayout>
@@ -29,7 +29,7 @@
                     FontSize="Small"
                     HorizontalOptions="Fill"
                     HorizontalTextAlignment="End"
-                    Text="{Binding IdadeLote, Source={RelativeSource AncestorType={x:Type viewmodels:LoteFormularioViewModel}}, FallbackValue='N�o Conseguiu Calcular'}"
+                    Text="{Binding IdadeLote, Source={RelativeSource AncestorType={x:Type viewmodels:LoteFormularioViewModel}}, FallbackValue='Não Conseguiu Calcular'}"
                     TextColor="{StaticResource PrimaryColor}"
                     VerticalOptions="Fill"
                     VerticalTextAlignment="Start" />

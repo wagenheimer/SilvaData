@@ -2,7 +2,7 @@ using SkiaSharp;
 
 using System.Diagnostics;
 
-namespace SilvaData.Utilities
+namespace SilvaData_MAUI.Utilities
 {
     // --- Interfaces e Classes de Contexto ---
 
@@ -17,15 +17,15 @@ namespace SilvaData.Utilities
         public byte[]? ResizedImage { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-        public float Quality { get; set; } = 0.75f; // Qualidade JPEG padr�o (75%)
+        public float Quality { get; set; } = 0.75f; // Qualidade JPEG padrão (75%)
         public TaskResult TaskResult { get; set; }
     }
 
     public enum TaskResult { Success, Canceled, Faulted }
 
     /// <summary>
-    /// Implementa��o de redimensionamento de imagem usando SkiaSharp.
-    /// Oferece melhor performance e menor uso de mem�ria no MAUI Android.
+    /// Implementação de redimensionamento de imagem usando SkiaSharp.
+    /// Oferece melhor performance e menor uso de memória no MAUI Android.
     /// </summary>
     public class SkiaSharpResizeCommand : IResizeImageCommand
     {
@@ -40,13 +40,13 @@ namespace SilvaData.Utilities
 
             try
             {
-                // Executar processamento em thread separada para n�o bloquear UI
+                // Executar processamento em thread separada para não bloquear UI
                 await Task.Run(() => ProcessResize(context)).ConfigureAwait(false);
                 return context;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[SkiaSharpResize] Erro cr�tico: {ex.Message}");
+                Debug.WriteLine($"[SkiaSharpResize] Erro crítico: {ex.Message}");
                 context.TaskResult = TaskResult.Faulted;
                 return context;
             }
@@ -75,20 +75,20 @@ namespace SilvaData.Utilities
 
                 if (original.Width <= 0 || original.Height <= 0)
                 {
-                    Debug.WriteLine("[SkiaSharpResize] Dimens�es inv�lidas");
+                    Debug.WriteLine("[SkiaSharpResize] Dimensões inválidas");
                     context.TaskResult = TaskResult.Faulted;
                     return;
                 }
 
                 Debug.WriteLine($"[SkiaSharpResize] Imagem original: {original.Width}x{original.Height}, {context.OriginalImage.Length:N0} bytes");
 
-                // 2. Calcular escala mantendo propor��o
+                // 2. Calcular escala mantendo proporção
                 float scale = Math.Min(
                     (float)context.Width / original.Width,
                     (float)context.Height / original.Height
                 );
 
-                // Se a imagem j� � menor que o tamanho desejado, retornar original
+                // Se a imagem já é menor que o tamanho desejado, retornar original
                 if (scale >= 1.0f)
                 {
                     Debug.WriteLine($"[SkiaSharpResize] Imagem original mantida (escala {scale:F2})");
@@ -97,7 +97,7 @@ namespace SilvaData.Utilities
                     return;
                 }
 
-                // 3. Calcular novas dimens�es
+                // 3. Calcular novas dimensões
                 int newWidth = (int)(original.Width * scale);
                 int newHeight = (int)(original.Height * scale);
 
@@ -144,7 +144,7 @@ namespace SilvaData.Utilities
                 float resizedLength = context.ResizedImage.Length;
                 float reducao = (1 - (resizedLength / originalLength)) * 100;
 
-                Debug.WriteLine($"[SkiaSharpResize] ? Sucesso: {originalLength:N0} bytes -> {resizedLength:N0} bytes (redu��o de {reducao:F1}%)");
+                Debug.WriteLine($"[SkiaSharpResize] ✓ Sucesso: {originalLength:N0} bytes -> {resizedLength:N0} bytes (redução de {reducao:F1}%)");
             }
             catch (Exception ex)
             {
@@ -154,8 +154,8 @@ namespace SilvaData.Utilities
             }
             finally
             {
-                // IMPORTANTE: Liberar TODA mem�ria nativa
-                // SkiaSharp usa mem�ria n�o-gerenciada que precisa ser liberada manualmente
+                // IMPORTANTE: Liberar TODA memória nativa
+                // SkiaSharp usa memória não-gerenciada que precisa ser liberada manualmente
                 encoded?.Dispose();
                 image?.Dispose();
                 resized?.Dispose();

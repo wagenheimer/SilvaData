@@ -1,19 +1,19 @@
-using SilvaData.Infrastructure;
-using SilvaData.Models;
-using SilvaData.ViewModels;
-using SilvaData.Utils; // Adicionado
+using SilvaData_MAUI.Infrastructure;
+using SilvaData_MAUI.Models;
+using SilvaData_MAUI.ViewModels;
+using SilvaData_MAUI.Utils; // Adicionado
 
 namespace ISIInstitute.Views // (Mantendo seu namespace original)
 {
     /// <summary>
-    /// View (P�gina) para a tela "Minha Conta".
+    /// View (Página) para a tela "Minha Conta".
     /// </summary>
     public partial class MinhaConta : ContentPageWithLocalization
     {
         private readonly MinhaContaViewModel ViewModel;
 
         /// <summary>
-        /// Inicializa uma nova inst�ncia da classe <see cref="MinhaConta"/>.
+        /// Inicializa uma nova instância da classe <see cref="MinhaConta"/>.
         /// </summary>
         public MinhaConta()
         {

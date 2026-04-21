@@ -4,12 +4,12 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 
-using SilvaData.Models;
+using SilvaData_MAUI.Models;
 using ISIInstitute.Views;
 
-using SilvaData.Utilities;
+using SilvaData_MAUI.Utilities;
 
-namespace SilvaData.ViewModels
+namespace SilvaData_MAUI.ViewModels
 {
     public partial class AtividadeViewModel : ViewModelBase
     {
@@ -27,7 +27,7 @@ namespace SilvaData.ViewModels
         public Command _ShowListaCommand;
 
         [ObservableProperty]
-        public bool calendarioVisible = true; //Se true mostra calend�rio, sen�o Lista
+        public bool calendarioVisible = true; //Se true mostra calendário, senão Lista
 
         [ObservableProperty]
 

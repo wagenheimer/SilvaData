@@ -1,7 +1,7 @@
-using SilvaData.Utils;
+using SilvaData_MAUI.Utils;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace SilvaData.Models
+namespace SilvaData_MAUI.Models
 {
     public class UpdateResult
     {
@@ -16,9 +16,9 @@ namespace SilvaData.Models
 
     public class UpdateDataParametros
     {
-        public string usuario; //id do usu�rio
-        public string dispositivoId; //identificador do dispositivo de sess�o
-        public string session; //id da sess�o (que � retornado no login)
+        public string usuario; //id do usuário
+        public string dispositivoId; //identificador do dispositivo de sessão
+        public string session; //id da sessão (que é retornado no login)
         public string array;
 
         public UpdateDataParametros()
@@ -94,7 +94,7 @@ namespace SilvaData.Models
         internal async static Task<int> GetNextId(object table)
         {
             var tabela = table.GetType().ToString();
-            tabela = tabela.Replace("SilvaData.Models.", "");
+            tabela = tabela.Replace("SilvaData_MAUI.Models.", "");
 
             var id = await Db.FindWithQueryAsync<MaxId>($"select max(id)+1 as maxid from {tabela}");
             if (id.maxid < 50000)

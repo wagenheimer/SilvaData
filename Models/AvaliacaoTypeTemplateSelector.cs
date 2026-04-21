@@ -1,12 +1,12 @@
-using SilvaData.Models;
+using SilvaData_MAUI.Models;
 
 using Microsoft.Maui.Controls;
 
-namespace SilvaData.Utilities
+namespace SilvaData_MAUI.Utilities
 {
     /// <summary>
-    /// ? Selector que escolhe qual template/content renderizar
-    /// Renderiza APENAS o que � necess�rio
+    /// ✅ Selector que escolhe qual template/content renderizar
+    /// Renderiza APENAS o que é necessário
     /// </summary>
     public class AvaliacaoTypeTemplateSelector : DataTemplateSelector
     {
@@ -16,7 +16,7 @@ namespace SilvaData.Utilities
 
         protected override DataTemplate? OnSelectTemplate(object item, BindableObject container)
         {
-            // item � um enum ou tipo que define qual visualizar
+            // item é um enum ou tipo que define qual visualizar
             if (item is AvaliacaoType tipo)
             {
                 return tipo switch
@@ -33,7 +33,7 @@ namespace SilvaData.Utilities
     }
 
     /// <summary>
-    /// Enum para definir tipo de avalia��o
+    /// Enum para definir tipo de avaliação
     /// </summary>
     public enum AvaliacaoType
     {

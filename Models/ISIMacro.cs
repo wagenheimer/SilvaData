@@ -1,4 +1,4 @@
-namespace SilvaData.Models
+namespace SilvaData_MAUI.Models
 {
     public class ISIMacroResumoFormulario
     {
@@ -17,30 +17,30 @@ namespace SilvaData.Models
 
 
         /// <summary>
-        /// Obt�m os itens com detalhes do loteFormId especificado. 
+        /// Obtém os itens com detalhes do loteFormId especificado. 
         /// </summary>
         /// <param name="loteFormId"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         public static async Task<List<ISIMacro>> GetItemsComDetalhesAsync(int? loteFormId)
         {
-            // Verifica se o loteFormId � nulo
+            // Verifica se o loteFormId é nulo
             if (loteFormId == null)
             {
-                throw new ArgumentNullException(nameof(loteFormId), "O ID do lote n�o pode ser nulo.");
+                throw new ArgumentNullException(nameof(loteFormId), "O ID do lote não pode ser nulo.");
             }
 
             // Executa a consulta SQL para obter os itens com detalhes
-            // IMPORTANTE: O filtro "p.Tipo = 0" � INTENCIONAL aqui.
-            // Esta query calcula o score total por categoria para exibi��o no resumo do ISI Macro.
-            // Par�metros "Isolados" (Tipo = 1) s�o registrados no formul�rio mas N�O entram
-            // no c�lculo do score � por isso o JOIN exclui Tipo != 0.
-            // No formul�rio de preenchimento, os par�metros Isolados S�O exibidos (ver
+            // IMPORTANTE: O filtro "p.Tipo = 0" é INTENCIONAL aqui.
+            // Esta query calcula o score total por categoria para exibição no resumo do ISI Macro.
+            // Parâmetros "Isolados" (Tipo = 1) são registrados no formulário mas NÃO entram
+            // no cálculo do score — por isso o JOIN exclui Tipo != 0.
+            // No formulário de preenchimento, os parâmetros Isolados SÃO exibidos (ver
             // GetForFormAsync em Parametros.cs), mas a propriedade Nota deles retorna 0.
             return await Db.QueryAsync<ISIMacro>(
                 "SELECT p.parametroCategoriaId, pc.nome, SUM(pa.score * p.peso) AS scoreTotal " +
                 "FROM LoteFormParametro lfp " +
-                "INNER JOIN Parametro p ON p.id = lfp.parametroId AND p.Tipo = 0 " + // Tipo = 0 ? exclui "Isolados" do score
+                "INNER JOIN Parametro p ON p.id = lfp.parametroId AND p.Tipo = 0 " + // Tipo = 0 → exclui "Isolados" do score
                 "INNER JOIN ParametroCategoria pc ON pc.id = p.parametroCategoriaId " +
                 "INNER JOIN ParametroAlternativas pa ON pa.idParametro = p.id AND pa.id = lfp.valor " +
                 "WHERE lfp.LoteFormId = ? AND COALESCE(p.excluido, 0) = 0 " +

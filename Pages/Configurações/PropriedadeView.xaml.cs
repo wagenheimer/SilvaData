@@ -1,15 +1,15 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using SilvaData.Models;
-using SilvaData.Utilities;
+using SilvaData_MAUI.Models;
+using SilvaData_MAUI.Utilities;
 using System.Linq;
 
-namespace SilvaData.Controls
+namespace SilvaData_MAUI.Controls
 {
     /// <summary>
-    /// P�gina para visualizar e gerenciar a lista de Propriedades.
-    /// MIGRADO: Usa CacheService ao inv�s de DadosStatic.
+    /// Página para visualizar e gerenciar a lista de Propriedades.
+    /// MIGRADO: Usa CacheService ao invés de DadosStatic.
     /// </summary>
     public partial class PropriedadeView : ContentPageWithLocalization
     {
@@ -37,26 +37,26 @@ namespace SilvaData.Controls
             BindingContext = this;
         }
 
-        #region Ciclo de Vida da P�gina
+        #region Ciclo de Vida da Página
 
         /// <summary>
-        /// Chamado quando a p�gina est� prestes a se tornar vis�vel.
+        /// Chamado quando a página está prestes a se tornar visível.
         /// Carrega os dados e registra os receptores de mensagens.
         /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            // MIGRADO: Usa CacheService ao inv�s de DadosStatic
+            // MIGRADO: Usa CacheService ao invés de DadosStatic
             ListaPropriedades = new ObservableCollection<Propriedade>(_cacheService.PropriedadeList);
 
-            // Notifica a UI (SfListView) que a cole��o mudou
+            // Notifica a UI (SfListView) que a coleção mudou
             OnPropertyChanged(nameof(ListaPropriedades));
 
             // Aplica o filtro
             RefreshData();
 
-            // Registra as mensagens para atualiza��es em tempo real
+            // Registra as mensagens para atualizações em tempo real
             WeakReferenceMessenger.Default.Register<PropriedadeAdicionadaMessage>(this, (recipient, message) =>
             {
                 ListaPropriedades.Insert(0, message.Propriedade);
@@ -86,7 +86,7 @@ namespace SilvaData.Controls
         }
 
         /// <summary>
-        /// Chamado quando a p�gina n�o est� mais vis�vel.
+        /// Chamado quando a página não está mais visível.
         /// Remove o registro dos receptores de mensagens.
         /// </summary>
         protected override void OnDisappearing()
@@ -103,13 +103,13 @@ namespace SilvaData.Controls
         #region Comandos
 
         /// <summary>
-        /// Comando para navegar para a tela de edi��o de uma propriedade.
+        /// Comando para navegar para a tela de edição de uma propriedade.
         /// </summary>
         [RelayCommand(CanExecute = nameof(PodeEditar))]
         private async Task Edit(Propriedade propriedade) => await Editar(propriedade);
 
         /// <summary>
-        /// Comando para navegar para a tela de adi��o de uma nova propriedade.
+        /// Comando para navegar para a tela de adição de uma nova propriedade.
         /// </summary>
         [RelayCommand(CanExecute = nameof(PodeAdicionar))]
         private async Task AddNew()
@@ -118,7 +118,7 @@ namespace SilvaData.Controls
         }
 
         /// <summary>
-        /// Comando para navegar para a tela de Unidades Epidemiol�gicas.
+        /// Comando para navegar para a tela de Unidades Epidemiológicas.
         /// </summary>
         [RelayCommand]
         private async Task ShowUnidade()
@@ -127,34 +127,34 @@ namespace SilvaData.Controls
         }
 
         /// <summary>
-        /// Comando para fechar a p�gina modal atual.
+        /// Comando para fechar a página modal atual.
         /// </summary>
         [RelayCommand]
         public async Task Voltar() => await NavigationUtils.PopModalAsync();
 
         /// <summary>
-        /// Comando para for�ar a atualiza��o dos filtros da lista.
+        /// Comando para forçar a atualização dos filtros da lista.
         /// </summary>
         [RelayCommand]
         public void AtualizaFiltros() => RefreshData();
 
         #endregion
 
-        #region Permiss�es
+        #region Permissões
 
         /// <summary>
-        /// Obt�m um valor que indica se o usu�rio pode editar propriedades.
+        /// Obtém um valor que indica se o usuário pode editar propriedades.
         /// </summary>
         public bool PodeEditar => Permissoes.UsuarioPermissoes?.propriedades.atualizar ?? false;
 
         /// <summary>
-        /// Obt�m um valor que indica se o usu�rio pode adicionar propriedades.
+        /// Obtém um valor que indica se o usuário pode adicionar propriedades.
         /// </summary>
         public bool PodeAdicionar => Permissoes.UsuarioPermissoes?.propriedades.cadastrar ?? false;
 
         #endregion
 
-        #region L�gica de Filtro e Dados
+        #region Lógica de Filtro e Dados
 
         /// <summary>
         /// Atualiza o filtro da SfListView.
@@ -169,7 +169,7 @@ namespace SilvaData.Controls
         }
 
         /// <summary>
-        /// M�todo de predicado de filtro para a SfListView.
+        /// Método de predicado de filtro para a SfListView.
         /// </summary>
         private bool filterData(object obj)
         {
@@ -193,7 +193,7 @@ namespace SilvaData.Controls
         }
 
         /// <summary>
-        /// Manipulador de evento para altera��o de texto na barra de pesquisa.
+        /// Manipulador de evento para alteração de texto na barra de pesquisa.
         /// </summary>
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -202,7 +202,7 @@ namespace SilvaData.Controls
         }
 
         /// <summary>
-        /// Navega para a p�gina de edi��o de uma propriedade espec�fica.
+        /// Navega para a página de edição de uma propriedade específica.
         /// </summary>
         public async Task Editar(Propriedade propriedade)
         {

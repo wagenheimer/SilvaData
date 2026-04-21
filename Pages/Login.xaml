@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="SilvaData.Controls.Login"
+    x:Class="SilvaData_MAUI.Controls.Login"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:button="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
-    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:controls="clr-namespace:SilvaData_MAUI.Controls"
     xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
+    xmlns:viewmodels="clr-namespace:SilvaData_MAUI.ViewModels"
     x:DataType="viewmodels:LoginViewModel"
     BackgroundColor="{StaticResource QuaseBranco}"
     Shell.NavBarIsVisible="false"
@@ -19,7 +19,7 @@
 
     <!--  Grid raiz para sobrepor o overlay de loading  -->
     <Grid>
-        <!--  Conte�do rol�vel (centralizado)  -->
+        <!--  Conteúdo rolável (centralizado)  -->
         <Grid
             Padding="10"
             ColumnDefinitions="*,Auto,*"
@@ -49,7 +49,7 @@
                             Grid.Row="1"
                             FontSize="Micro"
                             HorizontalTextAlignment="Center"
-                            Text="ISI Sys ? FROM"
+                            Text="ISI Sys ⬤ FROM"
                             TextColor="Gray" />
                         <Label
                             Grid.Row="2"
@@ -85,7 +85,7 @@
                             Text="{Binding Password, Mode=TwoWay}" />
                     </StackLayout>
 
-                    <!--  Bot�o Login  -->
+                    <!--  Botão Login  -->
                     <button:SfButton
                         Grid.Row="2"
                         Margin="0,8,0,0"
@@ -138,7 +138,7 @@
                         </Image>
                     </Grid>
 
-                    <!--  A��es secund�rias  -->
+                    <!--  Ações secundárias  -->
                     <Grid
                         Grid.Row="4"
                         Margin="0,8,0,0"
@@ -156,14 +156,14 @@
                             BackgroundColor="White"
                             Command="{Binding PolicyPrivacyCommand}"
                             Style="{StaticResource ButtonSecondary}"
-                            Text="{localization:Translate Pol�ticaDePrivacidade}"
+                            Text="{localization:Translate PolíticaDePrivacidade}"
                             TextColor="{StaticResource PrimaryColor}" />
                     </Grid>
                 </Grid>
             </Border>
         </Grid>
 
-        <!--  Overlay de carregamento (scrim + cart�o central sem borda)  -->
+        <!--  Overlay de carregamento (scrim + cartão central sem borda)  -->
 
         <controls:LoadingView
             x:Name="busyindicator"

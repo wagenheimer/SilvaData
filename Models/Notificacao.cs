@@ -1,4 +1,4 @@
-using SilvaData.Utils;
+using SilvaData_MAUI.Utils;
 using Newtonsoft.Json;
 using Plugin.LocalNotification;
 using SQLite;
@@ -7,7 +7,7 @@ using System.Threading;
 using Microsoft.Maui.ApplicationModel;
 using Plugin.LocalNotification.Core.Models; // Para MainThread
 
-namespace SilvaData.Models
+namespace SilvaData_MAUI.Models
 {
     public class Notificacao
     {
@@ -73,11 +73,11 @@ namespace SilvaData.Models
             else
             {
                 await SentryHelper.LogErrorAsync(updateJson, "Notificacao", result.mensagem);
-                throw new Exception(!string.IsNullOrEmpty(result.mensagem) ? result.mensagem : "Erro desconhecido ao enviar notifica��es");
+                throw new Exception(!string.IsNullOrEmpty(result.mensagem) ? result.mensagem : "Erro desconhecido ao enviar notificações");
             }
         }
 
-        /// <summary>Cria notifica��es locais para os itens agendados.</summary>
+        /// <summary>Cria notificações locais para os itens agendados.</summary>
         public static async Task CreateNotificationsAsync()
         {
             try
@@ -86,12 +86,12 @@ namespace SilvaData.Models
                 var temPermissao = await EnsureNotificationPermissionAsync();
                 if (!temPermissao)
                 {
-                    Debug.WriteLine("Notifica��es: permiss�o negada. Agendamento cancelado.");
+                    Debug.WriteLine("Notificações: permissão negada. Agendamento cancelado.");
                     return;
                 }
                 var notificacoes = await PegaNotificacoesAtivas();
                 var futuras = notificacoes.Where(n => n.dataHora.HasValue && n.dataHora > DateTime.Now).ToList();
-                Debug.WriteLine($"Agendando {futuras.Count} notifica��es");
+                Debug.WriteLine($"Agendando {futuras.Count} notificações");
                 int idx = 0;
                 foreach (var n in futuras)
                 {
@@ -103,13 +103,13 @@ namespace SilvaData.Models
                     }
                     catch (Exception ex)
                     {
-                        Debug.WriteLine($"Erro ao agendar notifica��o (idBD:{n.idBD}): {ex.Message}");
+                        Debug.WriteLine($"Erro ao agendar notificação (idBD:{n.idBD}): {ex.Message}");
                     }
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Erro ao criar notifica��es: {ex.Message}");
+                Debug.WriteLine($"Erro ao criar notificações: {ex.Message}");
             }
         }
 
@@ -124,7 +124,7 @@ namespace SilvaData.Models
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Permiss�o de notifica��o falhou: {ex.Message}");
+                Debug.WriteLine($"Permissão de notificação falhou: {ex.Message}");
                 return false;
             }
         }
@@ -133,7 +133,7 @@ namespace SilvaData.Models
         {
             if (!notificacao.dataHora.HasValue)
             {
-                Debug.WriteLine($"ERRO: Notifica��o (idBD:{notificacao.idBD}) sem dataHora v�lida.");
+                Debug.WriteLine($"ERRO: Notificação (idBD:{notificacao.idBD}) sem dataHora válida.");
                 return Task.CompletedTask;
             }
             var notification = new NotificationRequest

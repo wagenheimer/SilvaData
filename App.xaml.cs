@@ -1,5 +1,5 @@
-using SilvaData.Pages.PopUps;
-using SilvaData.Models;
+using SilvaData_MAUI.Pages.PopUps;
+using SilvaData_MAUI.Models;
 
 using Microsoft.Maui.Storage;
 using Sentry;
@@ -7,19 +7,19 @@ using Sentry;
 using Syncfusion.Licensing;
 using System.Diagnostics;
 
-namespace SilvaData
+namespace SilvaData_MAUI
 {
     public partial class App : Application
     {
         public App(IServiceProvider serviceProvider)
         {
-            // Inicializa o ServiceHelper o mais cedo poss�vel,
+            // Inicializa o ServiceHelper o mais cedo possível,
             // antes que as views XAML comecem a resolver ViewModels.
-            SilvaData.Infrastructure.ServiceHelper.Initialize(serviceProvider);
+            SilvaData_MAUI.Infrastructure.ServiceHelper.Initialize(serviceProvider);
 
             RegisterGlobalExceptionHandlers();
 
-            // For�a o tema Light ANTES do InitializeComponent()
+            // Força o tema Light ANTES do InitializeComponent()
             UserAppTheme = AppTheme.Light;
 
             InitializeComponent();
@@ -39,30 +39,30 @@ namespace SilvaData
             
             try
             {
-                // Salvar estado cr�tico ao app entrar em modo sleep
-                Debug.WriteLine("[App] OnSleep - Salvando estado cr�tico");
+                // Salvar estado crítico ao app entrar em modo sleep
+                Debug.WriteLine("[App] OnSleep - Salvando estado crítico");
                 
-                // For�a sincroniza��o de dados pendentes se necess�rio
+                // Força sincronização de dados pendentes se necessário
                 _ = Task.Run(async () =>
                 {
                     try
                     {
-                        // Verificar se h� altera��es pendentes que precisam de aten��o especial
+                        // Verificar se há alterações pendentes que precisam de atenção especial
                         await ManutencaoTabelas.UpdateTotalAlteracoes();
                         
-                        // Salvar formul�rios em andamento (j� implementado)
+                        // Salvar formulários em andamento (já implementado)
                         // Esta chamama garante que o estado atual seja persistido
                         var formularioEmAndamento = Preferences.Get("FormularioEmAndamento", "");
                         if (!string.IsNullOrEmpty(formularioEmAndamento))
                         {
-                            // O formul�rio j� est� sendo salvo automaticamente pelo SalvaEmAndamento()
-                            Debug.WriteLine("[App] OnSleep - Formul�rio em andamento detectado");
+                            // O formulário já está sendo salvo automaticamente pelo SalvaEmAndamento()
+                            Debug.WriteLine("[App] OnSleep - Formulário em andamento detectado");
                         }
                         
                         // Garantir que o banco de dados esteja em estado consistente
                         await Database.GetInstanceAsync();
                         
-                        Debug.WriteLine("[App] OnSleep - Estado cr�tico salvo com sucesso");
+                        Debug.WriteLine("[App] OnSleep - Estado crítico salvo com sucesso");
                     }
                     catch (Exception ex)
                     {
@@ -91,10 +91,10 @@ namespace SilvaData
                 {
                     try
                     {
-                        // Verificar se h� inconsist�ncias nos dados
+                        // Verificar se há inconsistências nos dados
                         await ManutencaoTabelas.UpdateTotalAlteracoes();
                         
-                        // Garantir que o banco de dados esteja acess�vel
+                        // Garantir que o banco de dados esteja acessível
                         await Database.GetInstanceAsync();
                         
                         Debug.WriteLine("[App] OnResume - Estado restaurado com sucesso");
@@ -115,7 +115,7 @@ namespace SilvaData
 
         private void RegisterGlobalExceptionHandlers()
         {
-            // Exce��es n�o tratadas em threads background
+            // Exceções não tratadas em threads background
             AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
             {
                 var ex = args.ExceptionObject as Exception ?? new Exception("Erro desconhecido (UnhandledException)");
@@ -124,7 +124,7 @@ namespace SilvaData
                     await MostrarErroGlobal(ex));
             };
 
-            // Tasks ass�ncronas cujas exce��es n�o foram observadas
+            // Tasks assíncronas cujas exceções não foram observadas
             TaskScheduler.UnobservedTaskException += (sender, args) =>
             {
                 SentrySdk.CaptureException(args.Exception);
@@ -148,7 +148,7 @@ namespace SilvaData
             }
             catch
             {
-                // �ltimo recurso: n�o deixa o tratamento de erro causar outro crash
+                // Último recurso: não deixa o tratamento de erro causar outro crash
             }
         }
     }
