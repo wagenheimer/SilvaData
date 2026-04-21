@@ -97,7 +97,6 @@
 		<None Remove="Resources\Images\Icons\IconAtividades.png" />
 		<None Remove="Resources\Images\Icons\IconDashboard.png" />
 		<None Remove="Resources\Images\Icons\IconDispersao.png" />
-		<None Remove="Resources\Images\Icons\IconISIMicro.png" />
 		<None Remove="Resources\Images\Icons\IconLogOff.png" />
 		<None Remove="Resources\Images\Icons\IconLotes.png" />
 		<None Remove="Resources\Images\Icons\IconMinhaConta.png" />
@@ -129,7 +128,6 @@
 		<None Remove="Resources\Images\Icons\TratamentoViaAgua.png" />
 		<None Remove="Resources\Images\Icons\Vacinas.png" />
 		<None Remove="Resources\Images\Icons\Voltar.svg" />
-		<None Remove="Resources\Images\Icons\VoltarAzul.png" />
 		<None Remove="Resources\Images\Icons\Whatsapp.png" />
 		<None Remove="Resources\Images\Icons\Zootecnico.png" />
 	</ItemGroup>
@@ -179,7 +177,6 @@
 		<MauiImage Include="Resources\Images\Icons\iconatividades.png" />
 		<MauiImage Include="Resources\Images\Icons\icondashboard.png" />
 		<MauiImage Include="Resources\Images\Icons\icondispersao.png" />
-		<MauiImage Include="Resources\Images\Icons\iconisimicro.png" />
 		<MauiImage Include="Resources\Images\Icons\iconlogoff.png" />
 		<MauiImage Include="Resources\Images\Icons\iconlotes.png" />
 		<MauiImage Include="Resources\Images\Icons\iconminhaconta.png" />
@@ -214,7 +211,6 @@
 		<MauiImage Include="Resources\Images\Icons\tratamentoviaagua.png" />
 		<MauiImage Include="Resources\Images\Icons\vacinas.png" />
 		<MauiImage Include="Resources\Images\Icons\voltar.svg" />
-		<MauiImage Include="Resources\Images\Icons\voltarazul.png" />
 		<MauiImage Include="Resources\Images\Icons\whatsapp.png" />
 		<MauiImage Include="Resources\Images\Icons\zootecnico.png" />
 	</ItemGroup>
