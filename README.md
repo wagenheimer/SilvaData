@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/CW-Software-Apps/SilvaData/master/SilvaData/Resources/AppIcon/appicon.svg" width="128" alt="SilvaData Logo" />
+  <img src="SilvaData/Resources/Images/Icons/isilogo.png" width="128" alt="SilvaData Logo" />
 </p>
 
 <h1 align="center">SilvaData 🚀</h1>
