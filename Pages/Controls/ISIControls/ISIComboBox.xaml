@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<controls:ValidatableFieldBase
+    x:Class="SilvaData.Controls.ISIComboBox"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:comboBox="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    x:Name="comboBox">
+
+    <VerticalStackLayout
+        Padding="2"
+        Spacing="4">
+
+        <!--  Título + asterisco obrigatório  -->
+        <Grid ColumnDefinitions="*,Auto">
+            <Label
+                x:Name="labelTitle"
+                Grid.Column="0"
+                Margin="0"
+                Padding="5,0"
+                FontSize="Small"
+                Text="{Binding Title, Source={x:Reference comboBox}}"
+                TextColor="{StaticResource PrimaryColor}" />
+            <Label
+                Grid.Column="1"
+                Margin="2,0,0,0"
+                Padding="0"
+                FontAttributes="Bold"
+                FontSize="Small"
+                IsVisible="{Binding IsRequired, Source={x:Reference comboBox}}"
+                Text="*"
+                TextColor="Red"
+                VerticalTextAlignment="Center" />
+        </Grid>
+
+        <!--  Borda com borda vermelha no erro  -->
+        <Border
+            x:Name="isiComboBoxBorder"
+            Margin="0"
+            Padding="12,0"
+            Background="White"
+            HeightRequest="52"
+            Stroke="{StaticResource PrimaryColor}"
+            StrokeThickness="1">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="8" />
+            </Border.StrokeShape>
+
+            <Border.Triggers>
+                <DataTrigger
+                    Binding="{Binding HasError, Source={x:Reference comboBox}}"
+                    TargetType="Border"
+                    Value="True">
+                    <Setter Property="Stroke" Value="Red" />
+                    <Setter Property="StrokeThickness" Value="2" />
+                </DataTrigger>
+            </Border.Triggers>
+
+            <comboBox:SfComboBox
+                x:Name="isiComboBox"
+                Margin="0"
+                DisplayMemberPath="nome"
+                HeightRequest="52"
+                IsEnabled="{Binding IsReadOnly, x:DataType={x:Type controls:ISIComboBox}, Source={x:Reference comboBox}, Converter={StaticResource InvertBoolean}}"
+                ItemsSource="{Binding ItemsSource, Source={x:Reference comboBox}}"
+                Text="{Binding Text, Source={x:Reference comboBox}, Mode=TwoWay}"
+                SelectionChanged="OnComboBoxSelectionChanged"
+                SelectionTextHighlightColor="AliceBlue"
+                ShowBorder="false"
+                TextColor="{Binding IsReadOnly, x:DataType={x:Type controls:ISIComboBox}, Source={x:Reference comboBox}, Converter={StaticResource BoolToColorConverter}}" />
+        </Border>
+
+    </VerticalStackLayout>
+</controls:ValidatableFieldBase>

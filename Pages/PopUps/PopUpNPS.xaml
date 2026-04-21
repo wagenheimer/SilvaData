@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<toolkit:Popup
+    x:Class="SilvaData.Pages.PopUps.PopUpNPS"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:models="clr-namespace:SilvaData.Models"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:TypeArguments="models:NPSResult">
+    <Border
+        Margin="20"
+        Padding="10"
+        BackgroundColor="{StaticResource White}"
+        HorizontalOptions="Fill"
+        Stroke="{StaticResource Primary}"
+        StrokeShape="RoundRectangle 10,10,10,10"
+        StrokeThickness="1"
+        VerticalOptions="Center">
+        <Grid RowDefinitions="Auto,Auto,*,Auto" RowSpacing="10">
+            <Label
+                FontAttributes="Bold"
+                FontSize="18"
+                HorizontalOptions="Center"
+                Text="{Binding Titulo}" />
+            <Label
+                Grid.Row="1"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                Text="{Binding Mensagem}"
+                VerticalTextAlignment="Center" />
+
+            <!--  Slider for NPS rating  -->
+            <StackLayout Grid.Row="2" Spacing="10">
+                <Slider
+                    Maximum="10"
+                    MaximumTrackColor="{StaticResource Gray300}"
+                    Minimum="0"
+                    MinimumTrackColor="{StaticResource Primary}"
+                    ThumbColor="{StaticResource Primary}"
+                    Value="{Binding Rating}" />
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="24"
+                    HorizontalOptions="Center"
+                    Text="{Binding Rating, StringFormat='{0:F0}'}" />
+                <Grid ColumnDefinitions="*,*">
+                    <Label HorizontalOptions="Start" Text="{localization:Translate Improv�vel}" />
+                    <Label
+                        Grid.Column="1"
+                        HorizontalOptions="End"
+                        Text="{localization:Translate MuitoProv�vel}" />
+                </Grid>
+
+                <Entry
+                    Margin="0,10,0,0"
+                    Placeholder="{localization:Translate Coment�rios}"
+                    Text="{Binding Comments}" />
+            </StackLayout>
+
+            <Grid
+                Grid.Row="3"
+                ColumnDefinitions="*,*"
+                ColumnSpacing="10">
+                <buttons:SfButton
+                    Command="{Binding EnviarCommand}"
+                    Style="{StaticResource ButtonPrimary}"
+                    Text="{localization:Translate Enviar}" />
+                <buttons:SfButton
+                    Grid.Column="1"
+                    Command="{Binding CancelarCommand}"
+                    Style="{StaticResource ButtonSecondary}"
+                    Text="{localization:Translate Cancelar}" />
+            </Grid>
+        </Grid>
+    </Border>
+</toolkit:Popup>

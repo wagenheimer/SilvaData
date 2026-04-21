@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<controls:ValidatableFieldBase
+    x:Class="SilvaData.Controls.RegionalComboBox"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:comboBox="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:models="clr-namespace:SilvaData.Models"
+    x:Name="reginalComboBox"
+    Padding="0">
+
+    <StackLayout Padding="2" Spacing="4">
+
+        <!--  Título + asterisco de obrigatório  -->
+        <Grid ColumnDefinitions="*,Auto">
+            <Label
+                x:Name="labelTitle"
+                Grid.Column="0"
+                Margin="0"
+                Padding="5,0"
+                FontSize="Small"
+                Text="{localization:Translate Regional}"
+                TextColor="{StaticResource PrimaryColor}" />
+            <Label
+                Grid.Column="1"
+                Margin="2,0,0,0"
+                Padding="0"
+                FontAttributes="Bold"
+                FontSize="Small"
+                IsVisible="{Binding IsObrigatorio, Source={x:Reference reginalComboBox}}"
+                Text="*"
+                TextColor="Red"
+                VerticalTextAlignment="Center" />
+        </Grid>
+
+        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+
+            <!--  Borda com destaque visual no erro  -->
+            <Border
+                Grid.Column="0"
+                Margin="0"
+                Padding="12,0"
+                Background="White"
+                HeightRequest="52"
+                Stroke="{StaticResource PrimaryColor}"
+                StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8" />
+                </Border.StrokeShape>
+
+                <Border.Triggers>
+                    <DataTrigger
+                        Binding="{Binding HasError, Source={x:Reference reginalComboBox}}"
+                        TargetType="Border"
+                        Value="True">
+                        <Setter Property="Stroke" Value="Red" />
+                        <Setter Property="StrokeThickness" Value="2" />
+                    </DataTrigger>
+                </Border.Triggers>
+
+                <comboBox:SfComboBox
+                    x:Name="regionalcombobox"
+                    Margin="0"
+                    BackgroundColor="Transparent"
+                    DisplayMemberPath="nome"
+                    DropDownItemTextColor="{StaticResource PrimaryColor}"
+                    HeightRequest="52"
+                    HighlightedTextColor="AliceBlue"
+                    IsEnabled="{Binding IsReadOnly, Source={x:Reference reginalComboBox}, Converter={StaticResource InvertBoolean}}"
+                    ItemsSource="{Binding RegionalList, Source={x:Reference reginalComboBox}}"
+                    SelectionChanged="OnComboBoxSelectionChanged"
+                    SelectionTextHighlightColor="AliceBlue"
+                    ShowBorder="False"
+                    TextColor="{Binding IsReadOnly, Source={x:Reference reginalComboBox}, Converter={StaticResource BoolToColorConverter}}" />
+            </Border>
+
+            <buttons:SfButton
+                x:Name="btAdd"
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                Command="{Binding AddNewComboBoxCommand, Source={x:Reference reginalComboBox}}"
+                CornerRadius="24"
+                FontFamily="FontAwesomeRegular"
+                FontSize="24"
+                HeightRequest="48"
+                IsVisible="{Binding Source={x:Static models:Permissoes.UsuarioPermissoes}, Path=regionais.cadastrar}"
+                Text="{x:Static fontawesome:FontAwesomeIcons.CirclePlus}"
+                TextColor="{StaticResource PrimaryColor}"
+                WidthRequest="48" />
+        </Grid>
+    </StackLayout>
+</controls:ValidatableFieldBase>

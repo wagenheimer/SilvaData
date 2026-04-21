@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="SilvaData.Controls.SincronizacaoView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:conv="clr-namespace:SilvaData.Converters"
+    xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
+    x:DataType="viewmodels:SincronizacaoViewModel"
+    BackgroundColor="#F5F5F5">
+    <ContentView.Resources>
+        <conv:PercentToFractionConverter x:Key="PercentToFractionConverter" />
+        <conv:IsNotZeroConverter x:Key="IsNotZeroConverter" />
+    </ContentView.Resources>
+
+    <Grid RowDefinitions="Auto,Auto,*" Style="{StaticResource HeaderGradient}">
+        <!--  Header  -->
+        <Grid
+            Grid.Row="0"
+            Margin="0"
+            Padding="5,10"
+            ColumnDefinitions="*,Auto"
+            RowDefinitions="Auto">
+            <HorizontalStackLayout
+                Grid.Row="0"
+                Spacing="0"
+                VerticalOptions="Center">
+                <Image
+                    Margin="5,0,0,0"
+                    Aspect="AspectFit"
+                    HeightRequest="40"
+                    HorizontalOptions="Center"
+                    Source="isilogo.png">
+                    <Image.Shadow>
+                        <Shadow
+                            Brush="White"
+                            Opacity="0.5"
+                            Radius="10"
+                            Offset="0,1" />
+                    </Image.Shadow>
+                </Image>
+                <Label
+                    Margin="5,0,2,0"
+                    Padding="5,0"
+                    FontAttributes="Bold"
+                    FontFamily="Nunito"
+                    FontSize="Large"
+                    HorizontalTextAlignment="Start"
+                    Text="ISI Sys"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+                <Label
+                    Margin="0,6"
+                    FontAttributes="Bold"
+                    FontSize="Micro"
+                    HorizontalTextAlignment="Start"
+                    Text="from ISI Institute"
+                    TextColor="White"
+                    VerticalOptions="End" />
+            </HorizontalStackLayout>
+        </Grid>
+
+        <VerticalStackLayout
+            Grid.Row="2"
+            Margin="10"
+            Spacing="16"
+            VerticalOptions="Center">
+            <Label
+                FontSize="Large"
+                HorizontalTextAlignment="Center"
+                Text="Sincronização de Dados"
+                TextColor="White" />
+
+            <Border
+                Padding="24"
+                Background="White"
+                StrokeShape="RoundRectangle 16"
+                StrokeThickness="0"
+                VerticalOptions="Center">
+                <VerticalStackLayout Spacing="20">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Border
+                            Grid.Column="0"
+                            Background="{StaticResource PrimaryColor}"
+                            IsVisible="{Binding IndicadorVisivel}"
+                            StrokeShape="RoundRectangle 30">
+                            <ActivityIndicator
+                                HeightRequest="24"
+                                IsRunning="True"
+                                WidthRequest="24"
+                                Color="White" />
+                        </Border>
+                        <VerticalStackLayout
+                            Grid.Column="1"
+                            Padding="8,0"
+                            Spacing="2">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Small"
+                                LineBreakMode="WordWrap"
+                                Text="{Binding EtapaAtual}"
+                                TextColor="#212121" />
+                            <!--  Descrição da sub-tarefa  -->
+                            <Label
+                                FontSize="11"
+                                IsVisible="{Binding SubTexto, Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                                LineBreakMode="WordWrap"
+                                Opacity="0.65"
+                                Text="{Binding SubTexto}"
+                                TextColor="#424242" />
+                        </VerticalStackLayout>
+                    </Grid>
+                    <!--  Progresso principal  -->
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout HorizontalOptions="Fill">
+                            <Label
+                                FontSize="13"
+                                Text="Progresso:"
+                                TextColor="#757575" />
+                            <Label
+                                Padding="5,0"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                HorizontalOptions="End"
+                                Text="{Binding Progresso}"
+                                TextColor="{StaticResource PrimaryColor}" />
+                        </HorizontalStackLayout>
+                        <ProgressBar HeightRequest="10" Progress="{Binding Percent, Converter={StaticResource PercentToFractionConverter}}" />
+                    </VerticalStackLayout>
+                    <!--  Sub-progresso: reserva espaço fixo para evitar layout shift  -->
+                    <VerticalStackLayout
+                        MinimumHeightRequest="36"
+                        Opacity="{Binding SubPercent, Converter={StaticResource IsNotZeroConverter}}"
+                        Spacing="4">
+                        <HorizontalStackLayout HorizontalOptions="FillAndExpand">
+                            <Label
+                                Padding="0,0,4,0"
+                                FontSize="12"
+                                Opacity="0.7"
+                                Text="Sub-tarefa:"
+                                TextColor="#757575" />
+                            <Label
+                                FontSize="12"
+                                HorizontalOptions="FillAndExpand"
+                                IsVisible="{Binding Texto2, Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                                LineBreakMode="TailTruncation"
+                                Text="{Binding Texto2}"
+                                TextColor="{StaticResource PrimaryColor}" />
+                        </HorizontalStackLayout>
+                        <ProgressBar HeightRequest="6" Progress="{Binding SubPercent, Converter={StaticResource PercentToFractionConverter}}" />
+                    </VerticalStackLayout>
+                    <!--  Tempo Decorrido  -->
+                    <Border
+                        Padding="12,10"
+                        Background="#E3F2FD"
+                        StrokeShape="RoundRectangle 10">
+                        <VerticalStackLayout Spacing="4">
+                            <Label
+                                FontSize="11"
+                                Text="Tempo Decorrido"
+                                TextColor="#1565C0" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{Binding TempoDecorrido}"
+                                TextColor="#0D47A1" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentView>

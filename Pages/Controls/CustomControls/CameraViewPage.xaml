@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="SilvaData.Controls.CameraViewPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    BackgroundColor="{StaticResource DarkBackground}"
+    NavigationPage.HasNavigationBar="False">
+
+    <Grid BackgroundColor="Black" RowDefinitions="*, Auto">
+        <!--  Camera View com Overlay  -->
+        <Grid Grid.Row="0">
+            <toolkit:CameraView
+                x:Name="cameraView"
+                CameraFlashMode="{Binding FlashMode}"
+                VerticalOptions="Fill" />
+
+            <!--  Overlay de foco  -->
+            <Grid BackgroundColor="Transparent">
+                <Ellipse
+                    HeightRequest="180"
+                    HorizontalOptions="Center"
+                    Stroke="{StaticResource PrimaryColor}"
+                    StrokeDashArray="2,2"
+                    StrokeThickness="2"
+                    VerticalOptions="Center"
+                    WidthRequest="180" />
+            </Grid>
+
+            <!--  Botão de voltar no canto superior esquerdo  -->
+            <buttons:SfButton
+                Margin="16"
+                Clicked="BackButton_Clicked"
+                HorizontalOptions="Start"
+                Style="{StaticResource CircleButton}"
+                Text="{x:Static fontawesome:FontAwesomeIcons.ArrowLeft}"
+                VerticalOptions="Start" />
+        </Grid>
+
+        <!--  Barra inferior de controles  -->
+        <Grid
+            Grid.Row="1"
+            Padding="24,20"
+            BackgroundColor="{StaticResource Gray900}"
+            ColumnDefinitions="Auto,*,Auto"
+            ColumnSpacing="16"
+            RowDefinitions="Auto">
+
+            <!--  Botão Flash  -->
+            <buttons:SfButton
+                Grid.Column="0"
+                Clicked="FlashButton_Clicked"
+                CornerRadius="24"
+                HeightRequest="48"
+                Style="{StaticResource CircleButtonWhite}"
+                WidthRequest="48"
+                ShowIcon="False">
+                <buttons:SfButton.Content>
+                    <DataTemplate>
+                        <Label
+                            x:Name="flashIcon"
+                            FontFamily="FontAwesomeSolid"
+                            FontSize="20"
+                            HorizontalTextAlignment="Center"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.Bolt}"
+                            TextColor="{StaticResource Gray600}"
+                            VerticalTextAlignment="Center" />
+                    </DataTemplate>
+                </buttons:SfButton.Content>
+            </buttons:SfButton>
+
+            <!--  Botão principal de captura  -->
+            <buttons:SfButton
+                x:Name="captureButton"
+                Grid.Column="1"
+                Clicked="CaptureButton_Clicked"
+                CornerRadius="36"
+                HeightRequest="72"
+                HorizontalOptions="Center"
+                WidthRequest="72"
+                Background="{StaticResource PrimaryColor}"
+                ShowIcon="False">
+                <buttons:SfButton.Content>
+                    <DataTemplate>
+                        <Ellipse
+                            Fill="White"
+                            HeightRequest="60"
+                            WidthRequest="60" />
+                    </DataTemplate>
+                </buttons:SfButton.Content>
+                <buttons:SfButton.Shadow>
+                    <Shadow
+                        Brush="{StaticResource PrimaryColor}"
+                        Opacity="0.4"
+                        Radius="12"
+                        Offset="0,4" />
+                </buttons:SfButton.Shadow>
+            </buttons:SfButton>
+
+            <!--  Botão trocar câmera  -->
+            <buttons:SfButton
+                Grid.Column="2"
+                Clicked="SwitchCameraButton_Clicked"
+                CornerRadius="24"
+                HeightRequest="48"
+                Style="{StaticResource CircleButtonWhite}"
+                WidthRequest="48"
+                ShowIcon="False">
+                <buttons:SfButton.Content>
+                    <DataTemplate>
+                        <Label
+                            FontFamily="FontAwesomeSolid"
+                            FontSize="20"
+                            HorizontalTextAlignment="Center"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.Rotate}"
+                            TextColor="{StaticResource PrimaryColor}"
+                            VerticalTextAlignment="Center" />
+                    </DataTemplate>
+                </buttons:SfButton.Content>
+            </buttons:SfButton>
+        </Grid>
+    </Grid>
+</ContentPage>

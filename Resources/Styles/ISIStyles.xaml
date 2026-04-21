@@ -1,0 +1,1093 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:button="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:converters="clr-namespace:SilvaData.Converters"
+    xmlns:core="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:models="clr-namespace:SilvaData.Models"
+    xmlns:numericEntry="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+    xmlns:numericupdown="http://schemas.syncfusion.com/maui/toolkit"
+    xmlns:templates="clr-namespace:ISIInstitute.Views.Templates"
+    xmlns:utils="clr-namespace:SilvaData.Utils"
+    xmlns:viewModels="clr-namespace:SilvaData.ViewModels">
+
+    <!--
+        ═══════════════════════════════════════════════════
+        CORES (PALETA)
+        ═══════════════════════════════════════════════════
+    -->
+    <Color x:Key="PrimaryColor">#0888CD</Color>
+    <Color x:Key="PrimaryLightColor">#41ABD9</Color>
+    <Color x:Key="SecondaryColor">#26558D</Color>
+    <Color x:Key="DarkColor">#324275</Color>
+    <Color x:Key="HeaderColor">#03A7FF</Color>
+
+    <Color x:Key="ButtonColor">#108bce</Color>
+    <Color x:Key="CorBotao">#5377AA</Color>
+    <Color x:Key="DarkButtonColor">#324275</Color>
+    <Color x:Key="LightButtonColor">#f2f9fd</Color>
+    <Color x:Key="FundoClarinhoBotao">#EFF3F8</Color>
+
+    <Color x:Key="DisabledBackgroundColor">#E0E0E0</Color>
+    <Color x:Key="DisabledTextColor">#A0A0A0</Color>
+
+    <Color x:Key="TextEnabled">#324275</Color>
+    <Color x:Key="TextDisabled">LightGray</Color>
+    <Color x:Key="TextColorLight">White</Color>
+    <Color x:Key="TextColor">Black</Color>
+    <Color x:Key="PrimaryFontColor">White</Color>
+
+    <Color x:Key="BackgroudColor">White</Color>
+    <Color x:Key="FlyoutBackgroundColor">White</Color>
+    <Color x:Key="QuaseBranco">#f6f6f9</Color>
+
+    <Color x:Key="ScoreBackground">#f2f9fc</Color>
+    <Color x:Key="ScoreTextColor">#0888cd</Color>
+
+    <Color x:Key="AcometimentoBackground">#f4f5fc</Color>
+    <Color x:Key="AcometimentoTextColor">#04289a</Color>
+
+    <Color x:Key="DispersaoBackground">#f5f5fc</Color>
+    <Color x:Key="DispersaoTextColor">#8079dd</Color>
+
+
+
+    <Color x:Key="MediaBoaBackground">#f6fbf2</Color>
+    <Color x:Key="MediaBoaTextColor">#4dba21</Color>
+    <Color x:Key="MediaRuimBackground">#fbf2f2</Color>
+    <Color x:Key="MediaRuimTextColor">#ba2121</Color>
+
+    <!--
+        ═══════════════════════════════════════════════════
+        CONVERTERS (TOOLKIT)
+        ═══════════════════════════════════════════════════
+    -->
+    <converters:InvertBoolConverter x:Key="InvertBoolean" />
+    <converters:IsListNullOrEmptyConverter x:Key="ListIsNullOrEmptyConverter" />
+    <converters:IsListNotNullOrEmptyConverter x:Key="ListIsNotNullOrEmptyConverter" />
+    <converters:IsStringNullOrEmptyConverter x:Key="IsNullOrEmptyConverter" />
+    <converters:IsStringNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter" />
+    <converters:IntToBoolConverter x:Key="IntToBoolConverter" />
+
+    <!--
+        ═══════════════════════════════════════════════════
+        CONVERTERS (CUSTOM)
+        ═══════════════════════════════════════════════════
+    -->
+    <converters:StatusStyleConverter x:Key="StatusStyleConverter" />
+    <converters:DateToStringConverter x:Key="DateToString" />
+    <converters:BooleanToStringConverter x:Key="BooleanToStringConverter" />
+    <converters:StringToNullableDoubleConverter x:Key="StringToNullableDoubleConverter" />
+    <converters:TemDadosConverter x:Key="TemDados" />
+    <converters:NaoTemDadosConverter x:Key="NaoTemDados" />
+    <converters:NullToDefaultConverter x:Key="NullToDefaultConverter" />
+    <converters:BooleanToOpacityConverter x:Key="BooleanToOpacityConverter" />
+    <converters:BoolToColorConverter x:Key="BoolToColorConverter" />
+    <converters:DateTimeNullableConverter x:Key="DateTimeNullableConverter" />
+    <converters:BoolToIconConverter x:Key="BoolToIconConverter" />
+    <converters:IsZeroConverter x:Key="IsZeroConverter" />
+    <converters:PercentToWidthConverter x:Key="PercentToWidthConverter" />
+
+    <!--
+        ═══════════════════════════════════════════════════
+        ESTILOS DE BADGES (REUTILIZÁVEIS)
+        ═══════════════════════════════════════════════════
+    -->
+
+    <!--  Badge azul (Primary)  -->
+    <Style x:Key="BadgePrimary" TargetType="Border">
+        <Setter Property="Padding" Value="10,6" />
+        <Setter Property="Background" Value="#E3F2FD" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 10" />
+        <Setter Property="StrokeThickness" Value="0" />
+    </Style>
+
+    <!--  Badge verde (Success)  -->
+    <Style x:Key="BadgeSuccess" TargetType="Border">
+        <Setter Property="Padding" Value="10,6" />
+        <Setter Property="Background" Value="#E8F5E9" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 10" />
+        <Setter Property="StrokeThickness" Value="0" />
+    </Style>
+
+    <!--  Badge laranja (Warning)  -->
+    <Style x:Key="BadgeWarning" TargetType="Border">
+        <Setter Property="Padding" Value="10,6" />
+        <Setter Property="Background" Value="#FFF3E0" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 10" />
+        <Setter Property="StrokeThickness" Value="0" />
+    </Style>
+
+    <!--  Badge roxo (Purple)  -->
+    <Style x:Key="BadgePurple" TargetType="Border">
+        <Setter Property="Padding" Value="10,6" />
+        <Setter Property="Background" Value="#F3E5F5" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 10" />
+        <Setter Property="StrokeThickness" Value="0" />
+    </Style>
+
+    <!--  Badge cinza (Info)  -->
+    <Style x:Key="BadgeInfo" TargetType="Border">
+        <Setter Property="Padding" Value="10,6" />
+        <Setter Property="Background" Value="#F5F5F5" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 10" />
+        <Setter Property="StrokeThickness" Value="0" />
+    </Style>
+
+    <!--
+        ═══════════════════════════════════════════════════
+        ESTILOS DE CARDS (REUTILIZÁVEIS)
+        ═══════════════════════════════════════════════════
+    -->
+
+    <!--  Card base  -->
+    <Style x:Key="CardBase" TargetType="Border">
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Stroke" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 16" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="Margin" Value="12,8" />
+    </Style>
+
+    <!--  Card com sombra  -->
+    <Style
+        x:Key="CardWithShadow"
+        BasedOn="{StaticResource CardBase}"
+        TargetType="Border">
+        <Setter Property="Shadow">
+            <Setter.Value>
+                <Shadow
+                    Brush="{StaticResource PrimaryColor}"
+                    Opacity="0.15"
+                    Radius="10"
+                    Offset="0,3" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  Card sem borda  -->
+    <Style x:Key="CardNoBorder" TargetType="Border">
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 16" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="Margin" Value="12,8" />
+        <Setter Property="Shadow">
+            <Setter.Value>
+                <Shadow
+                    Brush="Black"
+                    Opacity="0.1"
+                    Radius="8"
+                    Offset="0,2" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--
+        ═══════════════════════════════════════════════════
+        DATA TEMPLATES (FORMULÁRIO)
+        ═══════════════════════════════════════════════════
+    -->
+
+      <DataTemplate x:Key="ISIMacroTemplate">
+          <VerticalStackLayout>
+              <controls:ISIMacroNota IsReadOnly="{Binding Source={RelativeSource AncestorType={x:Type viewModels:BaseEditViewModel}}, Path=ReadOnly, Mode=OneWay}" />
+          </VerticalStackLayout>
+      </DataTemplate>
+
+    <DataTemplate x:Key="Alternativas">
+        <VerticalStackLayout Padding="10,2">
+            <controls:Grupo />
+            <controls:ComboAlternativas IsReadOnly="{Binding Source={RelativeSource AncestorType={x:Type viewModels:BaseEditViewModel}}, Path=ReadOnly, Mode=OneWay}" />
+        </VerticalStackLayout>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ValorInteiro">
+        <VerticalStackLayout Padding="10,2">
+            <controls:Grupo />
+            <controls:ValorInteiroComBotoes IsReadOnly="{Binding Source={RelativeSource AncestorType={x:Type viewModels:BaseEditViewModel}}, Path=ReadOnly, Mode=OneWay}" />
+        </VerticalStackLayout>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CheckList">
+        <VerticalStackLayout Padding="10,2">
+            <controls:Grupo />
+            <controls:YesNoToggle IsReadOnly="{Binding Source={RelativeSource AncestorType={x:Type viewModels:BaseEditViewModel}}, Path=ReadOnly, Mode=OneWay}" />
+        </VerticalStackLayout>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ValorDouble">
+        <VerticalStackLayout Padding="10,2">
+            <controls:Grupo />
+            <controls:ValorDouble IsReadOnly="{Binding Source={RelativeSource AncestorType={x:Type viewModels:BaseEditViewModel}}, Path=ReadOnly, Mode=OneWay}" />
+        </VerticalStackLayout>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CampoTexto">
+        <VerticalStackLayout Padding="10,2">
+            <controls:Grupo />
+            <controls:CampoTexto IsReadOnly="{Binding Source={RelativeSource AncestorType={x:Type viewModels:BaseEditViewModel}}, Path=ReadOnly, Mode=OneWay}" />
+        </VerticalStackLayout>
+    </DataTemplate>
+
+    <!--  ★★★ TEMPLATE QUANTITATIVO MELHORADO ★★★  -->
+    <DataTemplate x:Key="Quantitativo" x:DataType="models:LoteFormAvaliacaoGalpao">
+        <Border Background="{Binding CorFundo}" Style="{StaticResource CardWithShadow}">
+            <Grid
+                Padding="16,5"
+                RowDefinitions="Auto,Auto,Auto"
+                RowSpacing="4">
+
+                <!--  Header: Badge com número do registro  -->
+                <Border
+                    Grid.Row="0"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource BadgePrimary}">
+                    <HorizontalStackLayout Spacing="8">
+                        <Label
+                            FontFamily="FontAwesomeSolid"
+                            FontSize="13"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.Hashtag}"
+                            TextColor="{StaticResource PrimaryColor}"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            FontSize="14"
+                            Text="{localization:Translate Registro}"
+                            TextColor="{StaticResource SecondaryColor}"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            Text="{Binding NumeroResposta}"
+                            TextColor="{StaticResource PrimaryColor}"
+                            VerticalTextAlignment="Center" />
+                    </HorizontalStackLayout>
+                </Border>
+
+                <!--  Campo numérico destacado  -->
+                <Border
+                    Grid.Row="1"
+                    Padding="6,0"
+                    Background="#F8F9FA"
+                    Stroke="{StaticResource PrimaryColor}"
+                    StrokeThickness="0">
+                    <controls:ISINumericUpDown
+                        FontAttributes="Bold"
+                        FontSize="36"
+                        Maximum="{Binding ParametroValorMaximo}"
+                        Minimum="{Binding ParametroValorMinimo}"
+                        TextColor="{StaticResource PrimaryColor}"
+                        Value="{Binding RespostaQtde, Mode=TwoWay}" />
+                </Border>
+   
+                <!--  Footer: Range de valores permitidos  -->
+                <Border
+                    Grid.Row="2"
+                    Margin="5,0"
+                    Padding="5,0"
+                    Background="Transparent"
+                    HorizontalOptions="End">
+                    <HorizontalStackLayout Spacing="8">
+   
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="Micro"
+                            Text="{Binding Parametro.valorMinimo}"
+                            TextColor="{StaticResource PrimaryColor}"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            FontSize="Micro"
+                            Text=" - "
+                            TextColor="{StaticResource PrimaryColor}"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="Micro"
+                            Text="{Binding Parametro.valorMaximo}"
+                            TextColor="{StaticResource PrimaryColor}"
+                            VerticalTextAlignment="Center" />
+
+                    </HorizontalStackLayout>
+                </Border>
+            </Grid>
+        </Border>
+    </DataTemplate>
+
+    <!--  Template Selectors  -->
+    <templates:FormularioTemplateSelector
+        x:Key="FormularioTemplateSelector"
+        Alternativas="{StaticResource Alternativas}"
+        CampoTexto="{StaticResource CampoTexto}"
+        CheckList="{StaticResource CheckList}"
+        ISIMacro="{StaticResource ISIMacroTemplate}"
+        ValorDouble="{StaticResource ValorDouble}"
+        ValorInteiro="{StaticResource ValorInteiro}" />
+
+    <templates:AvaliacaoGalpaoTemplateSelector x:Key="AvaliacaoGalpaoTemplateSelector" Quantitativo="{StaticResource Quantitativo}" />
+
+    <!--
+        ═══════════════════════════════════════════════════
+        ÍCONES - CONSTANTES DE FONTE/COR/TAMANHO
+        ═══════════════════════════════════════════════════
+        OBS: FontImageSource não possui 'Style'. Use estes recursos nas instâncias.
+    -->
+
+    <!--  Light  -->
+    <x:String x:Key="IconLightFontFamily">FontAwesomeLight</x:String>
+    <x:Double x:Key="IconLightSize">13</x:Double>
+    <Color x:Key="IconLightColor">White</Color>
+
+    <!--  Regular  -->
+    <x:String x:Key="IconRegularFontFamily">FontAwesomeRegular</x:String>
+    <x:Double x:Key="IconRegularSize">13</x:Double>
+    <Color x:Key="IconRegularColor">White</Color>
+
+    <!--  Solid  -->
+    <x:String x:Key="IconSolidFontFamily">FontAwesomeSolid</x:String>
+    <x:Double x:Key="IconSolidSize">30</x:Double>
+    <Color x:Key="IconSolidColor">White</Color>
+
+    <!--
+        ═══════════════════════════════════════════════════
+        ESTILOS GLOBAIS: SfButton (Syncfusion)
+        ═══════════════════════════════════════════════════
+    -->
+
+    <!--  Estilo global base para todos os SfButtons  -->
+    <Style ApplyToDerivedTypes="true" TargetType="button:SfButton">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="FontFamily" Value="Nunito" />
+        <Setter Property="EnableRippleEffect" Value="True" />
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+        <Setter Property="TextColor" Value="{StaticResource SecondaryColor}" />
+    </Style>
+
+    <!--  Base para botões customizados  -->
+    <Style x:Key="BaseSfButton" TargetType="button:SfButton">
+        <Setter Property="CornerRadius" Value="15" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="HorizontalOptions" Value="Fill" />
+        <Setter Property="HeightRequest" Value="50" />
+    </Style>
+
+    <!--  Botão de configurações (ícone em cima)  -->
+    <Style x:Key="ConfiguracoesButton" TargetType="button:SfButton">
+        <Setter Property="ImageAlignment" Value="Top" />
+        <Setter Property="TextColor" Value="Gray" />
+        <Setter Property="FontSize" Value="Small" />
+        <Setter Property="ImageSize" Value="30" />
+        <Setter Property="ShowIcon" Value="true" />
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="HeightRequest" Value="120" />
+    </Style>
+
+    <!--  Botão com ícone no topo + Estado Desabilitado  -->
+    <Style x:Key="IconTopButtonStyle" TargetType="button:SfButton">
+        <Setter Property="ImageAlignment" Value="Top" />
+        <Setter Property="Background" Value="{StaticResource CorBotao}" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="FontSize" Value="Small" />
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="ImageSize" Value="30" />
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="CornerRadius" Value="8" />
+
+        <!--  ★★★ VisualStateManager para estados do botão ★★★  -->
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+
+                    <!--  Estado Normal (habilitado)  -->
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="Background" Value="{StaticResource CorBotao}" />
+                            <Setter Property="TextColor" Value="White" />
+                            <Setter Property="Opacity" Value="1.0" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <!--  Estado Pressionado  -->
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="Background" Value="{StaticResource CorBotao}" />
+                            <Setter Property="TextColor" Value="White" />
+                            <Setter Property="Opacity" Value="0.7" />
+                            <Setter Property="Scale" Value="0.97" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <!--  ★★★ Estado Desabilitado (AUTOMÁTICO quando IsEnabled=False) ★★★  -->
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="Background" Value="#BDBDBD" />
+                            <Setter Property="TextColor" Value="#757575" />
+                            <Setter Property="Opacity" Value="0.5" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <!--  Estado Hover (desktop/mouse)  -->
+                    <VisualState x:Name="PointerOver">
+                        <VisualState.Setters>
+                            <Setter Property="Background" Value="{StaticResource CorBotao}" />
+                            <Setter Property="TextColor" Value="White" />
+                            <Setter Property="Opacity" Value="0.9" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+
+    <!--  Botão primário (dark blue)  -->
+    <Style
+        x:Key="ButtonPrimary"
+        BasedOn="{StaticResource BaseSfButton}"
+        TargetType="button:SfButton">
+        <Setter Property="Background" Value="{StaticResource DarkButtonColor}" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="Background" Value="{StaticResource DarkButtonColor}" />
+                            <Setter Property="TextColor" Value="White" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="Background" Value="{StaticResource DisabledBackgroundColor}" />
+                            <Setter Property="TextColor" Value="{StaticResource DisabledTextColor}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!--  Botão secundário (light blue)  -->
+    <Style
+        x:Key="ButtonSecondary"
+        BasedOn="{StaticResource BaseSfButton}"
+        TargetType="button:SfButton">
+        <Setter Property="Background" Value="{StaticResource LightButtonColor}" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="Background" Value="{StaticResource LightButtonColor}" />
+                            <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="Background" Value="{StaticResource DisabledBackgroundColor}" />
+                            <Setter Property="TextColor" Value="{StaticResource DisabledTextColor}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!--  Botão primário (preset)  -->
+    <Style x:Key="PrimaryButton" TargetType="button:SfButton">
+        <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="FontFamily" Value="Nunito" />
+        <Setter Property="MinimumHeightRequest" Value="40" />
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
+                            <Setter Property="TextColor" Value="White" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="Background" Value="{StaticResource DisabledBackgroundColor}" />
+                            <Setter Property="TextColor" Value="{StaticResource DisabledTextColor}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!--  Botão Novo (azul)  -->
+    <Style
+        x:Key="NovoBotao"
+        BasedOn="{StaticResource PrimaryButton}"
+        TargetType="button:SfButton">
+        <Setter Property="Margin" Value="2" />
+        <Setter Property="FontFamily" Value="FontAwesomeSolid" />
+        <Setter Property="Background" Value="{StaticResource CorBotao}" />
+        <Setter Property="CornerRadius" Value="18" />
+        <Setter Property="ShowIcon" Value="false" />
+    </Style>
+
+    <!--  Botão Add New (com texto)  -->
+    <Style
+        x:Key="AddNewButton"
+        BasedOn="{StaticResource PrimaryButton}"
+        TargetType="button:SfButton">
+        <Setter Property="VerticalOptions" Value="Fill" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="WidthRequest" Value="200" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="Margin" Value="2" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="ImageAlignment" Value="Start" />
+        <Setter Property="ShowIcon" Value="false" />
+    </Style>
+
+    <!--  Barra padrão com ícone  -->
+    <Style
+        x:Key="sfButtonBar"
+        BasedOn="{StaticResource PrimaryButton}"
+        TargetType="button:SfButton">
+        <Setter Property="Stroke" Value="White" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="MinimumHeightRequest" Value="40" />
+        <Setter Property="WidthRequest" Value="250" />
+        <Setter Property="ShowIcon" Value="true" />
+    </Style>
+
+    <!--  Botão Cancelar (com ícone)  -->
+    <Style
+        x:Key="sfButtonBarCancelar"
+        BasedOn="{StaticResource sfButtonBar}"
+        TargetType="button:SfButton">
+        <Setter Property="Command" Value="{Binding CancelAddNewCommand}" />
+        <Setter Property="Text" Value="{localization:Translate Cancelar}" />
+        <Setter Property="ImageSource">
+            <FontImageSource
+                FontFamily="{StaticResource IconLightFontFamily}"
+                Glyph="{x:Static fontawesome:FontAwesomeIcons.DoorClosed}"
+                Size="{StaticResource IconLightSize}"
+                Color="{StaticResource IconLightColor}" />
+        </Setter>
+    </Style>
+
+    <!--  Botão Voltar (com ícone)  -->
+    <Style
+        x:Key="sfButtonBarBack"
+        BasedOn="{StaticResource sfButtonBar}"
+        TargetType="button:SfButton">
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="Command" Value="{Binding CancelAddNewCommand}" />
+        <Setter Property="Text" Value="{localization:Translate Voltar}" />
+        <Setter Property="ImageSource">
+            <FontImageSource
+                FontFamily="{StaticResource IconLightFontFamily}"
+                Glyph="{x:Static fontawesome:FontAwesomeIcons.ArrowLeft}"
+                Size="{StaticResource IconLightSize}"
+                Color="{StaticResource IconLightColor}" />
+        </Setter>
+    </Style>
+
+    <!--  Botão branco (secundário)  -->
+    <Style x:Key="sfButtonWhite" TargetType="button:SfButton">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="TextColor" Value="Gray" />
+        <Setter Property="Stroke" Value="White" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="MinimumHeightRequest" Value="80" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="WidthRequest" Value="250" />
+        <Setter Property="ShowIcon" Value="true" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="Background" Value="White" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="Background" Value="{StaticResource DisabledBackgroundColor}" />
+                            <Setter Property="TextColor" Value="{StaticResource DisabledTextColor}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!--  Botão para barra de busca (Cadastrar) com ícone +  -->
+    <Style
+        x:Key="SearchBarButton"
+        BasedOn="{StaticResource PrimaryButton}"
+        TargetType="button:SfButton">
+        <Setter Property="Command" Value="{Binding AddNewCommand}" />
+        <Setter Property="Text" Value="{localization:Translate Cadastrar}" />
+        <Setter Property="ImageSource">
+            <FontImageSource
+                FontFamily="{StaticResource IconRegularFontFamily}"
+                Glyph="{x:Static fontawesome:FontAwesomeIcons.Plus}"
+                Size="{StaticResource IconRegularSize}"
+                Color="{StaticResource IconRegularColor}" />
+        </Setter>
+        <Setter Property="Stroke" Value="White" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="WidthRequest" Value="250" />
+        <Setter Property="Grid.Column" Value="1" />
+        <Setter Property="ShowIcon" Value="true" />
+        <Setter Property="MinimumHeightRequest" Value="40" />
+        <Setter Property="Margin" Value="2" />
+    </Style>
+
+    <!--  Botão apenas ícone +  -->
+    <Style
+        x:Key="AddButtonNoText"
+        BasedOn="{StaticResource PrimaryButton}"
+        TargetType="button:SfButton">
+        <Setter Property="ImageSource">
+            <FontImageSource
+                FontFamily="{StaticResource IconRegularFontFamily}"
+                Glyph="{x:Static fontawesome:FontAwesomeIcons.Plus}"
+                Size="{StaticResource IconRegularSize}"
+                Color="{StaticResource IconRegularColor}" />
+        </Setter>
+        <Setter Property="Stroke" Value="White" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="WidthRequest" Value="40" />
+        <Setter Property="Grid.Column" Value="1" />
+        <Setter Property="ShowIcon" Value="true" />
+        <Setter Property="MinimumHeightRequest" Value="40" />
+        <Setter Property="Margin" Value="2" />
+    </Style>
+
+    <!--
+        ═══════════════════════════════════════════════════
+        BOTÕES CIRCULARES
+        ═══════════════════════════════════════════════════
+    -->
+
+    <!--  Botão circular base  -->
+    <Style x:Key="CircleButton" TargetType="button:SfButton">
+        <Setter Property="WidthRequest" Value="50" />
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="CornerRadius" Value="40" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="FontFamily" Value="FontAwesomeSolid" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="Background" Value="{StaticResource DisabledBackgroundColor}" />
+                            <Setter Property="TextColor" Value="{StaticResource DisabledTextColor}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!--  Botão circular verde  -->
+    <Style
+        x:Key="CircleButtonGreen"
+        BasedOn="{StaticResource CircleButton}"
+        TargetType="button:SfButton">
+        <Setter Property="FontFamily" Value="FontAwesomeLight" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="Background" Value="LimeGreen" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="Background" Value="{StaticResource DisabledBackgroundColor}" />
+                            <Setter Property="TextColor" Value="{StaticResource DisabledTextColor}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!--  FAB: Botão circular + (grande)  -->
+    <Style
+        x:Key="CircleButtonPlus"
+        BasedOn="{StaticResource CircleButton}"
+        TargetType="button:SfButton">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="HeightRequest" Value="70" />
+        <Setter Property="WidthRequest" Value="70" />
+        <Setter Property="Text" Value="+" />
+        <Setter Property="VerticalOptions" Value="End" />
+        <Setter Property="HorizontalOptions" Value="End" />
+        <Setter Property="Shadow">
+            <Setter.Value>
+                <Shadow
+                    Brush="Black"
+                    Opacity="0.3"
+                    Radius="12"
+                    Offset="0,4" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
+                            <Setter Property="TextColor" Value="White" />
+                            <Setter Property="Opacity" Value="1" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="Background" Value="{StaticResource DisabledBackgroundColor}" />
+                            <Setter Property="TextColor" Value="{StaticResource DisabledTextColor}" />
+                            <Setter Property="Opacity" Value="0.6" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!--  Botão circular branco  -->
+    <Style x:Key="CircleButtonWhite" TargetType="button:SfButton">
+        <Setter Property="WidthRequest" Value="50" />
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="CornerRadius" Value="40" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="Background" Value="White" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="Background" Value="{StaticResource DisabledBackgroundColor}" />
+                            <Setter Property="TextColor" Value="{StaticResource DisabledTextColor}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!--
+        ═══════════════════════════════════════════════════
+        BOTÕES DE MONITORAMENTO
+        ═══════════════════════════════════════════════════
+    -->
+
+    <!--  Botão de monitoramento (ícone no topo)  -->
+    <Style x:Key="MonitoramentoButton" TargetType="button:SfButton">
+        <Setter Property="FontFamily" Value="Nunito" />
+        <Setter Property="FontSize" Value="Small" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="HeightRequest" Value="130" />
+        <Setter Property="HorizontalOptions" Value="Fill" />
+        <Setter Property="ImageAlignment" Value="Top" />
+        <Setter Property="ShowIcon" Value="True" />
+        <Setter Property="ImageSize" Value="40" />
+        <Setter Property="TextColor" Value="{StaticResource SecondaryColor}" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="LightGray" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="White" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!--  Sub-botão de monitoramento (ícone à esquerda)  -->
+    <Style x:Key="SubMonitoramentoButton" TargetType="button:SfButton">
+        <Setter Property="FontFamily" Value="Nunito" />
+        <Setter Property="FontSize" Value="Small" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="HeightRequest" Value="80" />
+        <Setter Property="HorizontalOptions" Value="Fill" />
+        <Setter Property="ImageAlignment" Value="Left" />
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="ShowIcon" Value="True" />
+        <Setter Property="ImageSize" Value="40" />
+        <Setter Property="TextColor" Value="{StaticResource SecondaryColor}" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="LightGray" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="White" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!--
+        ═══════════════════════════════════════════════════
+        ESTILOS DE TEXTO (LABELS)
+        ═══════════════════════════════════════════════════
+    -->
+
+    <!--  Label global  -->
+    <Style TargetType="Label">
+        <Setter Property="FontFamily" Value="Nunito" />
+        <Setter Property="TextColor" Value="Gray" />
+        <Setter Property="FontSize" Value="20" />
+    </Style>
+
+    <!--  Label para grids  -->
+    <Style x:Key="LabelGrid" TargetType="Label">
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+    </Style>
+
+    <!--  Label grid com título  -->
+    <Style
+        x:Key="LabelGridTitle"
+        BasedOn="{StaticResource LabelGrid}"
+        TargetType="Label">
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <!--  Label grid com FontAwesome  -->
+    <Style
+        x:Key="LabelGridFontAwesome"
+        BasedOn="{StaticResource LabelGrid}"
+        TargetType="Label">
+        <Setter Property="FontFamily" Value="FontAwesomeRegular" />
+        <Setter Property="FontSize" Value="30" />
+    </Style>
+
+    <!--  Título de categoria  -->
+    <Style x:Key="LabelCategoryTitle" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="Medium" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="Margin" Value="0" />
+    </Style>
+
+    <!--  Label de monitoramento  -->
+    <Style x:Key="MonitoramentoLabel" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="Small" />
+        <Setter Property="TextColor" Value="{StaticResource ButtonColor}" />
+    </Style>
+
+    <!--  Label para datas  -->
+    <Style x:Key="DateLabel" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="Micro" />
+        <Setter Property="Margin" Value="5,-5" />
+    </Style>
+
+    <!--  Label de data com check (verde)  -->
+    <Style x:Key="DateLabelCheck" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="Small" />
+        <Setter Property="Margin" Value="5,-5" />
+        <Setter Property="TextColor" Value="Green" />
+    </Style>
+
+    <!--  Número do dia (grande)  -->
+    <Style x:Key="DayNumber" TargetType="Label">
+        <Setter Property="Grid.Column" Value="0" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="40" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <!--  Ícone quadrado  -->
+    <Style x:Key="SquareIcon" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="End" />
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="Margin" Value="0,5,5,0" />
+        <Setter Property="Grid.Column" Value="0" />
+        <Setter Property="FontFamily" Value="FontAwesomeRegular" />
+    </Style>
+
+    <!--
+        ═══════════════════════════════════════════════════
+        ESTILOS DE CONTROLES NATIVOS
+        ═══════════════════════════════════════════════════
+    -->
+
+    <Style TargetType="ListView">
+        <Setter Property="Background" Value="White" />
+    </Style>
+
+    <Style TargetType="Entry">
+        <Setter Property="TextColor" Value="{StaticResource ButtonColor}" />
+    </Style>
+
+    <Style TargetType="SearchBar">
+        <Setter Property="Placeholder" Value="{localization:Translate Procurar}" />
+        <Setter Property="Margin" Value="0,1,0,0" />
+        <Setter Property="Background" Value="AliceBlue" />
+        <Setter Property="TextColor" Value="{StaticResource ButtonColor}" />
+    </Style>
+
+    <Style TargetType="numericEntry:SfNumericEntry">
+        <Setter Property="Background" Value="White" />
+    </Style>
+
+    <!--
+        ═══════════════════════════════════════════════════
+        ESTILOS SYNCFUSION: BUSYINDICATOR E INPUTLAYOUT
+        ═══════════════════════════════════════════════════
+    -->
+
+    <Style x:Key="BusyIndicator" TargetType="core:SfBusyIndicator">
+        <Setter Property="VerticalOptions" Value="Fill" />
+        <Setter Property="TextColor" Value="{StaticResource ButtonColor}" />
+        <Setter Property="IsVisible" Value="false" />
+        <Setter Property="Title" Value="{localization:Translate Processando}" />
+    </Style>
+
+    <Style TargetType="core:SfTextInputLayout">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="ContainerType" Value="Filled" />
+        <Setter Property="FocusedStrokeThickness" Value="0" />
+        <Setter Property="OutlineCornerRadius" Value="20" />
+        <Setter Property="UnfocusedStrokeThickness" Value="0" />
+        <Setter Property="ReserveSpaceForAssistiveLabels" Value="False" />
+    </Style>
+
+    <!--
+        ═══════════════════════════════════════════════════
+        ESTILOS DE IMAGENS
+        ═══════════════════════════════════════════════════
+    -->
+
+    <Style x:Key="MonitoramentoImage" TargetType="Image">
+        <Setter Property="HeightRequest" Value="30" />
+        <Setter Property="Margin" Value="0,5,0,0" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+
+    <Style x:Key="ImageTitle" TargetType="Image">
+        <Setter Property="Grid.Column" Value="0" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="HeightRequest" Value="30" />
+        <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="VerticalOptions" Value="Fill" />
+        <Setter Property="HorizontalOptions" Value="Fill" />
+    </Style>
+
+    <!--
+        ═══════════════════════════════════════════════════
+        CONTROL TEMPLATES
+        ═══════════════════════════════════════════════════
+    -->
+
+    <ControlTemplate x:Key="EntryWithTitle">
+        <StackLayout>
+            <Label Text="Titulo" />
+            <Entry IsReadOnly="{TemplateBinding IsReadOnly}" Text="{TemplateBinding Text}" />
+        </StackLayout>
+    </ControlTemplate>
+
+    <!--
+        ═══════════════════════════════════════════════════
+        ESTILOS DE GRADIENTES (REUTILIZÁVEIS)
+        ═══════════════════════════════════════════════════
+    -->
+
+    <!--  Gradiente padrão (Header)  -->
+    <Style x:Key="HeaderGradient" TargetType="Grid">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Offset="0.1" Color="#0888CD" />
+                    <GradientStop Offset="1.0" Color="#26558D" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  Gradiente invertido (Footer)  -->
+    <Style x:Key="FooterGradient" TargetType="Grid">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Offset="0.1" Color="#26558D" />
+                    <GradientStop Offset="1.0" Color="#0888CD" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  Gradiente suave (de cima para baixo)  -->
+    <Style x:Key="SoftGradient" TargetType="Grid">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Offset="0.0" Color="#26558D" />
+                    <GradientStop Offset="1.0" Color="{StaticResource QuaseBranco}" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

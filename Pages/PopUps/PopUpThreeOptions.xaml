@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<toolkit:Popup
+    x:Class="SilvaData.Pages.PopUps.PopUpThreeOptions"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:button="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:local="clr-namespace:SilvaData.Utilities"
+    Margin="0"
+    Padding="0"
+    x:TypeArguments="local:ExitAction"
+    BackgroundColor="Transparent"
+    CanBeDismissedByTappingOutsideOfPopup="False"
+    MinimumHeightRequest="200">
+
+    <Border
+        Padding="5"
+        BackgroundColor="{StaticResource White}"
+        Stroke="{StaticResource Primary}"
+        StrokeShape="RoundRectangle 20"
+        StrokeThickness="1"
+        VerticalOptions="Fill">
+
+        <Grid RowDefinitions="Auto,*,Auto" RowSpacing="10">
+            <Label
+                FontAttributes="Bold"
+                FontSize="18"
+                HorizontalOptions="Center"
+                Text="{Binding Titulo}"
+                TextColor="{StaticResource PrimaryColor}" />
+            <Label
+                Grid.Row="1"
+                Margin="15,10"
+                FontSize="Small"
+                HorizontalOptions="Fill"
+                HorizontalTextAlignment="Center"
+                LineBreakMode="WordWrap"
+                Text="{Binding Mensagem}"
+                VerticalOptions="Center" />
+
+            <Grid
+                Grid.Row="2"
+                Margin="5,10,5,0"
+                ColumnDefinitions="*,*,*"
+                ColumnSpacing="10">
+                <button:SfButton
+                    Command="{Binding SalvarCommand}"
+                    Style="{StaticResource PrimaryButton}"
+                    Text="{Binding TextoSalvar}" />
+                <button:SfButton
+                    Grid.Column="1"
+                    Command="{Binding DescartarCommand}"
+                    Style="{StaticResource ButtonSecondary}"
+                    Text="{Binding TextoDescartar}" />
+                <button:SfButton
+                    Grid.Column="2"
+                    Command="{Binding CancelarCommand}"
+                    Style="{StaticResource ButtonSecondary}"
+                    Text="{Binding TextoCancelar}" />
+            </Grid>
+        </Grid>
+    </Border>
+</toolkit:Popup>

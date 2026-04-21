@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<toolkit:Popup
+    x:Class="SilvaData.Pages.PopUps.PhotoPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Margin="0"
+    Padding="0"
+    CanBeDismissedByTappingOutsideOfPopup="True"
+    HorizontalOptions="Center"
+    VerticalOptions="Center">
+
+
+    <Border
+        Margin="0"
+        Padding="0"
+        Background="{StaticResource White}"
+        HorizontalOptions="Fill"
+        StrokeShape="RoundRectangle 10"
+        VerticalOptions="Center">
+
+
+        <Grid RowDefinitions="Auto,*,Auto" RowSpacing="10">
+
+            <Label
+                FontAttributes="Bold"
+                FontSize="18"
+                HorizontalOptions="Center"
+                Text="{Binding Titulo}"
+                TextColor="{StaticResource Primary}" />
+
+            <Image
+                Grid.Row="1"
+                Aspect="AspectFit"
+                HorizontalOptions="Center"
+                Source="{Binding PhotoSource}"
+                VerticalOptions="Center" />
+
+            <buttons:SfButton
+                Grid.Row="2"
+                Command="{Binding CloseCommand}"
+                HorizontalOptions="Fill"
+                Style="{StaticResource PrimaryButton}"
+                Text="{localization:Translate Voltar}" />
+
+        </Grid>
+
+    </Border>
+</toolkit:Popup>

@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="SilvaData.Controls.LoteView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:listview="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:models="clr-namespace:SilvaData.Models"
+    xmlns:sfComboBox="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
+    x:Name="loteViewPage"
+    x:DataType="viewmodels:LoteViewModel">
+
+    <Grid RowDefinitions="Auto,*" RowSpacing="0">
+
+        <Grid
+            Grid.Row="0"
+            Margin="0"
+            ColumnDefinitions="*,Auto"
+            RowDefinitions="Auto,Auto,Auto"
+            RowSpacing="0"
+            Style="{StaticResource HeaderGradient}">
+
+            <Grid
+                Grid.Row="0"
+                Padding="10,0"
+                ColumnDefinitions="Auto,*,Auto"
+                RowDefinitions="Auto">
+                <StackLayout Orientation="Horizontal" Spacing="0">
+                    <Label
+                        Padding="0"
+                        FontFamily="Nunito"
+                        FontSize="Large"
+                        HorizontalOptions="Center"
+                        Text="{Binding Title}"
+                        TextColor="White"
+                        VerticalOptions="Center" />
+                    <Label
+                        Padding="5,0"
+                        FontFamily="Nunito"
+                        FontSize="Large"
+                        HorizontalOptions="Center"
+                        Text="{Binding ListaLotes.Count, StringFormat='({0})'}"
+                        TextColor="White"
+                        VerticalOptions="Center" />
+                </StackLayout>
+
+                <buttons:SfButton
+                    Grid.Column="2"
+                    Margin="2,5"
+                    Background="{StaticResource CorBotao}"
+                    Command="{Binding ShowHidePesquisaCommand}"
+                    FontFamily="FontAwesomeLight"
+                    FontSize="Small"
+                    IsVisible="{Binding PesquisaVisible, Converter={StaticResource InvertBoolean}}"
+                    Style="{StaticResource IconTopButtonStyle}"
+                    Text="{x:Static fontawesome:FontAwesomeIcons.Down}"
+                    TextColor="White"
+                    VerticalOptions="Center"
+                    WidthRequest="40" />
+
+            </Grid>
+
+            <Grid
+                Grid.Row="1"
+                Padding="10,0,10,0"
+                IsVisible="{Binding PesquisaVisible}"
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+
+                <!--  Pesquisar Lote  -->
+                <StackLayout Grid.Row="0" Padding="2">
+                    <Label
+                        Margin="0"
+                        Padding="0"
+                        FontSize="Micro"
+                        Text="{localization:Translate PesquisarLotes}"
+                        TextColor="White" />
+                    <Border
+                        Margin="0"
+                        Padding="5,0"
+                        Background="White"
+                        HeightRequest="50"
+                        StrokeShape="RoundRectangle 8"
+                        StrokeThickness="0">
+                        <Entry
+                            x:Name="PesquisaEntry"
+                            Background="White"
+                            Text="{Binding PesquisaLoteText, Mode=TwoWay}"
+                            TextColor="{StaticResource SecondaryColor}" />
+                    </Border>
+                </StackLayout>
+
+                <VerticalStackLayout Grid.Row="1" Spacing="5">
+                    <VerticalStackLayout Grid.Column="0">
+                        <Label
+                            Margin="0"
+                            Padding="5,0"
+                            FontSize="Micro"
+                            Text="{localization:Translate Regional}"
+                            TextColor="White" />
+                        <Border
+                            Margin="0"
+                            Padding="5,0"
+                            Background="White"
+                            HeightRequest="50"
+                            StrokeShape="RoundRectangle 8"
+                            StrokeThickness="0">
+                            <sfComboBox:SfComboBox
+                                x:Name="regionalCombobox"
+                                Margin="0"
+                                Background="White"
+                                DisplayMemberPath="nome"
+                                IsEditable="True"
+                                ItemsSource="{Binding RegionalList}"
+                                SelectedItem="{Binding SelectedFiltroRegional, Mode=TwoWay}" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="1">
+                        <Label
+                            Margin="0"
+                            Padding="5,0"
+                            FontSize="Micro"
+                            Text="{localization:Translate Propriedade}"
+                            TextColor="White" />
+                        <Border
+                            Margin="0"
+                            Padding="5,0"
+                            Background="White"
+                            HeightRequest="50"
+                            StrokeShape="RoundRectangle 8"
+                            StrokeThickness="0">
+                            <sfComboBox:SfComboBox
+                                x:Name="propriedadeCombobox"
+                                Margin="0"
+                                Background="White"
+                                DisplayMemberPath="nome"
+                                IsEditable="True"
+                                ItemsSource="{Binding PropriedadeList}"
+                                SelectedItem="{Binding SelectedFiltroPropriedade, Mode=TwoWay}" />
+                        </Border>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+
+                <StackLayout Grid.Row="2" Padding="2">
+                    <Label
+                        Margin="0"
+                        Padding="5,0"
+                        FontSize="Micro"
+                        Text="{localization:Translate UnidadeEpidemiológica}"
+                        TextColor="White" />
+                    <Border
+                        Margin="0"
+                        Padding="5,0"
+                        Background="White"
+                        HeightRequest="50"
+                        StrokeShape="RoundRectangle 8"
+                        StrokeThickness="0">
+                        <sfComboBox:SfComboBox
+                            x:Name="unidadeEpidemiologicaCombobox"
+                            Margin="0"
+                            Background="White"
+                            DisplayMemberPath="nome"
+                            IsEditable="True"
+                            ItemsSource="{Binding UEList}"
+                            SelectedItem="{Binding SelectedFiltroUE, Mode=TwoWay}" />
+                    </Border>
+                </StackLayout>
+
+
+                <!--  Botões  -->
+                <Grid
+                    Grid.Row="3"
+                    Margin="10,5"
+                    ColumnDefinitions="100,*,60"
+                    ColumnSpacing="10"
+                    IsVisible="{Binding PesquisaVisible}"
+                    RowDefinitions="50">
+
+                    <!--  Ordem  -->
+                    <buttons:SfButton
+                        Grid.Column="0"
+                        Command="{Binding InverteOrdemLotesCommand}"
+                        HorizontalOptions="Fill"
+                        Style="{StaticResource IconTopButtonStyle}"
+                        TextColor="White"
+                        WidthRequest="-1">
+                        <buttons:SfButton.Content>
+                            <DataTemplate>
+                                <HorizontalStackLayout Margin="10,5" Spacing="5">
+                                    <Label
+                                        Grid.Column="0"
+                                        FontFamily="FontAwesomeSolid"
+                                        Text="{Binding OrdemLotesIcone}"
+                                        TextColor="White"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="1"
+                                        FontSize="Small"
+                                        Text="{localization:Translate OrdemDosLotes}"
+                                        TextColor="White"
+                                        VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </buttons:SfButton.Content>
+                    </buttons:SfButton>
+
+                    <!--  Limpar Filtros  -->
+                    <buttons:SfButton
+                        Grid.Column="1"
+                        Background="{StaticResource CorBotao}"
+                        Command="{Binding LimparFiltrosCommand}"
+                        HorizontalOptions="Fill"
+                        Style="{StaticResource IconTopButtonStyle}"
+                        WidthRequest="-1">
+                        <buttons:SfButton.Content>
+                            <DataTemplate>
+                                <HorizontalStackLayout
+                                    Margin="10,5"
+                                    HorizontalOptions="Center"
+                                    Spacing="5">
+                                    <Label
+                                        FontFamily="FontAwesomeSolid"
+                                        Text="{x:Static fontawesome:FontAwesomeIcons.Recycle}"
+                                        TextColor="White"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        FontSize="Small"
+                                        HorizontalTextAlignment="Center"
+                                        Text="{localization:Translate LimparFiltros}"
+                                        TextColor="White"
+                                        VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </buttons:SfButton.Content>
+                    </buttons:SfButton>
+
+                    <!--  Show/Hide  -->
+                    <buttons:SfButton
+                        Grid.Column="2"
+                        Padding="2"
+                        Background="{StaticResource CorBotao}"
+                        Command="{Binding ShowHidePesquisaCommand}"
+                        FontFamily="FontAwesomeLight"
+                        FontSize="Small"
+                        Style="{StaticResource IconTopButtonStyle}"
+                        Text="{x:Static fontawesome:FontAwesomeIcons.Up}"
+                        TextColor="White"
+                        VerticalOptions="Center" />
+
+                </Grid>
+
+                <!--  Título Lotes  -->
+                <Grid
+                    Grid.Row="4"
+                    Margin="10,5,10,5"
+                    Padding="10,0"
+                    ColumnDefinitions="80,80,*,45">
+                    <Label
+                        Grid.Column="0"
+                        FontSize="Micro"
+                        HorizontalTextAlignment="Center"
+                        Text="{localization:Translate LOTEMaiusculo}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                    <Label
+                        Grid.Column="1"
+                        FontSize="Micro"
+                        HorizontalTextAlignment="Center"
+                        Text="{localization:Translate INÍCIO}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                    <Label
+                        Grid.Column="2"
+                        FontSize="Micro"
+                        HorizontalTextAlignment="Center"
+                        Text="{localization:Translate UNIDADEEPID}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                    <Label
+                        Grid.Column="3"
+                        FontSize="Micro"
+                        HorizontalTextAlignment="Center"
+                        Text="{localization:Translate SCOREMaiusculo}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+
+                </Grid>
+
+            </Grid>
+
+
+        </Grid>
+
+        <Grid
+            Grid.Row="1"
+            Padding="0"
+            RowDefinitions="*">
+            <listview:SfListView
+                x:Name="sfListView"
+                Grid.Row="0"
+                Margin="0,2"
+                Padding="3,0"
+                IsVisible="{Binding IsBusy, Converter={StaticResource InvertBoolean}}"
+                ItemSize="50"
+                ItemSpacing="2"
+                ItemTapped="OnLoteItemTapped"
+                ItemsSource="{Binding ListaLotes}"
+                SelectionBackground="#330888CD"
+                SelectionMode="Single">
+
+                <listview:SfListView.EmptyView>
+                    <VerticalStackLayout
+                        Padding="30,60"
+                        Spacing="16"
+                        VerticalOptions="Center">
+
+                        <Border
+                            Padding="24"
+                            Background="#F0F4F8"
+                            HorizontalOptions="Center"
+                            StrokeShape="RoundRectangle 50"
+                            StrokeThickness="0">
+                            <Label
+                                FontFamily="FontAwesomeSolid"
+                                FontSize="56"
+                                HorizontalTextAlignment="Center"
+                                Opacity="0.4"
+                                Text="{x:Static fontawesome:FontAwesomeIcons.ClipboardList}"
+                                TextColor="{StaticResource PrimaryColor}" />
+                        </Border>
+
+                        <VerticalStackLayout Spacing="6">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                HorizontalTextAlignment="Center"
+                                Text="{localization:Translate NenhumLoteTratamento}"
+                                TextColor="{StaticResource PrimaryColor}" />
+                            <Label
+                                FontSize="13"
+                                HorizontalTextAlignment="Center"
+                                Opacity="0.7"
+                                Text="{localization:Translate AltereCriteriosOuAdicioneNovoLote}"
+                                TextColor="{StaticResource SecondaryColor}" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </listview:SfListView.EmptyView>
+
+                <listview:SfListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Lote">
+                        <Border
+                            x:Name="loteBorder"
+                            Margin="2,0"
+                            Padding="0"
+                            Background="{Binding BackgroundColor}"
+                            MinimumHeightRequest="50"
+                            Stroke="{StaticResource PrimaryColor}"
+                            StrokeThickness="1">
+
+                            <Grid
+                                Padding="10"
+                                ColumnDefinitions="80,Auto,*,45"
+                                RowDefinitions="Auto"
+                                VerticalOptions="Center">
+                                <Label
+                                    Grid.Column="0"
+                                    FontSize="Micro"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding numero}"
+                                    TextColor="{StaticResource PrimaryColor}"
+                                    VerticalTextAlignment="Center" />
+                                <Label
+                                    Grid.Column="1"
+                                    FontSize="Micro"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding dataInicio, StringFormat='{0:dd/MM/yy}'}"
+                                    VerticalTextAlignment="Center" />
+                                <Label
+                                    Grid.Column="2"
+                                    FontSize="Micro"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding UnidadeEpidemiologicaNome}"
+                                    VerticalTextAlignment="Center" />
+                                <Label
+                                    Grid.Column="3"
+                                    FontAttributes="Bold"
+                                    FontSize="Medium"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding ISIMacroScoreMedio, StringFormat='{0:N1}'}"
+                                    TextColor="{Binding StatusColor}"
+                                    VerticalTextAlignment="Center" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </listview:SfListView.ItemTemplate>
+            </listview:SfListView>
+
+            <controls:LoadingView
+                x:Name="busyindicator"
+                Grid.Row="0"
+                Margin="0,0"
+                Padding="0"
+                Background="#220888CD"
+                HorizontalOptions="Fill"
+                IsVisible="{Binding IsBusy}"
+                Text="{localization:Translate Aguarde}"
+                VerticalOptions="Fill" />
+        </Grid>
+
+        <buttons:SfButton
+            Grid.Row="1"
+            Command="{Binding NovoLoteCommand}"
+            IsVisible="{Binding IsNovoLoteVisible}"
+            Style="{StaticResource CircleButtonPlus}"
+            VerticalOptions="End" />
+    </Grid>
+
+</ContentView>

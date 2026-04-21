@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="SilvaData.Controls.ConfigView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:local="clr-namespace:SilvaData"
+    xmlns:syncfusion="http://schemas.syncfusion.com/maui"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
+    x:DataType="viewmodels:ConfigViewModel">
+
+    <ContentView.Content>
+        <ScrollView
+            Margin="0"
+            Padding="0"
+            BackgroundColor="{StaticResource QuaseBranco}"
+            Orientation="Vertical">
+
+            <Grid BackgroundColor="{StaticResource QuaseBranco}" RowDefinitions="Auto,*">
+
+                <StackLayout
+                    Grid.Row="0"
+                    Orientation="Horizontal"
+                    Spacing="0">
+                    <Label
+                        Padding="15,10,0,0"
+                        FontFamily="Nunito"
+                        FontSize="Large"
+                        HorizontalOptions="Start"
+                        Text="Configurações"
+                        TextColor="{StaticResource PrimaryColor}" />
+
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" Margin="10">
+                    <!--  Dados  -->
+                    <Label
+                        Padding="5,0,5,5"
+                        FontSize="Small"
+                        Text="O que você deseja configurar?"
+                        TextColor="Gray" />
+
+
+                    <Grid
+                        ColumnDefinitions="*,*"
+                        ColumnSpacing="20"
+                        RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+                        RowSpacing="10">
+                        <buttons:SfButton
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Command="{Binding AtividadesCommand}"
+                            ImageSource="iconatividades.png"
+                            Style="{StaticResource ConfiguracoesButton}"
+                            Text="Atividades" />
+
+                        <buttons:SfButton
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Command="{Binding NotificacoesCommand}"
+                            ImageSource="iconnotificacoes.png"
+                            Style="{StaticResource ConfiguracoesButton}"
+                            Text="Notificações" />
+
+                        <buttons:SfButton
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Command="{Binding ProprietariosCommand}"
+                            ImageSource="iconproprietarios.png"
+                            Style="{StaticResource ConfiguracoesButton}"
+                            Text="Proprietários" />
+
+                        <buttons:SfButton
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Command="{Binding RegionaisCommand}"
+                            ImageSource="iconregionais.png"
+                            Style="{StaticResource ConfiguracoesButton}"
+                            Text="Regionais" />
+
+                        <buttons:SfButton
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Command="{Binding PropriedadesCommand}"
+                            ImageSource="iconpropriedades.png"
+                            Style="{StaticResource ConfiguracoesButton}"
+                            Text="Propriedades" />
+
+                        <buttons:SfButton
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Command="{Binding UnidadesEpidemiologicasCommand}"
+                            ImageSource="iconue.png"
+                            Style="{StaticResource ConfiguracoesButton}"
+                            Text="Unidades Epidemiológicas" />
+
+                        <buttons:SfButton
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Command="{Binding MinhaContaCommand}"
+                            ImageSource="iconminhaconta.png"
+                            Style="{StaticResource ConfiguracoesButton}"
+                            Text="Minha Conta" />
+
+                        <buttons:SfButton
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Command="{Binding PrivacyCommand}"
+                            ImageSource="iconprivacy.png"
+                            Style="{StaticResource ConfiguracoesButton}"
+                            Text="Política de Privacidade" />
+
+                        <buttons:SfButton
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Command="{Binding LogOffCommand}"
+                            ImageSource="iconlogoff.png"
+                            Style="{StaticResource ConfiguracoesButton}"
+                            Text="Deslogar" />
+                    </Grid>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentView.Content>
+</ContentView>

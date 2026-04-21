@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<toolkit:Popup
+    x:Class="SilvaData.Pages.PopUps.PopUpSuccessGalpao"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:local="clr-namespace:SilvaData.Pages.PopUps"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Margin="0"
+    Padding="0"
+    x:DataType="local:PopUpSuccessGalpaoViewModel"
+    x:TypeArguments="x:Boolean"
+    Background="Transparent"
+    CanBeDismissedByTappingOutsideOfPopup="False"
+    HorizontalOptions="Center"
+    VerticalOptions="Center">
+
+    <Border
+        Margin="20"
+        Padding="0"
+        Background="White"
+        StrokeThickness="0"
+        WidthRequest="340"
+        StrokeShape="RoundRectangle 24">
+        <Border.Shadow>
+            <Shadow Brush="Black" Offset="0,10" Radius="20" Opacity="0.2"/>
+        </Border.Shadow>
+
+        <VerticalStackLayout Spacing="0">
+            <!-- Header with Icon -->
+            <Grid HeightRequest="120">
+                <BoxView Color="{StaticResource PrimaryColor}" />
+                <Label Text="&#xf058;" 
+                       FontFamily="FontAwesomeSolid" 
+                       FontSize="60" 
+                       TextColor="White"
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center" />
+            </Grid>
+
+            <VerticalStackLayout Padding="24" Spacing="20">
+                <!-- Title & Message -->
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="{Binding Titulo}"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource PrimaryColor}"
+                           HorizontalTextAlignment="Center" />
+                    <Label Text="{Binding Mensagem}"
+                           FontSize="15"
+                           TextColor="{StaticResource SecondaryColor}"
+                           HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+
+                <!-- Stats Grid -->
+                <Frame Padding="16" HasShadow="False" BackgroundColor="#F8FAFC" CornerRadius="16" BorderColor="#E2E8F0">
+                    <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="4">
+                        <!-- Mínimo -->
+                        <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" Spacing="2">
+                            <Label Text="{localization:Translate Minimo}" FontSize="10" TextColor="{StaticResource SecondaryColor}" HorizontalTextAlignment="Center"/>
+                            <Label Text="{Binding Minimo}" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+
+                        <!-- Realizado -->
+                        <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" Spacing="2">
+                            <Label Text="{localization:Translate Realizado}" FontSize="10" TextColor="{StaticResource SecondaryColor}" HorizontalTextAlignment="Center"/>
+                            <Label Text="{Binding Realizado}" FontSize="16" FontAttributes="Bold" TextColor="{Binding RealizadoColor}" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                        
+                        <!-- Máximo -->
+                        <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" Spacing="2">
+                            <Label Text="{localization:Translate Maximo}" FontSize="10" TextColor="{StaticResource SecondaryColor}" HorizontalTextAlignment="Center"/>
+                            <Label Text="{Binding Maximo}" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+
+                        <!-- Média -->
+                        <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center" Spacing="2" IsVisible="{Binding MostrarMedia}">
+                            <Label Text="{localization:Translate Media}" FontSize="10" TextColor="{StaticResource SecondaryColor}" HorizontalTextAlignment="Center"/>
+                            <Label Text="{Binding Media, StringFormat='{0:F2}'}" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+
+                <!-- Discarded Info (if any) -->
+                <Frame IsVisible="{Binding TemMsgDescarte}" Padding="12" HasShadow="False" BackgroundColor="#FFFBEB" CornerRadius="12" BorderColor="#FEF3C7">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                        <Label Grid.Column="0" Text="&#xf071;" FontFamily="FontAwesomeSolid" FontSize="16" TextColor="#B45309" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="{Binding MsgDescarte}" FontSize="13" TextColor="#B45309" VerticalOptions="Center" LineBreakMode="WordWrap"/>
+                    </Grid>
+                </Frame>
+
+                <!-- Button -->
+                <buttons:SfButton
+                    Text="OK"
+                    Command="{Binding OKCommand}"
+                    Background="#26558D"
+                    TextColor="White"
+                    CornerRadius="12"
+                    HeightRequest="48"
+                    FontSize="16"
+                    FontAttributes="Bold"/>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </Border>
+
+</toolkit:Popup>

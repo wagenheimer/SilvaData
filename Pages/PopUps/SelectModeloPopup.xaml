@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<toolkit:Popup
+    x:Class="SilvaData.Pages.PopUps.SelectModeloPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:models="clr-namespace:SilvaData.Models"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    Margin="0"
+    Padding="0"
+    x:TypeArguments="models:ModeloIsiMacroComParametros"
+    CanBeDismissedByTappingOutsideOfPopup="True"
+    HorizontalOptions="Center"
+    VerticalOptions="Center">
+
+    <Border
+        Background="{StaticResource QuaseBranco}"
+        HorizontalOptions="Fill"
+        MaximumWidthRequest="400"
+        Stroke="{StaticResource PrimaryColor}"
+        StrokeShape="RoundRectangle 20"
+        StrokeThickness="2"
+        VerticalOptions="Center">
+
+        <Grid
+            Padding="0"
+            RowDefinitions="Auto,*,Auto"
+            RowSpacing="0">
+
+            <!--  Título  -->
+            <Grid
+                Grid.Row="0"
+                Padding="20,15"
+                ColumnDefinitions="Auto,*"
+                ColumnSpacing="15">
+                <Label
+                    FontFamily="FontAwesomeSolid"
+                    FontSize="24"
+                    Text="{x:Static fontawesome:FontAwesomeIcons.ListCheck}"
+                    TextColor="{StaticResource PrimaryColor}"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    HorizontalOptions="Start"
+                    Text="{localization:Translate SelecioneUmModeloISIMacro}"
+                    TextColor="{StaticResource PrimaryColor}"
+                    VerticalOptions="Center" />
+            </Grid>
+
+            <!--  Lista de Modelos  -->
+            <CollectionView
+                x:Name="ModelosCollectionView"
+                Grid.Row="1"
+                HeightRequest="300"
+                ItemsSource="{Binding Modelos}"
+                SelectionMode="Single"
+                SelectionChanged="OnSelectionChanged">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ModeloIsiMacroComParametros">
+                        <Border
+                            x:Name="ItemBorder"
+                            Margin="20,5"
+                            Padding="15"
+                            Background="White"
+                            Stroke="Transparent"
+                            StrokeShape="RoundRectangle 12"
+                            StrokeThickness="1">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="Background" Value="White" />
+                                            <Setter Property="Stroke" Value="Transparent" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="Background" Value="#E3F2FD" />
+                                            <Setter Property="Stroke" Value="{StaticResource PrimaryColor}" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="16"
+                                    Text="{Binding NomeModelo}"
+                                    TextColor="{StaticResource SecondaryColor}"
+                                    VerticalOptions="Center" />
+
+                                <Label
+                                    x:Name="SelectionIndicator"
+                                    Grid.Column="1"
+                                    FontFamily="FontAwesomeSolid"
+                                    FontSize="18"
+                                    Text="{x:Static fontawesome:FontAwesomeIcons.CircleCheck}"
+                                    TextColor="{StaticResource PrimaryColor}"
+                                    IsVisible="False"
+                                    VerticalOptions="Center" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout Padding="20" Spacing="10" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Label
+                            FontFamily="FontAwesomeSolid"
+                            FontSize="40"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.TriangleExclamation}"
+                            TextColor="Gray"
+                            HorizontalOptions="Center" />
+                        <Label
+                            Text="{localization:Translate NenhumModeloDisponivel}"
+                            HorizontalTextAlignment="Center"
+                            TextColor="Gray"
+                            FontSize="14" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+            </CollectionView>
+
+            <!--  Botões  -->
+            <Grid
+                Grid.Row="2"
+                Padding="20"
+                ColumnDefinitions="*,*"
+                ColumnSpacing="15">
+                <buttons:SfButton
+                    Grid.Column="0"
+                    Clicked="OnCancelClicked"
+                    Style="{StaticResource ButtonSecondary}"
+                    Text="{localization:Translate Cancelar}" />
+                <buttons:SfButton
+                    Grid.Column="1"
+                    Clicked="OnConfirmClicked"
+                    Style="{StaticResource ButtonPrimary}"
+                    Text="{localization:Translate Confirmar}" />
+            </Grid>
+        </Grid>
+    </Border>
+
+</toolkit:Popup>

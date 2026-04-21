@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="SilvaData.Controls.ISINumericUpDown"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    x:Name="rootControl">
+
+    <ContentView.Content>
+        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="0">
+            <!-- Botão Menos (-) -->
+            <Button
+                Grid.Column="0"
+                Margin="0"
+                Padding="0"
+                BackgroundColor="Transparent"
+                Command="{Binding MinusCommand, Source={x:Reference rootControl}}"
+                FontFamily="FontAwesomeSolid"
+                FontSize="Small"
+                HeightRequest="40"
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsNotReadOnly, Source={x:Reference rootControl}}"
+                Text="{x:Static fontawesome:FontAwesomeIcons.Minus}"
+                TextColor="{OnPlatform iOS='#0888CD', Default={StaticResource PrimaryColor}}"
+                VerticalOptions="Center"
+                WidthRequest="40" />
+
+            <!-- Entry de Valor -->
+            <Entry
+                Grid.Column="1"
+                Margin="0"
+                BackgroundColor="Transparent"
+                ClearButtonVisibility="Never"
+                FontAttributes="{Binding FontAttributes, Source={x:Reference rootControl}}"
+                FontSize="{Binding FontSize, Source={x:Reference rootControl}}"
+                HorizontalTextAlignment="Center"
+                IsReadOnly="{Binding IsReadOnly, Source={x:Reference rootControl}}"
+                Keyboard="Numeric"
+                Text="{Binding ValueText, Source={x:Reference rootControl}, Mode=TwoWay}"
+                TextColor="{Binding TextColor, Source={x:Reference rootControl}}"
+                VerticalOptions="Center" />
+
+            <!-- Botão Mais (+) -->
+            <Button
+                Grid.Column="2"
+                Margin="0"
+                Padding="0"
+                BackgroundColor="Transparent"
+                Command="{Binding PlusCommand, Source={x:Reference rootControl}}"
+                FontFamily="FontAwesomeSolid"
+                FontSize="Small"
+                HeightRequest="40"
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsNotReadOnly, Source={x:Reference rootControl}}"
+                Text="{x:Static fontawesome:FontAwesomeIcons.Plus}"
+                TextColor="{OnPlatform iOS='#0888CD', Default={StaticResource PrimaryColor}}"
+                VerticalOptions="Center"
+                WidthRequest="40" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SilvaData.Controls.LoteFormularioView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:models="clr-namespace:SilvaData.Models"
+    xmlns:shimmer="clr-namespace:Syncfusion.Maui.Shimmer;assembly=Syncfusion.Maui.Core"
+    xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
+    x:DataType="viewModels:LoteFormularioViewModel"
+    Background="{StaticResource PrimaryColor}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="CommonHeaderTemplate">
+                <controls:LoteFormHeader />
+            </DataTemplate>
+
+            <DataTemplate x:Key="CommonFooterTemplate">
+                <controls:LoteFormFooter />
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid
+        Background="{StaticResource QuaseBranco}"
+        RowDefinitions="Auto,Auto,*,Auto"
+        RowSpacing="0">
+
+        <controls:LoteFormTopHeader Grid.Row="0" IsVisible="True" />
+
+        <VerticalStackLayout Grid.Row="1">
+
+            <Grid
+                Background="#26558D"
+                IsVisible="{Binding PrecisaMostrarEscoreAve}"
+                RowDefinitions="25,25">
+                <BoxView Grid.Row="1" Background="{StaticResource QuaseBranco}" />
+
+                <Border
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Margin="40,0,0,0"
+                    Padding="0"
+                    Background="White"
+                    HeightRequest="50"
+                    StrokeShape="RoundRectangle 25"
+                    VerticalOptions="Center">
+                    <Border.Shadow>
+                        <Shadow
+                            Brush="Black"
+                            Opacity="0.15"
+                            Radius="10"
+                            Offset="0,4" />
+                    </Border.Shadow>
+                    <Grid
+                        Padding="25,0,0,0"
+                        ColumnDefinitions="*,Auto,Auto"
+                        VerticalOptions="Center">
+                        <Label
+                            Grid.Column="0"
+                            Text="{localization:Translate ScoreTotalDaAve}"
+                            TextColor="{Binding ScoreTotalDaAveCor}"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Grid.Column="1"
+                            FontAttributes="Bold"
+                            FontSize="Large"
+                            Text="{Binding ScoreTotalDaAve}"
+                            TextColor="{Binding ScoreTotalDaAveCor}"
+                            VerticalTextAlignment="Center" />
+                        <Ellipse
+                            Grid.Column="2"
+                            Margin="10,0"
+                            Fill="{Binding ScoreTotalDaAveCor}"
+                            HeightRequest="25"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            WidthRequest="25" />
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!--  Avalição Qualitativo  -->
+            <Grid
+                Background="#26558D"
+                IsVisible="{Binding AvaliacaoGalpaoQuantitativo}"
+                RowDefinitions="40,80">
+                <BoxView Grid.Row="0"  Background="#26558D"/>
+                <BoxView Grid.Row="1" Background="{StaticResource QuaseBranco}" />
+
+                <Border
+                    Grid.Row="1"
+                    Margin="5,0"
+                    Padding="0"
+                    Background="White"
+                    StrokeShape="RoundRectangle 20"
+                    TranslationY="-40">
+                    <Grid
+                        Padding="15,0,0,0"
+                        ColumnDefinitions="*,*,*,*"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="0"
+                        VerticalOptions="Center">
+                        <Label
+                            Grid.Column="0"
+                            HorizontalTextAlignment="Center"
+                            Text="{localization:Translate Minimo}"
+                            VerticalTextAlignment="Center"
+                            FontSize="11"/>
+                        <Label
+                            Grid.Column="1"
+                            HorizontalTextAlignment="Center"
+                            Text="{localization:Translate Realizado}"
+                            VerticalTextAlignment="Center"
+                            FontSize="11"/>
+                        <Label
+                            Grid.Column="2"
+                            HorizontalTextAlignment="Center"
+                            Text="{localization:Translate Maximo}"
+                            VerticalTextAlignment="Center"
+                            FontSize="11"/>
+                        <Label
+                            Grid.Column="3"
+                            HorizontalTextAlignment="Center"
+                            Text="{localization:Translate Media}"
+                            VerticalTextAlignment="Center"
+                            FontSize="11"/>
+
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding ParametroSelecionado.qtdMinima}"
+                            TextColor="{StaticResource PrimaryColor}"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding LoteFormulario.AvaliacoesRealizadasQuantitativa}"
+                            TextColor="{Binding RealizadoColor}"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding ParametroSelecionado.qtdCampos}"
+                            TextColor="{StaticResource PrimaryColor}"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="3"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding LoteFormulario.AvaliacaoMediaQuantitativa, StringFormat='{0:F2}'}"
+                            TextColor="{StaticResource PrimaryColor}"
+                            VerticalTextAlignment="Center" />
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!--#region Totais Avaliação - Avaliação Galpão Qualitativo-->
+            <Grid
+                Background="#26558D"
+                IsVisible="{Binding AvaliacaoGalpaoQualitativo}"
+                RowDefinitions="40,80">
+                <BoxView Grid.Row="0"  Background="#26558D"/>
+                <BoxView Grid.Row="1" Background="{StaticResource QuaseBranco}" />
+
+                <Border
+                    Grid.Row="1"
+                    Margin="5,0"
+                    Padding="0"
+                    Background="White"
+                    StrokeShape="RoundRectangle 20"
+                    TranslationY="-40">
+                    <Grid
+                        Padding="15,0,0,0"
+                        ColumnDefinitions="*,*,*"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="0"
+                        VerticalOptions="Center">
+                        <Label
+                            Grid.Column="0"
+                            HorizontalTextAlignment="Center"
+                            Text="{localization:Translate Minimo}"
+                            VerticalTextAlignment="Center"
+                            FontSize="11"/>
+                        <Label
+                            Grid.Column="1"
+                            HorizontalTextAlignment="Center"
+                            Text="{localization:Translate Realizado}"
+                            VerticalTextAlignment="Center"
+                            FontSize="11"/>
+                        <Label
+                            Grid.Column="2"
+                            HorizontalTextAlignment="Center"
+                            Text="{localization:Translate Maximo}"
+                            VerticalTextAlignment="Center"
+                            FontSize="11"/>
+
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding ParametroSelecionado.qtdMinima}"
+                            TextColor="{StaticResource PrimaryColor}"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding LoteFormulario.AvaliacoesRealizadasQualitativa}"
+                            TextColor="{Binding RealizadoColor}"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding ParametroSelecionado.qtdCampos}"
+                            TextColor="{StaticResource PrimaryColor}"
+                            VerticalTextAlignment="Center" />
+                    </Grid>
+                </Border>
+            </Grid>
+            <!--#endregion-->
+        </VerticalStackLayout>
+
+        <!--  Region  Campos Dinâmicos (Formulários Normais)  -->
+        <listView:SfListView
+            x:Name="camposaPreencher"
+            Grid.Row="2"
+            AutoFitMode="DynamicHeight"
+            CachingStrategy="RecycleTemplate"
+            FooterTemplate="{StaticResource CommonFooterTemplate}"
+            HeaderTemplate="{StaticResource CommonHeaderTemplate}"
+            IsVisible="{Binding AvaliacaoGalpao, Converter={StaticResource InvertBoolean}}"
+            ItemSize="80"
+            ItemTemplate="{StaticResource FormularioTemplateSelector}"
+            ItemsSource="{Binding LoteFormulario.Formulario_ParametrosComAlternativas}"
+            SelectionMode="None" />
+        <!--#endregion-->
+
+
+        <!--  Region  Campos Dinâmicos (Avaliação no Galpão - Quantitativo)  -->
+        <listView:SfListView
+            x:Name="camposaPreencherGalpao"
+            Grid.Row="2"
+            AutoFitMode="DynamicHeight"
+            CachingStrategy="RecycleTemplate"
+            FooterTemplate="{StaticResource CommonFooterTemplate}"
+            HeaderTemplate="{StaticResource CommonHeaderTemplate}"
+            IsVisible="{Binding AvaliacaoGalpaoQuantitativo}"
+            ItemTemplate="{StaticResource Quantitativo}"
+            ItemsSource="{Binding LoteFormulario.ListaAvaliacoesGalpao}"
+            SelectionMode="None">
+
+            <listView:SfListView.ItemsLayout>
+                <listView:GridLayout SpanCount="2" />
+            </listView:SfListView.ItemsLayout>
+
+        </listView:SfListView>
+        <!--#endregion-->
+
+
+        <!--  Region  Campos Dinâmicos (Avaliação no Galpão - Qualitativo (Único e Múltiplo)  -->
+        <ScrollView
+            Grid.Row="2"
+            IsVisible="{Binding AvaliacaoGalpaoQualitativo}"
+            TranslationY="-30">
+            <Grid RowDefinitions="Auto,*,Auto">
+                <controls:LoteFormHeader Grid.Row="0" BindingContext="{Binding}" />
+                <controls:AvaliacaoAlternativas x:Name="avaliacaoAlternativas" Grid.Row="1" />
+                <controls:LoteFormFooter Grid.Row="2" BindingContext="{Binding}" />
+            </Grid>
+        </ScrollView>
+        <!--#endregion-->
+
+
+        <Grid Grid.Row="3">
+            <Grid
+                Padding="5,0"
+                ColumnDefinitions="*,Auto"
+                RowDefinitions="60">
+
+                <buttons:SfButton
+                    x:Name="btSalvar"
+                    Grid.Row="0"
+                    Margin="4"
+                    Command="{Binding SalvarCommand}"
+                    CornerRadius="10"
+                    IsVisible="{Binding ReadOnly, Converter={StaticResource InvertBoolean}}"
+                    Style="{StaticResource PrimaryButton}"
+                    Text="{localization:Translate Salvar}" />
+
+                <buttons:SfButton
+                    Grid.Row="0"
+                    Margin="4"
+                    Command="{Binding EditarCommand}"
+                    CornerRadius="10"
+                    IsVisible="{Binding ReadOnly}"
+                    Style="{StaticResource PrimaryButton}"
+                    Text="{localization:Translate Editar}" />
+
+                <buttons:SfButton
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="4"
+                    Command="{Binding ProcurarISIMacroCommand}"
+                    CornerRadius="10"
+                    FontFamily="FontAwesomeLight"
+                    IsVisible="{Binding IsISIMacro}"
+                    Style="{StaticResource PrimaryButton}"
+                    Text="{x:Static fontawesome:FontAwesomeIcons.MagnifyingGlass}"
+                    WidthRequest="50" />
+
+                <buttons:SfButton
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="4"
+                    Padding="10,0"
+                    Command="{Binding ProcurarAvaliacoesCommand}"
+                    CornerRadius="10"
+                    IsVisible="{Binding AvaliacaoGalpao}"
+                    Style="{StaticResource PrimaryButton}"
+                    Text="{localization:Translate VerRegistros}" />
+            </Grid>
+        </Grid>
+        <Grid
+            Grid.Row="0"
+            Grid.RowSpan="4"
+            IsVisible="{Binding PesquisaISIMacroDialogVisible}"
+            RowDefinitions="Auto,*">
+
+            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto">
+
+                <Border
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="0"
+                    Padding="5,6"
+                    Stroke="LightGray"
+                    StrokeShape="RoundRectangle 8">
+
+                    <Entry
+                        x:Name="filtroISIMacroText"
+                        Background="White"
+                        ClearButtonVisibility="WhileEditing"
+                        Placeholder="{localization:Translate DigiteParaPesquisar}"
+                        TextChanged="ProcuraISIMacroTextChanged"
+                        TextColor="{StaticResource SecondaryColor}" />
+                </Border>
+
+                <buttons:SfButton
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="5,4"
+                    Padding="0"
+                    Background="{StaticResource PrimaryColor}"
+                    Command="{Binding ProcurarISIMacroCommand}"
+                    CornerRadius="8"
+                    FontFamily="FontAwesomeRegular"
+                    FontSize="25"
+                    Text="{x:Static fontawesome:FontAwesomeIcons.X}"
+                    TextColor="White" />
+            </Grid>
+
+            <listView:SfListView
+                x:Name="listViewFiltroISIMacro"
+                Grid.Row="1"
+                AutoFitMode="Height"
+                Background="#AA000000"
+                CachingStrategy="RecycleTemplate"
+                ItemSize="60"
+                ItemTapped="ListViewFiltroISIMacro_OnItemTapped"
+                ItemsSource="{Binding LoteFormulario.Formulario_ParametrosComAlternativas}"
+                SelectionMode="None">
+                <listView:SfListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ParametroComAlternativas">
+                        <VerticalStackLayout>
+                            <Border
+                                Margin="10,2,10,2"
+                                Padding="2"
+                                Background="White"
+                                Stroke="{StaticResource PrimaryColor}"
+                                StrokeShape="RoundRectangle 5"
+                                StrokeThickness="1">
+                                <Grid Padding="5,2" ColumnDefinitions="*,Auto">
+                                    <Label
+                                        Grid.Column="0"
+                                        FontSize="Small"
+                                        Text="{Binding nome}"
+                                        TextColor="{StaticResource SecondaryColor}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="1"
+                                        FontAttributes="Bold"
+                                        FontSize="Large"
+                                        Text="{Binding Score}"
+                                        TextColor="{StaticResource PrimaryColor}"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </Border>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </listView:SfListView.ItemTemplate>
+            </listView:SfListView>
+        </Grid>
+
+        <shimmer:SfShimmer
+            Grid.Row="1"
+            Grid.RowSpan="4"
+            IsVisible="{Binding IsBusy}"
+            RepeatCount="10"
+            Type="Shopping"
+            VerticalOptions="Fill" />
+
+
+        <controls:LoadingView
+            Grid.Row="0"
+            Grid.RowSpan="4"
+            IsVisible="{Binding IsBusy}"
+            Text="{localization:Translate Aguarde}"
+            VerticalOptions="Fill" />
+
+    </Grid>
+</ContentPage>

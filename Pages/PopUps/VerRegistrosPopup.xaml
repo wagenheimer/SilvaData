@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<toolkit:Popup
+    x:Class="SilvaData.Pages.PopUps.VerRegistrosPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:models="clr-namespace:SilvaData.Models"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewModels="clr-namespace:SilvaData.Pages.PopUps"
+    x:DataType="viewModels:VerRegistrosPopupViewModel"
+    Margin="16"
+    Padding="0"
+    x:TypeArguments="models:LoteFormAvaliacaoGalpao"
+    CanBeDismissedByTappingOutsideOfPopup="True"
+    HorizontalOptions="Fill"
+    VerticalOptions="Center">
+
+    <Border
+        Background="{StaticResource QuaseBranco}"
+        HorizontalOptions="Fill"
+        MaximumWidthRequest="500"
+        MaximumHeightRequest="580"
+        Margin="0"
+        Padding="0"
+        Stroke="{StaticResource PrimaryColor}"
+        StrokeShape="RoundRectangle 16"
+        StrokeThickness="1.5">
+
+        <Grid RowDefinitions="Auto,*,Auto" RowSpacing="0">
+
+            <!-- Cabeçalho -->
+            <Border
+                Grid.Row="0"
+                Background="{StaticResource PrimaryColor}"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 14,14,0,0">
+                <Grid
+                    Padding="5"
+                    ColumnDefinitions="Auto,*,Auto"
+                    ColumnSpacing="10">
+                    <Label
+                        Grid.Column="0"
+                        FontFamily="FontAwesomeSolid"
+                        FontSize="18"
+                        Text="{x:Static fontawesome:FontAwesomeIcons.ListCheck}"
+                        TextColor="White"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Column="1"
+                        FontAttributes="Bold"
+                        FontSize="15"
+                        LineBreakMode="NoWrap"
+                        Text="{localization:Translate RegistrosNesteFormulário}"
+                        TextColor="White"
+                        VerticalOptions="Center" />
+                    <buttons:SfButton
+                        Grid.Column="2"
+                        Margin="4,0,0,0"
+                        Padding="0"
+                        Background="#40FFFFFF"
+                        Clicked="OnCloseButtonClicked"
+                        CornerRadius="15"
+                        FontFamily="FontAwesomeSolid"
+                        FontSize="13"
+                        HeightRequest="30"
+                        Text="{x:Static fontawesome:FontAwesomeIcons.X}"
+                        TextColor="White"
+                        VerticalOptions="Center"
+                        WidthRequest="30" />
+                </Grid>
+            </Border>
+
+            <!-- Lista de Registros -->
+            <ScrollView
+                Grid.Row="1"
+                Padding="0,6,0,2"
+                VerticalScrollBarVisibility="Always"
+                HorizontalScrollBarVisibility="Never">
+
+                <VerticalStackLayout Padding="0" Spacing="4">
+
+                    <!-- Qualitativo -->
+                    <listView:SfListView
+                        x:Name="listViewQualitativo"
+                        IsVisible="{Binding IsQualitativo}"
+                        ItemTapped="OnItemTapped"
+                        ItemsSource="{Binding RegistrosQualitativos}"
+                        SelectionMode="None"
+                        AutoFitMode="DynamicHeight">
+                        <listView:SfListView.ItemTemplate>
+                            <DataTemplate x:DataType="models:LoteFormAvaliacaoGalpao">
+                                <Border
+                                    Margin="10,3"
+                                    Padding="10,8"
+                                    Background="{StaticResource QuaseBranco}"
+                                    Stroke="{StaticResource PrimaryColor}"
+                                    StrokeShape="RoundRectangle 8"
+                                    StrokeThickness="1">
+                                    <Grid Padding="0" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                                        <Border
+                                            Grid.Column="0"
+                                            Padding="7,3"
+                                            Background="{StaticResource PrimaryColor}"
+                                            StrokeShape="RoundRectangle 6"
+                                            StrokeThickness="0">
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="13"
+                                                Text="{Binding NumeroResposta}"
+                                                TextColor="White"
+                                                VerticalOptions="Center" />
+                                        </Border>
+                                        <Label
+                                            Grid.Column="1"
+                                            FontSize="13"
+                                            LineBreakMode="TailTruncation"
+                                            MaxLines="2"
+                                            Text="{Binding ResumoSelecionadas}"
+                                            TextColor="{StaticResource SecondaryColor}"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Grid.Column="2"
+                                            FontFamily="FontAwesomeSolid"
+                                            FontSize="13"
+                                            Text="{x:Static fontawesome:FontAwesomeIcons.ChevronRight}"
+                                            TextColor="{StaticResource PrimaryColor}"
+                                            VerticalOptions="Center" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </listView:SfListView.ItemTemplate>
+                    </listView:SfListView>
+
+                    <!-- Quantitativo -->
+                    <listView:SfListView
+                        x:Name="listViewQuantitativo"
+                        IsVisible="{Binding IsQuantitativo}"
+                        ItemTapped="OnItemTapped"
+                        ItemsSource="{Binding RegistrosQuantitativos}"
+                        SelectionMode="None"
+                        AutoFitMode="DynamicHeight">
+                        <listView:SfListView.ItemTemplate>
+                            <DataTemplate x:DataType="models:LoteFormAvaliacaoGalpao">
+                                <Border
+                                    Margin="10,3"
+                                    Padding="10,8"
+                                    Background="{StaticResource QuaseBranco}"
+                                    Stroke="{StaticResource PrimaryColor}"
+                                    StrokeShape="RoundRectangle 8"
+                                    StrokeThickness="1">
+                                    <Grid Padding="0" ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="8">
+                                        <Border
+                                            Grid.Column="0"
+                                            Padding="7,3"
+                                            Background="{StaticResource PrimaryColor}"
+                                            StrokeShape="RoundRectangle 6"
+                                            StrokeThickness="0">
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="13"
+                                                Text="{Binding NumeroResposta}"
+                                                TextColor="White"
+                                                VerticalOptions="Center" />
+                                        </Border>
+                                        <Label
+                                            Grid.Column="1"
+                                            FontSize="13"
+                                            Text="Registro"
+                                            TextColor="{StaticResource SecondaryColor}"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Grid.Column="2"
+                                            FontAttributes="Bold"
+                                            FontSize="15"
+                                            Text="{Binding RespostaQtde, StringFormat='{0:F0}'}"
+                                            TextColor="{StaticResource PrimaryColor}"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Grid.Column="3"
+                                            FontFamily="FontAwesomeSolid"
+                                            FontSize="13"
+                                            Text="{x:Static fontawesome:FontAwesomeIcons.ChevronRight}"
+                                            TextColor="{StaticResource PrimaryColor}"
+                                            VerticalOptions="Center" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </listView:SfListView.ItemTemplate>
+                    </listView:SfListView>
+
+                    <!-- Empty State -->
+                    <VerticalStackLayout
+                        IsVisible="{Binding HasNoRegistros}"
+                        Padding="24,32"
+                        Spacing="12"
+                        VerticalOptions="Center">
+                        <Label
+                            FontFamily="FontAwesomeSolid"
+                            FontSize="48"
+                            HorizontalTextAlignment="Center"
+                            Opacity="0.2"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.ClipboardList}"
+                            TextColor="{StaticResource PrimaryColor}" />
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="15"
+                            HorizontalTextAlignment="Center"
+                            Text="Nenhum registro encontrado"
+                            TextColor="#424242" />
+                        <Label
+                            FontSize="13"
+                            HorizontalTextAlignment="Center"
+                            Opacity="0.6"
+                            Text="Comece a preencher as avaliações"
+                            TextColor="#757575" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <!-- Footer -->
+            <Grid
+                Grid.Row="2"
+                Padding="10,2"
+                ColumnDefinitions="*,Auto"
+                BackgroundColor="#F0F2F5">
+                <Label
+                    Grid.Column="0"
+                    FontSize="12"
+                    Text="{Binding TotalRegistrosFormatado}"
+                    TextColor="{StaticResource SecondaryColor}"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    FontSize="12"
+                    Text="{Binding RegistrosRespondidosFormatado}"
+                    TextColor="{StaticResource PrimaryColor}"
+                    VerticalOptions="Center" />
+            </Grid>
+        </Grid>
+    </Border>
+
+</toolkit:Popup>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SilvaData.Controls.Login"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:button="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
+    x:DataType="viewmodels:LoginViewModel"
+    BackgroundColor="{StaticResource QuaseBranco}"
+    Shell.NavBarIsVisible="false"
+    Style="{StaticResource HeaderGradient}">
+
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="#0888CD" StatusBarStyle="LightContent" />
+    </ContentPage.Behaviors>
+
+    <!--  Grid raiz para sobrepor o overlay de loading  -->
+    <Grid>
+        <!--  Conteúdo rolável (centralizado)  -->
+        <Grid
+            Padding="10"
+            ColumnDefinitions="*,Auto,*"
+            RowDefinitions="Auto"
+            VerticalOptions="Center">
+
+            <!--  Card central  -->
+            <Border
+                Grid.Column="1"
+                Margin="20"
+                Background="#DDFFFFFF"
+                SemanticProperties.Description="Painel de login"
+                Stroke="{StaticResource PrimaryColor}"
+                StrokeShape="RoundRectangle 16"
+                StrokeThickness="2">
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" RowSpacing="16">
+
+                    <!--  Header / Logo  -->
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="2">
+                        <Image
+                            Grid.Row="0"
+                            Aspect="AspectFit"
+                            HeightRequest="90"
+                            HorizontalOptions="Center"
+                            Source="isilogo.png" />
+                        <Label
+                            Grid.Row="1"
+                            FontSize="Micro"
+                            HorizontalTextAlignment="Center"
+                            Text="ISI Sys ? FROM"
+                            TextColor="Gray" />
+                        <Label
+                            Grid.Row="2"
+                            FontAttributes="Bold"
+                            FontSize="20"
+                            HorizontalTextAlignment="Center"
+                            Text="ISI Institute"
+                            TextColor="{StaticResource PrimaryColor}" />
+                        <Label
+                            x:Name="labelVersion"
+                            Grid.Row="3"
+                            Margin="0,4,0,0"
+                            FontSize="Micro"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding VersionText}"
+                            TextColor="Gray" />
+                    </Grid>
+
+                    <!--  Campos  -->
+                    <StackLayout
+                        Grid.Row="1"
+                        Margin="0,8,0,0"
+                        Spacing="12">
+                        <controls:ISITextField
+                            x:Name="email"
+                            Title="{localization:Translate EMail}"
+                            Text="{Binding Email, Mode=TwoWay}" />
+
+                        <controls:ISITextField
+                            x:Name="password"
+                            Title="{localization:Translate Senha}"
+                            IsPassword="True"
+                            Text="{Binding Password, Mode=TwoWay}" />
+                    </StackLayout>
+
+                    <!--  Botão Login  -->
+                    <button:SfButton
+                        Grid.Row="2"
+                        Margin="0,8,0,0"
+                        BackgroundColor="{StaticResource SecondaryColor}"
+                        Command="{Binding LoginNowCommand}"
+                        HeightRequest="52"
+                        Style="{StaticResource sfButtonBar}"
+                        Text="{localization:Translate Login}" />
+
+                    <!--  Idiomas  -->
+                    <Grid
+                        Grid.Row="3"
+                        Margin="0,8,0,0"
+                        ColumnDefinitions="*,*,*"
+                        ColumnSpacing="30">
+                        <Image
+                            x:Name="langenglish"
+                            Grid.Column="0"
+                            HeightRequest="42"
+                            HorizontalOptions="Center"
+                            Opacity="{Binding EnglishOpacity}"
+                            Source="lang_english.png">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SetLanguageCommand}" CommandParameter="en-US" />
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image
+                            x:Name="langportuguese"
+                            Grid.Column="1"
+                            HeightRequest="42"
+                            HorizontalOptions="Center"
+                            Opacity="{Binding PortugueseOpacity}"
+                            Source="lang_portuguese.png">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SetLanguageCommand}" CommandParameter="pt-BR" />
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image
+                            x:Name="langspanish"
+                            Grid.Column="2"
+                            HeightRequest="42"
+                            HorizontalOptions="Center"
+                            Opacity="{Binding SpanishOpacity}"
+                            Source="lang_spanish.png">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SetLanguageCommand}" CommandParameter="es-ES" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+
+                    <!--  Ações secundárias  -->
+                    <Grid
+                        Grid.Row="4"
+                        Margin="0,8,0,0"
+                        ColumnDefinitions="*,*"
+                        ColumnSpacing="8">
+                        <button:SfButton
+                            Grid.Column="0"
+                            BackgroundColor="White"
+                            Command="{Binding ForgotPasswordCommand}"
+                            Style="{StaticResource ButtonSecondary}"
+                            Text="{localization:Translate EsqueceuASenha}"
+                            TextColor="{StaticResource PrimaryColor}" />
+                        <button:SfButton
+                            Grid.Column="1"
+                            BackgroundColor="White"
+                            Command="{Binding PolicyPrivacyCommand}"
+                            Style="{StaticResource ButtonSecondary}"
+                            Text="{localization:Translate PolíticaDePrivacidade}"
+                            TextColor="{StaticResource PrimaryColor}" />
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!--  Overlay de carregamento (scrim + cartão central sem borda)  -->
+
+        <controls:LoadingView
+            x:Name="busyindicator"
+            Grid.Row="0"
+            IndicatorColor="{StaticResource PrimaryColor}"
+            IsVisible="{Binding IsBusy}"
+            Text="{Binding BusyText}"
+            TextColor="{StaticResource PrimaryColor}" />
+
+    </Grid>
+</ContentPage>

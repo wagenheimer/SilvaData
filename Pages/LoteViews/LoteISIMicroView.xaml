@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ISIInstitute.Views.LoteViews.LoteISIMicroView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
+    x:DataType="viewmodels:LoteISIMicroViewModel"
+    Background="#0888CD">
+
+
+    <Grid Background="{StaticResource QuaseBranco}" RowDefinitions="Auto,*">
+
+        <Grid
+            Grid.Row="0"
+            Margin="0"
+            Padding="10,0"
+            ColumnDefinitions="*,Auto"
+            RowDefinitions="Auto,Auto,Auto">
+
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Offset="0.1" Color="#0888CD" />
+                    <GradientStop Offset="1.0" Color="#26558D" />
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <StackLayout Grid.Row="0" Spacing="0">
+                <Label
+                    Padding="5,0,0,5"
+                    FontSize="Micro"
+                    HorizontalTextAlignment="Start"
+                    Text="{Binding Lote.DescricaoCompleta}"
+                    TextColor="White" />
+
+                <Label
+                    Padding="5,0"
+                    FontFamily="Nunito"
+                    FontSize="Large"
+                    HorizontalOptions="Start"
+                    Text="{localization:Translate ISIMicro}"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+            </StackLayout>
+
+            <HorizontalStackLayout
+                Grid.RowSpan="3"
+                Grid.Column="1"
+                VerticalOptions="Center">
+                <buttons:SfButton
+                    Command="{Binding VoltarCommand}"
+                    Style="{StaticResource CircleButton}"
+                    Text="{x:Static fontawesome:FontAwesomeIcons.TurnDownLeft}" />
+            </HorizontalStackLayout>
+
+            <StackLayout
+                Grid.Row="2"
+                Padding="5,0,0,10"
+                Orientation="Horizontal">
+                <Label
+                    FontSize="Micro"
+                    HorizontalTextAlignment="Start"
+                    Text="{localization:Translate ResumoDasAnálisesDoLote}"
+                    TextColor="White" />
+            </StackLayout>
+        </Grid>
+
+        <listView:SfListView
+            Grid.Row="1"
+            IsScrollingEnabled="True"
+            IsVisible="{Binding IsBusy, Converter={StaticResource InvertBoolean}}"
+            ItemSize="80"
+            ItemSpacing="10"
+            ItemsSource="{Binding IsiMicroList}"
+            SelectionMode="None"
+            VerticalOptions="Fill">
+
+            <listView:SfListView.EmptyView>
+
+                <StackLayout
+                    Grid.Row="1"
+                    Margin="15,10"
+                    IsVisible="{Binding IsiMicroList, Converter={StaticResource NaoTemDados}}"
+                    VerticalOptions="Center">
+                    <Label
+                        FontSize="Small"
+                        HorizontalTextAlignment="Center"
+                        Text="{localization:Translate NunhumISIMicroCadastrado}"
+                        TextColor="{StaticResource PrimaryColor}"
+                        VerticalOptions="Fill"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+
+            </listView:SfListView.EmptyView>
+
+            <listView:SfListView.ItemTemplate>
+                <DataTemplate x:DataType="viewmodels:ISIMicroButton">
+                    <buttons:SfButton
+                        Background="Transparent"
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:LoteISIMicroViewModel}}, x:DataType={x:Type viewmodels:LoteISIMicroViewModel}, Path=ShowISIMicroCommand}"
+                        CommandParameter="{Binding .}"
+                        CornerRadius="20"
+                        HeightRequest="45"
+                        ShowIcon="False">
+
+                        <buttons:SfButton.Content>
+                            <DataTemplate x:DataType="viewmodels:ISIMicroButton">
+                                <Border
+                                    Padding="10,5"
+                                    Stroke="{StaticResource PrimaryColor}"
+                                    StrokeShape="RoundRectangle 20"
+                                    StrokeThickness="1">
+                                    <Grid
+                                        ColumnDefinitions="40,*"
+                                        RowDefinitions="40"
+                                        VerticalOptions="Center">
+
+                                        <Image
+                                            Grid.Column="0"
+                                            Margin="5,0"
+                                            HeightRequest="45"
+                                            Source="IconISIMicro.png"
+                                            VerticalOptions="Center" />
+
+                                        <Label
+                                            Grid.Column="1"
+                                            FontSize="Medium"
+                                            HorizontalTextAlignment="Start"
+                                            Text="{Binding Data, Converter={StaticResource DateToString}}"
+                                            TextColor="{StaticResource SecondaryColor}"
+                                            VerticalTextAlignment="Center" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </buttons:SfButton.Content>
+                    </buttons:SfButton>
+                </DataTemplate>
+            </listView:SfListView.ItemTemplate>
+        </listView:SfListView>
+
+        <controls:LoadingView
+            Grid.Row="1"
+            IsVisible="{Binding IsBusy}"
+            Text="{localization:Translate Aguarde}"
+            VerticalOptions="Fill" />
+
+
+        <buttons:SfButton
+            Grid.Row="2"
+            Command="{Binding NovoISIMicroCommand}"
+            Style="{StaticResource CircleButtonPlus}" />
+    </Grid>
+</ContentPage>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<controls:ValidatableFieldBase
+    x:Class="SilvaData.Controls.CampoTexto"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    x:Name="campoTexto"
+    Padding="0">
+
+    <controls:ValidatableFieldBase.Content>
+        <!--  ISITextField gerenciado automaticamente  -->
+        <controls:ISITextField
+            x:Name="isiTextField"
+            HasError="{Binding HasError, Source={x:Reference campoTexto}}"
+            IsReadOnly="{Binding IsReadOnly, Source={x:Reference campoTexto}}"
+            IsRequired="{Binding ParametroComAlternativas.required, Source={x:Reference campoTexto}, Converter={StaticResource IntToBoolConverter}}"
+            Text="{Binding Texto, Source={x:Reference campoTexto}, Mode=TwoWay}"
+            Title="{Binding ParametroComAlternativas.nome, Source={x:Reference campoTexto}}" />
+    </controls:ValidatableFieldBase.Content>
+</controls:ValidatableFieldBase>

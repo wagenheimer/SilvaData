@@ -1,0 +1,1302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AbrirLote" xml:space="preserve">
+    <value>Abrir Lote</value>
+  </data>
+  <data name="ConversaoAlimentarReal" xml:space="preserve">
+    <value>Conversão Alimentar Real</value>
+  </data>
+  <data name="DataDoAbate" xml:space="preserve">
+    <value>Data do Abate</value>
+  </data>
+  <data name="DataInicio" xml:space="preserve">
+    <value>Data de Início</value>
+  </data>
+  <data name="FecharLote" xml:space="preserve">
+    <value>Fechar Lote</value>
+  </data>
+  <data name="Mortalidade" xml:space="preserve">
+    <value>Mortalidade (%)</value>
+  </data>
+  <data name="Numero" xml:space="preserve">
+    <value>Número</value>
+  </data>
+  <data name="PesoFinalG" xml:space="preserve">
+    <value>Peso Final (g)</value>
+  </data>
+  <data name="PesoInicial" xml:space="preserve">
+    <value>Peso Inicial (g)</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="NúmeroDoLote" xml:space="preserve">
+    <value>Número do Lote</value>
+  </data>
+  <data name="UnidadeEpidemiológica" xml:space="preserve">
+    <value>Unidade Epidemiológica</value>
+  </data>
+  <data name="Salvar" xml:space="preserve">
+    <value>Salvar</value>
+  </data>
+  <data name="Editar" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="MeusLotes" xml:space="preserve">
+    <value>Lotes</value>
+  </data>
+  <data name="MeusTratamentos" xml:space="preserve">
+    <value>Tratamentos</value>
+  </data>
+  <data name="Lote" xml:space="preserve">
+    <value>Lote</value>
+  </data>
+  <data name="NovoLote" xml:space="preserve">
+    <value>Novo Lote</value>
+  </data>
+  <data name="Tratamento" xml:space="preserve">
+    <value>Tratamento</value>
+  </data>
+  <data name="NovoTratamento" xml:space="preserve">
+    <value>Novo Tratamento</value>
+  </data>
+  <data name="InformaçõesDoLote" xml:space="preserve">
+    <value>Informações do Lote</value>
+  </data>
+  <data name="InformaçõesDoTratamento" xml:space="preserve">
+    <value>Informações do Tratamento</value>
+  </data>
+  <data name="MonitoramentoDoLote" xml:space="preserve">
+    <value>Monitoramento do Lote</value>
+  </data>
+  <data name="MonitoramentoDoTratamento" xml:space="preserve">
+    <value>Monitoramento do Tratamento</value>
+  </data>
+  <data name="Manejo" xml:space="preserve">
+    <value>Manejo</value>
+  </data>
+  <data name="Zootécnico" xml:space="preserve">
+    <value>Zootécnico</value>
+  </data>
+  <data name="AvaliacoesNoGalpao" xml:space="preserve">
+    <value>Avaliações no Galpão</value>
+  </data>
+  <data name="ISIMacro" xml:space="preserve">
+    <value>ISI Macro</value>
+  </data>
+  <data name="ISIMicro" xml:space="preserve">
+    <value>ISI Micro</value>
+  </data>
+  <data name="Sanidade" xml:space="preserve">
+    <value>Sanidade</value>
+  </data>
+  <data name="Nutrição" xml:space="preserve">
+    <value>Nutrição</value>
+  </data>
+  <data name="DiagnósticoDeEnfermidades" xml:space="preserve">
+    <value>Diagnóstico de Enfermidades</value>
+  </data>
+  <data name="TratamentoViaÁgua" xml:space="preserve">
+    <value>Tratamento via água</value>
+  </data>
+  <data name="AnáliseDeSalmonella" xml:space="preserve">
+    <value>Análise de Salmonella</value>
+  </data>
+  <data name="Vacinas" xml:space="preserve">
+    <value>Vacinas</value>
+  </data>
+  <data name="Configurações" xml:space="preserve">
+    <value>Configurações</value>
+  </data>
+  <data name="OQueVocêDesejaConfigurar" xml:space="preserve">
+    <value>O que você deseja configurar?</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="Lotes" xml:space="preserve">
+    <value>Lotes</value>
+  </data>
+  <data name="Sincronização" xml:space="preserve">
+    <value>Sincronização</value>
+  </data>
+  <data name="Suporte" xml:space="preserve">
+    <value>Suporte</value>
+  </data>
+  <data name="Atividades" xml:space="preserve">
+    <value>Atividades</value>
+  </data>
+  <data name="Notificações" xml:space="preserve">
+    <value>Notificações</value>
+  </data>
+  <data name="Proprietários" xml:space="preserve">
+    <value>Proprietários</value>
+  </data>
+  <data name="Regionais" xml:space="preserve">
+    <value>Regionais</value>
+  </data>
+  <data name="UnidadesEpidemiológicas" xml:space="preserve">
+    <value>Unidades Epidemiológicas</value>
+  </data>
+  <data name="Propriedades" xml:space="preserve">
+    <value>Propriedades</value>
+  </data>
+  <data name="Deslogar" xml:space="preserve">
+    <value>Deslogar</value>
+  </data>
+  <data name="PolíticaDePrivacidade" xml:space="preserve">
+    <value>Política de Privacidade</value>
+  </data>
+  <data name="MinhaConta" xml:space="preserve">
+    <value>Minha Conta</value>
+  </data>
+  <data name="GerencieSeusProprietários" xml:space="preserve">
+    <value>Gerencie seus proprietários</value>
+  </data>
+  <data name="EditeAsInformaçõesAbaixo" xml:space="preserve">
+    <value>Edite as informações abaixo</value>
+  </data>
+  <data name="AdicioneAsInformaçõesAbaixo" xml:space="preserve">
+    <value>Adicione as informações abaixo</value>
+  </data>
+  <data name="NovoProprietário" xml:space="preserve">
+    <value>Novo proprietário</value>
+  </data>
+  <data name="EditarProprietário" xml:space="preserve">
+    <value>Editar proprietário</value>
+  </data>
+  <data name="ProprietárioAlteradoComSucesso" xml:space="preserve">
+    <value>Proprietário alterado com sucesso</value>
+  </data>
+  <data name="ProprietárioAdicionadoComSucesso" xml:space="preserve">
+    <value>Proprietário adicionado com sucesso</value>
+  </data>
+  <data name="Nome" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="GerencieSuasRegionais" xml:space="preserve">
+    <value>Gerencie suas regionais</value>
+  </data>
+  <data name="ReginonalAlteradaComSucesso" xml:space="preserve">
+    <value>Reginonal alterada com sucesso</value>
+  </data>
+  <data name="RegionalAdicionadaComSucesso" xml:space="preserve">
+    <value>Regional adicionada com sucesso</value>
+  </data>
+  <data name="EditarRegional" xml:space="preserve">
+    <value>Editar Regional</value>
+  </data>
+  <data name="NovaRegional" xml:space="preserve">
+    <value>Nova Regional</value>
+  </data>
+  <data name="GerencieSuaRegionais" xml:space="preserve">
+    <value>Gerencie sua regionais</value>
+  </data>
+  <data name="GerencieSuasPropriedades" xml:space="preserve">
+    <value>Gerencie suas propriedades</value>
+  </data>
+  <data name="Regional" xml:space="preserve">
+    <value>Regional</value>
+  </data>
+  <data name="PropriedadeAdicionadaComSucesso" xml:space="preserve">
+    <value>Propriedade adicionada com sucesso</value>
+  </data>
+  <data name="PropriedadeEditadaComSucesso" xml:space="preserve">
+    <value>Propriedade editada com sucesso</value>
+  </data>
+  <data name="EditarPropriedade" xml:space="preserve">
+    <value>Editar propriedade</value>
+  </data>
+  <data name="NovaPropriedade" xml:space="preserve">
+    <value>Nova propriedade</value>
+  </data>
+  <data name="Proprietário" xml:space="preserve">
+    <value>Proprietário</value>
+  </data>
+  <data name="GerencieSuasUnidadesEpidemiológicas" xml:space="preserve">
+    <value>Gerencie suas Unidades Epidemiológicas</value>
+  </data>
+  <data name="EditarUnidadeEpidemiológica" xml:space="preserve">
+    <value>Editar Unidade Epidemiológica</value>
+  </data>
+  <data name="NovaUnidadeEpidemiológica" xml:space="preserve">
+    <value>Nova unidade epidemiológica</value>
+  </data>
+  <data name="Longitude" xml:space="preserve">
+    <value>Longitude</value>
+  </data>
+  <data name="Latitude" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
+  <data name="Propriedade" xml:space="preserve">
+    <value>Propriedade</value>
+  </data>
+  <data name="UnidadeEpidemiológicaEditadaComSucesso" xml:space="preserve">
+    <value>Unidade Epidemiológica editada com sucesso</value>
+  </data>
+  <data name="UnidadeEpidemiológicaAdicionadaComSucesso" xml:space="preserve">
+    <value>Unidade Epidemiológica adicionada com sucesso</value>
+  </data>
+  <data name="SincronizaçãoPendente" xml:space="preserve">
+    <value>Sincronização pendente</value>
+  </data>
+  <data name="HáUmaSincronizaçãoObrigatóriaPendenteElaSeráEfetuadaAgora" xml:space="preserve">
+    <value>Há uma sincronização obrigatória pendente, ela será efetuada agora</value>
+  </data>
+  <data name="AdicionadoComSucesso" xml:space="preserve">
+    <value>Adicionado com sucesso</value>
+  </data>
+  <data name="EditadoComSucesso" xml:space="preserve">
+    <value>Editado com sucesso</value>
+  </data>
+  <data name="PropriedadeAlteradaComSucesso" xml:space="preserve">
+    <value>Propriedade alterada com sucesso</value>
+  </data>
+  <data name="AsAlteraçõesForamSalvas" xml:space="preserve">
+    <value>As alterações foram salvas</value>
+  </data>
+  <data name="Erro" xml:space="preserve">
+    <value>Erro</value>
+  </data>
+  <data name="PorFavorPreencherCamposObrigatórios" xml:space="preserve">
+    <value>Por favor preencher campos obrigatórios!</value>
+  </data>
+  <data name="UmCampoPendente" xml:space="preserve">
+    <value>1 campo pendente</value>
+  </data>
+  <data name="CamposPendentesQuantidade" xml:space="preserve">
+    <value>{0} campos pendentes</value>
+  </data>
+  <data name="ReviseOsCamposAbaixoECompleteOQueFaltaParaContinuar" xml:space="preserve">
+    <value>Revise os campos abaixo e complete o que falta para continuar.</value>
+  </data>
+  <data name="Pendentes" xml:space="preserve">
+    <value>Pendentes</value>
+  </data>
+  <data name="NãoExisteNenhumProdutoCadastradoParaTratamentoDesteDiagnóstico" xml:space="preserve">
+    <value>Não existe nenhum produto cadastrado para tratamento deste diagnóstico</value>
+  </data>
+  <data name="LogadoComMesmoUsuarioSenha" xml:space="preserve">
+    <value>Alguém logou com o mesmo usuário/senha em outro dispositivo! Por favor, efetue o login novamente para continuar</value>
+  </data>
+  <data name="NaoTemSessaoValidaAtiva" xml:space="preserve">
+    <value>Você não tem mais uma sessão válida ativa.</value>
+  </data>
+  <data name="ASincronizaçãoFalhou" xml:space="preserve">
+    <value>A Sincronização falhou</value>
+  </data>
+  <data name="Sucesso" xml:space="preserve">
+    <value>Sucesso</value>
+  </data>
+  <data name="DadosEnviadosComSucesso" xml:space="preserve">
+    <value>Dados enviados com sucesso</value>
+  </data>
+  <data name="DadosRecebidosComSucesso" xml:space="preserve">
+    <value>Dados recebidos com sucesso</value>
+  </data>
+  <data name="AindaNãoEstamosNaDataMínimaParaPreenchimentoDesteFormulário" xml:space="preserve">
+    <value>Ainda não estamos na data mínima para preenchimento deste formulário</value>
+  </data>
+  <data name="OLoteEstáFechado" xml:space="preserve">
+    <value>O lote está fechado</value>
+  </data>
+  <data name="NãoPodeAlterarDadosEmLotesFechados" xml:space="preserve">
+    <value>Não é possível alterar dados em lotes fechados</value>
+  </data>
+  <data name="AtualizarDados" xml:space="preserve">
+    <value>Atualizar dados</value>
+  </data>
+  <data name="NaoPodeAtualizarSemInternet" xml:space="preserve">
+    <value>Não foi possível atualizar agora. Por favor verifique sua conexão com a internet e tente novamente mais tarde.</value>
+  </data>
+  <data name="NenhumaSessãoVálidaAtiva" xml:space="preserve">
+    <value>Nenhuma sessão válida ativa</value>
+  </data>
+  <data name="NenhumaSessaoValidaDetalhes" xml:space="preserve">
+    <value>Você não tem mais uma sessão válida ativa. Alguém logou com o mesmo usuário/senha em outro dispositivo! Por favor, efetue o login novamente para continuar.</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LoginInválido" xml:space="preserve">
+    <value>Login Inválido!</value>
+  </data>
+  <data name="Aguarde" xml:space="preserve">
+    <value>Aguarde...</value>
+  </data>
+  <data name="SeusDadosAindaNãoForamSalvos" xml:space="preserve">
+    <value>Seus dados ainda não foram salvos</value>
+  </data>
+  <data name="Sim" xml:space="preserve">
+    <value>Sim</value>
+  </data>
+  <data name="Não" xml:space="preserve">
+    <value>Não</value>
+  </data>
+  <data name="ASincronizaçãoFalhouComAMensagem" xml:space="preserve">
+    <value>A Sincronização Falhou com a mensagem:</value>
+  </data>
+  <data name="DesejaTentarNovamente" xml:space="preserve">
+    <value>Deseja tentar novamente?</value>
+  </data>
+  <data name="ConectadoAInternet" xml:space="preserve">
+    <value>É precisar estar conectado na internet para efetuar essa operação! Tentar Novamente?</value>
+  </data>
+  <data name="SemInternet" xml:space="preserve">
+    <value>Sem Internet!</value>
+  </data>
+  <data name="FormulárioEmAndamento" xml:space="preserve">
+    <value>Formulário em andamento</value>
+  </data>
+  <data name="RetomarPreenchimentoFormulario" xml:space="preserve">
+    <value>Você tem um preenchimento de formulário em andamento. Deseja retomar o preenchimento dele?</value>
+  </data>
+  <data name="Atenção" xml:space="preserve">
+    <value>Atenção!</value>
+  </data>
+  <data name="ConfirmacaodeLogOff" xml:space="preserve">
+    <value>Ao deslogar, você perderá todas os dados que ainda não foram sincronizados! Você tem mesmo certeza que deseja deslogar? Esses dados não poderão mais ser recuperados. Deseja mesmo deslogar?</value>
+  </data>
+  <data name="SimTenhoCerteza" xml:space="preserve">
+    <value>Sim, tenho certeza</value>
+  </data>
+  <data name="Cancelar" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="DesejaMesmaFinalizarEstaAtividade" xml:space="preserve">
+    <value>Deseja mesma finalizar esta atividade?</value>
+  </data>
+  <data name="FinalizarAtividade" xml:space="preserve">
+    <value>Finalizar</value>
+  </data>
+  <data name="CancelarAtividade" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="CancelarAtividadeConfirmacao" xml:space="preserve">
+    <value>Deseja mesmo cancelar esta atividade?</value>
+  </data>
+  <data name="AveDoente" xml:space="preserve">
+    <value>Essa pontuação está muito alta para uma ave saudável. Deseja confirmar?</value>
+  </data>
+  <data name="SaveAndReturn_AveNãoSaudável" xml:space="preserve">
+    <value>Ave não saudável</value>
+  </data>
+  <data name="UsuarioJaLogado" xml:space="preserve">
+    <value>Este usuário tem uma sessão ativa no dispositivo {0} desde {1}. Se você continuar, todas as alterações ainda não sincronizadas naquele dispositivo serão perdidas! Deseja continuar mesmo assim?</value>
+  </data>
+  <data name="ISIMacroAdicionadoComSucesso" xml:space="preserve">
+    <value>ISI Macro adicionado com Sucesso!</value>
+  </data>
+  <data name="CadastrarMais1" xml:space="preserve">
+    <value>Cadastrar +1</value>
+  </data>
+  <data name="Voltar" xml:space="preserve">
+    <value>Voltar</value>
+  </data>
+  <data name="FinalizarAVisita" xml:space="preserve">
+    <value>Finalizar a visita</value>
+  </data>
+  <data name="FinalizarVisitaConfirmacao" xml:space="preserve">
+    <value>Deseja realmente finalizar a visita?</value>
+  </data>
+  <data name="NotificacoesView_ArquivarNotificação" xml:space="preserve">
+    <value>Arquivar notificação</value>
+  </data>
+  <data name="ArquivarNotificacaoDesc" xml:space="preserve">
+    <value>Deseja mesmo arquivar essa notificação?</value>
+  </data>
+  <data name="ScoreMédioTotal" xml:space="preserve">
+    <value>Score Médio Total</value>
+  </data>
+  <data name="CarregandoDadosDoFormulário" xml:space="preserve">
+    <value>Carregando dados do formulário...</value>
+  </data>
+  <data name="Vazio" xml:space="preserve">
+    <value>Vazio</value>
+  </data>
+  <data name="Alojamento" xml:space="preserve">
+    <value>Alojamento</value>
+  </data>
+  <data name="Inicial" xml:space="preserve">
+    <value>Inicial</value>
+  </data>
+  <data name="Crescimento1" xml:space="preserve">
+    <value>Crescimento 1</value>
+  </data>
+  <data name="Crescimento2" xml:space="preserve">
+    <value>Crescimento 2</value>
+  </data>
+  <data name="Final" xml:space="preserve">
+    <value>Final</value>
+  </data>
+  <data name="Biosseguridade" xml:space="preserve">
+    <value>Biosseguridade</value>
+  </data>
+  <data name="Dias" xml:space="preserve">
+    <value>Dias</value>
+  </data>
+  <data name="DiagnósticoDeEnfermidade" xml:space="preserve">
+    <value>Diagnóstico de Enfermidade</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="DetalhesDaAnálise" xml:space="preserve">
+    <value>Detalhes da análise:</value>
+  </data>
+  <data name="Observações" xml:space="preserve">
+    <value>Observações</value>
+  </data>
+  <data name="Fotos" xml:space="preserve">
+    <value>Fotos</value>
+  </data>
+  <data name="VerFotos" xml:space="preserve">
+    <value>Ver Fotos</value>
+  </data>
+  <data name="ScoreTotalDaAve" xml:space="preserve">
+    <value>Score total da ave:</value>
+  </data>
+  <data name="Score" xml:space="preserve">
+    <value>Score:</value>
+  </data>
+  <data name="Selecionar" xml:space="preserve">
+    <value>Selecionar</value>
+  </data>
+  <data name="Selecione" xml:space="preserve">
+    <value>Selecione</value>
+  </data>
+  <data name="APartirDe" xml:space="preserve">
+    <value>A partir de</value>
+  </data>
+  <data name="Até" xml:space="preserve">
+    <value>até</value>
+  </data>
+  <data name="Ave" xml:space="preserve">
+    <value>Ave</value>
+  </data>
+  <data name="ResumoDasAnálisesDoLote" xml:space="preserve">
+    <value>Resumo das análises do lote:</value>
+  </data>
+  <data name="AdicionarTratamento" xml:space="preserve">
+    <value>Adicionar tratamento</value>
+  </data>
+  <data name="Tratamentos" xml:space="preserve">
+    <value>Tratamentos</value>
+  </data>
+  <data name="DiagnósticosRealizadosNoLote" xml:space="preserve">
+    <value>Diagnósticos realizados no lote:</value>
+  </data>
+  <data name="TratamentosViaÁguaNoLote" xml:space="preserve">
+    <value>Tratamentos via água no lote:</value>
+  </data>
+  <data name="VerDetalhes" xml:space="preserve">
+    <value>Ver Detalhes &gt;</value>
+  </data>
+  <data name="VejaAbaixoAListaCompletaDeAtividades" xml:space="preserve">
+    <value>Veja abaixo a lista completa de atividades</value>
+  </data>
+  <data name="CarregandoAtividades" xml:space="preserve">
+    <value>Carregando Atividades</value>
+  </data>
+  <data name="VejaDadosConta" xml:space="preserve">
+    <value>Veja abaixo os dados da conta ISI App que está logada neste dispositivo</value>
+  </data>
+  <data name="NumeroDoDispositivo" xml:space="preserve">
+    <value>Nº do dispositivo</value>
+  </data>
+  <data name="Sessão" xml:space="preserve">
+    <value>Sessão</value>
+  </data>
+  <data name="EnviarBancoDeDadosParaSuporte" xml:space="preserve">
+    <value>Enviar banco de dados para suporte</value>
+  </data>
+  <data name="PorFavorAguarde" xml:space="preserve">
+    <value>Por favor, aguarde...</value>
+  </data>
+  <data name="ChecandoDados" xml:space="preserve">
+    <value>Checando dados...</value>
+  </data>
+  <data name="ChecandoLogin" xml:space="preserve">
+    <value>Checando login...</value>
+  </data>
+  <data name="IndoParaTelaDeLogin" xml:space="preserve">
+    <value>Indo para tela de login....</value>
+  </data>
+  <data name="Processando" xml:space="preserve">
+    <value>Processando...</value>
+  </data>
+  <data name="QuasePronto" xml:space="preserve">
+    <value>Quase pronto...</value>
+  </data>
+  <data name="DeslogarConta" xml:space="preserve">
+    <value>Deslogar conta</value>
+  </data>
+  <data name="EsqueceuASenha" xml:space="preserve">
+    <value>Esqueceu a senha</value>
+  </data>
+  <data name="Global" xml:space="preserve">
+    <value>Global</value>
+  </data>
+  <data name="Empresa" xml:space="preserve">
+    <value>Empresa</value>
+  </data>
+  <data name="MeusResultados" xml:space="preserve">
+    <value>Meus Resultados</value>
+  </data>
+  <data name="Acomet" xml:space="preserve">
+    <value>Acomet.</value>
+  </data>
+  <data name="Dispersão" xml:space="preserve">
+    <value>Dispersão</value>
+  </data>
+  <data name="LotesEmAlerta" xml:space="preserve">
+    <value>Lotes em alerta:</value>
+  </data>
+  <data name="ÍndiceDoManejo" xml:space="preserve">
+    <value>Índice do Manejo</value>
+  </data>
+  <data name="IEP" xml:space="preserve">
+    <value>IEP</value>
+  </data>
+  <data name="ISIScoreTotal" xml:space="preserve">
+    <value>ISI Score Total</value>
+  </data>
+  <data name="ScoreSemDoisPontos" xml:space="preserve">
+    <value>Score</value>
+  </data>
+  <data name="LOTEMaiusculo" xml:space="preserve">
+    <value>LOTE</value>
+  </data>
+  <data name="INÍCIO" xml:space="preserve">
+    <value>INÍCIO</value>
+  </data>
+  <data name="UNIDADEEPID" xml:space="preserve">
+    <value>UNIDADE EPID.</value>
+  </data>
+  <data name="SCOREMaiusculo" xml:space="preserve">
+    <value>SCORE</value>
+  </data>
+  <data name="ScoreMédioDoLote" xml:space="preserve">
+    <value>Score médio do lote:</value>
+  </data>
+  <data name="ISIScoreMédioDoLote" xml:space="preserve">
+    <value>ISI Score médio</value>
+  </data>
+  <data name="OpcoesDeMonitoramento" xml:space="preserve">
+    <value>Opções de monitoramento</value>
+  </data>
+  <data name="Bom" xml:space="preserve">
+    <value>Bom</value>
+  </data>
+  <data name="Regular" xml:space="preserve">
+    <value>Regular</value>
+  </data>
+  <data name="Ruim" xml:space="preserve">
+    <value>Ruim</value>
+  </data>
+  <data name="QueAMédiaDaEmpresa" xml:space="preserve">
+    <value>que a média da empresa.</value>
+  </data>
+  <data name="Pior" xml:space="preserve">
+    <value>pior</value>
+  </data>
+  <data name="Melhor" xml:space="preserve">
+    <value>melhor</value>
+  </data>
+  <data name="MesmoValor" xml:space="preserve">
+    <value>mesmo valor</value>
+  </data>
+  <data name="QueAMédiaGlobal" xml:space="preserve">
+    <value>que a média global</value>
+  </data>
+  <data name="SincronizarDados" xml:space="preserve">
+    <value>Sincronizar dados</value>
+  </data>
+  <data name="SincronizarDadosExplicacao" xml:space="preserve">
+    <value>Sincronize aqui os dados da sua conta com a nuvem do ISI App. Abaixo estão as sincronização pendentes:</value>
+  </data>
+  <data name="SincronizarAgora" xml:space="preserve">
+    <value>Sincronizar Agora</value>
+  </data>
+  <data name="ListaDeMudançasIdentificadas" xml:space="preserve">
+    <value>Lista de mudanças identificadas:</value>
+  </data>
+  <data name="NenhumaMudançaPendenteDeSincronização" xml:space="preserve">
+    <value>Nenhuma mudança pendente de sincronização!</value>
+  </data>
+  <data name="FormuláriosDosLotes" xml:space="preserve">
+    <value>Formulários dos lotes</value>
+  </data>
+  <data name="ImagensDosFormulários" xml:space="preserve">
+    <value>Imagens dos Formulários</value>
+  </data>
+  <data name="AguardeEnviandoDados" xml:space="preserve">
+    <value>Aguarde... Enviando Dados...</value>
+  </data>
+  <data name="Enviando0" xml:space="preserve">
+    <value>Enviando {0}</value>
+  </data>
+  <data name="NuncaSincronizado" xml:space="preserve">
+    <value>Nunca sincronizado...</value>
+  </data>
+  <data name="_0SegundosAtrás" xml:space="preserve">
+    <value>{0} segundos atrás</value>
+  </data>
+  <data name="_0MinutosAtrás" xml:space="preserve">
+    <value>{0} minutos atrás</value>
+  </data>
+  <data name="ÚltimaSincronização" xml:space="preserve">
+    <value>Última Sincronização</value>
+  </data>
+  <data name="DadosRecebidosDaNuvem" xml:space="preserve">
+    <value>Dados recebidos da nuvem</value>
+  </data>
+  <data name="EMail" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="Senha" xml:space="preserve">
+    <value>Senha</value>
+  </data>
+  <data name="Versão" xml:space="preserve">
+    <value>Versão</value>
+  </data>
+  <data name="PesquisarLotes" xml:space="preserve">
+    <value>Pesquisar Lotes</value>
+  </data>
+  <data name="Filtros" xml:space="preserve">
+    <value>Filtros</value>
+  </data>
+  <data name="LimparFiltros" xml:space="preserve">
+    <value>Limpar Filtros</value>
+  </data>
+  <data name="ISIDispersãoScore" xml:space="preserve">
+    <value>Dispersão dos lotes</value>
+  </data>
+  <data name="Acometimento" xml:space="preserve">
+    <value>Acometimento</value>
+  </data>
+  <data name="Acomentimento" xml:space="preserve">
+    <value>Acomentimento:</value>
+  </data>
+  <data name="DataDoisPontos" xml:space="preserve">
+    <value>Data:</value>
+  </data>
+  <data name="MédiaScore" xml:space="preserve">
+    <value>Score médio:</value>
+  </data>
+  <data name="ISITotal" xml:space="preserve">
+    <value>ISI Total:</value>
+  </data>
+  <data name="DashLote" xml:space="preserve">
+    <value>Lote:</value>
+  </data>
+  <data name="DashPropriedade" xml:space="preserve">
+    <value>Propriedade:</value>
+  </data>
+  <data name="DashUE" xml:space="preserve">
+    <value>U.E.:</value>
+  </data>
+  <data name="BaixandoParâmetrosDaNuvem" xml:space="preserve">
+    <value>Baixando parâmetros da nuvem...</value>
+  </data>
+  <data name="ApagandoTabelasAntigas" xml:space="preserve">
+    <value>Apagando tabelas antigas...</value>
+  </data>
+  <data name="BaixandoImagensDosParâmetrosDaNuvem" xml:space="preserve">
+    <value>Baixando imagens dos parâmetros da nuvem...</value>
+  </data>
+  <data name="BaixandoProprietáriosDaNuvem" xml:space="preserve">
+    <value>Baixando proprietários da nuvem...</value>
+  </data>
+  <data name="BaixandoRegionaisDaNuvem" xml:space="preserve">
+    <value>Baixando regionais da nuvem...</value>
+  </data>
+  <data name="BaixandoPropriedadesDaNuvem" xml:space="preserve">
+    <value>Baixando propriedades da nuvem...</value>
+  </data>
+  <data name="BaixandoUnidadesEpidemiológicasDaNuvem" xml:space="preserve">
+    <value>Baixando unidades epidemiológicas da nuvem...</value>
+  </data>
+  <data name="BaixandoParâmetrosDasAtividadesDaNuvem" xml:space="preserve">
+    <value>Baixando parâmetros das atividades da nuvem...</value>
+  </data>
+  <data name="BaixandoTipoDeAtividadesDaNuvem" xml:space="preserve">
+    <value>Baixando tipo de atividades da nuvem...</value>
+  </data>
+  <data name="BaixandoLotesFechadosDaNuvem" xml:space="preserve">
+    <value>Baixando lotes fechados da nuvem...</value>
+  </data>
+  <data name="BaixandoParâmetrosDosLotesDaNuvem" xml:space="preserve">
+    <value>Baixando parâmetros dos lotes da nuvem...</value>
+  </data>
+  <data name="BaixandoAtividadesDaNuvem" xml:space="preserve">
+    <value>Baixando atividades da nuvem...</value>
+  </data>
+  <data name="BaixandoNotificaçõesDaNuvem" xml:space="preserve">
+    <value>Baixando notificações da nuvem...</value>
+  </data>
+  <data name="BaixandoFormuláriosDosLotesDaNuvem" xml:space="preserve">
+    <value>Baixando formulários dos lotes da nuvem...</value>
+  </data>
+  <data name="BaixandoFormulários" xml:space="preserve">
+    <value>Baixando formulários...</value>
+  </data>
+  <data name="BaixandoPermissõesDaNuvem" xml:space="preserve">
+    <value>Baixando permissões da nuvem...</value>
+  </data>
+  <data name="AtualizandoScoreDosLotes" xml:space="preserve">
+    <value>Atualizando os scores dos lotes</value>
+  </data>
+  <data name="SincronizaçãoCompletada" xml:space="preserve">
+    <value>Sincronização Completada!</value>
+  </data>
+  <data name="ErroAoSincronizarDadosDaTabela0" xml:space="preserve">
+    <value>Erro ao sincronizar dados da tabela {0}.</value>
+  </data>
+  <data name="SuporteISIApp" xml:space="preserve">
+    <value>Suporte ISIApp</value>
+  </data>
+  <data name="Horas" xml:space="preserve">
+    <value>horas</value>
+  </data>
+  <data name="Atividade" xml:space="preserve">
+    <value>Atividade</value>
+  </data>
+  <data name="NovaAtividade" xml:space="preserve">
+    <value>Nova atividade</value>
+  </data>
+  <data name="Hora" xml:space="preserve">
+    <value>Hora</value>
+  </data>
+  <data name="DataDeInício" xml:space="preserve">
+    <value>Data de Início</value>
+  </data>
+  <data name="Título" xml:space="preserve">
+    <value>Título</value>
+  </data>
+  <data name="Descrição" xml:space="preserve">
+    <value>Descrição</value>
+  </data>
+  <data name="NenhumaAtividadeNesteDia" xml:space="preserve">
+    <value>Nenhuma atividade neste dia</value>
+  </data>
+  <data name="Prazo" xml:space="preserve">
+    <value>Prazo</value>
+  </data>
+  <data name="AtividadeStatus_Cancelada" xml:space="preserve">
+    <value>Cancelada</value>
+  </data>
+  <data name="AtividadeStatus_Atrasada" xml:space="preserve">
+    <value>Atrasada</value>
+  </data>
+  <data name="AtividadeStatus_EmAndamento" xml:space="preserve">
+    <value>Em Andamento</value>
+  </data>
+  <data name="AtividadeStatus_Finalizada" xml:space="preserve">
+    <value>Finalizada</value>
+  </data>
+  <data name="DetalhesDaAtividade" xml:space="preserve">
+    <value>Detalhes da Atividade</value>
+  </data>
+  <data name="SobreAAtividade" xml:space="preserve">
+    <value>Sobre a Atividade</value>
+  </data>
+  <data name="AtividadeEdit_Datas" xml:space="preserve">
+    <value>Datas</value>
+  </data>
+  <data name="AtividadeEdit_Início" xml:space="preserve">
+    <value>Início</value>
+  </data>
+  <data name="AtividadeView_A" xml:space="preserve">
+    <value> a </value>
+  </data>
+  <data name="NenhumTratamentoCadastrado" xml:space="preserve">
+    <value>Não há nenhum tratamento cadastrado. Para cadastrar um tratamento, use o botão Adicionar Tratamento no diagnóstico de enfermidade.</value>
+  </data>
+  <data name="NenhumISIMacroCadastrado" xml:space="preserve">
+    <value>Nenhum ISI Macro cadastrado...</value>
+  </data>
+  <data name="NunhumISIMicroCadastrado" xml:space="preserve">
+    <value>Nunhum ISI Micro cadastrado...</value>
+  </data>
+  <data name="NenhumaNutriçãoCadastrada" xml:space="preserve">
+    <value>Nenhum formulário de nutrição cadastrado...</value>
+  </data>
+  <data name="BuscarAtualizações" xml:space="preserve">
+    <value>Buscar Mudanças</value>
+  </data>
+  <data name="BuscarNovosDadosNaNuvem" xml:space="preserve">
+    <value>Buscar novos dados na nuvem...</value>
+  </data>
+  <data name="Procurar" xml:space="preserve">
+    <value>Procurar</value>
+  </data>
+  <data name="Cadastrar" xml:space="preserve">
+    <value>Cadastrar</value>
+  </data>
+  <data name="Fechado" xml:space="preserve">
+    <value>Fechado</value>
+  </data>
+  <data name="Aberto" xml:space="preserve">
+    <value>Aberto</value>
+  </data>
+  <data name="ErroAoAcessarWebService" xml:space="preserve">
+    <value>Erro ao acessar WebService! Por favor tente novamente mais tarde!</value>
+  </data>
+  <data name="DadosDoFechamento" xml:space="preserve">
+    <value>Dados do fechamento</value>
+  </data>
+  <data name="Arquivar" xml:space="preserve">
+    <value>Arquivar</value>
+  </data>
+  <data name="NenhumaNotificaçãoPendente" xml:space="preserve">
+    <value>Nenhuma notificação pendente!</value>
+  </data>
+  <data name="NovaVersaoApp" xml:space="preserve">
+    <value>Existe uma nova versão do aplicativo disponível! É muito importante que você faça essa atualização agora.</value>
+  </data>
+  <data name="AtualizaçãoDisponível" xml:space="preserve">
+    <value>Atualização disponível</value>
+  </data>
+  <data name="AtualizarAgora" xml:space="preserve">
+    <value>Atualizar agora</value>
+  </data>
+  <data name="SuasNotificacoes" xml:space="preserve">
+    <value>Veja aqui todas suas notificações</value>
+  </data>
+  <data name="Limpar" xml:space="preserve">
+    <value>Limpar</value>
+  </data>
+  <data name="PreenchaOsFormuláriosAbaixo" xml:space="preserve">
+    <value>Preencha os formulários abaixo</value>
+  </data>
+  <data name="NenhumLoteEmAlerta" xml:space="preserve">
+    <value>Nenhum lote em alerta. Parabéns!</value>
+  </data>
+  <data name="FaleConoscoNoWhatsApp" xml:space="preserve">
+    <value>Fale conosco no WhatsApp</value>
+  </data>
+  <data name="NenhumDiagnósticoCadastrado" xml:space="preserve">
+    <value>Nenhum diagnóstico cadastrado...</value>
+  </data>
+  <data name="NenhumaAnáliseDeSalmonellaCadastrada" xml:space="preserve">
+    <value>Nenhuma análise de Salmonella cadastrada...</value>
+  </data>
+  <data name="VacinasAplicadasNoLote" xml:space="preserve">
+    <value>Vacinas aplicadas no lote:</value>
+  </data>
+  <data name="NenhumaVacidaAplicadaNesteLote" xml:space="preserve">
+    <value>Nenhum vacida aplicada neste lote...</value>
+  </data>
+  <data name="AguardeAtualizandoDados" xml:space="preserve">
+    <value>Aguarde... Atualizando Dados...</value>
+  </data>
+  <data name="NosEnvieUmEmail" xml:space="preserve">
+    <value>Nos envie um email</value>
+  </data>
+  <data name="AcesseNossoSite" xml:space="preserve">
+    <value>Acesse nosso site</value>
+  </data>
+  <data name="PesquisaISIMacro" xml:space="preserve">
+    <value>Pesquisa ISI Macro</value>
+  </data>
+  <data name="DigiteParaPesquisar" xml:space="preserve">
+    <value>Digite para pesquisar...</value>
+  </data>
+  <data name="politicaPrivacidadeAceitar" xml:space="preserve">
+    <value>Você precisa aceitar nossa política de privacidade para utilizar esse app!</value>
+  </data>
+  <data name="popUpPrivacy_EuAceito" xml:space="preserve">
+    <value>Eu aceito</value>
+  </data>
+  <data name="VerPolíticaDePrivacidade" xml:space="preserve">
+    <value>Ler Política de Privacidade</value>
+  </data>
+  <data name="MédiaISI" xml:space="preserve">
+    <value>Score médio:</value>
+  </data>
+  <data name="Qtde" xml:space="preserve">
+    <value>Aves avaliadas:</value>
+  </data>
+  <data name="IrParaOLote" xml:space="preserve">
+    <value>Ver aves do lote</value>
+  </data>
+  <data name="BoaSaúde" xml:space="preserve">
+    <value>Boa</value>
+  </data>
+  <data name="SaudeMédia" xml:space="preserve">
+    <value>Mediana</value>
+  </data>
+  <data name="SaúdeBaixa" xml:space="preserve">
+    <value>Baixa</value>
+  </data>
+  <data name="BaixandoImagensDosFormuláriosDaNuvem" xml:space="preserve">
+    <value>Baixando imagens dos formulários da nuvem</value>
+  </data>
+  <data name="PesquisaDeSatisfacao" xml:space="preserve">
+    <value>Pesquisa de Satisfação</value>
+  </data>
+  <data name="NPSTexto" xml:space="preserve">
+    <value>Em uma escala de Zero a 10, qual é a probabilidade de você recomendar a ferramenta ISI Sys (ISI App e Plataforma da Web) para um colega da área?</value>
+  </data>
+  <data name="Votar" xml:space="preserve">
+    <value>Votar</value>
+  </data>
+  <data name="sairformulario" xml:space="preserve">
+    <value>Tem certeza que deseja sair sem salvar este formulário?</value>
+  </data>
+  <data name="confirmacao" xml:space="preserve">
+    <value>Confirmação</value>
+  </data>
+  <data name="DadosDeAbate" xml:space="preserve">
+    <value>Dados de abate</value>
+  </data>
+  <data name="AvisoAbateLote" xml:space="preserve">
+    <value>Atenção: após a sincronização do app, os dados de abate só poderão ser editados na plataforma</value>
+  </data>
+  <data name="OLote0FoiFechado" xml:space="preserve">
+    <value>O lote {0} foi fechado!</value>
+  </data>
+  <data name="OrdemDosLotes" xml:space="preserve">
+    <value>Ordem</value>
+  </data>
+  <data name="Buscar" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+  <data name="ProcessandoFormuláriosBaixadosDaNuvem" xml:space="preserve">
+    <value>Processando Formulários Baixados da Nuvem</value>
+  </data>
+  <data name="NenhumaAvaliacaoParametro" xml:space="preserve">
+    <value>Nenhuma avaliação realizada para este parâmetro</value>
+  </data>
+  <data name="SelecioneParametroAvaliacao" xml:space="preserve">
+    <value>Selecione um parâmetro para avaliação</value>
+  </data>
+  <data name="Resposta" xml:space="preserve">
+    <value>Resposta</value>
+  </data>
+  <data name="Registro" xml:space="preserve">
+    <value>Registro</value>
+  </data>
+  <data name="Minimo" xml:space="preserve">
+    <value>Mínimo</value>
+  </data>
+  <data name="Realizado" xml:space="preserve">
+    <value>Realizado</value>
+  </data>
+  <data name="Media" xml:space="preserve">
+    <value>Média</value>
+  </data>
+  <data name="IdadeDoLote" xml:space="preserve">
+    <value>Idade do Lote</value>
+  </data>
+  <data name="QtdAvaliada" xml:space="preserve">
+    <value>Qtd. Avaliada</value>
+  </data>
+  <data name="SelecioneUmParâmetro" xml:space="preserve">
+    <value>Selecione um parâmetro</value>
+  </data>
+  <data name="ErroSincronizarCompartilhe" xml:space="preserve">
+    <value>Erro ao sincronizar dados! Por favor compartilhar o arquivo com o Log de erro com o suporte!</value>
+  </data>
+  <data name="Confirmar" xml:space="preserve">
+    <value>Confirmar</value>
+  </data>
+  <data name="NovoRegistro" xml:space="preserve">
+    <value>Novo Registro</value>
+  </data>
+  <data name="Exibindo" xml:space="preserve">
+    <value>Exibindo</value>
+  </data>
+  <data name="VerRegistros" xml:space="preserve">
+    <value>Ver Registros</value>
+  </data>
+  <data name="RegistrosNesteFormulário" xml:space="preserve">
+    <value>Registros neste formulário</value>
+  </data>
+  <data name="PressioneParaRetornarAUmRegistro" xml:space="preserve">
+    <value>Pressione para retornar a um registro</value>
+  </data>
+  <data name="FormularioRegistros" xml:space="preserve">
+    <value>Formulário com {0} registros salvo com sucesso.</value>
+  </data>
+  <data name="UltimaNaoFoiPreenchido" xml:space="preserve">
+    <value>O registro {0} não foi preenchido e foi descartado.</value>
+  </data>
+  <data name="RegistrosNaoPreenchidosDescartados" xml:space="preserve">
+    <value>{0} registros não preenchidos foram descartados.</value>
+  </data>
+  <data name="Maximo" xml:space="preserve">
+    <value>Máximo</value>
+  </data>
+  <data name="BaixandoAvaliaçõesDoGalpãoDaNuvem" xml:space="preserve">
+    <value>Baixando avaliações do galpão da Nuvem</value>
+  </data>
+  <data name="ProcessandoAvaliacaoesGalpaoNuvem" xml:space="preserve">
+    <value>Processando Avaliações Galpão Baixadas da Nuvem</value>
+  </data>
+  <data name="TirarFoto" xml:space="preserve">
+    <value>Tirar Foto</value>
+  </data>
+  <data name="JaFoiMaximoRespostas" xml:space="preserve">
+    <value>Você já registrou o máximo ({0}) de respostas permitidas!</value>
+  </data>
+  <data name="Saúde" xml:space="preserve">
+    <value>Saúde :</value>
+  </data>
+  <data name="BaixandoModelosDeISIMacro" xml:space="preserve">
+    <value>Baixando Modelos de ISIMacro</value>
+  </data>
+  <data name="SelecioneUmModeloISIMacro" xml:space="preserve">
+    <value>Selecione um Modelo ISIMacro:</value>
+  </data>
+  <data name="Nao" xml:space="preserve">
+    <value>Não</value>
+  </data>
+  <data name="PorFavorSelecionarUmLote" xml:space="preserve">
+    <value>Por favor selecione um lote!</value>
+  </data>
+  <data name="Aviso" xml:space="preserve">
+    <value>Aviso</value>
+  </data>
+  <data name="ErroAoAbrir" xml:space="preserve">
+    <value>Erro ao Abrir!</value>
+  </data>
+  <data name="ConfirmeOFechamentoDolote" xml:space="preserve">
+    <value>Deseja mesmo fechar o lote?</value>
+  </data>
+  <data name="ErroAoFecharLote" xml:space="preserve">
+    <value>Erro ao fechar o lote!</value>
+  </data>
+  <data name="UnidadeEp" xml:space="preserve">
+    <value>Unidade Ep.:</value>
+  </data>
+  <data name="Faltam" xml:space="preserve">
+    <value>Faltam</value>
+  </data>
+  <data name="Atencao" xml:space="preserve">
+    <value>Atenção!</value>
+  </data>
+  <data name="OperaçãoCancelada" xml:space="preserve">
+    <value>Operação Cancelada</value>
+  </data>
+  <data name="Pendente" xml:space="preserve">
+    <value>Pendente</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="CompartilharBancoDeDados" xml:space="preserve">
+    <value>Compartilhar Banco de Dados</value>
+  </data>
+  <data name="ForcarSincronizacaoCompleta" xml:space="preserve">
+    <value>Forçar Sincronização Completa?</value>
+  </data>
+  <data name="Debug" xml:space="preserve">
+    <value>DEBUG</value>
+  </data>
+  <data name="ArquivoBackupNaoEncontrado" xml:space="preserve">
+    <value>Arquivo de backup não encontrado.</value>
+  </data>
+  <data name="ErroAoEnviarBancoDados" xml:space="preserve">
+    <value>Erro ao enviar banco de dados</value>
+  </data>
+  <data name="OverrideGetViewDefaultComponents" xml:space="preserve">
+    <value>Você tem que dar Override do GetViewDefaultComponentsOnAppearing para inicializar os componentes</value>
+  </data>
+  <data name="NenhumLoteTratamento" xml:space="preserve">
+    <value>Nenhum Lote/Tratamento</value>
+  </data>
+  <data name="AltereCriteriosOuAdicioneNovoLote" xml:space="preserve">
+    <value>Altere os critérios de pesquisa ou aperte no + pra adicionar um novo lote.</value>
+  </data>
+  <data name="NenhumModeloDisponivel" xml:space="preserve">
+    <value>Nenhum Modelo Disponível</value>
+  </data>
+  <data name="OperacaoCancelada" xml:space="preserve">
+    <value>Operação Cancelada</value>
+  </data>
+  <data name="NaoFoiPossivelAtualizarDadosGraficos" xml:space="preserve">
+    <value>Os dados dos gráficos não puderam ser atualizados no momento. Por favor, tente novamente mais tarde. Essa falha não afeta o funcionamento</value>
+  </data>
+  <data name="FalhaAoEnviarDados" xml:space="preserve">
+    <value>Não foi possível enviar os dados no momento. Por favor, tente novamente mais tarde. </value>
+  </data>
+  <data name="AindaHa0RegistrosPendentes" xml:space="preserve">
+    <value>Ainda há {0} registros pendentes...</value>
+  </data>
+  <data name="BaixandoAvaliacaoes" xml:space="preserve">
+    <value>Baixando Avaliaçãoes</value>
+  </data>
+  <data name="AbaGeral" xml:space="preserve">
+    <value>Geral</value>
+  </data>
+  <data name="AbaPorIdade" xml:space="preserve">
+    <value>Por idade</value>
+  </data>
+  <data name="Zootecnico_Header_Subtitulo" xml:space="preserve">
+    <value>Preencha os formulários abaixo</value>
+  </data>
+  <data name="Zootecnico_AbaGeral_Dica" xml:space="preserve">
+    <value>Registros gerais por data</value>
+  </data>
+  <data name="Descartar" xml:space="preserve">
+    <value>Descartar</value>
+  </data>
+  <data name="DesejaSalvarAlteracoes" xml:space="preserve">
+    <value>Deseja salvar as alterações?</value>
+  </data>
+  <data name="Zootecnico_AbaPorIdade_Dica" xml:space="preserve">
+    <value>Avaliações ordenadas por idade (dias)</value>
+  </data>
+  <data name="Zootecnico_Formulario_ApartirDe" xml:space="preserve">
+    <value>A partir de...</value>
+  </data>
+  <data name="Zootecnico_IdadeDias" xml:space="preserve">
+    <value>Dias</value>
+  </data>
+  <data name="NenhumRegistroZootecnico" xml:space="preserve">
+    <value>Nenhum registro de zootécnico encontrado</value>
+  </data>
+  <data name="NenhumRegistroManejo" xml:space="preserve">
+    <value>Nenhum registro de manejo encontrado</value>
+  </data>
+  <data name="Manejo_AbaGeral_Dica" xml:space="preserve">
+    <value>Todos os registros</value>
+  </data>
+  <data name="Manejo_AbaPorFase_Dica" xml:space="preserve">
+    <value>Organizado por fase</value>
+  </data>
+  <data name="AbaPorFase" xml:space="preserve">
+    <value>Por fase</value>
+  </data>
+  <data name="AdicionarFoto" xml:space="preserve">
+    <value>Adicionar Foto</value>
+  </data>
+  <data name="Galeria" xml:space="preserve">
+    <value>Galeria</value>
+  </data>
+  <data name="Camera" xml:space="preserve">
+    <value>Câmera</value>
+  </data>
+  <data name="SelecioneUmaFoto" xml:space="preserve">
+    <value>Selecione uma foto</value>
+  </data>
+</root>

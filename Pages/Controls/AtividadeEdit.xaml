@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<controls:ContentPageEdit
+    x:Class="SilvaData.Controls.AtividadeEdit"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:models="clr-namespace:SilvaData.Models"
+    xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
+    Title="{localization:Translate NovoLote}"
+    x:DataType="viewmodels:AtividadeEditViewModel"
+    Background="#0888CD"
+    Shell.PresentationMode="ModalAnimated"
+    Shell.TabBarIsVisible="false">
+
+    <Grid BackgroundColor="{StaticResource QuaseBranco}" RowDefinitions="Auto,*">
+
+        <Grid
+            Grid.Row="0"
+            Margin="0"
+            Padding="10,0"
+            ColumnDefinitions="*,Auto"
+            RowDefinitions="Auto,Auto,Auto">
+
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Offset="0.1" Color="#0888CD" />
+                    <GradientStop Offset="1.0" Color="#26558D" />
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <StackLayout Grid.Row="0" Spacing="0">
+                <Label
+                    Padding="5,0"
+                    FontFamily="Nunito"
+                    FontSize="Large"
+                    HorizontalOptions="Start"
+                    Text="{localization:Translate Atividades}"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+            </StackLayout>
+
+            <StackLayout
+                Grid.RowSpan="3"
+                Grid.Column="1"
+                Orientation="Horizontal"
+                VerticalOptions="Center">
+                <buttons:SfButton
+                    Grid.Column="1"
+                    Command="{Binding BackNowCommand}"
+                    Style="{StaticResource CircleButton}"
+                    Text="{x:Static fontawesome:FontAwesomeIcons.TurnDownLeft}" />
+            </StackLayout>
+
+            <StackLayout
+                Grid.Row="2"
+                Padding="5,0,0,10"
+                Orientation="Horizontal">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Micro"
+                    Text="{localization:Translate DetalhesDaAtividade}"
+                    TextColor="White" />
+            </StackLayout>
+        </Grid>
+
+
+        <Grid Grid.Row="1" Padding="10,0">
+
+            <Grid
+                x:Name="editdados"
+                Grid.Row="0"
+                RowSpacing="0"
+                VerticalOptions="Fill">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <ScrollView x:Name="scrollView" Grid.Row="0">
+                    <StackLayout
+                        Margin="4"
+                        Spacing="10">
+
+                        <Grid Padding="5" IsVisible="{Binding MostraBotoesExtrasAtividate}">
+                            <buttons:SfButton
+                                Grid.Column="0"
+                                BackgroundColor="#4DBA21"
+                                Command="{Binding FinalizarAtividadeCommand}"
+                                CornerRadius="30"
+                                HeightRequest="50">
+                                <buttons:SfButton.Content>
+                                    <DataTemplate>
+                                        <StackLayout
+                                            Padding="5"
+                                            HorizontalOptions="Center"
+                                            Orientation="Horizontal"
+                                            VerticalOptions="Center">
+                                            <Label
+                                                FontFamily="FontAwesomeRegular"
+                                                FontSize="Medium"
+                                                Text="{x:Static fontawesome:FontAwesomeIcons.CircleCheck}"
+                                                TextColor="White"
+                                                VerticalTextAlignment="Center" />
+                                            <Label
+                                                FontSize="Small"
+                                                Text="{localization:Translate FinalizarAtividade}"
+                                                TextColor="White" />
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </buttons:SfButton.Content>
+                            </buttons:SfButton>
+
+                            <buttons:SfButton
+                                Command="{Binding CancelarAtividadeCommand}"
+                                CornerRadius="30"
+                                HeightRequest="50"
+                                Style="{StaticResource sfButtonBar}">
+                                <buttons:SfButton.Content>
+                                    <DataTemplate>
+                                        <StackLayout
+                                            Padding="5"
+                                            HorizontalOptions="Center"
+                                            Orientation="Horizontal"
+                                            VerticalOptions="Center">
+                                            <Label
+                                                FontFamily="FontAwesomeRegular"
+                                                FontSize="Medium"
+                                                Text="{x:Static fontawesome:FontAwesomeIcons.X}"
+                                                TextColor="White"
+                                                VerticalTextAlignment="Center" />
+                                            <Label
+                                                FontSize="Small"
+                                                Text="{localization:Translate CancelarAtividade}"
+                                                TextColor="White" />
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </buttons:SfButton.Content>
+                            </buttons:SfButton>
+                        </Grid>
+
+                        <Label Text="{localization:Translate SobreAAtividade}" TextColor="{StaticResource PrimaryColor}" />
+
+                        <controls:ISITextField
+                            x:Name="titulo"
+                            Title="{localization:Translate Título}"
+                            IsReadOnly="{Binding ReadOnly, Mode=OneWay}"
+                            Text="{Binding Atividade.titulo, Mode=TwoWay}" />
+
+                        <controls:ISITextField
+                            x:Name="descricao"
+                            Title="{localization:Translate Descrição}"
+                            IsReadOnly="{Binding ReadOnly, Mode=OneWay}"
+                            Text="{Binding Atividade.descricao, Mode=TwoWay}" />
+
+                        <controls:UnidadeEpidemiologicaComboBox
+                            x:Name="unidadeComboBox"
+                            Margin="0,0,0,10"
+                            IsObrigatorio="True"
+                            IsReadOnly="{Binding ReadOnly, Mode=OneWay}"
+                            SelectedItem="{Binding SelectedUE, Mode=TwoWay}" />
+
+                        <Label Text="{localization:Translate AtividadeEdit_Datas}" TextColor="{StaticResource PrimaryColor}" />
+
+                        <StackLayout Grid.Column="0" Spacing="0">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Small"
+                                HorizontalTextAlignment="Start"
+                                Text="{localization:Translate AtividadeEdit_Início}"
+                                TextColor="Gray" />
+                            <Grid>
+                                <controls:ISIDatePicker
+                                    x:Name="dataInicio"
+                                    Grid.Column="0"
+                                    Data="{Binding Atividade.dataInicio, Mode=TwoWay}"
+                                    IsReadOnly="{Binding ReadOnly, Mode=OneWay}" />
+                                <controls:ISITimePicker
+                                    x:Name="horaInicio"
+                                    Grid.Column="1"
+                                    Hora="{Binding Atividade.horaInicio, Mode=TwoWay}"
+                                    IsReadOnly="{Binding ReadOnly, Mode=OneWay}" />
+                            </Grid>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="0" Spacing="0">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Small"
+                                HorizontalTextAlignment="Start"
+                                Text="{localization:Translate Prazo}"
+                                TextColor="Gray" />
+                            <Grid>
+                                <controls:ISIDatePicker
+                                    x:Name="dataPrazo"
+                                    Grid.Column="0"
+                                    Data="{Binding Atividade.dataPrazo, Mode=TwoWay}"
+                                    IsReadOnly="{Binding ReadOnly, Mode=OneWay}" />
+                                <controls:ISITimePicker
+                                    x:Name="horaPrazo"
+                                    Grid.Column="1"
+                                    Hora="{Binding Atividade.horaPrazo, Mode=TwoWay}"
+                                    IsReadOnly="{Binding ReadOnly, Mode=OneWay}" />
+                            </Grid>
+                        </StackLayout>
+
+                        <StackLayout
+                            x:Name="Notificacoes"
+                            IsVisible="{Binding EstaInserindo}"
+                            VerticalOptions="Fill">
+
+                            <Grid ColumnDefinitions="*,60">
+                                <Label
+                                    Grid.Column="0"
+                                    Padding="5"
+                                    Text="{localization:Translate Notificações}"
+                                    TextColor="{StaticResource PrimaryColor}"
+                                    VerticalOptions="Center" />
+                                <buttons:SfButton
+                                    x:Name="btAdd"
+                                    Grid.Column="1"
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding NovaNotificacaoCommand}"
+                                    FontFamily="FontAwesomeRegular"
+                                    FontSize="25"
+                                    Text="{x:Static fontawesome:FontAwesomeIcons.CirclePlus}"
+                                    TextColor="{StaticResource PrimaryColor}" />
+                            </Grid>
+
+                            <StackLayout BindableLayout.ItemsSource="{Binding Atividade.Notificacoes}" VerticalOptions="Fill">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="models:AtividadeNotificacao">
+                                        <Grid
+                                            Margin="0,0,0,10"
+                                            ColumnDefinitions="*,*,50"
+                                            RowDefinitions="Auto">
+
+                                            <Border
+                                                Grid.Column="0"
+                                                Margin="2"
+                                                Padding="5,0"
+                                                Stroke="Black"
+                                                StrokeShape="RoundRectangle 8"
+                                                StrokeThickness="1">
+                                                <inputs:SfComboBox
+                                                    x:DataType="x:Null"
+                                                    BackgroundColor="White"
+                                                    ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AtividadeEditViewModel}}, Path=NotificacaoDias}"
+                                                    ShowBorder="False"
+                                                    Text="{Binding Qtde}" />
+                                            </Border>
+
+                                            <Border
+                                                Grid.Column="1"
+                                                Margin="2"
+                                                Padding="5,0"
+                                                Stroke="Black"
+                                                StrokeShape="RoundRectangle 8"
+                                                StrokeThickness="1">
+                                                <inputs:SfComboBox
+                                                    x:DataType="x:Null"
+                                                    ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AtividadeEditViewModel}}, Path=AtividadeNotificacaoTipo}"
+                                                    ShowBorder="False"
+                                                    Text="{Binding Tipo}" />
+                                            </Border>
+
+                                            <buttons:SfButton
+                                                x:Name="btRemove"
+                                                x:DataType="x:Null"
+                                                Grid.Column="2"
+                                                BackgroundColor="Transparent"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AtividadeEditViewModel}}, Path=RemoveNotificacaoCommand}"
+                                                CommandParameter="{Binding .}"
+                                                FontFamily="FontAwesomeRegular"
+                                                FontSize="25"
+                                                Text="{x:Static fontawesome:FontAwesomeIcons.Trash}"
+                                                TextColor="{StaticResource PrimaryColor}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+
+                <controls:ContentPageEdit_Footer x:Name="editfooter" Grid.Row="1" />
+            </Grid>
+
+            <controls:LoadingView
+                x:Name="busyindicator"
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                HorizontalOptions="Fill"
+                IsVisible="{Binding IsBusy}"
+                Text="{localization:Translate Aguarde}"
+                VerticalOptions="Fill" />
+        </Grid>
+    </Grid>
+</controls:ContentPageEdit>

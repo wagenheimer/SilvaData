@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<controls:ValidatableFieldBase
+    x:Class="SilvaData.Controls.ISIDatePicker"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    x:Name="DatePickerEx"
+    x:DataType="controls:ISIDatePicker">
+
+    <Grid
+        Padding="2"
+        BindingContext="{x:Reference DatePickerEx}"
+        RowDefinitions="Auto,Auto"
+        RowSpacing="4">
+
+        <!--  Label do Hint + Asterisco  -->
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto" IsVisible="{Binding Hint, Converter={StaticResource IsNotNullOrEmptyConverter}}">
+            <Label
+                x:Name="labelTitle"
+                Grid.Column="0"
+                Margin="0"
+                Padding="5,0"
+                FontSize="Small"
+                Text="{Binding Hint}"
+                TextColor="{StaticResource PrimaryColor}" />
+            <Label
+                Grid.Column="1"
+                Margin="2,0,0,0"
+                Padding="0"
+                FontAttributes="Bold"
+                FontSize="Small"
+                IsVisible="{Binding IsObrigatorio}"
+                Text="*"
+                TextColor="Red"
+                VerticalTextAlignment="Center" />
+        </Grid>
+
+        <!--  Border com DatePicker  -->
+        <Border
+            x:Name="ControlBorder"
+            Grid.Row="1"
+            Margin="0"
+            Padding="12,0"
+            Background="White"
+            HeightRequest="52"
+            Stroke="{StaticResource PrimaryColor}"
+            StrokeShape="RoundRectangle 8"
+            StrokeThickness="1">
+
+            <Border.Triggers>
+                <DataTrigger
+                    Binding="{Binding HasError, Source={x:Reference DatePickerEx}}"
+                    TargetType="Border"
+                    Value="True">
+                    <Setter Property="Stroke" Value="Red" />
+                    <Setter Property="StrokeThickness" Value="2" />
+                </DataTrigger>
+            </Border.Triggers>
+
+            <Grid ColumnDefinitions="*,44" ColumnSpacing="0">
+                <!--  DatePicker Input  -->
+                <DatePicker
+                    x:Name="dataPicker"
+                    Grid.Column="0"
+                    Background="Transparent"
+                    BackgroundColor="Transparent"
+                    FontSize="Medium"
+                    Format="dd/MM/yyyy"
+                    HeightRequest="52"
+                    IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertBoolean}}"
+                    MaximumDate="{Binding MaximumDate}"
+                    MinimumDate="{Binding MinimumDate}"
+                    TextColor="{Binding IsReadOnly, Converter={StaticResource BoolToColorConverter}}"
+                    VerticalOptions="Center">
+                    <DatePicker.Triggers>
+                        <DataTrigger
+                            Binding="{Binding Data, Source={x:Reference DatePickerEx}}"
+                            TargetType="DatePicker"
+                            Value="{x:Null}">
+                            <Setter Property="TextColor" Value="Transparent" />
+                        </DataTrigger>
+                    </DatePicker.Triggers>
+                </DatePicker>
+
+                <!--  Botão do Calendário  -->
+                <Button
+                    Grid.Column="1"
+                    Padding="0"
+                    BackgroundColor="Transparent"
+                    BorderWidth="0"
+                    Clicked="OnCalendarButtonClicked"
+                    FontFamily="FontAwesomeLight"
+                    FontSize="20"
+                    HeightRequest="52"
+                    HorizontalOptions="Center"
+                    IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertBoolean}}"
+                    Text="{x:Static fontawesome:FontAwesomeIcons.Calendar}"
+                    TextColor="{StaticResource PrimaryColor}"
+                    VerticalOptions="Center"
+                    WidthRequest="44" />
+            </Grid>
+        </Border>
+
+        <!--  Mensagem de Erro  -->
+        <Label
+            x:Name="ErrorLabel"
+            Margin="0"
+            Padding="0"
+            FontSize="Micro"
+            IsVisible="False"
+            Text="Campo obrigatório"
+            TextColor="Red" />
+
+    </Grid>
+
+</controls:ValidatableFieldBase>

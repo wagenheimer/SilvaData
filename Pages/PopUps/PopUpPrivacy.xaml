@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<toolkit:Popup
+    x:Class="SilvaData.Pages.PopUps.PopUpPrivacy"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:TypeArguments="x:Boolean">
+
+    <Border
+        Margin="20"
+        Padding="10"
+        BackgroundColor="{StaticResource White}"
+        HorizontalOptions="Fill"
+        Stroke="{StaticResource Primary}"
+        StrokeShape="RoundRectangle 10"
+        StrokeThickness="1"
+        VerticalOptions="Center">
+
+        <Grid RowDefinitions="Auto,*,Auto" RowSpacing="10">
+            <Label
+                FontAttributes="Bold"
+                FontSize="18"
+                HorizontalOptions="Center"
+                Text="{Binding Titulo}" />
+
+            <ScrollView Grid.Row="1">
+                <Label
+                    Margin="10"
+                    Text="{Binding TextoPrivacidade}"
+                    TextType="Html" />
+            </ScrollView>
+
+            <Grid
+                Grid.Row="2"
+                ColumnDefinitions="*,*"
+                ColumnSpacing="10">
+                <buttons:SfButton
+                    Command="{Binding AceitarCommand}"
+                    Style="{StaticResource ButtonPrimary}"
+                    Text="{localization:Translate Aceitar}" />
+                <buttons:SfButton
+                    Grid.Column="1"
+                    Command="{Binding RecusarCommand}"
+                    Style="{StaticResource ButtonSecondary}"
+                    Text="{localization:Translate Recusar}" />
+            </Grid>
+        </Grid>
+    </Border>
+</toolkit:Popup>

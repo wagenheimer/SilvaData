@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<controls:ValidatableFieldBase
+    x:Class="SilvaData.Controls.ISIDoubleValue"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:numericEntry="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+    x:Name="isiDoubleValue">
+    <StackLayout Padding="2" Spacing="4">
+            
+            <!--  Título + asterisco de obrigatório  -->
+            <Grid ColumnDefinitions="*,Auto">
+                <Label
+                    x:Name="labelTitle"
+                    Grid.Column="0"
+                    Margin="0"
+                    Padding="5,0"
+                    FontSize="Small"
+                    Text="{Binding Title, Source={x:Reference isiDoubleValue}}" />
+                <Label
+                    Grid.Column="1"
+                    Margin="2,0,0,0"
+                    Padding="0"
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                    IsVisible="{Binding IsObrigatorio, Source={x:Reference isiDoubleValue}}"
+                    Text="*"
+                    TextColor="Red"
+                    VerticalTextAlignment="Center" />
+            </Grid>
+
+            <Border
+                Margin="0"
+                Padding="12,0"
+                Background="White"
+                HeightRequest="52"
+                Stroke="{StaticResource PrimaryColor}"
+                StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8" />
+                </Border.StrokeShape>
+
+                <Border.Triggers>
+                    <DataTrigger
+                        Binding="{Binding HasError, Source={x:Reference isiDoubleValue}}"
+                        TargetType="Border"
+                        Value="True">
+                        <Setter Property="Stroke" Value="Red" />
+                        <Setter Property="StrokeThickness" Value="2" />
+                    </DataTrigger>
+                </Border.Triggers>
+
+                <Grid ColumnDefinitions="*,Auto" RowDefinitions="52">
+
+                    <numericEntry:SfNumericEntry
+                        x:Name="SfNumericTextBox"
+                        AllowNull="True"
+                        Background="Transparent"
+                        IsEnabled="{Binding IsReadOnly, Source={x:Reference isiDoubleValue}, Converter={StaticResource InvertBoolean}}"
+                        ShowBorder="False"
+                        ShowClearButton="False"
+                        TextColor="{Binding IsReadOnly, Source={x:Reference isiDoubleValue}, Converter={StaticResource BoolToColorConverter}}"
+                        Value="{Binding Value, Source={x:Reference isiDoubleValue}, Mode=TwoWay}" />
+                </Grid>
+            </Border>
+
+            <Label
+                Margin="0"
+                Padding="12,0"
+                FontSize="Micro"
+                IsVisible="{Binding HelperText, Source={x:Reference isiDoubleValue}, Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                Text="{Binding HelperText, Source={x:Reference isiDoubleValue}}"
+                TextColor="Gray" />
+    </StackLayout>
+</controls:ValidatableFieldBase>

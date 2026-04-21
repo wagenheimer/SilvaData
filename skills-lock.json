@@ -1,0 +1,390 @@
+{
+  "version": 1,
+  "skills": {
+    "syncfusion-maui-accordion": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "d1a6df14bac9d1a977c9073529807451173807fe855e8e24c10ff26053027c88"
+    },
+    "syncfusion-maui-ai-assistview": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "a06368f03e8d915cd7427a03147a91049a90a301c3bf3a34eba06fb08567ed25"
+    },
+    "syncfusion-maui-autocomplete": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "73ddd9a80d5e7c0ce38ada03664b3b32a9775a1bdd2f23494c43c956a624c8e9"
+    },
+    "syncfusion-maui-avatar-view": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "f54222afe3af111979435f46e933bce6c0fb0d7190a240df9642f876aedc2fd4"
+    },
+    "syncfusion-maui-backdrop": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "d659049806dd565953fa760490e7131aea7e1684b24694e59d21d93786064005"
+    },
+    "syncfusion-maui-badge-view": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "e593689737f304bcbfc0bf42693671fa253bd14320970bd76096a54a26a03d8e"
+    },
+    "syncfusion-maui-barcode-generator": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "2756df120e47e628387471eacaea40fef52e86cb7270e41ad5c06c46d7e381f8"
+    },
+    "syncfusion-maui-busy-indicator": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "6971b0f207618f3e51273723c5c4005683fea9600320c38b8856c5e0b7c1de1e"
+    },
+    "syncfusion-maui-button": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "671b4963f2d243788588d4dc725156f26ad4627304353dd4a46b748b27dc12d2"
+    },
+    "syncfusion-maui-calendar": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "4190a02ccc361e74028574b819f2c235d32561a00fd19a7c32eb9908e49c9801"
+    },
+    "syncfusion-maui-cards": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "8dd0873ec6c78829b2131a70f5e9f248b6d7001cf44eba4a121054b67e525350"
+    },
+    "syncfusion-maui-carousel": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "b508e55585da4e9a7ed9d68bec9227c3c7b16f51bdb964a254595302e1aa96d0"
+    },
+    "syncfusion-maui-cartesian-charts": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "5e5087bab75c970fc94cf1e2f4b1ac5050e6a8c8dfcda167e4ebcddd9e0c38f6"
+    },
+    "syncfusion-maui-chat": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "c402d4d7c491bd7d6d74b72c989fff0285236a3a1969222b3c1c6c57d43e6aaf"
+    },
+    "syncfusion-maui-checkbox": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "e86b7fbc135bf34efb36bf9d49053130397ad6858dcc423cc4441d130e9280fe"
+    },
+    "syncfusion-maui-chips": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "89aff40e2eb5b42f535b3cedd53247744af6f1b1d8f2e77899d3085c858db869"
+    },
+    "syncfusion-maui-circular-charts": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "556ca957976295a76c9441c57334061d0066fdb95dc73e9e2e5d51bc112822da"
+    },
+    "syncfusion-maui-circular-progressbar": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "44ed3017c63d9234ba84edeb97ad31167d63be2090e2c7252d562bb37231ed8b"
+    },
+    "syncfusion-maui-color-picker": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "fa24c37af6197788890c19f8470c02dc380323af3f59712ede75bd5b1e089fd0"
+    },
+    "syncfusion-maui-combobox": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "97ce3f064f33b9aeaae80315b86f62de82a9ee637489bc789ab03f6cbeba6157"
+    },
+    "syncfusion-maui-dataform": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "158d383203f1d2741841cd035e05c72ae7988864c7a5ed7b5783014a31d30cf3"
+    },
+    "syncfusion-maui-datagrid": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "e61b171f9c05d9adcf68b26302f0a718cb3533df444eaf38f25e3ab918412763"
+    },
+    "syncfusion-maui-date-picker": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "37c54c317e70c1d0284b6419156632f59bc4f6c660e6c50d5fdbcb4d59b62097"
+    },
+    "syncfusion-maui-date-time-picker": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "1131458909f297692ea08922c5a5a79b0a5b49c8381639e6da36cb0359c3463b"
+    },
+    "syncfusion-maui-date-time-range-selector": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "d3a61834e87a92b5a6cab5c9b5219d1642b4db5bab5b5bffaa5bba4686f9efe8"
+    },
+    "syncfusion-maui-date-time-range-slider": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "97511029293f51864da1ed668fd813fd42722c83ed42dabe196b6752353813ae"
+    },
+    "syncfusion-maui-date-time-slider": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "20a5ff61bf4cf950dd43b6d065b8b1dd6a9073bf1c38706430d78c2a3c70e136"
+    },
+    "syncfusion-maui-digital-gauge": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "a011c3454e7133997554586d7d279c9011abeced15f0747575fc863d07b4b7af"
+    },
+    "syncfusion-maui-docklayout": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "853f454fb1e114faa092690a1b0ef3ac43748d471928d1166963eb2fc8c40014"
+    },
+    "syncfusion-maui-effects-view": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "0b044bd2f49ccf5011a9200f259d94709cbcbe8c350b43c5f69a9e300d942538"
+    },
+    "syncfusion-maui-expander": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "c65816a5873482a457d8c995def1c2023cf1f4e026b8f368a7a77d17fc1dd7b1"
+    },
+    "syncfusion-maui-funnel-charts": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "179ed03531a22a51e50d778348d7e7550be783a0d9b622c36eb6becd42ec61f7"
+    },
+    "syncfusion-maui-getting-started": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "15cccce83e2325d46b2cf98208ae3fe24e247bfaa244eb8a5c1f04dc41a7c548"
+    },
+    "syncfusion-maui-image-editor": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "97e977b4eb1d61cd57b06cd4912dcf10ccd27ff0c0b32db2674a76ae09214666"
+    },
+    "syncfusion-maui-kanban-board": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "3734a922e9d4e7da0d10cb9cb15f6ea8e951de8c4d2710c9d7fa44be3cabb088"
+    },
+    "syncfusion-maui-licensing": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "91d69385708727fe6ecc5dab0fb7cfdd2a07201bb64fdbace2bd8f8c3a56c7c0"
+    },
+    "syncfusion-maui-linear-gauge": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "ee37da9eda3f3db6d71ec70382f3c51b4b1d3542d6cbe96495b0f2ed5246652b"
+    },
+    "syncfusion-maui-linear-progressbar": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "69287cd71d14e347159a1cc0a15ebfbb48b4c1f0ceece745d5d3d947df400615"
+    },
+    "syncfusion-maui-listview": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "39b83e984333cd68b26b433e2187a53a4a23e11a799c61fc06f390007e383242"
+    },
+    "syncfusion-maui-maps": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "8eba34dcefe1bc12491a3be28a3d9ea1013cef402903837542e007de01a3d974"
+    },
+    "syncfusion-maui-markdown-viewer": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "94dcb9bd12fcbaca6ce788005901c7f55ae04a51d4b27f01cff57e83bdf0db39"
+    },
+    "syncfusion-maui-masked-entry": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "28cd7c291fd4048f4547e01bb961ebfd0820fa69dfd068ae79ac8c5e303892f1"
+    },
+    "syncfusion-maui-migration": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "70d1246b8c347fa857eb0607b88db86d9b606071da518d5cfd22b3499f341100"
+    },
+    "syncfusion-maui-navigation-drawer": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "d7660f0eb48b83b4d4f6b7c0905e5403efbd8be7eef7aa5dcacd889a41c220cb"
+    },
+    "syncfusion-maui-numeric-entry": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "35d2f19b17e0c5c0bb851954f93edce7264554a61822a542c80b5385fe645086"
+    },
+    "syncfusion-maui-parallax-view": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "e8a598d0d46fcae727125a5694836dc21b02911429ff06c5aa0c86351f1190d7"
+    },
+    "syncfusion-maui-picker": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "a52694f08bd3779e303ca86daa8391ebfed4aeee420ceac27df6c7bbef996212"
+    },
+    "syncfusion-maui-polar-charts": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "e61fe6248ae66117f3e07c4e0b84ec22ba9ac205027b2f8731322aa497c98b35"
+    },
+    "syncfusion-maui-popup": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "f3cf43eebc6563837b92219b1e29a8f9ed6b8463eec78b277956755b73ebc08e"
+    },
+    "syncfusion-maui-pull-to-refresh": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "c47e7c893f14224f55175e682185048f49316b1fada7d8f3c8ef5b1488183a60"
+    },
+    "syncfusion-maui-pyramid-charts": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "91c43f2791fdcd1b749709c06e1cc50c4172996a185606a9af53f88607964304"
+    },
+    "syncfusion-maui-radial-gauge": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "6cb2ab00d3d8fae248b75d3f1d8af0abd8f53de883be079b32b56a505f08f0c7"
+    },
+    "syncfusion-maui-radial-menu": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "59e9fcbafe138544059d79b15f7175f1de7543564919e25d33444414100292a0"
+    },
+    "syncfusion-maui-radio-button": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "a09b1aca6dcb058ecd3eb0a036506c9ee613eaecf5b737f988d10cc1a0c06f8a"
+    },
+    "syncfusion-maui-range-selector": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "3ed0de153cbca4520d8cc2b9112c66b62b964c478ba619585f2967c7e38964b8"
+    },
+    "syncfusion-maui-range-slider": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "26fbc1288a1b67370b50d38e8610f33358a60f9070a8caa4116a3591a0114e11"
+    },
+    "syncfusion-maui-rating": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "d7198d03e40b06709ab4a899d9b2370d5e59d027d32415ddaeaca3c3b39f6550"
+    },
+    "syncfusion-maui-rich-text-editor": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "ae40204687b2831f4f9ff6d43ba77d44d2729aff798d28734adba8f479d37f4e"
+    },
+    "syncfusion-maui-rotator": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "b758f85aafb457b6f16205ab6f9f17445beb12d43263ef37040a4b8ef0e59eb1"
+    },
+    "syncfusion-maui-scheduler": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "80f88191f549d4c894f7f6f1f67334ee2d526244bace7c87f2298a23bdbbf091"
+    },
+    "syncfusion-maui-segmented-control": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "acad1e11d45d05c84b30a62ce5c58e801cc2e32710235627447d43d3907c8b7d"
+    },
+    "syncfusion-maui-shimmer": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "babaceec68c67d4796e1f5981d51358105d36b6ec01895b39a6f6338436cdafc"
+    },
+    "syncfusion-maui-signature-pad": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "39850a69ad09dc06e43900cf06cec006338dcd1b88e05453db1b19b800b565ef"
+    },
+    "syncfusion-maui-slider": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "c5b1e4b7f9f7a2de6db21fcd72e10181ebf73d813049f18f240936295567b22b"
+    },
+    "syncfusion-maui-smart-datagrid": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "4efa8914a2788609d12c3f2927b3370a6e347f0319c120d2f97b7ed87f360715"
+    },
+    "syncfusion-maui-smart-scheduler": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "2db2e1ad990828fdfba562d265727bf23c7ce60cb9b49295dead5a6b49398970"
+    },
+    "syncfusion-maui-smart-text-editor": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "39d0f425e971718cf64c8f8c0ade370f4fe3235de3b33f9f0148102aafdf5848"
+    },
+    "syncfusion-maui-step-progressbar": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "f769e55bc23146b369eab5b6a9e235094ae14c269bd13ae4bc52aeba226a9d5e"
+    },
+    "syncfusion-maui-sunburst-charts": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "41ad736c08bf0dc24590f7b0b15f8990e6c83490ec8965aca9dfa5ae0f52c9fa"
+    },
+    "syncfusion-maui-switch": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "a0967606ee16ee266ebe73f2149e00556554d4d3b2a748f9ad2fbc3e85ca3822"
+    },
+    "syncfusion-maui-tab-view": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "cc56b20364d5efb9b796e3918bf8cbfecfb4ff60d2c7938063b745549efa6e1b"
+    },
+    "syncfusion-maui-text-input-layout": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "026981d856ebe24427a4ab518ecb540fdd4fa7728a2e8b0eeac780e43a307906"
+    },
+    "syncfusion-maui-theming": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "8aa6cdab1f3da23d2249e014032222c7d2f120da604f5af318a44f0f33b7d0e6"
+    },
+    "syncfusion-maui-time-picker": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "4930801dc1856ed23b424f1559e06b402b49541756a0c80f956e21f72666139a"
+    },
+    "syncfusion-maui-toolbar": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "6ba38938ad44efb4042c1ebbed13d2682a6dfcac2908b23315ef44f72057f228"
+    },
+    "syncfusion-maui-treemap": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "8e6d2134eef0edf1845b1489e9120271cc4fd6468c32cfad65aa8d12e18798d3"
+    },
+    "syncfusion-maui-treeview": {
+      "source": "syncfusion/maui-ui-components-skills",
+      "sourceType": "github",
+      "computedHash": "b14109cfb1caf4d5ce74644220aff93027eb11c7a922abcea0fca1f8daf089cb"
+    }
+  }
+}

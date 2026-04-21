@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SilvaData.Pages.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:core="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+    xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
+    xmlns:pageModels="clr-namespace:SilvaData.PageModels"
+    xmlns:sf="clr-namespace:Syncfusion.Maui.Toolkit.TabView;assembly=Syncfusion.Maui.Toolkit"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:views="clr-namespace:SilvaData.Pages"
+    x:Name="mainPage"
+    x:DataType="pageModels:MainPageModel"
+    Background="#0888CD"
+    Shell.NavBarIsVisible="false">
+
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource Primary}" StatusBarStyle="LightContent" />
+    </ContentPage.Behaviors>
+
+    <ContentPage.Resources>
+        <Style x:Key="BaseTabStyle" TargetType="sf:SfTabItem">
+            <Setter Property="ImageSize" Value="35" />
+        </Style>
+        <Style
+            x:Key="DashboardTabStyle"
+            BasedOn="{StaticResource BaseTabStyle}"
+            TargetType="sf:SfTabItem">
+            <Setter Property="ImageSource" Value="dashboard.png" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup>
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="ImageSource" Value="dashboard.png" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="ImageSource" Value="dashboardselected.png" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+        <Style
+            x:Key="LotesTabStyle"
+            BasedOn="{StaticResource BaseTabStyle}"
+            TargetType="sf:SfTabItem">
+            <Setter Property="ImageSource" Value="lotes.png" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup>
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="ImageSource" Value="lotes.png" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="ImageSource" Value="lotesselected.png" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+        <Style
+            x:Key="SyncTabStyle"
+            BasedOn="{StaticResource BaseTabStyle}"
+            TargetType="sf:SfTabItem">
+            <Setter Property="ImageSource" Value="sync.png" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup>
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="ImageSource" Value="sync.png" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="ImageSource" Value="syncselected.png" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+        <Style
+            x:Key="ConfigTabStyle"
+            BasedOn="{StaticResource BaseTabStyle}"
+            TargetType="sf:SfTabItem">
+            <Setter Property="ImageSource" Value="config.png" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup>
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="ImageSource" Value="config.png" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="ImageSource" Value="configselected.png" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+        <Style
+            x:Key="SuporteTabStyle"
+            BasedOn="{StaticResource BaseTabStyle}"
+            TargetType="sf:SfTabItem">
+            <Setter Property="ImageSource" Value="suporte.png" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup>
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="ImageSource" Value="suporte.png" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="ImageSource" Value="suporteselected.png" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid Background="{StaticResource QuaseBranco}" RowDefinitions="*">
+
+
+        <sf:SfTabView
+            x:Name="mainTabView"
+            Grid.Row="0"
+            HeaderDisplayMode="Image"
+            IndicatorBackground="{SolidColorBrush Color={StaticResource Primary}}"
+            IsVisible="{Binding IsBusy, Converter={StaticResource InvertBoolean}}"
+            SelectionChanged="OnTabSelectionChanged"
+            TabBarHeight="50"
+            TabBarPlacement="Bottom"
+            VerticalOptions="Fill">
+
+            <sf:SfTabItem Header="Dashboard" Style="{StaticResource DashboardTabStyle}">
+                <controls:DashboardView />
+            </sf:SfTabItem>
+            
+            <sf:SfTabItem Header="Lotes" Style="{StaticResource LotesTabStyle}">
+                <controls:LoteView />
+            </sf:SfTabItem>
+            <sf:SfTabItem
+              Header="{localization:Translate Sincronização}"
+              Style="{StaticResource SyncTabStyle}">
+                <controls:SincronizacaoPendentesView />
+            </sf:SfTabItem>
+            <sf:SfTabItem Header="Configurações" Style="{StaticResource ConfigTabStyle}">
+                <controls:ConfigView />
+            </sf:SfTabItem>
+            <sf:SfTabItem Header="Suporte" Style="{StaticResource SuporteTabStyle}">
+                <controls:SuportePage />
+            </sf:SfTabItem>
+
+        </sf:SfTabView>
+
+        <Grid
+            Grid.Row="0"
+            IsVisible="{Binding IsBusy}">
+
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Offset="0.1" Color="#26558D" />
+                    <GradientStop Offset="1.0" Color="#0888CD" />
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="40">
+                
+                <!-- Large Centered Logo -->
+                <Image
+                    Source="isilogo.png"
+                    WidthRequest="250"
+                    HeightRequest="250"
+                    Aspect="AspectFit"
+                    HorizontalOptions="Center">
+                    <Image.Shadow>
+                        <Shadow Brush="Black" Opacity="0.3" Radius="20" Offset="0,10" />
+                    </Image.Shadow>
+                </Image>
+
+                <!-- Centered Loading Progress -->
+                <VerticalStackLayout Spacing="15" HorizontalOptions="Center">
+                    <ActivityIndicator
+                        IsRunning="True"
+                        Color="White"
+                        HorizontalOptions="Center"
+                        HeightRequest="40"
+                        WidthRequest="40" />
+                    <Label
+                        Text="{Binding LoadingText}"
+                        TextColor="White"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        HorizontalTextAlignment="Center"
+                        HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </Grid>
+
+    </Grid>
+</ContentPage>

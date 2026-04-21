@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="SilvaData.Controls.SincronizacaoPendentesView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:models="clr-namespace:SilvaData.Models"
+    xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
+    x:Name="DadosSyncViewRoot"
+    x:DataType="viewModels:SincronizacaoPendentesViewModel"
+    Background="{StaticResource QuaseBranco}">
+
+    <RefreshView
+        Command="{Binding AtualizaListaAlteracoesCommand}"
+        IsRefreshing="{Binding IsRefreshing}"
+        RefreshColor="{StaticResource PrimaryColor}">
+
+        <Grid RowDefinitions="Auto,*">
+
+            <!--  Header  -->
+            <Grid
+                Grid.Row="0"
+                Margin="0"
+                Padding="5,10"
+                ColumnDefinitions="*,Auto"
+                RowDefinitions="Auto"
+                Style="{StaticResource HeaderGradient}">
+
+                <HorizontalStackLayout
+                    Grid.Row="0"
+                    Spacing="0"
+                    VerticalOptions="Center">
+                    <Image
+                        Margin="5,0,0,0"
+                        Aspect="AspectFit"
+                        HeightRequest="40"
+                        HorizontalOptions="Center"
+                        Source="isilogo.png">
+                        <Image.Shadow>
+                            <Shadow
+                                Brush="White"
+                                Opacity="0.5"
+                                Radius="10"
+                                Offset="0,1" />
+                        </Image.Shadow>
+                    </Image>
+                    <Label
+                        Margin="5,0,2,0"
+                        Padding="5,0"
+                        FontAttributes="Bold"
+                        FontFamily="Nunito"
+                        FontSize="Large"
+                        HorizontalTextAlignment="Start"
+                        Text="ISI Sys"
+                        TextColor="White"
+                        VerticalOptions="Center" />
+                    <Label
+                        Margin="0,6"
+                        FontAttributes="Bold"
+                        FontSize="Micro"
+                        HorizontalTextAlignment="Start"
+                        Text="from ISI Institute"
+                        TextColor="White"
+                        VerticalOptions="End" />
+                </HorizontalStackLayout>
+            </Grid>
+
+
+            <!--  ??? Grid em vez de ScrollView + ListView ???  -->
+            <Grid
+                Grid.Row="1"
+                Padding="20"
+                RowDefinitions="Auto,Auto,*,Auto"
+                RowSpacing="20">
+
+                <!--  ??? ROW 0: HEADER (fixo no topo) ???  -->
+                <VerticalStackLayout Grid.Row="0" Spacing="12">
+                    <Label
+                        FontAttributes="Bold"
+                        FontFamily="Nunito"
+                        FontSize="24"
+                        Text="{localization:Translate SincronizarDados}"
+                        TextColor="{StaticResource PrimaryColor}" />
+
+                    <Label
+                        FontSize="14"
+                        Opacity="0.8"
+                        Text="{localization:Translate SincronizarDadosExplicacao}"
+                        TextColor="{StaticResource SecondaryColor}" />
+                </VerticalStackLayout>
+
+                <!--  ??? ROW 1: Título da Lista ???  -->
+                <Border
+                    Grid.Row="1"
+                    Padding="16,12"
+                    Background="White"
+                    StrokeShape="RoundRectangle 16"
+                    StrokeThickness="0">
+
+                    <Border.Shadow>
+                        <Shadow
+                            Brush="Black"
+                            Opacity="0.08"
+                            Radius="12"
+                            Offset="0,4" />
+                    </Border.Shadow>
+
+                    <HorizontalStackLayout Spacing="12">
+                        <Label
+                            FontFamily="FontAwesomeSolid"
+                            FontSize="18"
+                            Text="&#xf0c1;"
+                            TextColor="{StaticResource PrimaryColor}"
+                            VerticalTextAlignment="Center" />
+
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            Text="{localization:Translate ListaDeMudançasIdentificadas}"
+                            TextColor="{StaticResource PrimaryColor}"
+                            VerticalTextAlignment="Center" />
+
+                        <!--  Badge com total  -->
+                        <Border
+                            Padding="8,4"
+                            Background="{StaticResource PrimaryColor}"
+                            IsVisible="{Binding TemAlteracoes}"
+                            StrokeShape="RoundRectangle 10">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="13"
+                                Text="{Binding ListaAlteracoes.Count}"
+                                TextColor="White" />
+                        </Border>
+                    </HorizontalStackLayout>
+                </Border>
+
+                <!--  ??? ROW 2: SfListView (ocupa o espaço restante com SCROLL PRÓPRIO) ???  -->
+                <Border
+                    Grid.Row="2"
+                    Padding="0"
+                    Background="White"
+                    StrokeShape="RoundRectangle 16"
+                    StrokeThickness="0">
+
+                    <Border.Shadow>
+                        <Shadow
+                            Brush="Black"
+                            Opacity="0.08"
+                            Radius="12"
+                            Offset="0,4" />
+                    </Border.Shadow>
+
+                    <Grid>
+                        <!--  ??? SfListView COM scroll (IsScrollingEnabled=True) ???  -->
+                        <listView:SfListView
+                            IsScrollingEnabled="True"
+                            ItemSize="80"
+                            ItemSpacing="0"
+                            ItemsSource="{Binding ListaAlteracoes}"
+                            SelectionMode="None">
+
+                            <listView:SfListView.ItemTemplate>
+                                <DataTemplate x:DataType="models:Alteracao">
+                                    <Border
+                                        Padding="16,14"
+                                        Background="Transparent"
+                                        StrokeShape="Rectangle"
+                                        StrokeThickness="0">
+
+                                        <!--  Linha divisória  -->
+                                        <Border.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding .}"
+                                                TargetType="Border"
+                                                Value="{x:Null}">
+                                                <Setter Property="Background" Value="Transparent" />
+                                            </DataTrigger>
+                                        </Border.Triggers>
+
+                                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+
+                                            <!--  Ícone  -->
+                                            <Border
+                                                Grid.Column="0"
+                                                Padding="1"
+                                                Background="#F5F5F5"
+                                                StrokeShape="RoundRectangle 10"
+                                                VerticalOptions="Center">
+                                                <Label
+                                                    FontFamily="FontAwesomeSolid"
+                                                    FontSize="16"
+                                                    Text="&#xf15c;"
+                                                    TextColor="{StaticResource PrimaryColor}" />
+                                            </Border>
+
+                                            <!--  Nome da tabela  -->
+                                            <Label
+                                                Grid.Column="1"
+                                                FontSize="15"
+                                                Text="{Binding TabelaTexto}"
+                                                TextColor="#212121"
+                                                VerticalTextAlignment="Center" />
+
+                                            <!--  Badge com quantidade  -->
+                                            <Border
+                                                Grid.Column="2"
+                                                Padding="12,6"
+                                                Background="{StaticResource PrimaryColor}"
+                                                StrokeShape="RoundRectangle 10"
+                                                VerticalOptions="Center">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="15"
+                                                    HorizontalTextAlignment="Center"
+                                                    Text="{Binding Qtde}"
+                                                    TextColor="White" />
+                                            </Border>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </listView:SfListView.ItemTemplate>
+
+                            <!--  ??? Empty View ???  -->
+                            <listView:SfListView.EmptyView>
+                                <VerticalStackLayout
+                                    Padding="40,60"
+                                    HorizontalOptions="Center"
+                                    Spacing="16"
+                                    VerticalOptions="Fill">
+
+                                    <Border
+                                        Padding="24"
+                                        Background="#E8F5E9"
+                                        HorizontalOptions="Center"
+                                        StrokeShape="RoundRectangle 60"
+                                        StrokeThickness="0"
+                                        VerticalOptions="Center">
+
+
+                                        <Label
+                                            FontFamily="FontAwesomeSolid"
+                                            FontSize="48"
+                                            HorizontalTextAlignment="Center"
+                                            Text="&#xf00c;"
+                                            TextColor="#4CAF50" />
+                                    </Border>
+
+                                    <VerticalStackLayout Spacing="6">
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontSize="16"
+                                            HorizontalTextAlignment="Center"
+                                            Text="{localization:Translate NenhumaMudançaPendenteDeSincronização}"
+                                            TextColor="#212121" />
+
+                                        <Label
+                                            FontSize="13"
+                                            HorizontalTextAlignment="Center"
+                                            Opacity="0.7"
+                                            Text="Todos os dados estão sincronizados"
+                                            TextColor="#757575" />
+                                    </VerticalStackLayout>
+                                </VerticalStackLayout>
+                            </listView:SfListView.EmptyView>
+                        </listView:SfListView>
+
+                        <!--  ??? Loading Overlay ???  -->
+                        <Border
+                            Background="#F0FFFFFF"
+                            IsVisible="{Binding IsBusy}"
+                            StrokeThickness="0">
+
+                            <VerticalStackLayout
+                                HorizontalOptions="Center"
+                                Spacing="12"
+                                VerticalOptions="Center">
+
+                                <ActivityIndicator
+                                    HeightRequest="48"
+                                    IsRunning="True"
+                                    WidthRequest="48"
+                                    Color="{StaticResource PrimaryColor}" />
+
+                                <Label
+                                    FontSize="14"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding AguardeTexto}"
+                                    TextColor="{StaticResource PrimaryColor}" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <!--  ??? ROW 3: Botões de Ação (fixo no fundo) ???  -->
+                <VerticalStackLayout Grid.Row="3" Spacing="12">
+
+                    <!--  Botões de Upload  -->
+                    <Grid
+                        ColumnDefinitions="*,*"
+                        ColumnSpacing="12"
+                        IsVisible="{Binding IsBusy, Converter={StaticResource InvertBoolean}}">
+
+                        <buttons:SfButton
+                            Grid.Column="0"
+                            Padding="0"
+                            Background="{StaticResource PrimaryColor}"
+                            Command="{Binding UploadNowCommand}"
+                            CornerRadius="14"
+                            HeightRequest="56"
+                            IsEnabled="{Binding TemAlteracoes}"
+                            Style="{StaticResource PrimaryButton}"
+                            Text="{localization:Translate SincronizarAgora}"
+                            TextColor="White"
+                            VerticalOptions="Center">
+                            <buttons:SfButton.Shadow>
+                                <Shadow
+                                    Brush="Black"
+                                    Opacity="0.15"
+                                    Radius="8"
+                                    Offset="0,3" />
+                            </buttons:SfButton.Shadow>
+                        </buttons:SfButton>
+
+                        <buttons:SfButton
+                            Grid.Column="1"
+                            Padding="0"
+                            Background="#607D8B"
+                            Command="{Binding AtualizaListaAlteracoesCommand}"
+                            CornerRadius="14"
+                            HeightRequest="56"
+                            Style="{StaticResource PrimaryButton}"
+                            Text="{localization:Translate BuscarAtualizações}"
+                            TextColor="White"
+                            VerticalOptions="Center">
+                            <buttons:SfButton.Shadow>
+                                <Shadow
+                                    Brush="Black"
+                                    Opacity="0.15"
+                                    Radius="8"
+                                    Offset="0,3" />
+                            </buttons:SfButton.Shadow>
+                        </buttons:SfButton>
+                    </Grid>
+
+                    <!--  Card: Última Sincronização + Baixar Dados  -->
+                    <Border
+                        Padding="20,16"
+                        Background="White"
+                        IsVisible="{Binding TemAlteracoes, Converter={StaticResource InvertBoolean}}"
+                        StrokeShape="RoundRectangle 16"
+                        StrokeThickness="0">
+
+                        <Border.Shadow>
+                            <Shadow
+                                Brush="Black"
+                                Opacity="0.08"
+                                Radius="12"
+                                Offset="0,4" />
+                        </Border.Shadow>
+
+                        <VerticalStackLayout Spacing="16">
+
+                            <!--  Última Sincronização  -->
+                            <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                                <Label
+                                    FontFamily="FontAwesomeSolid"
+                                    FontSize="14"
+                                    Text="&#xf017;"
+                                    TextColor="#1976D2"
+                                    VerticalTextAlignment="Center" />
+
+                                <Label
+                                    FontSize="13"
+                                    Text="{localization:Translate ÚltimaSincronização}"
+                                    TextColor="{StaticResource SecondaryColor}"
+                                    VerticalTextAlignment="Center" />
+
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="14"
+                                    Text="{Binding LastSyncronization}"
+                                    TextColor="#1976D2"
+                                    VerticalTextAlignment="Center" />
+                            </HorizontalStackLayout>
+
+                            <!--  Botão: Baixar Dados  -->
+                            <buttons:SfButton
+                                Padding="0"
+                                Background="{StaticResource PrimaryColor}"
+                                Command="{Binding DownloadNowCommand}"
+                                CornerRadius="14"
+                                HeightRequest="52"
+                                IsVisible="{Binding IsBusy, Converter={StaticResource InvertBoolean}}"
+                                Style="{StaticResource PrimaryButton}"
+                                Text="{localization:Translate BuscarNovosDadosNaNuvem}"
+                                TextColor="White">
+                                <buttons:SfButton.Shadow>
+                                    <Shadow
+                                        Brush="Black"
+                                        Opacity="0.15"
+                                        Radius="8"
+                                        Offset="0,3" />
+                                </buttons:SfButton.Shadow>
+                            </buttons:SfButton>
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+            </Grid>
+        </Grid>
+    </RefreshView>
+</ContentView>

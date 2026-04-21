@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SilvaData.Controls.LoteISIMacroView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
+    x:DataType="viewModels:LoteISIMacroViewModel"
+    Background="#0888CD">
+
+    <Grid
+        Background="{StaticResource QuaseBranco}"
+        RowDefinitions="Auto,Auto,*"
+        RowSpacing="0">
+
+        <Grid
+            Grid.Row="0"
+            Margin="0"
+            Padding="10,0"
+            ColumnDefinitions="*,Auto"
+            RowDefinitions="Auto,Auto,Auto"
+            Style="{StaticResource HeaderGradient}">
+
+            <VerticalStackLayout Grid.Row="0" Spacing="0">
+                <Label
+                    Padding="5,0,0,5"
+                    FontSize="Micro"
+                    HorizontalTextAlignment="Start"
+                    Text="{Binding Lote.DescricaoCompleta}"
+                    TextColor="White" />
+
+                <Label
+                    Padding="5,0"
+                    FontFamily="Nunito"
+                    FontSize="Large"
+                    HorizontalOptions="Start"
+                    Text="{Binding Title}"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+            </VerticalStackLayout>
+
+            <HorizontalStackLayout
+                Grid.RowSpan="3"
+                Grid.Column="1"
+                VerticalOptions="Center">
+                <buttons:SfButton
+                    Command="{Binding VoltarCommand}"
+                    Style="{StaticResource CircleButton}"
+                    Text="{x:Static fontawesome:FontAwesomeIcons.TurnDownLeft}" />
+            </HorizontalStackLayout>
+        </Grid>
+
+        <Grid
+            Grid.Row="1"
+            IsVisible="{Binding IsBusy, Converter={StaticResource InvertBoolean}}"
+            RowDefinitions="50,Auto">
+
+            <Grid Grid.Row="0" Background="#26558D" />
+
+            <Border
+                Grid.Row="1"
+                Margin="10,0"
+                Padding="0"
+                Background="White"
+                StrokeShape="RoundRectangle 30"
+                TranslationY="-50">
+
+                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto">
+                    <Label
+                        Grid.Column="0"
+                        Padding="20,0,0,0"
+                        FontSize="Small"
+                        HorizontalTextAlignment="Start"
+                        Text="{localization:Translate ISIScoreMédioDoLote}"
+                        TextColor="{StaticResource ScoreTextColor}"
+                        VerticalOptions="Center" />
+
+                    <controls:CirculoScoreLote
+                        x:Name="CirculoScore"
+                        Grid.Column="1"
+                        HeightRequest="120"
+                        HorizontalOptions="End"
+                        Valor="{Binding Lote.ISIMacroScoreMedio}"
+                        WidthRequest="150" />
+                </Grid>
+            </Border>
+        </Grid>
+
+        <listView:SfListView
+            Grid.Row="2"
+            Margin="0,-50,0,0"
+            HeaderSize="60"
+            IsScrollingEnabled="True"
+            IsVisible="{Binding IsBusy, Converter={StaticResource InvertBoolean}}"
+            ItemSize="120"
+            ItemSpacing="5"
+            ItemsSource="{Binding IsiMacroList}"
+            SelectionMode="None"
+            VerticalOptions="Fill">
+
+            <listView:SfListView.ItemsLayout>
+                <listView:GridLayout SpanCount="2" />
+            </listView:SfListView.ItemsLayout>
+
+            <listView:SfListView.HeaderTemplate>
+                <DataTemplate>
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                        <Label
+                            Margin="5,0"
+                            FontAttributes="Bold"
+                            FontSize="Small"
+                            Text="{localization:Translate Saúde}"
+                            VerticalOptions="Center" />
+                        <Grid
+                            Padding="5,0,10,0"
+                            ColumnDefinitions="Auto,Auto,Auto"
+                            ColumnSpacing="1"
+                            RowSpacing="0">
+
+                            <HorizontalStackLayout Grid.Column="0" Margin="0,0,10,0">
+                                <Ellipse
+                                    Fill="#48ba00"
+                                    HeightRequest="20"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    WidthRequest="20" />
+                                <Label
+                                    Padding="5,0,0,0"
+                                    FontSize="Small"
+                                    Text="{localization:Translate BoaSaúde}"
+                                    VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="1" Margin="0,0,10,0">
+                                <Ellipse
+                                    Fill="#ffba00"
+                                    HeightRequest="20"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    WidthRequest="20" />
+                                <Label
+                                    Padding="5,0,0,0"
+                                    FontSize="Small"
+                                    Text="{localization:Translate SaudeMédia}"
+                                    VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="2" HorizontalOptions="End">
+                                <Ellipse
+                                    Fill="#fc4c17"
+                                    HeightRequest="20"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    WidthRequest="20" />
+                                <Label
+                                    Padding="5,0,0,0"
+                                    FontSize="Small"
+                                    Text="{localization:Translate SaúdeBaixa}"
+                                    VerticalOptions="Center"
+                                    VerticalTextAlignment="Center" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </listView:SfListView.HeaderTemplate>
+
+
+            <listView:SfListView.ItemTemplate>
+                <DataTemplate x:DataType="viewModels:ISIMacroButton">
+
+                    <Border
+                        Padding="30,10"
+                        Background="White"
+                        Stroke="{Binding SaudeColor}"
+                        StrokeShape="RoundRectangle 20"
+                        StrokeThickness="1">
+
+                        <Border.Behaviors>
+                            <toolkit:TouchBehavior
+                                DefaultOpacity="1"
+                                DefaultScale="1"
+                                PressedAnimationDuration="100"
+                                PressedOpacity="0.7"
+                                PressedScale="0.95" />
+                        </Border.Behaviors>
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShowISIMacroCommand}" CommandParameter="{Binding .}" />
+                        </Border.GestureRecognizers>
+
+                        <Grid
+                            ColumnDefinitions="*,Auto"
+                            RowDefinitions="*,*"
+                            RowSpacing="0"
+                            VerticalOptions="Fill">
+
+                            <HorizontalStackLayout Grid.Row="0" VerticalOptions="End">
+                                <Label
+                                    FontSize="Large"
+                                    HorizontalTextAlignment="Start"
+                                    Text="{localization:Translate Ave}"
+                                    TextColor="{Binding SaudeColor}"
+                                    VerticalTextAlignment="Center" />
+                                <Label
+                                    Padding="5,0,0,0"
+                                    FontSize="Large"
+                                    HorizontalTextAlignment="Start"
+                                    Text="{Binding Numero, StringFormat='{0:00}'}"
+                                    TextColor="{Binding SaudeColor}"
+                                    VerticalTextAlignment="Center" />
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout Grid.Row="1" VerticalOptions="Start">
+                                <Label
+                                    FontSize="Medium"
+                                    HorizontalTextAlignment="Start"
+                                    Text="{localization:Translate Score}"
+                                    TextColor="{StaticResource SecondaryColor}"
+                                    VerticalTextAlignment="Center" />
+                                <Label
+                                    Padding="5,0,0,0"
+                                    FontAttributes="Bold"
+                                    FontSize="Medium"
+                                    Text="{Binding Score}"
+                                    TextColor="{Binding SaudeColor}"
+                                    VerticalOptions="Fill"
+                                    VerticalTextAlignment="Center" />
+                            </HorizontalStackLayout>
+
+                            <Ellipse
+                                Grid.RowSpan="2"
+                                Grid.Column="1"
+                                Margin="0"
+                                Fill="{Binding SaudeColor}"
+                                HeightRequest="25"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                WidthRequest="25" />
+                        </Grid>
+                    </Border>
+
+                </DataTemplate>
+            </listView:SfListView.ItemTemplate>
+
+
+            <listView:SfListView.EmptyView>
+                <Label
+                    FontSize="Small"
+                    HorizontalTextAlignment="Center"
+                    Text="{localization:Translate NenhumISIMacroCadastrado}"
+                    TextColor="{StaticResource PrimaryColor}"
+                    VerticalOptions="Fill"
+                    VerticalTextAlignment="Center" />
+            </listView:SfListView.EmptyView>
+        </listView:SfListView>
+
+        <controls:LoadingView
+            Grid.Row="0"
+            Grid.RowSpan="3"
+            IsVisible="{Binding IsBusy}"
+            Text="{localization:Translate Aguarde}"
+            VerticalOptions="Fill" />
+
+        <buttons:SfButton
+            Grid.Row="2"
+            Command="{Binding NovoISIMacroCommand}"
+            Style="{StaticResource CircleButtonPlus}" />
+
+    </Grid>
+</ContentPage>

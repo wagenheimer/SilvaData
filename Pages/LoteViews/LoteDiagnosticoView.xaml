@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ISIInstitute.Views.LoteViews.LoteDiagnosticoView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
+    x:Name="thisPage"
+    x:DataType="viewModels:LoteDiagnosticoViewModel"
+    Background="#0888CD">
+
+    <Grid Background="{StaticResource QuaseBranco}" RowDefinitions="Auto,*">
+
+        <!--  Header com gradiente  -->
+        <Grid
+            Grid.Row="0"
+            Margin="0"
+            Padding="15,10"
+            ColumnDefinitions="*,Auto"
+            RowDefinitions="Auto,Auto,Auto">
+
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Offset="0.1" Color="#0888CD" />
+                    <GradientStop Offset="1.0" Color="#26558D" />
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <!--  Título e descrição  -->
+            <VerticalStackLayout Grid.Row="0" Spacing="2">
+                <Label
+                    Padding="0,0,0,2"
+                    FontSize="12"
+                    HorizontalTextAlignment="Start"
+                    Opacity="0.9"
+                    Text="{Binding Lote.DescricaoCompleta}"
+                    TextColor="White" />
+                <Label
+                    FontAttributes="Bold"
+                    FontFamily="Nunito"
+                    FontSize="24"
+                    HorizontalOptions="Start"
+                    Text="{localization:Translate DiagnósticoDeEnfermidades}"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+            </VerticalStackLayout>
+
+            <!--  Botão voltar  -->
+            <HorizontalStackLayout
+                Grid.RowSpan="3"
+                Grid.Column="1"
+                VerticalOptions="Center">
+                <buttons:SfButton
+                    Command="{Binding VoltarCommand}"
+                    Style="{StaticResource CircleButton}"
+                    Text="{x:Static fontawesome:FontAwesomeIcons.TurnDownLeft}" />
+            </HorizontalStackLayout>
+
+            <!--  Subtítulo  -->
+            <HorizontalStackLayout Grid.Row="2" Padding="0,8,0,10">
+                <Label
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    Opacity="0.85"
+                    Text="{localization:Translate DiagnósticosRealizadosNoLote}"
+                    TextColor="White" />
+            </HorizontalStackLayout>
+        </Grid>
+
+        <!--  Lista de diagnósticos  -->
+        <listView:SfListView
+            Grid.Row="1"
+            AutoFitMode="DynamicHeight"
+            IsScrollingEnabled="True"
+            ItemSpacing="12"
+            ItemsSource="{Binding DiagnosticoList}"
+            SelectionMode="None"
+            VerticalOptions="Fill">
+
+            <!--  Empty state  -->
+            <listView:SfListView.EmptyView>
+                <VerticalStackLayout
+                    Margin="20"
+                    Padding="40,60"
+                    Spacing="12"
+                    VerticalOptions="Center">
+                    <Label
+                        FontFamily="FontAwesomeSolid"
+                        FontSize="48"
+                        HorizontalTextAlignment="Center"
+                        Opacity="0.3"
+                        Text="{x:Static fontawesome:FontAwesomeIcons.Stethoscope}"
+                        TextColor="{StaticResource PrimaryColor}" />
+                    <Label
+                        FontSize="16"
+                        HorizontalTextAlignment="Center"
+                        Text="{localization:Translate NenhumDiagnósticoCadastrado}"
+                        TextColor="{StaticResource SecondaryColor}"
+                        VerticalOptions="Center" />
+                </VerticalStackLayout>
+            </listView:SfListView.EmptyView>
+
+            <!--  ★★★ DATATEMPLATE COM x:DataType DO ITEM ★★★  -->
+            <listView:SfListView.ItemTemplate>
+                <DataTemplate x:DataType="viewModels:DiagnosticoButton">
+                    <Border
+                        Margin="12,0"
+                        Padding="0"
+                        Background="White"
+                        Stroke="{StaticResource PrimaryColor}"
+                        StrokeShape="RoundRectangle 16"
+                        StrokeThickness="1">
+
+                        <Border.Shadow>
+                            <Shadow
+                                Brush="{StaticResource PrimaryColor}"
+                                Opacity="0.15"
+                                Radius="8"
+                                Offset="0,2" />
+                        </Border.Shadow>
+
+                        <Grid Padding="0" RowDefinitions="Auto,Auto,Auto,1,Auto">
+
+                            <!--  Header do card com data e ação  -->
+                            <Grid
+                                Grid.Row="0"
+                                Padding="16,14,16,12"
+                                Background="#F8F9FA"
+                                ColumnDefinitions="Auto,*,Auto">
+
+                                <!--  Ícone de diagnóstico  -->
+                                <Border
+                                    Grid.Column="0"
+                                    Padding="10,8"
+                                    Background="{StaticResource PrimaryColor}"
+                                    StrokeShape="RoundRectangle 10"
+                                    StrokeThickness="0"
+                                    VerticalOptions="Center">
+                                    <Label
+                                        FontFamily="FontAwesomeRegular"
+                                        FontSize="18"
+                                        Text="{x:Static fontawesome:FontAwesomeIcons.Stethoscope}"
+                                        TextColor="White"
+                                        VerticalTextAlignment="Center" />
+                                </Border>
+
+                                <!--  Data do diagnóstico - Binding do ITEM  -->
+                                <VerticalStackLayout
+                                    Grid.Column="1"
+                                    Margin="12,0,0,0"
+                                    Spacing="2"
+                                    VerticalOptions="Center">
+                                    <Label
+                                        FontSize="11"
+                                        Opacity="0.6"
+                                        Text="Data do diagnóstico"
+                                        TextColor="{StaticResource SecondaryColor}" />
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="16"
+                                        Text="{Binding Data, Converter={StaticResource DateToString}}"
+                                        TextColor="{StaticResource PrimaryColor}" />
+                                </VerticalStackLayout>
+
+                                <!--  ★ Botão ver detalhes - Evento Clicked ★  -->
+                                <Border
+                                    Grid.Column="2"
+                                    Padding="12,8"
+                                    Background="Transparent"
+                                    Stroke="{StaticResource PrimaryColor}"
+                                    StrokeShape="RoundRectangle 8"
+                                    StrokeThickness="1.5"
+                                    VerticalOptions="Center">
+                                    <Label
+                                        FontSize="13"
+                                        Text="{localization:Translate VerDetalhes}"
+                                        TextColor="{StaticResource PrimaryColor}"
+                                        VerticalTextAlignment="Center" />
+
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="VerDetalhes_Tapped" />
+                                    </Border.GestureRecognizers>
+                                </Border>
+                            </Grid>
+
+                            <!--  Conteúdo: Diagnóstico - Binding do ITEM  -->
+                            <VerticalStackLayout
+                                Grid.Row="1"
+                                Padding="16,14"
+                                Spacing="6">
+                                <Label
+                                    FontSize="12"
+                                    Opacity="0.7"
+                                    Text="Diagnóstico"
+                                    TextColor="{StaticResource SecondaryColor}" />
+                                <Label
+                                    FontSize="15"
+                                    LineBreakMode="WordWrap"
+                                    MaxLines="3"
+                                    Text="{Binding Diagnostico}"
+                                    TextColor="#2C3E50" />
+                            </VerticalStackLayout>
+
+                            <!--  Badge de tratamentos - Binding do ITEM  -->
+                            <HorizontalStackLayout
+                                Grid.Row="2"
+                                Padding="16,0,16,14"
+                                Spacing="8"
+                                VerticalOptions="End">
+                                <Border
+                                    Padding="10,6"
+                                    Background="#E8F4F8"
+                                    StrokeShape="RoundRectangle 12"
+                                    StrokeThickness="0">
+                                    <HorizontalStackLayout Spacing="6">
+                                        <Label
+                                            FontFamily="FontAwesomeRegular"
+                                            FontSize="14"
+                                            Text="{x:Static fontawesome:FontAwesomeIcons.Syringe}"
+                                            TextColor="{StaticResource PrimaryColor}"
+                                            VerticalTextAlignment="Center" />
+                                        <Label
+                                            FontSize="13"
+                                            Text="{localization:Translate Tratamentos}"
+                                            TextColor="{StaticResource SecondaryColor}"
+                                            VerticalTextAlignment="Center" />
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontSize="15"
+                                            Text="{Binding TotalTratamentos}"
+                                            TextColor="{StaticResource PrimaryColor}"
+                                            VerticalTextAlignment="Center" />
+                                    </HorizontalStackLayout>
+                                </Border>
+                            </HorizontalStackLayout>
+
+                            <!--  Divider  -->
+                            <BoxView
+                                Grid.Row="3"
+                                Background="#E0E0E0"
+                                HeightRequest="1"
+                                HorizontalOptions="Fill" />
+
+                            <!--  ★ Botão adicionar tratamento - Evento Clicked ★  -->
+                            <buttons:SfButton
+                                Grid.Row="4"
+                                Padding="0"
+                                BackgroundColor="Transparent"
+                                Clicked="AdicionarTratamento_Clicked"
+                                CornerRadius="0">
+
+                                <buttons:SfButton.Content>
+                                    <DataTemplate>
+                                        <Grid
+                                            Padding="16,12"
+                                            Background="#FAFAFA"
+                                            ColumnDefinitions="*,Auto">
+
+                                            <HorizontalStackLayout
+                                                Grid.Column="0"
+                                                Spacing="10"
+                                                VerticalOptions="Center">
+                                                <Label
+                                                    FontFamily="FontAwesomeSolid"
+                                                    FontSize="16"
+                                                    Text="{x:Static fontawesome:FontAwesomeIcons.Plus}"
+                                                    TextColor="{StaticResource PrimaryColor}"
+                                                    VerticalTextAlignment="Center" />
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="14"
+                                                    Text="{localization:Translate AdicionarTratamento}"
+                                                    TextColor="{StaticResource PrimaryColor}"
+                                                    VerticalTextAlignment="Center" />
+                                            </HorizontalStackLayout>
+
+                                            <Border
+                                                Grid.Column="1"
+                                                Padding="12,10"
+                                                Background="{StaticResource PrimaryColor}"
+                                                StrokeShape="RoundRectangle 12"
+                                                StrokeThickness="1"
+                                                VerticalOptions="Center">
+                                                <Image
+                                                    HeightRequest="22"
+                                                    Source="icontratamentowhite.png"
+                                                    WidthRequest="22" />
+                                            </Border>
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </buttons:SfButton.Content>
+                            </buttons:SfButton>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </listView:SfListView.ItemTemplate>
+        </listView:SfListView>
+
+        <!--  Loading overlay  -->
+        <controls:LoadingView
+            Grid.Row="1"
+            IsVisible="{Binding IsBusy}"
+            Text="{localization:Translate Aguarde}"
+            VerticalOptions="Fill" />
+
+        <!--  FAB - Novo diagnóstico  -->
+        <buttons:SfButton
+            Grid.Row="1"
+            Command="{Binding NovoDiagnosticoCommand}"
+            Style="{StaticResource CircleButtonPlus}" />
+
+    </Grid>
+</ContentPage>

@@ -1,0 +1,15 @@
+./Models/LoteFormGalpao.cs:                Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(40));
+./Models/LoteFormGalpao.cs:            Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(40));
+./Models/LoteFormGalpao.cs:            Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(40));
+./Pages/Controls/AtividadeEditViewModel.cs:                Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(80));
+./Pages/Controls/AtividadeEditViewModel.cs:                Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(80));
+./Pages/Controls/CustomControls/AvaliaçãoGalpão/AvaliacaoAlternativasViewModel.cs:            Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(40));
+./Pages/Controls/CustomControls/AvaliaçãoGalpão/AvaliacaoAlternativasViewModel.cs:            Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(40));
+./Pages/Controls/CustomControls/ComboBox/RegionalComboBox.xaml.cs:            Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(40));
+./Pages/Controls/CustomControls/ComboBox/UnidadeEpidemiologicaComboBox.xaml.cs:            Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(40));
+./Pages/Controls/ISIControls/ISINumericUpDown.xaml.cs:                Microsoft.Maui.Devices.Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(40));
+./Pages/Controls/ISIControls/ISINumericUpDown.xaml.cs:                Microsoft.Maui.Devices.Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(40));
+./Pages/Controls/ISIControls/ParametrosComAlternativas/YesNoToggle.xaml.cs:            Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(40));
+./Pages/Controls/ISIControls/ParametrosComAlternativas/YesNoToggle.xaml.cs:            Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(40));
+./Utils/HapticHelper.cs:                    Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(40));
+./Utils/HapticHelper.cs:                    Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(80));

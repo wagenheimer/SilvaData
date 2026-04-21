@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Grid
+    x:Class="SilvaData.Controls.LoteFormTopHeader"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    Margin="0"
+    Padding="10,0"
+    ColumnDefinitions="*,Auto"
+    RowDefinitions="Auto,Auto,Auto"
+    Style="{StaticResource HeaderGradient}">
+
+    <!--  Dados do Lote  -->
+    <VerticalStackLayout Grid.Row="0" Spacing="0">
+        <Label
+            Padding="5,0,0,5"
+            FontSize="Micro"
+            HorizontalTextAlignment="Start"
+            Text="{Binding LoteDescricaoCompleta}"
+            TextColor="White" />
+        <Label
+            Padding="5,0"
+            FontFamily="Nunito"
+            FontSize="Large"
+            HorizontalOptions="Start"
+            Text="{Binding Title}"
+            TextColor="White"
+            VerticalOptions="Center" />
+    </VerticalStackLayout>
+
+    <!--  Botão Voltar  -->
+    <HorizontalStackLayout
+        Grid.RowSpan="3"
+        Grid.Column="1"
+        VerticalOptions="Center">
+        <buttons:SfButton
+            Command="{Binding VoltarCommand}"
+            Style="{StaticResource CircleButton}"
+            Text="{x:Static fontawesome:FontAwesomeIcons.TurnDownLeft}" />
+    </HorizontalStackLayout>
+
+    <!--  SubTitle  -->
+    <HorizontalStackLayout
+        Grid.Row="2"
+        Padding="5,0,0,10"
+        IsVisible="{Binding IsBusy, Converter={StaticResource InvertBoolean}}">
+        <Label
+            FontAttributes="Bold"
+            FontSize="Micro"
+            Text="{Binding SubTitle}"
+            TextColor="White" />
+    </HorizontalStackLayout>
+</Grid>

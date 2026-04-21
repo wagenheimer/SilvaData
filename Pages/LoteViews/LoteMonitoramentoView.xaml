@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ISIInstitute.Views.LoteViews.LoteMonitoramentoView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
+    x:DataType="viewModels:LoteMonitoramentoViewModel"
+    Background="{StaticResource QuaseBranco}">
+
+    <Grid
+        Background="{StaticResource QuaseBranco}"
+        RowDefinitions="Auto,*"
+        RowSpacing="0">
+
+            <Grid
+                x:Name="HeaderGrid"
+                Grid.Row="0"
+                Margin="0"
+                Padding="10,0"
+                ColumnDefinitions="*,Auto"
+                RowDefinitions="Auto,Auto"
+                Style="{StaticResource HeaderGradient}">
+
+                <!--  Dados do Lote  -->
+                <VerticalStackLayout Spacing="0">
+                    <Label Margin="0" Padding="15,0,0,0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    FontSize="Medium"
+                                    Text="{localization:Translate Lote}"
+                                    TextColor="White" />
+                                <Span Text=" " TextColor="White" />
+                                <Span
+                                    FontAttributes="Bold"
+                                    FontSize="Medium"
+                                    Text="{Binding LoteAtual.numero}"
+                                    TextColor="White" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label
+                        Padding="15,0,0,0"
+                        FontFamily="Nunito"
+                        HorizontalOptions="Fill"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding LoteAtual.Status}"
+                        TextColor="White"
+                        VerticalOptions="Start" />
+                </VerticalStackLayout>
+
+
+                <!--  Botões de Ação  -->
+                <HorizontalStackLayout Grid.Column="1" Padding="5">
+                    <buttons:SfButton
+                        Command="{Binding FecharLoteCommand}"
+                        IsVisible="{Binding PodeFecharLote}"
+                        Style="{StaticResource CircleButtonGreen}"
+                        Text="{x:Static fontawesome:FontAwesomeIcons.Truck}" />
+
+                    <buttons:SfButton
+                        Command="{Binding EditarLoteCommand}"
+                        FontFamily="FontAwesomeLight"
+                        IsVisible="{Binding IsEditarLoteVisible}"
+                        Style="{StaticResource CircleButton}"
+                        Text="{x:Static fontawesome:FontAwesomeIcons.Pen}" />
+
+                    <buttons:SfButton
+                        Command="{Binding VoltarCommand}"
+                        Style="{StaticResource CircleButton}"
+                        Text="{x:Static fontawesome:FontAwesomeIcons.TurnDownLeft}" />
+                </HorizontalStackLayout>
+
+                <toolkit:Expander
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Margin="15,0,0,20"
+                    IsExpanded="False">
+                    <toolkit:Expander.Header>
+                        <HorizontalStackLayout>
+                            <Label
+                                Margin="1,0,5,0"
+                                FontFamily="FontAwesomeLight"
+                                FontSize="Micro"
+                                HorizontalOptions="Center"
+                                Text="{x:Static fontawesome:FontAwesomeIcons.AngleRight}"
+                                TextColor="White"
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center">
+                                <Label.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding Source={RelativeSource AncestorType={x:Type toolkit:Expander}}, Path=IsExpanded}"
+                                        TargetType="Label"
+                                        Value="True">
+                                        <Setter Property="Text" Value="{x:Static fontawesome:FontAwesomeIcons.AngleDown}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <Label
+                                FontSize="Micro"
+                                Text="{Binding Title}"
+                                TextColor="White"
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center" />
+                        </HorizontalStackLayout>
+                    </toolkit:Expander.Header>
+                    <toolkit:Expander.Content>
+                        <VerticalStackLayout Margin="0,5">
+                            <Label FontSize="Micro">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span
+                                            FontAttributes="Bold"
+                                            FontSize="Micro"
+                                            Text="{localization:Translate DataInicio}"
+                                            TextColor="White" />
+                                        <Span Text=": " TextColor="White" />
+                                        <Span
+                                            FontSize="Micro"
+                                            Text="{Binding LoteAtual.dataInicio, StringFormat='{0:d}'}"
+                                            TextColor="White" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label FontSize="Micro">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span
+                                            FontAttributes="Bold"
+                                            FontSize="Micro"
+                                            Text="{localization:Translate Propriedade}"
+                                            TextColor="White" />
+                                        <Span Text=": " TextColor="White" />
+                                        <Span
+                                            FontSize="Micro"
+                                            Text="{Binding LoteAtual.PropriedadeNome}"
+                                            TextColor="White" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label FontSize="Micro">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span
+                                            FontAttributes="Bold"
+                                            FontSize="Micro"
+                                            Text="{localization:Translate Regional}"
+                                            TextColor="White" />
+                                        <Span Text=": " TextColor="White" />
+                                        <Span
+                                            FontSize="Micro"
+                                            Text="{Binding LoteAtual.RegionalNome}"
+                                            TextColor="White" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label FontSize="Micro">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span
+                                            FontAttributes="Bold"
+                                            FontSize="Micro"
+                                            Text="{localization:Translate UnidadeEp}"
+                                            TextColor="White" />
+                                        <Span Text=": " TextColor="White" />
+                                        <Span
+                                            FontSize="Micro"
+                                            Text="{Binding LoteAtual.UnidadeEpidemiologicaNome}"
+                                            TextColor="White" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </VerticalStackLayout>
+                    </toolkit:Expander.Content>
+                </toolkit:Expander>
+            </Grid>
+
+            <Grid Grid.Row="1" RowDefinitions="Auto,*" RowSpacing="0">
+                <Border
+                    Margin="10,10,10,0"
+                    Padding="0"
+                    Background="White"
+                    StrokeShape="RoundRectangle 30">
+
+                    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto">
+                        <VerticalStackLayout
+                            Grid.Column="0"
+                            Padding="20,15,0,15"
+                            Spacing="2"
+                            VerticalOptions="Center">
+                            <Label
+                                FontSize="Small"
+                                Text="{localization:Translate ISIScoreMédioDoLote}"
+                                TextColor="{StaticResource ScoreTextColor}" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Title"
+                                Text="{Binding LoteAtual.ISIMacroScoreMedioStatusText}"
+                                TextColor="{Binding LoteAtual.StatusColor}" />
+                        </VerticalStackLayout>
+
+                        <controls:CirculoScoreLote
+                            x:Name="CirculoScore"
+                            Grid.Column="1"
+                            HeightRequest="120"
+                            HorizontalOptions="End"
+                            Valor="{Binding LoteAtual.ISIMacroScoreMedio}"
+                            WidthRequest="150" />
+                    </Grid>
+                </Border>
+
+                <ScrollView x:Name="MainScrollView" Grid.Row="1">
+                    <VerticalStackLayout
+                    x:Name="ContentStack"
+                    Padding="10,15,10,20"
+                    Spacing="15">
+
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        HorizontalTextAlignment="Center"
+                        Text="{localization:Translate OpcoesDeMonitoramento}"
+                        TextColor="{StaticResource PrimaryColor}" />
+
+                    <FlexLayout
+                        AlignItems="Center"
+                        AlignContent="Center"
+                        Direction="Row"
+                        JustifyContent="SpaceEvenly"
+                        Wrap="Wrap"
+                        Padding="5">
+                        
+                        <buttons:SfButton
+                            Command="{Binding ManejoCommand}"
+                            ImageSource="manejo.png"
+                            IsVisible="{Binding IsManejoVisible}"
+                            Style="{StaticResource MonitoramentoButton}"
+                            Text="{localization:Translate Manejo}"
+                            WidthRequest="150"
+                            Margin="5" />
+
+                        <buttons:SfButton
+                            Command="{Binding ZootecnicoCommand}"
+                            ImageSource="zootecnico.png"
+                            IsVisible="{Binding IsZootecnicoVisible}"
+                            Style="{StaticResource MonitoramentoButton}"
+                            Text="{localization:Translate Zootécnico}"
+                            WidthRequest="150"
+                            Margin="5" />
+
+                        <buttons:SfButton
+                            Command="{Binding ISIMacroCommand}"
+                            ImageSource="isimacro.png"
+                            IsVisible="{Binding IsIsiMacroVisible}"
+                            Style="{StaticResource MonitoramentoButton}"
+                            Text="{localization:Translate ISIMacro}"
+                            WidthRequest="150"
+                            Margin="5" />
+
+                        <buttons:SfButton
+                            Command="{Binding AvaliacoesGalpaoCommand}"
+                            ImageSource="avaliacaogalpao.png"
+                            IsVisible="{Binding IsAvaliacaoGalpaoVisible}"
+                            Style="{StaticResource MonitoramentoButton}"
+                            Text="{localization:Translate AvaliacoesNoGalpao}"
+                            WidthRequest="150"
+                            Margin="5" />
+
+                        <buttons:SfButton
+                            Command="{Binding ShowHideSanidadeCommand}"
+                            ImageSource="sanidade.png"
+                            IsVisible="{Binding IsSanidadeVisible}"
+                            Style="{StaticResource MonitoramentoButton}"
+                            Text="{localization:Translate Sanidade}"
+                            WidthRequest="150"
+                            Margin="5" />
+
+                        <buttons:SfButton
+                            Command="{Binding NutricaoCommand}"
+                            ImageSource="nutricao.png"
+                            IsVisible="{Binding IsNutricaoVisible}"
+                            Style="{StaticResource MonitoramentoButton}"
+                            Text="{localization:Translate Nutrição}"
+                            WidthRequest="150"
+                            Margin="5" />
+                    </FlexLayout>
+
+                    <Label
+                        FontFamily="FontAwesomeLight"
+                        FontSize="Large"
+                        HorizontalOptions="Center"
+                        IsVisible="{Binding SanidadeVisible}"
+                        Text="{x:Static fontawesome:FontAwesomeIcons.ArrowDown}"
+                        TextColor="{StaticResource PrimaryColor}" />
+
+                    <VerticalStackLayout IsVisible="{Binding SanidadeVisible}" Spacing="10">
+                        <buttons:SfButton
+                            Command="{Binding DiagnosticoCommand}"
+                            ImageSource="diagnosticoenfermidade.png"
+                            IsVisible="{Binding IsDiagnosticoVisible}"
+                            Style="{StaticResource SubMonitoramentoButton}"
+                            Text="{localization:Translate DiagnósticoDeEnfermidades}" />
+
+                        <buttons:SfButton
+                            Command="{Binding TratamentoCommand}"
+                            ImageSource="tratamentoviaagua.png"
+                            IsVisible="{Binding IsTratamentoVisible}"
+                            Style="{StaticResource SubMonitoramentoButton}"
+                            Text="{localization:Translate TratamentoViaÁgua}" />
+
+                        <buttons:SfButton
+                            Command="{Binding SalmonellaCommand}"
+                            ImageSource="analisesalmonela.png"
+                            IsVisible="{Binding IsSalmonellaVisible}"
+                            Style="{StaticResource SubMonitoramentoButton}"
+                            Text="{localization:Translate AnáliseDeSalmonella}" />
+
+                        <buttons:SfButton
+                            Command="{Binding VacinasCommand}"
+                            ImageSource="vacinas.png"
+                            IsVisible="{Binding IsVacinasVisible}"
+                            Style="{StaticResource SubMonitoramentoButton}"
+                            Text="{localization:Translate Vacinas}" />
+
+                        <buttons:SfButton
+                            Command="{Binding ISIMicroCommand}"
+                            ImageSource="isimicro.png"
+                            IsVisible="{Binding IsIsiMicroVisible}"
+                            Style="{StaticResource SubMonitoramentoButton}"
+                            Text="{localization:Translate ISIMicro}" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+                </ScrollView>
+            </Grid>
+        </Grid>
+</ContentPage>

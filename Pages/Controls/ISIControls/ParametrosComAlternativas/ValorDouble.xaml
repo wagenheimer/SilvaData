@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<controls:ValidatableFieldBase
+    x:Class="SilvaData.Controls.ValorDouble"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    x:Name="valorDouble"
+    Padding="0">
+
+    <StackLayout Padding="2" Spacing="4">
+
+            <!--  Título + asterisco de obrigatório  -->
+            <Grid ColumnDefinitions="*,Auto">
+                <Label
+                    x:Name="labelTitle"
+                    Grid.Column="0"
+                    Margin="0"
+                    Padding="5,0"
+                    FontSize="Small"
+                    Text="{Binding nome}"
+                    TextColor="{StaticResource PrimaryColor}" />
+                <Label
+                    Grid.Column="1"
+                    Margin="2,0,0,0"
+                    Padding="0"
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                    Text="*"
+                    TextColor="Red"
+                    VerticalTextAlignment="Center">
+                    <Label.Triggers>
+                        <DataTrigger
+                            Binding="{Binding required}"
+                            TargetType="Label"
+                            Value="1">
+                            <Setter Property="IsVisible" Value="True" />
+                        </DataTrigger>
+                        <DataTrigger
+                            Binding="{Binding required}"
+                            TargetType="Label"
+                            Value="0">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                        <DataTrigger
+                            Binding="{Binding required}"
+                            TargetType="Label"
+                            Value="{x:Null}">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </Grid>
+
+            <Border
+                x:Name="valorDoubleBorder"
+                Margin="0"
+                Padding="12,0"
+                Background="White"
+                Stroke="{StaticResource PrimaryColor}"
+                StrokeShape="RoundRectangle 8"
+                StrokeThickness="1">
+
+                <Border.Triggers>
+                    <DataTrigger
+                        Binding="{Binding HasError, Source={x:Reference valorDouble}}"
+                        TargetType="Border"
+                        Value="True">
+                        <Setter Property="Stroke" Value="Red" />
+                        <Setter Property="StrokeThickness" Value="2" />
+                    </DataTrigger>
+                </Border.Triggers>
+
+                <Grid ColumnDefinitions="*,Auto" RowDefinitions="52">
+
+                    <Entry
+                        x:Name="SfNumericTextBox"
+                        Grid.Column="0"
+                        Background="Transparent"
+                        HorizontalOptions="Fill"
+                        IsEnabled="{Binding NotIsReadOnly, Source={x:Reference valorDouble}}"
+                        Keyboard="Numeric"
+                        Placeholder="0.00"
+                        Text="{Binding Valor, Source={x:Reference valorDouble}, Converter={StaticResource StringToNullableDoubleConverter}, StringFormat='{0:F2}'}"
+                        TextColor="{Binding IsReadOnly, Source={x:Reference valorDouble}, Converter={StaticResource BoolToColorConverter}}"
+                        Unfocused="Entry_Unfocused"
+                        VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <!--  Helper Text com Intervalo  -->
+            <Label
+                Margin="0"
+                Padding="12,0"
+                FontSize="Micro"
+                IsVisible="{Binding ShowHelperText, Source={x:Reference valorDouble}}"
+                Text="{Binding HelperText, Source={x:Reference valorDouble}}"
+                TextColor="Gray" />
+    </StackLayout>
+</controls:ValidatableFieldBase>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<toolkit:Popup
+    x:Class="SilvaData.Pages.PopUps.RequiredFieldsPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:local="clr-namespace:SilvaData.Pages.PopUps"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:DataType="local:RequiredFieldsPopupViewModel"
+    x:TypeArguments="x:Boolean"
+    BackgroundColor="Transparent"
+    CanBeDismissedByTappingOutsideOfPopup="False"
+    Padding="0">
+
+    <Border
+        Padding="0"
+        BackgroundColor="#FAFCFF"
+        Stroke="{StaticResource PrimaryColor}"
+        StrokeShape="RoundRectangle 18"
+        StrokeThickness="1"
+        MaximumWidthRequest="420"
+        MinimumWidthRequest="320">
+
+        <Grid RowDefinitions="Auto,Auto,*,Auto" RowSpacing="0">
+
+            <Grid Padding="18,16" BackgroundColor="{StaticResource PrimaryColor}" ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                <VerticalStackLayout Spacing="6">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="17"
+                        Text="{Binding Titulo}"
+                        TextColor="White" />
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="13"
+                        LineBreakMode="WordWrap"
+                        Text="{Binding SubTitulo}"
+                        TextColor="#DDF1FF" />
+                </VerticalStackLayout>
+
+                <Border
+                    Grid.Column="1"
+                    Padding="14,10"
+                    BackgroundColor="#FFF7F7"
+                    Stroke="#F2D400"
+                    StrokeShape="RoundRectangle 14"
+                    StrokeThickness="2"
+                    VerticalOptions="Center">
+                    <VerticalStackLayout Spacing="0">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="22"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding QuantidadeCampos}"
+                            TextColor="{StaticResource SecondaryColor}" />
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="10"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding ResumoPendencias}"
+                            TextColor="{StaticResource SecondaryColor}" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <Border
+                Grid.Row="1"
+                Margin="16,16,16,8"
+                Padding="14,12"
+                BackgroundColor="#EDF6FD"
+                Stroke="#B7D8F0"
+                StrokeShape="RoundRectangle 12"
+                StrokeThickness="1">
+                <Label
+                    FontSize="13"
+                    LineBreakMode="WordWrap"
+                    Text="{Binding Descricao}"
+                    TextColor="#1F4E73" />
+            </Border>
+
+            <Grid Grid.Row="2" Margin="16,0,16,8" RowDefinitions="Auto,*" RowSpacing="8">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="13"
+                    Text="Campos pendentes"
+                    TextColor="{StaticResource SecondaryColor}" />
+
+                <ScrollView Grid.Row="1" MaximumHeightRequest="320">
+                    <VerticalStackLayout
+                        BindableLayout.ItemsSource="{Binding Campos}"
+                        Spacing="10">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="sys:String">
+                            <Border
+                                Padding="14,12"
+                                BackgroundColor="White"
+                                Stroke="#BFD8EA"
+                                StrokeShape="RoundRectangle 12"
+                                StrokeThickness="1">
+                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                    <Border
+                                        WidthRequest="24"
+                                        HeightRequest="24"
+                                        BackgroundColor="#FFE7E1"
+                                        Stroke="Transparent"
+                                        StrokeShape="RoundRectangle 12"
+                                        VerticalOptions="Start">
+                                        <Label
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center"
+                                            HorizontalTextAlignment="Center"
+                                            VerticalTextAlignment="Center"
+                                            Text="!"
+                                            FontAttributes="Bold"
+                                            FontSize="12"
+                                            TextColor="#C62828" />
+                                    </Border>
+
+                                    <Label
+                                        Grid.Column="1"
+                                        FontAttributes="Bold"
+                                        FontSize="15"
+                                        LineBreakMode="WordWrap"
+                                        Text="{Binding}"
+                                        TextColor="#163955"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </ScrollView>
+            </Grid>
+
+            <buttons:SfButton
+                Grid.Row="3"
+                Margin="16,8,16,16"
+                Command="{Binding OKCommand}"
+                Style="{StaticResource PrimaryButton}"
+                Text="{Binding BotaoTexto}" />
+        </Grid>
+    </Border>
+</toolkit:Popup>

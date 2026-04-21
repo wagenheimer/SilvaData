@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<toolkit:Popup
+    x:Class="SilvaData.Pages.PopUps.PopUpUsuario"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
+    x:DataType="viewmodels:PopUpUsuarioViewModel"
+    BackgroundColor="Transparent"
+    CanBeDismissedByTappingOutsideOfPopup="True">
+
+    <Border
+        BackgroundColor="White"
+        Stroke="{StaticResource Gray200}"
+        StrokeShape="RoundRectangle 20"
+        StrokeThickness="1"
+        WidthRequest="250">
+
+        <VerticalStackLayout Padding="10" Spacing="10">
+
+            <VerticalStackLayout Padding="5">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                    HorizontalTextAlignment="Start"
+                    Text="{Binding LoggedUserName}"
+                    TextColor="{StaticResource PrimaryColor}" />
+
+                <Label
+                    Padding="0,2,0,0"
+                    FontSize="Micro"
+                    HorizontalTextAlignment="Start"
+                    Text="{Binding LoggedUserEmail}"
+                    TextColor="Gray" />
+            </VerticalStackLayout>
+
+            <BoxView
+                Margin="5,0"
+                HeightRequest="1"
+                Color="{StaticResource Gray200}" />
+
+            <VerticalStackLayout Spacing="5">
+                <buttons:SfButton
+                    Command="{Binding MinhaContaCommand}"
+                    Style="{StaticResource PrimaryButton}"
+                    Text="{localization:Translate MinhaConta}">
+                    <buttons:SfButton.ImageSource>
+                        <FontImageSource
+                            FontFamily="FontAwesomeRegular"
+                            Glyph="{x:Static fontawesome:FontAwesomeIcons.UserGear}"
+                            Color="{StaticResource TextDisabled}" />
+                    </buttons:SfButton.ImageSource>
+                </buttons:SfButton>
+
+                <buttons:SfButton
+                    Command="{Binding PrivacidadeCommand}"
+                    Style="{StaticResource PrimaryButton}"
+                    Text="{localization:Translate PolíticaDePrivacidade}">
+                    <buttons:SfButton.ImageSource>
+                        <FontImageSource
+                            FontFamily="FontAwesomeRegular"
+                            Glyph="{x:Static fontawesome:FontAwesomeIcons.ShieldHalved}"
+                            Color="{StaticResource TextDisabled}" />
+                    </buttons:SfButton.ImageSource>
+                </buttons:SfButton>
+
+                <buttons:SfButton
+                    Command="{Binding PermissoesCommand}"
+                    Style="{StaticResource PrimaryButton}"
+                    IsVisible="{Binding IsDebug}"
+                    Text="Permissões">
+                    <buttons:SfButton.ImageSource>
+                        <FontImageSource
+                            FontFamily="FontAwesomeRegular"
+                            Glyph="{x:Static fontawesome:FontAwesomeIcons.ShieldHalved}"
+                            Color="{StaticResource TextDisabled}" />
+                    </buttons:SfButton.ImageSource>
+                </buttons:SfButton>
+
+
+                <buttons:SfButton
+                    Command="{Binding LogOffCommand}"
+                    Style="{StaticResource PrimaryButton}"
+                    Text="{localization:Translate DeslogarConta}">
+                    <buttons:SfButton.ImageSource>
+                        <FontImageSource
+                            FontFamily="FontAwesomeRegular"
+                            Glyph="{x:Static fontawesome:FontAwesomeIcons.RightFromBracket}"
+                            Color="{StaticResource TextDisabled}" />
+                    </buttons:SfButton.ImageSource>
+                </buttons:SfButton>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </Border>
+</toolkit:Popup>

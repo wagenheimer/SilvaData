@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SilvaData.Utils.ContentPageWithLocalization"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:utils="clr-namespace:SilvaData.Utils"
+    Shell.BackgroundColor="{StaticResource PrimaryColor}"
+    Shell.TabBarBackgroundColor="{StaticResource PrimaryColor}"
+    Shell.TabBarTitleColor="{StaticResource PrimaryFontColor}"
+    Shell.TitleColor="{StaticResource PrimaryFontColor}" />

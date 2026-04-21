@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="SilvaData.Controls.sfFrameLabel"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    x:Name="frameLabel">
+    <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45" />
+                <RowDefinition Height="20" />
+            </Grid.RowDefinitions>
+
+            <Border
+                Grid.Row="0"
+                Margin="0,5,-0,0"
+                Padding="0"
+                BindingContext="{x:Reference frameLabel}"
+                HeightRequest="30"
+                Stroke="Gray"
+                StrokeShape="RoundRectangle 6"
+                StrokeThickness="1">
+
+                <Grid Padding="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        Padding="10,0,0,0"
+                        FontSize="Medium"
+                        Text="{Binding Text}"
+                        TextColor="Black"
+                        VerticalTextAlignment="Center" />
+                    <Label
+                        Grid.Column="1"
+                        Padding="5,0,5,0"
+                        FontFamily="FontAwesomeRegular"
+                        FontSize="Medium"
+                        Text="{Binding Icon}"
+                        TextColor="Gray"
+                        VerticalTextAlignment="Center" />
+                </Grid>
+            </Border>
+
+            <Label
+                Grid.Row="1"
+                Padding="2,0,2,0"
+                BackgroundColor="White"
+                BindingContext="{x:Reference frameLabel}"
+                FontSize="Small"
+                HeightRequest="20"
+                HorizontalOptions="Start"
+                Text="{Binding Hint}"
+                TextColor="Black"
+                TranslationX="6"
+                TranslationY="-55" />
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>

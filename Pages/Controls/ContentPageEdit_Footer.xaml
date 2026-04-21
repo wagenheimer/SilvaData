@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="SilvaData.Controls.ContentPageEdit_Footer"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:button="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    Padding="5">
+
+    <ContentView.Content>
+        <Grid
+            Margin="0,5"
+            RowDefinitions="Auto"
+            VerticalOptions="Center">
+            <button:SfButton
+                x:Name="btSalvar"
+                Grid.Row="0"
+                Command="{Binding SaveAndReturnCommand}"
+                IsVisible="{Binding NotReadOnly}"
+                Style="{StaticResource PrimaryButton}"
+                Text="{localization:Translate Salvar}" />
+
+            <button:SfButton
+                x:Name="btEditar"
+                Grid.Row="0"
+                Command="{Binding EditCommand}"
+                IsVisible="{Binding ReadOnly}"
+                Style="{StaticResource PrimaryButton}"
+                Text="{localization:Translate Editar}" />
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>

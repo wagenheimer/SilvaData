@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<controls:ContentPageEdit
+    x:Class="SilvaData.Controls.PropriedadeView_Edit"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:utils="clr-namespace:SilvaData.Utils"
+    xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
+    x:DataType="viewmodels:PropriedadeEditViewModel"
+    BackgroundColor="#0888CD"
+    Shell.TabBarIsVisible="false">
+
+    <Grid
+        BackgroundColor="{StaticResource QuaseBranco}"
+        RowDefinitions="Auto,*"
+        VerticalOptions="Fill">
+
+        <Grid
+            Grid.Row="0"
+            Margin="0,0,0,5"
+            Padding="0,0,0,20"
+            ColumnDefinitions="*,Auto"
+            RowDefinitions="Auto,Auto">
+
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Offset="0.1" Color="#0888CD" />
+                    <GradientStop Offset="1.0" Color="#26558D" />
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <StackLayout
+                Grid.Row="0"
+                Orientation="Horizontal"
+                Spacing="0">
+                <Label
+                    Padding="15,0"
+                    FontFamily="Nunito"
+                    FontSize="Large"
+                    HorizontalOptions="Start"
+                    Text="{Binding Title}"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+            </StackLayout>
+
+            <StackLayout
+                Grid.Row="0"
+                Grid.Column="1"
+                Orientation="Horizontal">
+                <buttons:SfButton
+                    Grid.Column="1"
+                    Command="{Binding BackNowCommand}"
+                    Style="{StaticResource CircleButton}"
+                    Text="{x:Static fontawesome:FontAwesomeIcons.TurnDownLeft}" />
+            </StackLayout>
+
+            <Label
+                Grid.Row="1"
+                Padding="15,0"
+                FontSize="Small"
+                Text="{Binding SubTitle}"
+                TextColor="White" />
+        </Grid>
+
+        <Grid
+            x:Name="editdados"
+            Grid.Row="1"
+            Margin="4"
+            RowDefinitions="*,Auto"
+            VerticalOptions="Fill">
+
+            <ScrollView x:Name="scrollView" Grid.Row="0">
+                <StackLayout x:Name="camposaPreencher" Margin="5,0">
+
+                    <controls:ISITextField
+                        x:Name="nome"
+                        Title="{localization:Translate Nome}"
+                        IsReadOnly="{Binding ReadOnly, Mode=OneWay}"
+                        Text="{Binding Propriedade.nome, Mode=TwoWay}" />
+
+                    <controls:RegionalComboBox
+                        x:Name="regionalcombobox"
+                        IsObrigatorio="True"
+                        IsReadOnly="{Binding ReadOnly, Mode=OneWay}"
+                        SelectedItem="{Binding SelectedRegional, Mode=TwoWay}" />
+
+                    <controls:ISIComboBox
+                        x:Name="proprietariocombobox"
+                        Title="{localization:Translate Proprietário}"
+                        IsReadOnly="{Binding ReadOnly, Mode=OneWay}"
+                        ItemsSource="{Binding Proprietarios}"
+                        SelectedItem="{Binding SelectedProprietario, Mode=TwoWay}" />
+
+                    <StackLayout
+                        x:Name="camposaPreencherExtras"
+                        Margin="5,0"
+                        BindableLayout.ItemTemplateSelector="{StaticResource FormularioTemplateSelector}"
+                        BindableLayout.ItemsSource="{Binding ParametrosList}" />
+
+                </StackLayout>
+            </ScrollView>
+
+            <controls:ContentPageEdit_Footer x:Name="editfooter" Grid.Row="1" />
+        </Grid>
+
+        <controls:LoadingView
+            Grid.Row="1"
+            IsVisible="{Binding IsBusy}"
+            Text="{localization:Translate Aguarde}" />
+    </Grid>
+</controls:ContentPageEdit>

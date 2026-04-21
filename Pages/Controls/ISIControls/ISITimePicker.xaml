@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<controls:ValidatableFieldBase
+    x:Class="SilvaData.Controls.ISITimePicker"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    x:Name="DatePickerEx"
+    x:DataType="controls:ISITimePicker">
+
+    <StackLayout Padding="2" BindingContext="{x:Reference DatePickerEx}">
+
+        <!--  Label do Hint + Asterisco  -->
+        <Grid ColumnDefinitions="*,Auto" IsVisible="{Binding Hint, Converter={StaticResource IsNotNullOrEmptyConverter}}">
+            <Label
+                x:Name="labelTitle"
+                Grid.Column="0"
+                Margin="0"
+                Padding="5,0"
+                FontSize="Small"
+                Text="{Binding Hint}" />
+            <Label
+                Grid.Column="1"
+                Margin="2,0,0,0"
+                Padding="0"
+                FontAttributes="Bold"
+                FontSize="Small"
+                IsVisible="{Binding IsObrigatorio}"
+                Text="*"
+                TextColor="Red"
+                VerticalTextAlignment="Center" />
+        </Grid>
+
+        <Border
+            x:Name="ControlBorder"
+            Margin="0"
+            Padding="12,0"
+            Background="White"
+            HeightRequest="52"
+            Stroke="{StaticResource PrimaryColor}"
+            StrokeShape="RoundRectangle 8"
+            StrokeThickness="1">
+
+            <Border.Triggers>
+                <DataTrigger
+                    Binding="{Binding HasError}"
+                    TargetType="Border"
+                    Value="True">
+                    <Setter Property="Stroke" Value="Red" />
+                    <Setter Property="StrokeThickness" Value="2" />
+                </DataTrigger>
+            </Border.Triggers>
+
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="0">
+                <TimePicker
+                    x:Name="horaPicker"
+                    Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    FontSize="Medium"
+                    Format="HH:mm"
+                    HeightRequest="52"
+                    IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertBoolean}}"
+                    TextColor="{Binding IsReadOnly, Converter={StaticResource BoolToColorConverter}}"
+                    VerticalOptions="Center">
+                    <TimePicker.Triggers>
+                        <DataTrigger
+                            Binding="{Binding Hora, Source={x:Reference DatePickerEx}}"
+                            TargetType="TimePicker"
+                            Value="{x:Null}">
+                            <Setter Property="TextColor" Value="Transparent" />
+                        </DataTrigger>
+                    </TimePicker.Triggers>
+                </TimePicker>
+
+                <Button
+                    Grid.Column="1"
+                    Padding="0"
+                    BackgroundColor="Transparent"
+                    Clicked="ClearHora"
+                    FontFamily="FontAwesomeRegular"
+                    FontSize="18"
+                    HeightRequest="52"
+                    HorizontalOptions="Center"
+                    IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertBoolean}}"
+                    IsVisible="{Binding PrecisaMostrarApagar}"
+                    Text="{x:Static fontawesome:FontAwesomeIcons.Trash}"
+                    TextColor="{StaticResource PrimaryColor}"
+                    VerticalOptions="Center"
+                    WidthRequest="44" />
+            </Grid>
+
+        </Border>
+    </StackLayout>
+</controls:ValidatableFieldBase>

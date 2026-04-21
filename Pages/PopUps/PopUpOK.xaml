@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<toolkit:Popup
+    x:Class="SilvaData.Pages.PopUps.PopUpOK"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:local="clr-namespace:SilvaData.Pages.PopUps"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Margin="0"
+    Padding="0"
+    x:DataType="local:PopUpOKViewModel"
+    x:TypeArguments="x:Boolean"
+    Background="Transparent"
+    CanBeDismissedByTappingOutsideOfPopup="False"
+    MinimumHeightRequest="300"
+    MinimumWidthRequest="300"
+    VerticalOptions="Center">
+    <Border
+        Padding="5"
+        BackgroundColor="{StaticResource White}"
+        HorizontalOptions="Fill"
+        Stroke="{StaticResource Primary}"
+        StrokeShape="RoundRectangle 10"
+        VerticalOptions="Center">
+
+        <Grid
+            Margin="5"
+            RowDefinitions="Auto,*,Auto"
+            RowSpacing="10">
+
+            <Label
+                FontAttributes="Bold"
+                FontSize="18"
+                HorizontalOptions="Center"
+                Text="{Binding Titulo}"
+                TextColor="{StaticResource PrimaryColor}" />
+
+            <Label
+                Grid.Row="1"
+                Margin="15,10"
+                FontSize="Small"
+                HorizontalOptions="Fill"
+                HorizontalTextAlignment="Center"
+                LineBreakMode="WordWrap"
+                Text="{Binding Mensagem}"
+                VerticalOptions="Center" />
+
+            <buttons:SfButton
+                Grid.Row="2"
+                Command="{Binding OKCommand}"
+                Style="{StaticResource PrimaryButton}"
+                Text="Ok" />
+        </Grid>
+    </Border>
+</toolkit:Popup>

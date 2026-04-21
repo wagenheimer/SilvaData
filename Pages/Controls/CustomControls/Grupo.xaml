@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="SilvaData.Controls.Grupo"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    IsVisible="{Binding CategoriaParaAgrupar, Converter={StaticResource IsNotNullOrEmptyConverter}}">
+
+    <ContentView.Content>
+        <Border
+            Margin="20,15,20,0"
+            Padding="10,5"
+            Background="{StaticResource FundoClarinhoBotao}"
+            StrokeShape="RoundRectangle 20"
+            StrokeThickness="0">
+
+            <Border.Shadow>
+                <Shadow
+                    Opacity="0.3"
+                    Radius="1"
+                    Offset="0,1" />
+            </Border.Shadow>
+
+
+            <Label
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Center"
+                Text="{Binding CategoriaParaAgrupar}"
+                TextColor="{StaticResource PrimaryColor}"
+                VerticalOptions="Center"
+                VerticalTextAlignment="Center" />
+
+        </Border>
+    </ContentView.Content>
+</ContentView>

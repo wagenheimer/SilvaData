@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="SilvaData.Controls.LoteFormHeader"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:viewmodels="clr-namespace:SilvaData.ViewModels">
+
+    <ContentView.Content>
+        <VerticalStackLayout>
+            <Grid ColumnSpacing="0" RowDefinitions="Auto,Auto">
+
+                <controls:ISIDatePicker
+                    x:Name="date_Picker"
+                    Margin="4,1,10,0"
+                    Padding="0"
+                    Data="{Binding LoteFormulario.LoteForm.data, Mode=TwoWay}"
+                    DateChanged="Date_Picker_OnDateChanged"
+                    Hint="{localization:Translate Data}"
+                    IsReadOnly="{Binding Path=ReadOnly, Mode=OneWay}"
+                    MinimumHeightRequest="55" />
+
+                <Label
+                    Grid.Row="1"
+                    Margin="0"
+                    Padding="10,0"
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                    HorizontalOptions="Fill"
+                    HorizontalTextAlignment="End"
+                    Text="{Binding IdadeLote, Source={RelativeSource AncestorType={x:Type viewmodels:LoteFormularioViewModel}}, FallbackValue='Não Conseguiu Calcular'}"
+                    TextColor="{StaticResource PrimaryColor}"
+                    VerticalOptions="Fill"
+                    VerticalTextAlignment="Start" />
+            </Grid>
+        </VerticalStackLayout>
+    </ContentView.Content>
+</ContentView>

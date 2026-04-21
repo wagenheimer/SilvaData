@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="SilvaData.Controls.ISIMacroNota"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="http://schemas.syncfusion.com/maui"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:models="clr-namespace:SilvaData.Models"
+    x:Name="isiMacroNota"
+    Margin="6,0"
+    Shell.TabBarIsVisible="false">
+
+    <Border
+        Margin="4"
+        Background="{Binding BackgroundColor, Source={x:Reference isiMacroNota}}"
+        StrokeShape="RoundRectangle 20">
+
+        <Border.Shadow>
+            <Shadow
+                Opacity="0.3"
+                Radius="3"
+                Offset="0,1" />
+        </Border.Shadow>
+
+        <Grid RowDefinitions="Auto,Auto,70,Auto,Auto,Auto" VerticalOptions="Fill">
+
+            <!--  Título/Nome do Parâmetro  -->
+            <Label
+                Grid.Row="0"
+                Margin="0,6"
+                Padding="4,0"
+                FontSize="Medium"
+                HorizontalTextAlignment="Center"
+                Text="{Binding nome}"
+                TextColor="{StaticResource SecondaryColor}"
+                VerticalOptions="Fill"
+                VerticalTextAlignment="Center" />
+
+            <!--  Linha  -->
+            <BoxView
+                Grid.Row="1"
+                HeightRequest="1"
+                Color="{StaticResource Gray100}" />
+
+            <!--  Score e Botão de Fotos  -->
+            <Grid
+                Grid.Row="2"
+                Margin="5,0"
+                ColumnDefinitions="Auto,*,Auto">
+
+                <!--  Border com Score  -->
+                <Border
+                    Grid.Column="0"
+                    Margin="8"
+                    Padding="0"
+                    HeightRequest="-1"
+                    HorizontalOptions="Center"
+                    Stroke="{Binding BorderColor, Source={x:Reference isiMacroNota}}"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="2"
+                    VerticalOptions="Center"
+                    WidthRequest="80">
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SelecionaFotoCommand, Source={x:Reference isiMacroNota}}" />
+                    </Border.GestureRecognizers>
+
+                    <Label
+                        x:Name="Score"
+                        FontAttributes="Bold"
+                        FontSize="35"
+                        HorizontalTextAlignment="Center"
+                        Text="{Binding AlternativaSelecionada.score, Source={x:Reference isiMacroNota}, StringFormat='{0}'}"
+                        TextColor="{StaticResource PrimaryColor}"
+                        VerticalTextAlignment="Center" />
+                </Border>
+
+                <!--  Botão "Ver Fotos" - ✅ CORRIGIDO: x:Reference removido  -->
+                <buttons:SfButton
+                    Grid.Column="2"
+                    Margin="8"
+                    Background="{StaticResource SecondaryColor}"
+                    Command="{Binding SelecionaFotoCommand, Source={x:Reference isiMacroNota}}"
+                    CornerRadius="10"
+                    FontSize="Small"
+                    ImageAlignment="Right"
+                    IsEnabled="{Binding IsReadOnly, Source={x:Reference isiMacroNota}, Converter={StaticResource InvertBoolean}}"
+                    IsVisible="{Binding IsReadOnly, Source={x:Reference isiMacroNota}, Converter={StaticResource InvertBoolean}}"
+                    ShowIcon="true"
+                    Text="{localization:Translate VerFotos}"
+                    TextColor="White"
+                    WidthRequest="150">
+
+                    <buttons:SfButton.ImageSource>
+                        <FontImageSource
+                            FontFamily="FontAwesomeLight"
+                            Glyph="{x:Static fontawesome:FontAwesomeIcons.Camera}"
+                            Color="White" />
+                    </buttons:SfButton.ImageSource>
+                </buttons:SfButton>
+            </Grid>
+
+            <!--  Botões de Alternativas  -->
+            <FlexLayout
+                Grid.Row="3"
+                Margin="5,0,5,10"
+                Padding="2"
+                AlignItems="End"
+                BindableLayout.ItemsSource="{Binding ListaAlternativas}"
+                IsVisible="{Binding IsReadOnly, Source={x:Reference isiMacroNota}, Converter={StaticResource InvertBoolean}}"
+                JustifyContent="SpaceBetween"
+                VerticalOptions="Fill"
+                Wrap="Wrap">
+
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="models:ParametroAlternativas">
+                        <controls:ISIMacroNotaButton
+                            Alternativa="{Binding .}"
+                            IsReadOnly="{Binding IsReadOnly, Source={x:Reference isiMacroNota}, FallbackValue=False}"
+                            Nota="{x:Reference isiMacroNota}" />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+
+            </FlexLayout>
+
+            <!--  Linha  -->
+            <BoxView
+                Grid.Row="4"
+                HeightRequest="1"
+                Color="{StaticResource Gray100}" />
+
+            <!--  Descrição da Alternativa  -->
+            <Label
+                Grid.Row="5"
+                Padding="4,0,4,0"
+                FontSize="Small"
+                HorizontalTextAlignment="Center"
+                Text="{Binding AlternativaSelecionada.descricao, Source={x:Reference isiMacroNota}}"
+                TextColor="{StaticResource SecondaryColor}"
+                VerticalTextAlignment="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelecionaFotoCommand, Source={x:Reference isiMacroNota}}" />
+                </Label.GestureRecognizers>
+            </Label>
+
+        </Grid>
+    </Border>
+</ContentView>

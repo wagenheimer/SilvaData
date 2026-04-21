@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<controls:ValidatableFieldBase
+    x:Class="SilvaData.Controls.PropriedadeComboBox"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:combobox="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:models="clr-namespace:SilvaData.Models"
+    x:Name="propriedadeComboBox"
+    Padding="0">
+
+    <VerticalStackLayout Padding="2" Spacing="4">
+
+        <!--  Título + asterisco de obrigatório  -->
+        <Grid ColumnDefinitions="*,Auto">
+            <Label
+                x:Name="labelTitle"
+                Grid.Column="0"
+                Margin="0"
+                Padding="5,0"
+                FontSize="Small"
+                Text="{localization:Translate Propriedade}"
+                TextColor="{StaticResource PrimaryColor}" />
+            <Label
+                Grid.Column="1"
+                Margin="2,0,0,0"
+                Padding="0"
+                FontAttributes="Bold"
+                FontSize="Small"
+                IsVisible="{Binding IsObrigatorio, Source={x:Reference propriedadeComboBox}}"
+                Text="*"
+                TextColor="Red"
+                VerticalTextAlignment="Center" />
+        </Grid>
+
+        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+
+            <!--  ComboBox Propriedade  -->
+            <Border
+                x:Name="propriedadeBorder"
+                Grid.Column="0"
+                Margin="0"
+                Padding="12,0"
+                Background="White"
+                HeightRequest="52"
+                Stroke="{StaticResource PrimaryColor}"
+                StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8" />
+                </Border.StrokeShape>
+
+                <Border.Triggers>
+                    <DataTrigger
+                        Binding="{Binding HasError, Source={x:Reference propriedadeComboBox}}"
+                        TargetType="Border"
+                        Value="True">
+                        <Setter Property="Stroke" Value="Red" />
+                        <Setter Property="StrokeThickness" Value="2" />
+                    </DataTrigger>
+                </Border.Triggers>
+
+                <!--  CORRIGIDO: Adicionado IsEnabled vinculado ao IsReadOnly (invertido)  -->
+                <combobox:SfComboBox
+                    x:Name="propriedadecombobox"
+                    Margin="0"
+                    BackgroundColor="Transparent"
+                    DisplayMemberPath="nome"
+                    EnableAutoSize="True"
+                    HeightRequest="52"
+                    IsEnabled="{Binding IsReadOnly, Source={x:Reference propriedadeComboBox}, Converter={StaticResource InvertBoolean}}"
+                    ItemsSource="{Binding PropriedadeList, Source={x:Reference propriedadeComboBox}}"
+                    SelectionChanged="OnComboBoxSelectionChanged"
+                    SelectionMode="Single"
+                    ShowBorder="False"
+                    TextColor="{Binding IsReadOnly, Source={x:Reference propriedadeComboBox}, Converter={StaticResource BoolToColorConverter}}"
+                    TokensWrapMode="Wrap" />
+            </Border>
+
+            <!--  Botão Adicionar  -->
+            <buttons:SfButton
+                x:Name="btAdd"
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                Command="{Binding AddNewComboBoxCommand, Source={x:Reference propriedadeComboBox}}"
+                CornerRadius="24"
+                FontFamily="FontAwesomeRegular"
+                FontSize="24"
+                HeightRequest="48"
+                IsVisible="{Binding Source={x:Static models:Permissoes.UsuarioPermissoes}, Path=propriedades.cadastrar}"
+                Text="{x:Static fontawesome:FontAwesomeIcons.CirclePlus}"
+                TextColor="{StaticResource PrimaryColor}"
+                WidthRequest="48" />
+        </Grid>
+    </VerticalStackLayout>
+</controls:ValidatableFieldBase>

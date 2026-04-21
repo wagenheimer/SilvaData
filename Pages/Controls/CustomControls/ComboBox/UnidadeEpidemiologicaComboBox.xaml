@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<controls:ValidatableFieldBase
+    x:Class="SilvaData.Controls.UnidadeEpidemiologicaComboBox"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:comboBox="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    x:Name="ueComboBox">
+
+    <ContentView.Content>
+        <VerticalStackLayout Padding="2" Spacing="5">
+
+            <!--  Título + asterisco de obrigatório  -->
+            <Grid ColumnDefinitions="*,Auto">
+                <Label
+                    x:Name="labelTitle"
+                    Grid.Column="0"
+                    Margin="0"
+                    Padding="5,0"
+                    FontSize="Small"
+                    Text="{localization:Translate UnidadeEpidemiológica}"
+                    TextColor="{StaticResource PrimaryColor}" />
+                <Label
+                    Grid.Column="1"
+                    Margin="2,0,0,0"
+                    Padding="0"
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                    IsVisible="{Binding IsObrigatorio, Source={x:Reference ueComboBox}}"
+                    Text="*"
+                    TextColor="Red"
+                    VerticalTextAlignment="Center" />
+            </Grid>
+
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+
+                <!--  ComboBox com Botão Limpar  -->
+                <Border
+                    Grid.Column="0"
+                    Margin="0"
+                    Padding="12,0"
+                    Background="White"
+                    HeightRequest="52"
+                    Stroke="{StaticResource PrimaryColor}"
+                    StrokeShape="RoundRectangle 8"
+                    StrokeThickness="1">
+ 
+                    <Border.Triggers>
+                        <DataTrigger
+                            Binding="{Binding HasError, Source={x:Reference ueComboBox}}"
+                            TargetType="Border"
+                            Value="True">
+                            <Setter Property="Stroke" Value="Red" />
+                            <Setter Property="StrokeThickness" Value="2" />
+                        </DataTrigger>
+                    </Border.Triggers>
+
+                    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto">
+                        <comboBox:SfComboBox
+                            x:Name="unidadeEpidemiologicaCombobox"
+                            Grid.Column="0"
+                            Margin="0"
+                            BackgroundColor="Transparent"
+                            DisplayMemberPath="nome"
+                            HeightRequest="52"
+                            IsEnabled="{Binding IsReadOnly, Source={x:Reference ueComboBox}, Converter={StaticResource InvertBoolean}}"
+                            ItemsSource="{Binding UnidadeEpidemiologicaList, Source={x:Reference ueComboBox}}"
+                            SelectionChanged="OnComboSelectionChanged"
+                            ShowBorder="False"
+                            TextColor="{Binding IsReadOnly, Source={x:Reference ueComboBox}, Converter={StaticResource BoolToColorConverter}}" />
+
+                        <!--  Botão Apagar (só visível se selecionado)  -->
+                        <buttons:SfButton
+                            Grid.Column="1"
+                            Margin="0"
+                            Padding="0"
+                            BackgroundColor="Transparent"
+                            Clicked="ClearSelected"
+                            FontFamily="FontAwesomeRegular"
+                            HeightRequest="40"
+                            HorizontalOptions="Center"
+                            IsEnabled="{Binding IsReadOnly, Source={x:Reference ueComboBox}, Converter={StaticResource InvertBoolean}}"
+                            IsVisible="{Binding PrecisaMostrarApagar, Source={x:Reference ueComboBox}, Mode=OneWay}"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.Trash}"
+                            TextColor="{StaticResource PrimaryColor}"
+                            VerticalOptions="Center"
+                            WidthRequest="40" />
+                    </Grid>
+                </Border>
+
+                <!--  Botão Adicionar Nova UE  -->
+                <buttons:SfButton
+                    x:Name="btAdd"
+                    Grid.Column="1"
+                    BackgroundColor="Transparent"
+                    Command="{Binding AddNewComboBoxCommand, Source={x:Reference ueComboBox}}"
+                    CornerRadius="24"
+                    FontFamily="FontAwesomeRegular"
+                    FontSize="24"
+                    HeightRequest="48"
+                    VerticalOptions="Center"
+                    Text="{x:Static fontawesome:FontAwesomeIcons.CirclePlus}"
+                    TextColor="{StaticResource PrimaryColor}"
+                    WidthRequest="48" />
+            </Grid>
+        </VerticalStackLayout>
+    </ContentView.Content>
+</controls:ValidatableFieldBase>

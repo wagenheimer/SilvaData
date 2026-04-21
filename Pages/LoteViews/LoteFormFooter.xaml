@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="SilvaData.Controls.LoteFormFooter"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:viewmodels="clr-namespace:SilvaData.ViewModels">
+
+    <ContentView.Content>
+        <StackLayout
+            Padding="10,2"
+            x:DataType="viewmodels:LoteFormularioViewModel"
+            BindingContext="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext}">
+
+            <Label
+                Margin="0,10,0,10"
+                Text="{localization:Translate Observações}"
+                TextColor="{StaticResource PrimaryColor}" />
+
+            <Editor
+                Margin="2,0"
+                HeightRequest="200"
+                IsReadOnly="{Binding ReadOnly}"
+                Text="{Binding LoteFormulario.LoteForm.observacoes, Mode=TwoWay}" />
+
+            <Label
+                Margin="0,10,0,10"
+                Text="{localization:Translate Fotos}"
+                TextColor="{StaticResource PrimaryColor}"
+                VerticalOptions="Center" />
+
+            <Grid ColumnDefinitions="1*,1*,1*" RowDefinitions="150">
+                <controls:ImagemSelecao
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    IsReadOnly="{Binding Path=ReadOnly, Mode=OneWay}"
+                    LoteFormImagem="{Binding LoteFormImagem1, Mode=TwoWay}"
+                    NumeroFoto="1" />
+                <controls:ImagemSelecao
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    IsReadOnly="{Binding Path=ReadOnly, Mode=OneWay}"
+                    LoteFormImagem="{Binding LoteFormImagem2, Mode=TwoWay}"
+                    NumeroFoto="2" />
+                <controls:ImagemSelecao
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    IsReadOnly="{Binding Path=ReadOnly, Mode=OneWay}"
+                    LoteFormImagem="{Binding LoteFormImagem3, Mode=TwoWay}"
+                    NumeroFoto="3" />
+            </Grid>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="SilvaData.Controls.AvaliacaoAlternativas"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:models="clr-namespace:SilvaData.Models"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
+    x:Name="AvaliacaoAlternativasRoot"
+    x:DataType="viewmodels:AvaliacaoAlternativasViewModel"
+    MinimumHeightRequest="400">
+
+    <ContentView.Content>
+        <Grid RowDefinitions="Auto,*" RowSpacing="10">
+
+            <Grid
+                Grid.Row="0"
+                Padding="10"
+                ColumnDefinitions="*,Auto,Auto,Auto"
+                ColumnSpacing="8">
+
+                <VerticalStackLayout Grid.Column="0" Spacing="2">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="15"
+                        LineBreakMode="TailTruncation"
+                        Text="{Binding RespostaSelecionada.Parametro.nome}"
+                        TextColor="{StaticResource PrimaryColor}" />
+                    <Label
+                        FontSize="11"
+                        Opacity="0.6"
+                        Text="{Binding RespostaSelecionada.NumeroRespostaFormatado}"
+                        TextColor="{StaticResource PrimaryColor}" />
+                </VerticalStackLayout>
+
+                <Button
+                    Grid.Column="1"
+                    Padding="12,0"
+                    Background="{StaticResource ButtonColor}"
+                    Command="{Binding EditarCommand}"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    IsVisible="{Binding PodeEditar, Converter={StaticResource InvertBoolean}}"
+                    Text="{localization:Translate Editar}"
+                    TextColor="White" />
+
+                <Button
+                    Grid.Column="2"
+                    Padding="12,0"
+                    Background="#07AD53"
+                    Command="{Binding ConfirmarRespostaCommand}"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    IsVisible="{Binding RespostaSelecionada.TemAlternativaSelecionadaAindaNaoConfirmada}"
+                    Text="{localization:Translate Confirmar}"
+                    TextColor="White" />
+
+                <Button
+                    Grid.Column="3"
+                    Padding="12,0"
+                    Background="{StaticResource ButtonColor}"
+                    Command="{Binding AdicionaNovoCommand}"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    IsVisible="{Binding RespostaSelecionada.TemAlternativaSelecionada}"
+                    Text="{localization:Translate NovoRegistro}"
+                    TextColor="White" />
+            </Grid>
+
+            <listView:SfListView
+                Grid.Row="1"
+                AutoFitMode="Height"
+                IsScrollingEnabled="True"
+                ItemSpacing="2"
+                ItemsSource="{Binding AlternativasParametroSelecionado}"
+                SelectionMode="None"
+                ItemTapped="SfListView_ItemTapped">
+                <listView:SfListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ParametroAlternativas">
+                        <Border
+                            Margin="8,0"
+                            Padding="0"
+                            Background="White"
+                            Stroke="#E0E0E0"
+                            StrokeShape="RoundRectangle 12"
+                            StrokeThickness="2">
+
+                            <Border.Triggers>
+                                <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
+                                    <Setter Property="Background" Value="#C6F1B9" />
+                                    <Setter Property="Stroke" Value="#4CAF50" />
+                                    <Setter Property="StrokeThickness" Value="3" />
+                                </DataTrigger>
+                            </Border.Triggers>
+
+                            <Border.Shadow>
+                                <Shadow Brush="Black" Opacity="0.1" Radius="8" Offset="0,2" />
+                            </Border.Shadow>
+
+                            <Grid
+                                Padding="8"
+                                ColumnDefinitions="*,Auto"
+                                ColumnSpacing="10">
+
+                                <Grid
+                                    Grid.Column="0"
+                                    ColumnDefinitions="Auto,*"
+                                    ColumnSpacing="10"
+                                    IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type controls:AvaliacaoAlternativas}}, Path=BindingContext.PodeEditar}">
+
+                                    <Label
+                                        Grid.Column="0"
+                                        Padding="6"
+                                        FontFamily="FontAwesomeRegular"
+                                        FontSize="20"
+                                        HorizontalTextAlignment="Center"
+                                        Text="{x:Static fontawesome:FontAwesomeIcons.Square}"
+                                        TextColor="{StaticResource PrimaryColor}"
+                                        VerticalTextAlignment="Center">
+                                        <Label.Triggers>
+                                            <DataTrigger Binding="{Binding IsSelected}" TargetType="Label" Value="True">
+                                                <Setter Property="Text" Value="{x:Static fontawesome:FontAwesomeIcons.SquareCheck}" />
+                                                <Setter Property="TextColor" Value="Green" />
+                                                <Setter Property="FontFamily" Value="FontAwesomeSolid" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+
+                                    <Label
+                                        Grid.Column="1"
+                                        FontAttributes="Bold"
+                                        FontSize="16"
+                                        Text="{Binding descricao}"
+                                        TextColor="{StaticResource PrimaryColor}"
+                                        VerticalOptions="Center">
+                                        <Label.Triggers>
+                                            <DataTrigger Binding="{Binding IsSelected}" TargetType="Label" Value="True">
+                                                <Setter Property="TextColor" Value="#2E7D32" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                </Grid>
+
+                                <Button
+                                    Grid.Column="1"
+                                    Padding="6"
+                                    BackgroundColor="{StaticResource PrimaryColor}"
+                                    Clicked="OnVerFotoClicked"  
+                                    CornerRadius="10"
+                                    FontFamily="FontAwesomeSolid"
+                                    FontSize="18"
+                                    IsVisible="{Binding urlImagemLocal, Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                                    Text="{x:Static fontawesome:FontAwesomeIcons.Image}"
+                                    TextColor="White"
+                                    VerticalOptions="Center" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </listView:SfListView.ItemTemplate>
+
+                <listView:SfListView.EmptyView>
+                    <VerticalStackLayout
+                        Padding="30,40"
+                        Spacing="16"
+                        VerticalOptions="Center">
+
+                        <Border
+                            Padding="24"
+                            Background="#F5F5F5"
+                            HorizontalOptions="Center"
+                            StrokeShape="RoundRectangle 60"
+                            StrokeThickness="0">
+                            <Label
+                                FontFamily="FontAwesomeSolid"
+                                FontSize="56"
+                                HorizontalTextAlignment="Center"
+                                Opacity="0.3"
+                                Text="{x:Static fontawesome:FontAwesomeIcons.ListCheck}"
+                                TextColor="{StaticResource PrimaryColor}" />
+                        </Border>
+
+                        <VerticalStackLayout Spacing="6">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                HorizontalTextAlignment="Center"
+                                Text="Nenhuma alternativa disponível"
+                                TextColor="#424242" />
+                            <Label
+                                FontSize="14"
+                                HorizontalTextAlignment="Center"
+                                Opacity="0.7"
+                                Text="Adicione alternativas para começar"
+                                TextColor="#757575" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </listView:SfListView.EmptyView>
+            </listView:SfListView>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,367 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net10.0-android;net10.0-ios;</TargetFrameworks>
+		<EnablePreviewFeatures>true</EnablePreviewFeatures>
+		<OutputType>Exe</OutputType>
+		<RootNamespace>SilvaData</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<NoWarn>XC0103;XA4211</NoWarn>
+		<MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
+
+		<ApplicationTitle>SilvaData</ApplicationTitle>
+		<ApplicationId>com.cwsoftware.silvadata</ApplicationId>
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<WindowsPackageType>None</WindowsPackageType>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">12.2</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">23.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(TargetFramework)'=='net10.0-ios'">
+		<CodesignKey>Apple Development: Created via API (A4F2T94FN8)</CodesignKey>
+		<CodesignProvision>VS: com.cwsoftware.ISIInstitute2 Development</CodesignProvision>
+	</PropertyGroup>
+
+	<!-- Configurações específicas para DEBUG (Rápido para desenvolvimento) -->
+	<PropertyGroup Condition="'$(TargetFramework)'=='net10.0-ios' and '$(Configuration)'=='Debug'">
+		<!-- O uso do interpreter em Debug evita o tempo exaustivo de AOT compilation -->
+		<MtouchExtraArgs>$(MtouchExtraArgs) --interpreter --linkskip=System.Security.Permissions --linkskip=CommunityToolkit.Maui --linkskip=Syncfusion.Maui.Core --linkskip=Syncfusion.Maui.Toolkit --linkskip=Syncfusion.Maui.Gauges --linkskip=Syncfusion.Maui.Buttons --linkskip=Syncfusion.Maui.DataGrid --linkskip=Syncfusion.Maui.ImageEditor --linkskip=Syncfusion.Maui.Inputs --linkskip=Syncfusion.Maui.ListView --linkskip=Syncfusion.Maui.Scheduler --linkskip=Syncfusion.Maui.TabView</MtouchExtraArgs>
+		<MtouchLink>None</MtouchLink>
+		<Optimize>false</Optimize>
+	</PropertyGroup>
+
+	<!-- Configurações específicas para RELEASE (Otimizado para produção) -->
+	<PropertyGroup Condition="'$(TargetFramework)'=='net10.0-ios' and '$(Configuration)'=='Release'">
+		<!-- Removido interpreter para produção. Adicionado num-jobs para paralelizar o stripping/AOT -->
+		<MtouchExtraArgs>$(MtouchExtraArgs) --num-jobs=4 --linkskip=System.Security.Permissions --linkskip=CommunityToolkit.Maui --linkskip=Syncfusion.Maui.Core --linkskip=Syncfusion.Maui.Toolkit --linkskip=Syncfusion.Maui.Gauges --linkskip=Syncfusion.Maui.Buttons --linkskip=Syncfusion.Maui.DataGrid --linkskip=Syncfusion.Maui.ImageEditor --linkskip=Syncfusion.Maui.Inputs --linkskip=Syncfusion.Maui.ListView --linkskip=Syncfusion.Maui.Scheduler --linkskip=Syncfusion.Maui.TabView</MtouchExtraArgs>
+		<MtouchLink>SdkOnly</MtouchLink>
+		<MtouchUseLlvm>false</MtouchUseLlvm>
+		<Optimize>true</Optimize>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<ValidateXcodeVersion>false</ValidateXcodeVersion>
+	</PropertyGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)'=='net10.0-ios'">
+		<LinkDescription Include="LinkerPreserve.xml" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)'=='net10.0-android'">
+		<LinkDescription Include="LinkerPreserve.xml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<MauiIcon Condition="$(TargetFramework.Contains('-ios'))" Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#364271" ForegroundScale="1" />
+		<MauiIcon Condition="!$(TargetFramework.Contains('-ios'))" Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#364271" ForegroundScale="0.85" />
+
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#364271" BaseSize="256,256" />
+
+		<MauiImage Include="Resources\Images\*" />
+
+		<MauiFont Include="Resources\Fonts\*.ttf" />
+		<MauiFont Include="Resources\Fonts\*.otf" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AndroidResource Remove="Resources\Raw\**" />
+	  <Compile Remove="Resources\Raw\**" />
+	  <EmbeddedResource Remove="Resources\Raw\**" />
+	  <MauiCss Remove="Resources\Raw\**" />
+	  <MauiXaml Remove="Resources\Raw\**" />
+	  <None Remove="Resources\Raw\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="Resources\Images\Icons\AnaliseSalmonela.png" />
+		<None Remove="Resources\Images\Icons\AvaliacaoGalpao.png" />
+		<None Remove="Resources\Images\Icons\Config.png" />
+		<None Remove="Resources\Images\Icons\ConfigSelected.png" />
+		<None Remove="Resources\Images\Icons\dashboard.png" />
+		<None Remove="Resources\Images\Icons\dashboardSelected.png" />
+		<None Remove="Resources\Images\Icons\DiagnosticoEnfermidade.png" />
+		<None Remove="Resources\Images\Icons\Edit.png" />
+		<None Remove="Resources\Images\Icons\Editar.png" />
+		<None Remove="Resources\Images\Icons\Email.png" />
+		<None Remove="Resources\Images\Icons\IconAcometimento.png" />
+		<None Remove="Resources\Images\Icons\IconAtividades.png" />
+		<None Remove="Resources\Images\Icons\IconDashboard.png" />
+		<None Remove="Resources\Images\Icons\IconDispersao.png" />
+		<None Remove="Resources\Images\Icons\IconISIMicro.png" />
+		<None Remove="Resources\Images\Icons\IconLogOff.png" />
+		<None Remove="Resources\Images\Icons\IconLotes.png" />
+		<None Remove="Resources\Images\Icons\IconMinhaConta.png" />
+		<None Remove="Resources\Images\Icons\IconNotificacoes.png" />
+		<None Remove="Resources\Images\Icons\IconPrivacy.png" />
+		<None Remove="Resources\Images\Icons\IconPropriedades.png" />
+		<None Remove="Resources\Images\Icons\IconProprietarios.png" />
+		<None Remove="Resources\Images\Icons\IconRegionais.png" />
+		<None Remove="Resources\Images\Icons\IconScore.png" />
+		<None Remove="Resources\Images\Icons\IconSuporte.png" />
+		<None Remove="Resources\Images\Icons\IconSync.png" />
+		<None Remove="Resources\Images\Icons\IconTratamentoWhite.png" />
+		<None Remove="Resources\Images\Icons\IconUE.png" />
+		<None Remove="Resources\Images\Icons\ISILogo.png" />
+		<None Remove="Resources\Images\Icons\ISIMacro.png" />
+		<None Remove="Resources\Images\Icons\ISIMacroIntestino.png" />
+		<None Remove="Resources\Images\Icons\ISIMacroOrgaos.png" />
+		<None Remove="Resources\Images\Icons\ISIMacroRespiratorio.png" />
+		<None Remove="Resources\Images\Icons\ISIMicro.png" />
+		<None Remove="Resources\Images\Icons\Landscape.png" />
+		<None Remove="Resources\Images\Icons\lotes.png" />
+		<None Remove="Resources\Images\Icons\lotesSelected.png" />
+		<None Remove="Resources\Images\Icons\Manejo.png" />
+		<None Remove="Resources\Images\Icons\Sanidade.png" />
+		<None Remove="Resources\Images\Icons\Spinner.png" />
+		<None Remove="Resources\Images\Icons\Suporte.png" />
+		<None Remove="Resources\Images\Icons\SuporteSelected.png" />
+		<None Remove="Resources\Images\Icons\Sync.png" />
+		<None Remove="Resources\Images\Icons\SyncSelected.png" />
+		<None Remove="Resources\Images\Icons\TratamentoViaAgua.png" />
+		<None Remove="Resources\Images\Icons\Vacinas.png" />
+		<None Remove="Resources\Images\Icons\Voltar.svg" />
+		<None Remove="Resources\Images\Icons\VoltarAzul.png" />
+		<None Remove="Resources\Images\Icons\Whatsapp.png" />
+		<None Remove="Resources\Images\Icons\Zootecnico.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui.Camera" Version="6.0.1" />
+		<PackageReference Include="LocalizationResourceManager.Maui" Version="1.2.2" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.51" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.6" />
+		<PackageReference Include="Plugin.LocalNotification" Version="14.1.0" />
+		<PackageReference Include="SkiaSharp" Version="3.119.2" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="14.1.0" />
+		<PackageReference Include="Microsoft.Data.Sqlite.Core" Version="10.0.6" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+		<PackageReference Include="Sentry" Version="6.4.0" />
+		<PackageReference Include="Sentry.Maui" Version="6.4.0" />
+		<PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.11" />
+		<PackageReference Include="Syncfusion.Maui.Buttons" Version="33.1.49" />
+		<PackageReference Include="Syncfusion.Maui.DataGrid" Version="33.1.49" />
+		<PackageReference Include="Syncfusion.Maui.Gauges" Version="33.1.49" />
+		<PackageReference Include="Syncfusion.Maui.ImageEditor" Version="33.1.49" />
+		<PackageReference Include="Syncfusion.Maui.Inputs" Version="33.1.49" />
+		<PackageReference Include="Syncfusion.Maui.ListView" Version="33.1.49" />
+		<PackageReference Include="Syncfusion.Maui.Scheduler" Version="33.1.49" />
+		<PackageReference Include="Syncfusion.Maui.Toolkit" Version="1.0.9" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Utils\Converters\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<MauiImage Include="Resources\Images\Icons\analisesalmonela.png" />
+		<MauiImage Include="Resources\Images\Icons\avaliacaogalpao.png" />
+		<MauiImage Include="Resources\Images\Icons\config.png" />
+		<MauiImage Include="Resources\Images\Icons\configselected.png" />
+		<MauiImage Include="Resources\Images\Icons\dashboard.png" />
+		<MauiImage Include="Resources\Images\Icons\dashboardselected.png" />
+		<MauiImage Include="Resources\Images\Icons\diagnosticoenfermidade.png" />
+		<MauiImage Include="Resources\Images\Icons\edit.png" />
+		<MauiImage Include="Resources\Images\Icons\editar.png" />
+		<MauiImage Include="Resources\Images\Icons\email.png" />
+		<MauiImage Include="Resources\Images\Icons\iconacometimento.png" />
+		<MauiImage Include="Resources\Images\Icons\iconatividades.png" />
+		<MauiImage Include="Resources\Images\Icons\icondashboard.png" />
+		<MauiImage Include="Resources\Images\Icons\icondispersao.png" />
+		<MauiImage Include="Resources\Images\Icons\iconisimicro.png" />
+		<MauiImage Include="Resources\Images\Icons\iconlogoff.png" />
+		<MauiImage Include="Resources\Images\Icons\iconlotes.png" />
+		<MauiImage Include="Resources\Images\Icons\iconminhaconta.png" />
+		<MauiImage Include="Resources\Images\Icons\iconnotificacoes.png" />
+		<MauiImage Include="Resources\Images\Icons\iconprivacy.png" />
+		<MauiImage Include="Resources\Images\Icons\iconpropriedades.png" />
+		<MauiImage Include="Resources\Images\Icons\iconproprietarios.png" />
+		<MauiImage Include="Resources\Images\Icons\iconregionais.png" />
+		<MauiImage Include="Resources\Images\Icons\iconscore.png" />
+		<MauiImage Include="Resources\Images\Icons\iconsuporte.png" />
+		<MauiImage Include="Resources\Images\Icons\iconsync.png" />
+		<MauiImage Include="Resources\Images\Icons\icontratamentowhite.png" />
+		<MauiImage Include="Resources\Images\Icons\iconue.png" />
+		<MauiImage Include="Resources\Images\Icons\isilogo.png" />
+		<MauiImage Include="Resources\Images\Icons\isimacro.png" />
+		<MauiImage Include="Resources\Images\Icons\isimacrointestino.png" />
+		<MauiImage Include="Resources\Images\Icons\isimacrolocomotorcarcaca.png" />
+		<MauiImage Include="Resources\Images\Icons\isimacroorgaos.png" />
+		<MauiImage Include="Resources\Images\Icons\isimacrorespiratorio.png" />
+		<MauiImage Include="Resources\Images\Icons\isimicro.png" />
+		<MauiImage Include="Resources\Images\Icons\landscape.png" />
+		<MauiImage Include="Resources\Images\Icons\lotes.png" />
+		<MauiImage Include="Resources\Images\Icons\lotesselected.png" />
+		<MauiImage Include="Resources\Images\Icons\manejo.png" />
+		<MauiImage Include="Resources\Images\Icons\nutricao.png" />
+		<MauiImage Include="Resources\Images\Icons\sanidade.png" />
+		<MauiImage Include="Resources\Images\Icons\spinner.png" />
+		<MauiImage Include="Resources\Images\Icons\suporte.png" />
+		<MauiImage Include="Resources\Images\Icons\suporteselected.png" />
+		<MauiImage Include="Resources\Images\Icons\sync.png" />
+		<MauiImage Include="Resources\Images\Icons\syncselected.png" />
+		<MauiImage Include="Resources\Images\Icons\tratamentoviaagua.png" />
+		<MauiImage Include="Resources\Images\Icons\vacinas.png" />
+		<MauiImage Include="Resources\Images\Icons\voltar.svg" />
+		<MauiImage Include="Resources\Images\Icons\voltarazul.png" />
+		<MauiImage Include="Resources\Images\Icons\whatsapp.png" />
+		<MauiImage Include="Resources\Images\Icons\zootecnico.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Pages\Controls\LoteFormTopHeader.xaml.cs">
+			<DependentUpon>LoteFormTopHeader.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\LoteViews\LoteMonitoramentoView.xaml.cs">
+			<DependentUpon>LoteMonitoramentoView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\LoteViews\LoteISIMicroView.xaml.cs">
+			<DependentUpon>LoteISIMicroView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\LoteViews\LoteZootecnicoView.xaml.cs">
+			<DependentUpon>LoteZootecnicoView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\LoteViews\LoteVacinasView.xaml.cs">
+			<DependentUpon>LoteVacinasView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\LoteViews\LoteTratamentoView.xaml.cs">
+			<DependentUpon>LoteTratamentoView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\LoteViews\LoteFormularioView.xaml.cs">
+			<DependentUpon>LoteFormularioView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\LoteViews\LoteEditView.xaml.cs">
+			<DependentUpon>LoteEditView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\LoteViews\LoteAvaliacaoGalpaoView.xaml.cs">
+			<DependentUpon>LoteAvaliacaoGalpaoView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\LoteViews\LoteDiagnosticoView.xaml.cs">
+			<DependentUpon>LoteDiagnosticoView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\LoteViews\LoteISIMacroView.xaml.cs">
+			<DependentUpon>LoteISIMacroView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\LoteViews\LoteManejoView.xaml.cs">
+			<DependentUpon>LoteManejoView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\LoteViews\LoteNutricaoView.xaml.cs">
+			<DependentUpon>LoteNutricaoView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\LoteViews\LoteSalmonellaView.xaml.cs">
+			<DependentUpon>LoteSalmonellaView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\SincronizacaoPendentesView.xaml.cs">
+			<DependentUpon>SincronizacaoPendentesView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\SincronizacaoView.xaml.cs">
+			<DependentUpon>SincronizacaoView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\SuportePage.xaml.cs">
+			<DependentUpon>SuportePage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Resources\Localization\AppResources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>AppResources.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Resources\Localization\Localization.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Localization.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\PopUps\PopUpSuccessGalpao.xaml.cs">
+			<DependentUpon>PopUpSuccessGalpao.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\PopUps\PopUpErrorGalpao.xaml.cs">
+			<DependentUpon>PopUpErrorGalpao.xaml</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Resources\Localization\AppResources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Resources\Localization\Localization.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>Localization.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<MauiXaml Update="Pages\Controls\CustomControls\Dashboard\DashboardTabMeusResultados.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\Controls\LoadingView.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\Controls\LoteFormTopHeader.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\DashboardView.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\GraficoResultadosView.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\PopUps\HtmlErrorPopup.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\PopUps\PopUpOK.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\PopUps\PopUpSuccessGalpao.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\PopUps\PopUpErrorGalpao.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\SincronizacaoPageModal.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\SincronizacaoView.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\SuportePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Resources\Styles\ISIStyles.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Templates\PopUpFecharLote.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Templates\PopUpNPS.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Templates\PopUpOK.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Templates\PopUpPrivacy.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Templates\PopUpUsuario.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Templates\PopUpYesNo.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Templates\SelectModeloPopup.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+	</ItemGroup>
+
+</Project>

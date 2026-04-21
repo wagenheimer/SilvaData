@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SilvaData.Pages.PopUps.HtmlErrorPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:localization="clr-namespace:SilvaData.Resources.Localization"
+    BackgroundColor="#80000000">
+
+    <Border
+        Margin="20"
+        Padding="0"
+        BackgroundColor="{AppThemeBinding Light=White,
+                                          Dark=#1E1E1E}"
+        Stroke="{AppThemeBinding Light=#E0E0E0,
+                                 Dark=#3E3E42}"
+        StrokeShape="RoundRectangle 12"
+        StrokeThickness="1">
+
+        <Grid RowDefinitions="Auto,*,Auto">
+            <!--  Header  -->
+            <Grid
+                Grid.Row="0"
+                Padding="16,12"
+                BackgroundColor="{AppThemeBinding Light=#F5F5F5,
+                                                  Dark=#252526}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <VerticalStackLayout Grid.Column="0" Spacing="4">
+                    <HorizontalStackLayout Spacing="8">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="15"
+                            Text="Erro do Servidor"
+                            TextColor="{AppThemeBinding Light=#D32F2F,
+                                                        Dark=#F44336}" />
+                        <Frame
+                            BackgroundColor="{AppThemeBinding Light=#FF9800,
+                                                        Dark=#F57C00}"
+                            CornerRadius="12"
+                            Padding="8,4"
+                            VerticalOptions="Center">
+                            <Label
+                                FontSize="10"
+                                FontAttributes="Bold"
+                                Text="HTML"
+                                TextColor="White" />
+                        </Frame>
+                    </HorizontalStackLayout>
+                    <Label
+                        x:Name="MethodLabel"
+                        FontSize="12"
+                        TextColor="{AppThemeBinding Light=#757575,
+                                                    Dark=#AAAAAA}" />
+                    <Label
+                        x:Name="TimestampLabel"
+                        FontSize="11"
+                        TextColor="{AppThemeBinding Light=#9E9E9E,
+                                                    Dark=#666666}" />
+                </VerticalStackLayout>
+
+                <ImageButton
+                    Grid.Column="1"
+                    AutomationId="BtnFecharHtmlError"
+                    BackgroundColor="Transparent"
+                    Clicked="OnCloseClicked"
+                    CornerRadius="16"
+                    HeightRequest="32"
+                    Source="voltarazul.png"
+                    WidthRequest="32" />
+            </Grid>
+
+            <!--  WebView  -->
+            <WebView
+                x:Name="HtmlWebView"
+                Grid.Row="1"
+                AutomationId="WebViewHtmlError" />
+
+            <!--  Footer com botões  -->
+            <VerticalStackLayout
+                Grid.Row="2"
+                Padding="12,10"
+                Spacing="8"
+                BackgroundColor="{AppThemeBinding Light=#F5F5F5,
+                                                  Dark=#252526}">
+
+                <Label
+                    FontSize="11"
+                    HorizontalOptions="Center"
+                    Text="Compartilhe este erro com o suporte técnico"
+                    TextColor="{AppThemeBinding Light=#757575,
+                                                Dark=#AAAAAA}" />
+
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                    <Button
+                        Grid.Column="0"
+                        Padding="4,6"
+                        AutomationId="BtnCopiarHtmlError"
+                        BackgroundColor="{AppThemeBinding Light=#4CAF50,
+                                                          Dark=#388E3C}"
+                        Clicked="OnCopyClicked"
+                        CornerRadius="6"
+                        FontSize="12"
+                        Text="Copiar HTML"
+                        TextColor="White" />
+
+                    <Button
+                        Grid.Column="1"
+                        Padding="4,6"
+                        AutomationId="BtnCompartilharHtmlError"
+                        BackgroundColor="{StaticResource Primary}"
+                        Clicked="OnShareClicked"
+                        CornerRadius="6"
+                        FontSize="12"
+                        Text="Compartilhar"
+                        TextColor="White" />
+
+                    <Button
+                        Grid.Column="2"
+                        Padding="4,6"
+                        AutomationId="BtnFecharHtmlError2"
+                        BackgroundColor="{AppThemeBinding Light=#E0E0E0,
+                                                          Dark=#3E3E42}"
+                        Clicked="OnCloseClicked"
+                        CornerRadius="6"
+                        FontSize="12"
+                        Text="Fechar"
+                        TextColor="{AppThemeBinding Light=#212121,
+                                                    Dark=#E0E0E0}" />
+                </Grid>
+            </VerticalStackLayout>
+        </Grid>
+    </Border>
+</ContentPage>

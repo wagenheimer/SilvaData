@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SilvaData.Pages.PopUps.DetailedErrorPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#80000000">
+
+    <Border
+        Margin="15"
+        Padding="0"
+        BackgroundColor="{AppThemeBinding Light=White,
+                                          Dark=#1E1E1E}"
+        Stroke="{AppThemeBinding Light=#E0E0E0,
+                                 Dark=#3E3E42}"
+        StrokeShape="RoundRectangle 12"
+        StrokeThickness="1">
+
+        <Grid RowDefinitions="Auto,*,Auto">
+            <!--  Header  -->
+            <Grid
+                Grid.Row="0"
+                Padding="16,12"
+                BackgroundColor="{AppThemeBinding Light=#F5F5F5,
+                                                  Dark=#252526}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <VerticalStackLayout Grid.Column="0" Spacing="4">
+                    <HorizontalStackLayout Spacing="8">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            Text="Erro Detalhado"
+                            TextColor="{AppThemeBinding Light=#D32F2F,
+                                                        Dark=#F44336}" />
+                        <Border
+                            x:Name="ErrorTypeFrame"
+                            BackgroundColor="{AppThemeBinding Light=#9C27B0,
+                                                        Dark=#7B1FA2}"
+                            StrokeShape="RoundRectangle 12"
+                            Stroke="Transparent"
+                            Padding="8,4"
+                            VerticalOptions="Center">
+                            <Label
+                                x:Name="ErrorTypeLabel"
+                                FontSize="10"
+                                FontAttributes="Bold"
+                                Text="ERROR"
+                                TextColor="White" />
+                        </Border>
+                    </HorizontalStackLayout>
+                    <Label
+                        x:Name="MethodLabel"
+                        FontSize="12"
+                        TextColor="{AppThemeBinding Light=#757575,
+                                                    Dark=#AAAAAA}" />
+                    <Label
+                        x:Name="TimestampLabel"
+                        FontSize="11"
+                        TextColor="{AppThemeBinding Light=#9E9E9E,
+                                                    Dark=#666666}" />
+                </VerticalStackLayout>
+
+                <ImageButton
+                    Grid.Column="1"
+                    AutomationId="BtnFecharDetailedError"
+                    BackgroundColor="Transparent"
+                    Clicked="OnCloseClicked"
+                    CornerRadius="16"
+                    HeightRequest="32"
+                    Source="voltarazul.png"
+                    WidthRequest="32" />
+            </Grid>
+
+            <!--  Content com ScrollView  -->
+            <ScrollView
+                Grid.Row="1"
+                Padding="16">
+                <VerticalStackLayout Spacing="12">
+                    
+                    <!--  Mensagem Amigável  -->
+                    <Border
+                        BackgroundColor="{AppThemeBinding Light=#FFF3E0,
+                                                        Dark=#3E2723}"
+                        StrokeShape="RoundRectangle 8"
+                        Stroke="Transparent"
+                        Padding="12">
+                        <VerticalStackLayout Spacing="4">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="Mensagem de Erro"
+                                TextColor="{AppThemeBinding Light=#E65100,
+                                                            Dark=#FFCC80}" />
+                            <Label
+                                x:Name="UserMessageLabel"
+                                FontSize="13"
+                                LineBreakMode="WordWrap"
+                                TextColor="{AppThemeBinding Light=#212121,
+                                                            Dark=#FFFFFF}" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!--  Accordion para Detalhes Técnicos  -->
+                    <Border
+                        BackgroundColor="{AppThemeBinding Light=#F5F5F5,
+                                                        Dark=#2D2D30}"
+                        StrokeShape="RoundRectangle 8"
+                        Stroke="Transparent"
+                        Padding="12">
+                        <VerticalStackLayout Spacing="8">
+                            <Button
+                                x:Name="ToggleDetailsButton"
+                                BackgroundColor="Transparent"
+                                Clicked="OnToggleDetailsClicked"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Start"
+                                Padding="0"
+                                Text="▶ Ver Detalhes Técnicos"
+                                TextColor="{AppThemeBinding Light=#1976D2,
+                                                            Dark=#64B5F6}" />
+
+                            <!--  Detalhes Expandidos  -->
+                            <VerticalStackLayout
+                                x:Name="DetailsStack"
+                                IsVisible="False"
+                                Spacing="12">
+                                
+                                <!--  Informações da Requisição  -->
+                                <VerticalStackLayout Spacing="4">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="13"
+                                        Text="Informações da Requisição"
+                                        TextColor="{AppThemeBinding Light=#424242,
+                                                                    Dark=#BDBDBD}" />
+                                    <Label
+                                        x:Name="RequestIdLabel"
+                                        FontSize="11"
+                                        TextColor="{AppThemeBinding Light=#616161,
+                                                                    Dark=#9E9E9E}" />
+                                    <Label
+                                        x:Name="UrlLabel"
+                                        FontSize="11"
+                                        LineBreakMode="WordWrap"
+                                        TextColor="{AppThemeBinding Light=#616161,
+                                                                    Dark=#9E9E9E}" />
+                                    <Label
+                                        x:Name="StatusCodeLabel"
+                                        FontSize="11"
+                                        TextColor="{AppThemeBinding Light=#616161,
+                                                                    Dark=#9E9E9E}" />
+                                    <Label
+                                        x:Name="ResponseTimeLabel"
+                                        FontSize="11"
+                                        TextColor="{AppThemeBinding Light=#616161,
+                                                                    Dark=#9E9E9E}" />
+                                </VerticalStackLayout>
+
+                                <!--  Payload  -->
+                                <VerticalStackLayout Spacing="4">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="13"
+                                        Text="Payload da Requisição"
+                                        TextColor="{AppThemeBinding Light=#424242,
+                                                                    Dark=#BDBDBD}" />
+                                    <Editor
+                                        x:Name="PayloadEditor"
+                                        FontSize="10"
+                                        HeightRequest="80"
+                                        IsReadOnly="True"
+                                        TextColor="{AppThemeBinding Light=#212121,
+                                                                    Dark=#FFFFFF}" />
+                                </VerticalStackLayout>
+
+                                <!--  Resposta  -->
+                                <VerticalStackLayout Spacing="4">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="13"
+                                        Text="Resposta do Servidor"
+                                        TextColor="{AppThemeBinding Light=#424242,
+                                                                    Dark=#BDBDBD}" />
+                                    <Editor
+                                        x:Name="ResponseEditor"
+                                        FontSize="10"
+                                        HeightRequest="80"
+                                        IsReadOnly="True"
+                                        TextColor="{AppThemeBinding Light=#212121,
+                                                                    Dark=#FFFFFF}" />
+                                </VerticalStackLayout>
+
+                                <!--  Stack Trace  -->
+                                <VerticalStackLayout Spacing="4">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="13"
+                                        Text="Stack Trace"
+                                        TextColor="{AppThemeBinding Light=#424242,
+                                                                    Dark=#BDBDBD}" />
+                                    <Editor
+                                        x:Name="StackTraceEditor"
+                                        FontSize="9"
+                                        HeightRequest="120"
+                                        IsReadOnly="True"
+                                        TextColor="{AppThemeBinding Light=#212121,
+                                                                    Dark=#FFFFFF}" />
+                                </VerticalStackLayout>
+
+                                <!--  Contexto Adicional  -->
+                                <VerticalStackLayout
+                                    x:Name="ContextStack"
+                                    Spacing="4">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="13"
+                                        Text="Contexto Adicional"
+                                        TextColor="{AppThemeBinding Light=#424242,
+                                                                    Dark=#BDBDBD}" />
+                                    <Editor
+                                        x:Name="ContextEditor"
+                                        FontSize="10"
+                                        HeightRequest="60"
+                                        IsReadOnly="True"
+                                        TextColor="{AppThemeBinding Light=#212121,
+                                                                    Dark=#FFFFFF}" />
+                                </VerticalStackLayout>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!--  Informações de Retry  -->
+                    <Border
+                        x:Name="RetryFrame"
+                        BackgroundColor="{AppThemeBinding Light=#E8F5E8,
+                                                        Dark=#1B5E20}"
+                        StrokeShape="RoundRectangle 8"
+                        Stroke="Transparent"
+                        Padding="12"
+                        IsVisible="False">
+                        <VerticalStackLayout Spacing="4">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="13"
+                                Text="Informações de Retry"
+                                TextColor="{AppThemeBinding Light=#2E7D32,
+                                                            Dark=#81C784}" />
+                            <Label
+                                x:Name="RetryCountLabel"
+                                FontSize="11"
+                                TextColor="{AppThemeBinding Light=#388E3C,
+                                                            Dark=#A5D6A7}" />
+                            <Label
+                                x:Name="RetryableLabel"
+                                FontSize="11"
+                                TextColor="{AppThemeBinding Light=#388E3C,
+                                                            Dark=#A5D6A7}" />
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <!--  Footer com botões  -->
+            <Grid
+                Grid.Row="2"
+                Padding="16,12"
+                BackgroundColor="{AppThemeBinding Light=#F5F5F5,
+                                                  Dark=#252526}"
+                ColumnDefinitions="*,Auto,Auto,Auto"
+                ColumnSpacing="8">
+
+                <Label
+                    Grid.Column="0"
+                    FontSize="12"
+                    Text="Compartilhe este erro para análise técnica"
+                    TextColor="{AppThemeBinding Light=#757575,
+                                                Dark=#AAAAAA}"
+                    VerticalOptions="Center" />
+
+                <Button
+                    Grid.Column="1"
+                    Padding="12,6"
+                    AutomationId="BtnCopiarDetailedError"
+                    BackgroundColor="{AppThemeBinding Light=#4CAF50,
+                                                      Dark=#388E3C}"
+                    Clicked="OnCopyClicked"
+                    CornerRadius="6"
+                    FontSize="12"
+                    Text="Copiar"
+                    TextColor="White" />
+
+                <Button
+                    Grid.Column="2"
+                    Padding="12,6"
+                    AutomationId="BtnCompartilharDetailedError"
+                    BackgroundColor="{StaticResource Primary}"
+                    Clicked="OnShareClicked"
+                    CornerRadius="6"
+                    FontSize="12"
+                    Text="Compartilhar"
+                    TextColor="White" />
+
+                <Button
+                    Grid.Column="3"
+                    Padding="12,6"
+                    AutomationId="BtnFecharDetailedError2"
+                    BackgroundColor="{AppThemeBinding Light=#E0E0E0,
+                                                      Dark=#3E3E42}"
+                    Clicked="OnCloseClicked"
+                    CornerRadius="6"
+                    FontSize="12"
+                    Text="Fechar"
+                    TextColor="{AppThemeBinding Light=#212121,
+                                                Dark=#E0E0E0}" />
+            </Grid>
+        </Grid>
+    </Border>
+</ContentPage>

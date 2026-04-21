@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Grid
+    x:Class="SilvaData.Controls.GradienteSuperior"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Grid.Row="0"
+    RowDefinitions="220">
+
+    <StackLayout>
+        <StackLayout.Background>
+            <LinearGradientBrush EndPoint="0,1">
+                <GradientStop Offset="0.1" Color="#0888CD" />
+                <GradientStop Offset="1.0" Color="#26558D" />
+                <GradientStop Offset="1.0" Color="White" />
+            </LinearGradientBrush>
+        </StackLayout.Background>
+    </StackLayout>
+</Grid>

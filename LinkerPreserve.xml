@@ -1,0 +1,21 @@
+<linker>
+  <!-- Microsoft.Maui - essencial para evitar UnsatisfiedLinkError -->
+  <assembly fullname="Microsoft.Maui.Controls" preserve="all" />
+  <assembly fullname="Microsoft.Maui.Core" preserve="all" />
+  
+  <!-- CommunityToolkit -->
+  <assembly fullname="CommunityToolkit.Maui" preserve="all" />
+  <assembly fullname="CommunityToolkit.Maui.Camera" preserve="all" />
+
+  <!-- Syncfusion - todos os assemblies usados no projeto -->
+  <assembly fullname="Syncfusion.Maui.Core" preserve="all" />
+  <assembly fullname="Syncfusion.Maui.Toolkit" preserve="all" />
+  <assembly fullname="Syncfusion.Maui.Buttons" preserve="all" />
+  <assembly fullname="Syncfusion.Maui.DataGrid" preserve="all" />
+  <assembly fullname="Syncfusion.Maui.Gauges" preserve="all" />
+  <assembly fullname="Syncfusion.Maui.ImageEditor" preserve="all" />
+  <assembly fullname="Syncfusion.Maui.Inputs" preserve="all" />
+  <assembly fullname="Syncfusion.Maui.ListView" preserve="all" />
+  <assembly fullname="Syncfusion.Maui.Scheduler" preserve="all" />
+  <assembly fullname="Syncfusion.Maui.TabView" preserve="all" />
+</linker>

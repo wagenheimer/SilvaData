@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="SilvaData.Controls.CirculoScoreLote"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:gauge="clr-namespace:Syncfusion.Maui.Gauges;assembly=Syncfusion.Maui.Gauges"
+    x:Name="circuloControl">
+
+    <ContentView.Content>
+        <Grid WidthRequest="145" RowDefinitions="100" HeightRequest="100" >
+            <gauge:SfRadialGauge  Grid.Row="0" HeightRequest="100">
+                <gauge:SfRadialGauge.Axes>
+                    <gauge:RadialAxis
+                    Background="White"
+                    EndAngle="270"
+                    Interval="1"
+                    Maximum="60"
+                    Minimum="0"
+                    MinorTicksPerInterval="0"
+                    ShowAxisLine="False"
+                    ShowLabels="False"
+                    ShowTicks="False"
+                    StartAngle="270">
+
+                        <gauge:RadialAxis.Pointers>
+                            <gauge:RangePointer
+                            EnableAnimation="False"
+                            Fill="{Binding ValorColorBackground, Source={x:Reference circuloControl}}"
+                            PointerOffset="0.6"
+                            PointerWidth="8"
+                            Value="60" />
+                            <gauge:RangePointer
+                            EnableAnimation="False"
+                            Fill="{Binding ValorColor, Source={x:Reference circuloControl}}"
+                            PointerOffset="0.6"
+                            PointerWidth="8"
+                            Value="{Binding ValorGauge, Source={x:Reference circuloControl}}" />
+                        </gauge:RadialAxis.Pointers>
+                    </gauge:RadialAxis>
+                </gauge:SfRadialGauge.Axes>
+            </gauge:SfRadialGauge>
+
+            <Label
+                Grid.Row="0"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    Text="{Binding Valor, StringFormat='{0:N1}', Source={x:Reference circuloControl}}"
+                    TextColor="{Binding ValorColor, Source={x:Reference circuloControl}}" />
+        </Grid>
+    </ContentView.Content>
+
+</ContentView>

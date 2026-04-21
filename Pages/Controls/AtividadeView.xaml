@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<utils:ContentPageWithLocalization
+    x:Class="SilvaData.Controls.AtividadeView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:isiInstitute="clr-namespace:ISIInstitute"
+    xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:models="clr-namespace:SilvaData.Models"
+    xmlns:pageModels="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:schedule="http://schemas.syncfusion.com/maui"
+    xmlns:templates="clr-namespace:ISIInstitute.Views.Templates"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:utils="clr-namespace:SilvaData.Utils"
+    xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
+    x:Name="AtividadesView"
+    x:DataType="viewModels:AtividadeViewModel"
+    BackgroundColor="{StaticResource PrimaryColor}"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <DataTemplate x:Key="AtividadeCell" x:DataType="models:Atividade">
+                <Border
+                    Margin="0,5"
+                    Padding="0"
+                    BackgroundColor="White"
+                    StrokeShape="RoundRectangle 30"
+                    StrokeThickness="0">
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer x:DataType="x:Null" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AtividadeViewModel}}, Path=MostraDetalheAtividadeCommand}" CommandParameter="{Binding .}" />
+                    </Border.GestureRecognizers>
+
+                    <Grid ColumnDefinitions="15,*,Auto" RowDefinitions="Auto,Auto">
+                        <StackLayout
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Grid.Column="0"
+                            BackgroundColor="{Binding AtividadeStatusColor}" />
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            FontAttributes="Bold"
+                            FontSize="Medium"
+                            Text="{Binding titulo}"
+                            TextColor="{StaticResource SecondaryColor}"
+                            VerticalOptions="End" />
+
+                        <StackLayout
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Orientation="Horizontal">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Micro"
+                                Text="{Binding dataInicio, Converter={StaticResource DateToString}}"
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Micro"
+                                Text="{localization:Translate AtividadeView_A}"
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Micro"
+                                Text="{Binding dataPrazo, Converter={StaticResource DateToString}}"
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Micro"
+                                Text=" - "
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Small"
+                                Text="{Binding AtividadeStatus}"
+                                TextColor="{Binding AtividadeStatusColor}"
+                                VerticalTextAlignment="Center" />
+                        </StackLayout>
+
+                        <Ellipse
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Grid.Column="2"
+                            Margin="0,20,20,20"
+                            Fill="{Binding AtividadeStatusColor}"
+                            HeightRequest="25"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            WidthRequest="25" />
+                    </Grid>
+                </Border>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid
+            BackgroundColor="{StaticResource QuaseBranco}"
+            RowDefinitions="Auto,*"
+            RowSpacing="0">
+
+            <Grid
+                Grid.Row="0"
+                Margin="0"
+                Padding="10,0"
+                ColumnDefinitions="*,Auto"
+                RowDefinitions="Auto,Auto,Auto">
+
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Offset="0.1" Color="#0888CD" />
+                        <GradientStop Offset="1.0" Color="#26558D" />
+                    </LinearGradientBrush>
+                </Grid.Background>
+
+                <StackLayout Grid.Row="0" Spacing="0">
+                    <Label
+                        Padding="5,0"
+                        FontFamily="Nunito"
+                        FontSize="Large"
+                        HorizontalOptions="Start"
+                        Text="{localization:Translate Atividades}"
+                        TextColor="White"
+                        VerticalOptions="Center" />
+                </StackLayout>
+
+                <StackLayout
+                    Grid.RowSpan="3"
+                    Grid.Column="1"
+                    Orientation="Horizontal"
+                    VerticalOptions="Center">
+
+                    <buttons:SfButton
+                        Margin="0"
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        Command="{Binding ShowCalendarioCommand}"
+                        FontFamily="FontAwesomeLight"
+                        FontSize="25"
+                        Style="{StaticResource CircleButton}"
+                        Text="{x:Static fontawesome:FontAwesomeIcons.Calendar}"
+                        TextColor="White" />
+
+                    <buttons:SfButton
+                        x:Name="btLista"
+                        Margin="0"
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        Command="{Binding ShowListaCommand}"
+                        FontFamily="FontAwesomeRegular"
+                        FontSize="25"
+                        Style="{StaticResource CircleButton}"
+                        Text="{x:Static fontawesome:FontAwesomeIcons.List}"
+                        TextColor="White" />
+
+                    <buttons:SfButton
+                        Grid.Column="1"
+                        Command="{Binding VoltarCommand}"
+                        Style="{StaticResource CircleButton}"
+                        Text="{x:Static fontawesome:FontAwesomeIcons.TurnDownLeft}" />
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Row="2"
+                    Padding="5,0,0,10"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Micro"
+                        Text="{Binding SubTitle}"
+                        TextColor="White" />
+                </StackLayout>
+            </Grid>
+
+            <Grid
+                Grid.Row="1"
+                Margin="0"
+                BackgroundColor="{StaticResource QuaseBranco}"
+                IsVisible="{Binding CalendarioVisible}"
+                RowDefinitions="*"
+                RowSpacing="0"
+                VerticalOptions="Fill">
+
+                <Grid
+                    x:Name="dados"
+                    Grid.Row="0"
+                    Margin="0"
+                    RowDefinitions="Auto,*"
+                    RowSpacing="0">
+
+                    <StackLayout Grid.Row="0">
+                        <StackLayout BackgroundColor="#26558D" HeightRequest="100" />
+                    </StackLayout>
+
+                    <Border
+                        x:Name="CalendarioView"
+                        Grid.Row="0"
+                        Margin="10,0"
+                        Padding="0"
+                        BackgroundColor="White"
+                        IsVisible="{Binding CalendarioVisible}"
+                        StrokeShape="RoundRectangle 30">
+
+                        <StackLayout>
+                            <schedule:SfScheduler
+                                x:Name="Calendario"
+                                Margin="5"
+                                AppointmentsSource="{Binding Atividades}"
+                                SelectedDate="{Binding SelectedDate}"
+                                View="Month">
+
+                                <schedule:SfScheduler.AppointmentMapping>
+                                    <schedule:SchedulerAppointmentMapping
+                                        Background="Color"
+                                        EndTime="dataHoraPrazoParaCalendario"
+                                        StartTime="dataHoraInicio"
+                                        Subject="titulo" />
+                                </schedule:SfScheduler.AppointmentMapping>
+
+                                <schedule:SfScheduler.MonthView>
+                                    <schedule:SchedulerMonthView />
+                                </schedule:SfScheduler.MonthView>
+
+                            </schedule:SfScheduler>
+                        </StackLayout>
+                    </Border>
+
+                    <ScrollView
+                        Grid.Row="1"
+                        Margin="15,0"
+                        Padding="0"
+                        BackgroundColor="{StaticResource QuaseBranco}"
+                        VerticalOptions="Fill">
+                        <Grid
+                            IsVisible="True"
+                            RowDefinitions="Auto,*"
+                            VerticalOptions="Fill">
+
+                            <Border
+                                Grid.Row="0"
+                                Padding="20,0"
+                                StrokeShape="RoundRectangle 30">
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding Source={x:Reference Calendario}, Path=SelectedDate, StringFormat='\{0:dddd, d MMMM yyyy}'}"
+                                    TextColor="{StaticResource PrimaryColor}"
+                                    VerticalOptions="Center" />
+                            </Border>
+
+                            <Label
+                                Grid.Row="1"
+                                HorizontalTextAlignment="Center"
+                                IsVisible="{Binding NaoTemAgendamentoNesseDia}"
+                                Text="{localization:Translate NenhumaAtividadeNesteDia}"
+                                VerticalOptions="Fill"
+                                VerticalTextAlignment="Center" />
+
+                            <StackLayout
+                                Grid.Row="1"
+                                Margin="0,5"
+                                BindableLayout.ItemTemplate="{StaticResource AtividadeCell}"
+                                BindableLayout.ItemsSource="{Binding AtividadesDoDia}" />
+                        </Grid>
+                    </ScrollView>
+                </Grid>
+            </Grid>
+
+            <ScrollView
+                x:Name="ListaView"
+                Grid.Row="1"
+                Margin="10,10,10,0"
+                BackgroundColor="{StaticResource QuaseBranco}"
+                IsVisible="{Binding CalendarioVisible, Converter={StaticResource InvertBoolean}}"
+                VerticalOptions="Fill">
+                <StackLayout BindableLayout.ItemTemplate="{StaticResource AtividadeCell}" BindableLayout.ItemsSource="{Binding Atividades}" />
+            </ScrollView>
+
+            <buttons:SfButton
+                Grid.Row="1"
+                Margin="5"
+                BackgroundColor="{StaticResource PrimaryColor}"
+                Command="{Binding NovaAtividadeCommand}"
+                CornerRadius="50"
+                FontSize="30"
+                HeightRequest="70"
+                HorizontalOptions="End"
+                IsVisible="{Binding IsBusy, Converter={StaticResource InvertBoolean}, Source={x:Reference AtividadesView}}"
+                ShowIcon="False"
+                Text="+"
+                VerticalOptions="End"
+                WidthRequest="70" />
+
+            <controls:LoadingView
+                x:Name="busyindicator"
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                IsVisible="{Binding IsBusy}"
+                VerticalOptions="Center" />
+        </Grid>
+    </ContentPage.Content>
+</utils:ContentPageWithLocalization>

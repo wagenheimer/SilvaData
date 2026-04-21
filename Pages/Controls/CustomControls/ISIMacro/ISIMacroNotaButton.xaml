@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="SilvaData.Controls.ISIMacroNotaButton"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    x:Name="NotaButton">
+    <ContentView.Content>
+        <Button
+            Margin="5"
+            BackgroundColor="{Binding SelecionadoColor, Source={x:Reference NotaButton}}"
+            Command="{Binding SelecionaNotaCommand, Source={x:Reference NotaButton}}"
+            CornerRadius="30"
+            FontSize="Large"
+            HeightRequest="65"
+            IsEnabled="{Binding IsReadOnly, Source={x:Reference NotaButton}, Converter={StaticResource InvertBoolean}}"
+            Text="{Binding score}"
+            TextColor="{Binding SelecionadoColorFonte, Source={x:Reference NotaButton}}"
+            VerticalOptions="Center"
+            WidthRequest="65" />
+
+    </ContentView.Content>
+</ContentView>

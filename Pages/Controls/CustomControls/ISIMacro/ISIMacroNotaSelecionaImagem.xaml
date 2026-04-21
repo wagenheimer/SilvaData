@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SilvaData.Controls.ISIMacroNotaSelecionaImagem"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:imageEditor="clr-namespace:Syncfusion.Maui.ImageEditor;assembly=Syncfusion.Maui.ImageEditor"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
+
+    x:DataType="viewModels:ISIMacroNotaSelecionaImagemViewModel"
+    Background="#0888CD"
+    Shell.TabBarIsVisible="False">
+
+    <Grid
+        BackgroundColor="{StaticResource QuaseBranco}"
+        RowDefinitions="Auto,*"
+        RowSpacing="0">
+
+        <!--  Header com gradiente  -->
+        <Grid
+            Grid.Row="0"
+            Padding="10,0"
+            ColumnDefinitions="*,Auto"
+            RowDefinitions="Auto"
+            Style="{StaticResource HeaderGradient}">
+
+            <Label
+                Padding="5,10"
+                FontFamily="Nunito"
+                FontSize="Large"
+                HorizontalOptions="Start"
+                Text="{Binding PageTitle}"
+                TextColor="White"
+                VerticalOptions="Center" />
+
+            <!--  ✅ CORRIGIDO: VoltarCommand (não VoltarAsyncCommand)  -->
+            <buttons:SfButton
+                Grid.Column="1"
+                Command="{Binding VoltarCommand}"
+                Style="{StaticResource CircleButton}"
+                Text="{x:Static fontawesome:FontAwesomeIcons.TurnDownLeft}" />
+        </Grid>
+
+        <!--  Content  -->
+        <Grid
+            Grid.Row="1"
+            BackgroundColor="{StaticResource QuaseBranco}"
+            RowDefinitions="50,*,Auto,Auto,70">
+
+            <!--  Barra decorativa superior  -->
+            <BoxView Grid.Row="0" Background="#26558D" />
+
+            <!--  Imagem com zoom  -->
+            <Border
+                Grid.Row="1"
+                Margin="10,0"
+                Background="White"
+                StrokeShape="RoundRectangle 30"
+                TranslationY="-50">
+
+
+                <Border.GestureRecognizers>
+                    <SwipeGestureRecognizer Command="{Binding PriorCommand}" Direction="Right" />
+                    <SwipeGestureRecognizer Command="{Binding NextCommand}" Direction="Left" />
+                </Border.GestureRecognizers>
+
+                <imageEditor:SfImageEditor
+                    x:Name="sfImageEditor"
+                    BackgroundColor="White"
+                    ShowToolbar="False"
+                    Source="{Binding AlternativaImageSource}" />
+
+            </Border>
+
+            <!--  Descrição  -->
+            <Label
+                Grid.Row="2"
+                Padding="10,5"
+                FontFamily="Nunito"
+                FontSize="20"
+                HorizontalTextAlignment="Center"
+                Text="{Binding Alternativa.descricao}"
+                TextColor="{StaticResource SecondaryColor}" />
+
+            <!--  Navegação  -->
+            <Grid
+                Grid.Row="3"
+                Padding="10,5"
+                ColumnDefinitions="Auto,*,Auto"
+                RowDefinitions="70">
+
+                <buttons:SfButton
+                    Grid.Column="0"
+                    Margin="30,0,5,0"
+                    Background="#EFF3F9"
+                    Command="{Binding PriorCommand}"
+                    CornerRadius="35"
+                    FontFamily="FontAwesomeLight"
+                    FontSize="Medium"
+                    HeightRequest="70"
+                    Style="{StaticResource PrimaryButton}"
+                    Text="{x:Static fontawesome:FontAwesomeIcons.ChevronLeft}"
+                    TextColor="Black"
+                    WidthRequest="70" />
+
+                <!--  ✅ CORRIGIDO: SelectAndBackCommand (não SelectAndBackAsyncCommand)  -->
+                <Border
+                    Grid.Column="1"
+                    Margin="15,0"
+                    Padding="0"
+                    HorizontalOptions="Center"
+                    Stroke="{StaticResource PrimaryColor}"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="2"
+                    VerticalOptions="Center"
+                    WidthRequest="80">
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SelectAndBackCommand}" />
+                    </Border.GestureRecognizers>
+
+                    <Label
+                        Margin="0"
+                        Padding="0"
+                        FontAttributes="Bold"
+                        FontSize="35"
+                        HorizontalTextAlignment="Center"
+                        Text="{Binding Alternativa.score}"
+                        TextColor="{StaticResource PrimaryColor}"
+                        VerticalTextAlignment="Center" />
+                </Border>
+
+                <buttons:SfButton
+                    Grid.Column="2"
+                    Margin="5,0,30,0"
+                    Background="#EFF3F9"
+                    Command="{Binding NextCommand}"
+                    CornerRadius="35"
+                    FontFamily="FontAwesomeLight"
+                    FontSize="Medium"
+                    HeightRequest="70"
+                    Style="{StaticResource PrimaryButton}"
+                    Text="{x:Static fontawesome:FontAwesomeIcons.ChevronRight}"
+                    TextColor="Black"
+                    WidthRequest="70" />
+            </Grid>
+
+            <buttons:SfButton
+                Grid.Row="4"
+                Margin="10,5"
+                Command="{Binding SelectAndBackCommand}"
+                CornerRadius="10"
+                FontSize="Medium"
+                Style="{StaticResource PrimaryButton}"
+                Text="{localization:Translate Selecionar}" />
+        </Grid>
+    </Grid>
+</ContentPage>

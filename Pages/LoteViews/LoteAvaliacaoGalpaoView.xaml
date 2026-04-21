@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ISIInstitute.Views.LoteViews.LoteAvaliacaoGalpaoView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:comboBox="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:templates="clr-namespace:ISIInstitute.Views.Templates"
+    xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
+    xmlns:numericupdown="http://schemas.syncfusion.com/maui/toolkit"
+    x:DataType="viewModels:LoteAvaliacaoGalpaoViewModel"
+    Background="#0888CD">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <!--  ★★★ TEMPLATE QUALITATIVO - COMPACTO ★★★  -->
+            <DataTemplate x:Key="AvaliacaoQualitativa" x:DataType="viewModels:AvaliacaoGalpaoButton">
+                <Border Margin="8,6" Style="{StaticResource CardWithShadow}">
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding EditaAvaliacaoCommand}" CommandParameter="{Binding .}" />
+                    </Border.GestureRecognizers>
+
+                    <Grid
+                        Padding="12"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="10">
+
+                        <!--  HEADER COMPACTO  -->
+                        <Grid
+                            Grid.Row="0"
+                            ColumnDefinitions="Auto,*,Auto,Auto"
+                            ColumnSpacing="10">
+
+                            <!--  Data  -->
+                            <Border
+                                Grid.Column="0"
+                                Padding="8,6"
+                                Background="{StaticResource PrimaryColor}"
+                                HorizontalOptions="Fill"
+                                StrokeShape="RoundRectangle 8"
+                                VerticalOptions="Center">
+                                <HorizontalStackLayout Spacing="6">
+                                    <Label
+                                        FontFamily="FontAwesomeRegular"
+                                        FontSize="14"
+                                        Text="{x:Static fontawesome:FontAwesomeIcons.CalendarDay}"
+                                        TextColor="White"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="14"
+                                        Text="{Binding Data, StringFormat='{0:dd/MM}'}"
+                                        TextColor="White"
+                                        VerticalTextAlignment="Center" />
+                                </HorizontalStackLayout>
+                            </Border>
+
+                            <!--  Spacer  -->
+                            <BoxView Grid.Column="1" Background="White" />
+
+                            <!--  Badge: Idade  -->
+                            <Border
+                                Grid.Column="2"
+                                Padding="8,6"
+                                Background="#E3F2FD"
+                                StrokeShape="RoundRectangle 8"
+                                VerticalOptions="Center">
+                                <HorizontalStackLayout Spacing="4">
+                                    <Label
+                                        FontSize="11"
+                                        Text="{localization:Translate IdadeDoLote}"
+                                        TextColor="{StaticResource PrimaryColor}"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="14"
+                                        Text="{Binding Idade}"
+                                        TextColor="{StaticResource PrimaryColor}"
+                                        VerticalTextAlignment="Center" />
+                                </HorizontalStackLayout>
+                            </Border>
+
+                            <!--  Badge: Quantidade  -->
+                            <Border
+                                Grid.Column="3"
+                                Padding="8,6"
+                                Background="#E8F5E9"
+                                StrokeShape="RoundRectangle 8"
+                                VerticalOptions="Center">
+                                <HorizontalStackLayout Spacing="4">
+                                    <Label
+                                        FontFamily="FontAwesomeSolid"
+                                        FontSize="12"
+                                        Text="{x:Static fontawesome:FontAwesomeIcons.Check}"
+                                        TextColor="#2E7D32"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="14"
+                                        Text="{Binding QtdeAvaliada}"
+                                        TextColor="#2E7D32"
+                                        VerticalTextAlignment="Center" />
+                                </HorizontalStackLayout>
+                            </Border>
+                        </Grid>
+
+                        <!--  BODY: Lista de Resultados COMPACTA  -->
+                        <VerticalStackLayout
+                            Grid.Row="1"
+                            Spacing="1"
+                            BindableLayout.ItemsSource="{Binding Resultados}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="viewModels:AvaliacaoGalpaoResultado">
+                                    <Grid
+                                        Padding="8,2"
+                                        ColumnDefinitions="*,60,Auto"
+                                        ColumnSpacing="8">
+
+                                        <!--  Parâmetro  -->
+                                        <Label
+                                            Grid.Column="0"
+                                            FontSize="13"
+                                            LineBreakMode="TailTruncation"
+                                            MaxLines="1"
+                                            Text="{Binding Parametro}"
+                                            TextColor="#2C3E50"
+                                            VerticalTextAlignment="Center" />
+
+                                        <!--  Barra mini  -->
+                                        <Border
+                                            Grid.Column="1"
+                                            Padding="0"
+                                            Background="#E3F2FD"
+                                            HeightRequest="20"
+                                            StrokeShape="RoundRectangle 10"
+                                            VerticalOptions="Center">
+                                            <Border
+                                                Background="{StaticResource PrimaryColor}"
+                                                HorizontalOptions="Start"
+                                                StrokeShape="RoundRectangle 10"
+                                                WidthRequest="{Binding Porcentagem, Converter={StaticResource PercentToWidthConverter}}" />
+                                        </Border>
+
+                                        <!--  %  -->
+                                        <Label
+                                            Grid.Column="2"
+                                            FontAttributes="Bold"
+                                            FontSize="13"
+                                            Text="{Binding Porcentagem, StringFormat='{0:F0}%'}"
+                                            TextColor="{StaticResource PrimaryColor}"
+                                            VerticalTextAlignment="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+
+            <!--  ★★★ TEMPLATE QUANTITATIVO - COMPACTO ★★★  -->
+            <DataTemplate x:Key="AvaliacaoQuantitativa" x:DataType="viewModels:AvaliacaoGalpaoButton">
+                <Border Margin="8,6" Style="{StaticResource CardWithShadow}" >
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding EditaAvaliacaoCommand}" CommandParameter="{Binding .}" />
+                    </Border.GestureRecognizers>
+
+                    <Grid
+                        Padding="12"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="10">
+
+                        <!--  HEADER COMPACTO  -->
+                        <Grid
+                            Grid.Row="0"
+                            ColumnDefinitions="Auto,*,Auto,Auto"
+                            ColumnSpacing="10">
+
+                            <!--  Data  -->
+                            <Border
+                                Grid.Column="0"
+                                Padding="8,6"
+                                Background="{StaticResource PrimaryColor}"
+                                HorizontalOptions="Fill"
+                                StrokeShape="RoundRectangle 8"
+                                VerticalOptions="Center">
+                                <HorizontalStackLayout Spacing="6">
+                                    <Label
+                                        FontFamily="FontAwesomeRegular"
+                                        FontSize="14"
+                                        Text="{x:Static fontawesome:FontAwesomeIcons.CalendarDay}"
+                                        TextColor="White"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="14"
+                                        Text="{Binding Data, StringFormat='{0:dd/MM}'}"
+                                        TextColor="White"
+                                        VerticalTextAlignment="Center" />
+                                </HorizontalStackLayout>
+                            </Border>
+
+                            <!--  Spacer  -->
+                            <BoxView Grid.Column="1" Background="White" />
+
+                            <!--  Badge: Idade  -->
+                            <Border
+                                Grid.Column="2"
+                                Padding="8,6"
+                                Background="#E3F2FD"
+                                StrokeShape="RoundRectangle 8"
+                                VerticalOptions="Center">
+                                <HorizontalStackLayout Spacing="4">
+                                    <Label
+                                        FontSize="11"
+                                        Text="{localization:Translate IdadeDoLote}"
+                                        TextColor="{StaticResource PrimaryColor}"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="14"
+                                        Text="{Binding Idade}"
+                                        TextColor="{StaticResource PrimaryColor}"
+                                        VerticalTextAlignment="Center" />
+                                </HorizontalStackLayout>
+                            </Border>
+
+                            <!--  Badge: Quantidade  -->
+                            <Border
+                                Grid.Column="3"
+                                Padding="8,6"
+                                Background="#E8F5E9"
+                                StrokeShape="RoundRectangle 8"
+                                VerticalOptions="Center">
+                                <HorizontalStackLayout Spacing="4">
+                                    <Label
+                                        FontFamily="FontAwesomeSolid"
+                                        FontSize="12"
+                                        Text="{x:Static fontawesome:FontAwesomeIcons.Check}"
+                                        TextColor="#2E7D32"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="14"
+                                        Text="{Binding QtdeAvaliada}"
+                                        TextColor="#2E7D32"
+                                        VerticalTextAlignment="Center" />
+                                </HorizontalStackLayout>
+                            </Border>
+                        </Grid>
+
+                        <!--  BODY: Valor de Média (Destaque)  -->
+                        <Grid
+                            Grid.Row="1"
+                            Padding="8,4"
+                            ColumnDefinitions="*,Auto"
+                            HorizontalOptions="Fill">
+
+                            <Label
+                                Grid.Column="0"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{localization:Translate Media}"
+                                TextColor="{StaticResource SecondaryColor}"
+                                VerticalTextAlignment="Center" />
+
+                            <Label
+                                Grid.Column="1"
+                                FontAttributes="Bold"
+                                FontSize="24"
+                                Text="{Binding Media, StringFormat='{0:N2}'}"
+                                TextColor="{StaticResource PrimaryColor}"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+
+            <templates:AvaliacaoGalpaoListagemGridTemplateSelector
+                x:Key="AvaliacaoGalpaoListagemGridTemplateSelector"
+                QualitativoMultiplo="{StaticResource AvaliacaoQualitativa}"
+                QualitativoUnico="{StaticResource AvaliacaoQualitativa}"
+                Quantitativo="{StaticResource AvaliacaoQuantitativa}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid
+        Background="{StaticResource QuaseBranco}"
+        RowDefinitions="Auto,Auto,*"
+        RowSpacing="0">
+
+        <!--  HEADER  -->
+        <Grid
+            Grid.Row="0"
+            Padding="16,12"
+            ColumnDefinitions="*,Auto"
+            Style="{StaticResource HeaderGradient}">
+
+            <VerticalStackLayout Spacing="4" VerticalOptions="Center">
+                <Label
+                    FontSize="12"
+                    Opacity="0.85"
+                    Text="{Binding Lote.DescricaoCompleta}"
+                    TextColor="White" />
+                <Label
+                    FontAttributes="Bold"
+                    FontFamily="Nunito"
+                    FontSize="24"
+                    Text="{localization:Translate AvaliacoesNoGalpao}"
+                    TextColor="White" />
+            </VerticalStackLayout>
+
+            <buttons:SfButton
+                Grid.Column="1"
+                Command="{Binding VoltarCommand}"
+                Style="{StaticResource CircleButton}"
+                Text="{x:Static fontawesome:FontAwesomeIcons.TurnDownLeft}"
+                VerticalOptions="Center" />
+        </Grid>
+
+        <!--  FILTRO COMPACTO  -->
+        <Grid
+            Grid.Row="1"
+            Padding="12,10,12,12"
+            Style="{StaticResource SoftGradient}">
+
+            <Border
+                Padding="4,0"
+                Background="White"
+                HeightRequest="48"
+                Stroke="{StaticResource PrimaryColor}"
+                StrokeShape="RoundRectangle 12"
+                StrokeThickness="2">
+
+                <Border.Shadow>
+                    <Shadow
+                        Brush="Black"
+                        Opacity="0.1"
+                        Radius="8"
+                        Offset="0,2" />
+                </Border.Shadow>
+
+                <comboBox:SfComboBox
+                    Background="Transparent"
+                    DisplayMemberPath="nome"
+                    ItemsSource="{Binding ParametrosAvaliacaoGalpaoList}"
+                    Placeholder="{localization:Translate Selecione}"
+                    SelectedItem="{Binding ParametroSelecionado, Mode=TwoWay}"
+                    ShowBorder="False"
+                    TextColor="{StaticResource PrimaryColor}" />
+            </Border>
+        </Grid>
+
+        <!--  LISTA  -->
+        <CollectionView
+            Grid.Row="2"
+            ItemTemplate="{StaticResource AvaliacaoGalpaoListagemGridTemplateSelector}"
+            ItemsSource="{Binding AvaliacaoGalpaoList}">
+
+            <!--  Empty View COMPACTO  -->
+            <CollectionView.EmptyView>
+                <VerticalStackLayout
+                    Padding="30,60"
+                    Spacing="16"
+                    VerticalOptions="Center">
+
+                    <Border
+                        Padding="24"
+                        Background="#F0F4F8"
+                        HorizontalOptions="Center"
+                        StrokeShape="RoundRectangle 50"
+                        StrokeThickness="0">
+                        <Label
+                            FontFamily="FontAwesomeSolid"
+                            FontSize="56"
+                            HorizontalTextAlignment="Center"
+                            Opacity="0.4"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.ClipboardList}"
+                            TextColor="{StaticResource PrimaryColor}" />
+                    </Border>
+
+                    <VerticalStackLayout Spacing="6">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            HorizontalTextAlignment="Center"
+                            Text="{localization:Translate NenhumaAvaliacaoParametro}"
+                            TextColor="{StaticResource PrimaryColor}" />
+                        <Label
+                            FontSize="13"
+                            HorizontalTextAlignment="Center"
+                            Opacity="0.7"
+                            Text="{localization:Translate SelecioneParametroAvaliacao}"
+                            TextColor="{StaticResource SecondaryColor}" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.Header>
+                <BoxView Background="Transparent" HeightRequest="4" />
+            </CollectionView.Header>
+
+            <CollectionView.Footer>
+                <BoxView Background="Transparent" HeightRequest="80" />
+            </CollectionView.Footer>
+        </CollectionView>
+
+        <!--  Loading  -->
+        <controls:LoadingView
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            IsVisible="{Binding IsBusy}"
+            Text="{localization:Translate Aguarde}" />
+
+        <!--  FAB  -->
+        <buttons:SfButton
+            Grid.Row="2"
+            Command="{Binding NovaAvaliacaoCommand}"
+            Style="{StaticResource CircleButtonPlus}" />
+    </Grid>
+</ContentPage>

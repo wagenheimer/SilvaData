@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<utils:ContentPageWithLocalization
+    x:Class="ISIInstitute.Views.NotificacoesView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:isiInstitute="clr-namespace:ISIInstitute"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:models="clr-namespace:SilvaData.Models"
+    xmlns:pageModels="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:utils="clr-namespace:SilvaData.Utils"
+    xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
+    x:Name="AtividadesView"
+    Title="{localization:Translate Notificações}"
+    BackgroundColor="{StaticResource PrimaryColor}"
+    Shell.NavBarIsVisible="false"
+    Shell.TabBarIsVisible="false">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="AtividadeCell" x:DataType="models:Notificacao">
+                <Border
+                    Margin="0,5"
+                    Padding="0"
+                    BackgroundColor="White"
+                    StrokeShape="RoundRectangle 30"
+                    StrokeThickness="0">
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AtividadeViewModel}}, Path=MostraDetalheAtividadeCommand}" CommandParameter="{Binding .}" />
+                    </Border.GestureRecognizers>
+
+                    <Grid ColumnDefinitions="15,*,Auto" RowDefinitions="Auto,Auto">
+
+                        <StackLayout
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Grid.Column="0"
+                            BackgroundColor="{Binding AtividadeStatusColor}" />
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            FontAttributes="Bold"
+                            FontSize="Medium"
+                            Text="{Binding titulo}"
+                            TextColor="{StaticResource SecondaryColor}"
+                            VerticalOptions="End" />
+
+                        <StackLayout
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Orientation="Horizontal">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Micro"
+                                Text="{Binding dataInicio, Converter={StaticResource DateToString}}"
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Micro"
+                                Text="{localization:Translate AtividadeView_A}"
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Micro"
+                                Text="{Binding dataPrazo, Converter={StaticResource DateToString}}"
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Micro"
+                                Text=" - "
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Small"
+                                Text="{Binding AtividadeStatus}"
+                                TextColor="{Binding AtividadeStatusColor}"
+                                VerticalTextAlignment="Center" />
+                        </StackLayout>
+
+                        <Ellipse
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Grid.Column="2"
+                            Margin="0,20,20,20"
+                            Fill="{Binding AtividadeStatusColor}"
+                            HeightRequest="25"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            WidthRequest="25" />
+                    </Grid>
+                </Border>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <Grid
+            BackgroundColor="{StaticResource QuaseBranco}"
+            RowDefinitions="Auto,*"
+            RowSpacing="0">
+
+            <Grid
+                Margin="10,10,0,0"
+                BackgroundColor="{StaticResource QuaseBranco}"
+                ColumnDefinitions="*,Auto"
+                RowDefinitions="Auto,Auto">
+
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    FontFamily="Nunito"
+                    FontSize="Large"
+                    HorizontalTextAlignment="Start"
+                    Text="{localization:Translate Notificações}"
+                    TextColor="{StaticResource PrimaryColor}"
+                    VerticalOptions="Center" />
+
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="0,15"
+                    FontSize="Small"
+                    HorizontalOptions="Start"
+                    Text="{localization:Translate SuasNotificacoes}" />
+
+                <Grid
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,0,10,0"
+                    ColumnDefinitions="Auto,Auto"
+                    HorizontalOptions="End"
+                    VerticalOptions="Fill">
+
+
+                    <buttons:SfButton
+                        Grid.Column="1"
+                        Command="{Binding VoltarCommand}"
+                        Style="{StaticResource CircleButton}"
+                        Text="{x:Static fontawesome:FontAwesomeIcons.TurnDownLeft}" />
+                </Grid>
+
+                <buttons:SfButton
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="10,0"
+                    BackgroundColor="{StaticResource FundoClarinhoBotao}"
+                    Command="{Binding LimparFiltrosCommand}"
+                    CornerRadius="20"
+                    ShowIcon="False"
+                    Text="{localization:Translate Limpar}"
+                    TextColor="{StaticResource PrimaryColor}"
+                    VerticalOptions="Center" />
+
+            </Grid>
+
+            <Grid
+                x:Name="GridNotificacoes"
+                Grid.Row="1"
+                BackgroundColor="{StaticResource QuaseBranco}"
+                IsVisible="{Binding TemNotificacao, Source={x:Reference AtividadesView}}"
+                RowDefinitions="Auto,*"
+                RowSpacing="0">
+
+                <StackLayout
+                    Grid.Row="1"
+                    Margin="15,0"
+                    BindableLayout.ItemsSource="{Binding Source={x:Reference AtividadesView}, Path=Notificacoes}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="{x:Type models:Notificacao}">
+
+                            <Border
+                                Margin="0,5"
+                                BackgroundColor="White"
+                                StrokeShape="RoundRectangle 20"
+                                StrokeThickness="0">
+                                <Grid
+                                    Padding="2,0,2,0"
+                                    ColumnDefinitions="90,*,70"
+                                    RowDefinitions="Auto,4">
+
+                                    <Label
+                                        Grid.Column="0"
+                                        FontSize="Micro"
+                                        HorizontalTextAlignment="Center"
+                                        Text="{Binding Path=dataHora}"
+                                        VerticalOptions="Fill"
+                                        VerticalTextAlignment="Center" />
+
+                                    <StackLayout Grid.Column="1">
+                                        <Label
+                                            Text="{Binding Path=titulo}"
+                                            TextColor="{StaticResource SecondaryColor}"
+                                            VerticalTextAlignment="Center" />
+                                        <Label
+                                            FontSize="Small"
+                                            Text="{Binding Path=descricao}"
+                                            TextColor="Gray"
+                                            VerticalTextAlignment="Center" />
+                                    </StackLayout>
+
+                                    <Button
+                                        Grid.Column="2"
+                                        Margin="2"
+                                        BackgroundColor="{StaticResource FundoClarinhoBotao}"
+                                        Command="{Binding RemoveNotificacaoCommand, Source={x:Reference AtividadesView}}"
+                                        CommandParameter="{Binding .}"
+                                        CornerRadius="20"
+                                        FontFamily="FontAwesomeLight"
+                                        FontSize="25"
+                                        HeightRequest="70"
+                                        HorizontalOptions="Fill"
+                                        Text="{x:Static fontawesome:FontAwesomeIcons.Trash}"
+                                        TextColor="{StaticResource PrimaryColor}"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+                <controls:LoadingView
+                    x:Name="busyindicator"
+                    Grid.Row="1"
+                    HorizontalOptions="Fill"
+                    IsVisible="False"
+                    VerticalOptions="Fill" />
+            </Grid>
+
+            <Label
+                Grid.Row="1"
+                HorizontalOptions="Fill"
+                HorizontalTextAlignment="Center"
+                IsVisible="{Binding NaoTemNotificacao, Source={x:Reference AtividadesView}}"
+                Text="{localization:Translate NenhumaNotificaçãoPendente}"
+                VerticalOptions="Fill"
+                VerticalTextAlignment="Center" />
+        </Grid>
+    </ContentPage.Content>
+</utils:ContentPageWithLocalization>

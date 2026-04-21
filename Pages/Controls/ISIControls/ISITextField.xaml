@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="SilvaData.Controls.ISITextField"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    x:Name="root">
+    <VerticalStackLayout
+        Padding="2"
+        BindingContext="{x:Reference root}"
+        Spacing="4">
+
+        <Grid ColumnDefinitions="*,Auto">
+            <Label
+                x:Name="labelTitle"
+                Grid.Column="0"
+                Margin="0"
+                Padding="5,0"
+                FontSize="Small"
+                Text="{Binding Title}"
+                TextColor="{StaticResource PrimaryColor}" />
+            <Label
+                Grid.Column="1"
+                Margin="2,0,0,0"
+                Padding="0"
+                FontAttributes="Bold"
+                FontSize="Small"
+                IsVisible="{Binding IsRequired}"
+                Text="*"
+                TextColor="Red"
+                VerticalTextAlignment="Center" />
+        </Grid>
+
+        <Border
+            x:Name="borderField"
+            Padding="12,0"
+            Background="White"
+            HeightRequest="52"
+            Stroke="{StaticResource PrimaryColor}"
+            StrokeThickness="1">
+
+            <Border.Triggers>
+                <DataTrigger
+                    Binding="{Binding HasError}"
+                    TargetType="Border"
+                    Value="True">
+                    <Setter Property="Stroke" Value="Red" />
+                    <Setter Property="StrokeThickness" Value="2" />
+                </DataTrigger>
+            </Border.Triggers>
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="8" />
+            </Border.StrokeShape>
+
+            <Grid ColumnDefinitions="*,Auto">
+                <Entry
+                    x:Name="entryField"
+                    Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    FontSize="{OnIdiom 18,
+                                       Desktop=24}"
+                    IsPassword="{Binding ShouldMaskPassword}"
+                    IsReadOnly="{Binding IsReadOnly}"
+                    Placeholder="{Binding Placeholder}"
+                    Text="{Binding Text, Mode=TwoWay}"
+                    TextColor="{Binding IsReadOnly, Converter={StaticResource BoolToColorConverter}}"
+                    VerticalOptions="Fill" />
+
+                <Label
+                    x:Name="togglePasswordButton"
+                    Grid.Column="1"
+                    Padding="8,0"
+                    FontFamily="FontAwesomeLight"
+                    FontSize="20"
+                    IsVisible="{Binding IsPassword}"
+                    Text="{Binding PasswordIconText}"
+                    TextColor="{StaticResource PrimaryColor}"
+                    VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTogglePasswordClicked" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+        </Border>
+    </VerticalStackLayout>
+</ContentView>

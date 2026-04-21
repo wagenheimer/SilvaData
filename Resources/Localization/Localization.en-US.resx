@@ -1,0 +1,1273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AbrirLote" xml:space="preserve">
+    <value>Open Flock</value>
+  </data>
+  <data name="ConversaoAlimentarReal" xml:space="preserve">
+    <value>Actual Food Conversion</value>
+  </data>
+  <data name="DataDoAbate" xml:space="preserve">
+    <value>Slaughter Date</value>
+  </data>
+  <data name="DataInicio" xml:space="preserve">
+    <value>Starting Date</value>
+  </data>
+  <data name="FecharLote" xml:space="preserve">
+    <value>Close Flock</value>
+  </data>
+  <data name="Mortalidade" xml:space="preserve">
+    <value>Mortality (%)</value>
+  </data>
+  <data name="Numero" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="PesoFinalG" xml:space="preserve">
+    <value>Final Weight (g)</value>
+  </data>
+  <data name="PesoInicial" xml:space="preserve">
+    <value>Initial Weight (g)</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="NúmeroDoLote" xml:space="preserve">
+    <value>Flock Number</value>
+  </data>
+  <data name="UnidadeEpidemiológica" xml:space="preserve">
+    <value>Epidemiological Unit</value>
+  </data>
+  <data name="Salvar" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Editar" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="MeusLotes" xml:space="preserve">
+    <value>Flocks</value>
+  </data>
+  <data name="MeusTratamentos" xml:space="preserve">
+    <value>Treatments</value>
+  </data>
+  <data name="Lote" xml:space="preserve">
+    <value>Flock</value>
+  </data>
+  <data name="NovoLote" xml:space="preserve">
+    <value>New Flock</value>
+  </data>
+  <data name="Tratamento" xml:space="preserve">
+    <value>Treatment</value>
+  </data>
+  <data name="NovoTratamento" xml:space="preserve">
+    <value>New Treatment</value>
+  </data>
+  <data name="InformaçõesDoLote" xml:space="preserve">
+    <value>Flock Information</value>
+  </data>
+  <data name="InformaçõesDoTratamento" xml:space="preserve">
+    <value>Treatment Information</value>
+  </data>
+  <data name="MonitoramentoDoLote" xml:space="preserve">
+    <value>Flock Monitoring</value>
+  </data>
+  <data name="MonitoramentoDoTratamento" xml:space="preserve">
+    <value>Treatment Monitoring</value>
+  </data>
+  <data name="Manejo" xml:space="preserve">
+    <value>Management</value>
+  </data>
+  <data name="Zootécnico" xml:space="preserve">
+    <value>Zootechnician</value>
+  </data>
+  <data name="AvaliacoesNoGalpao" xml:space="preserve">
+    <value>Evaluations in the barn</value>
+  </data>
+  <data name="ISIMacro" xml:space="preserve">
+    <value>ISI Macro</value>
+  </data>
+  <data name="ISIMicro" xml:space="preserve">
+    <value>ISI Micro</value>
+  </data>
+  <data name="Sanidade" xml:space="preserve">
+    <value>Sanity</value>
+  </data>
+  <data name="Nutrição" xml:space="preserve">
+    <value>Nutrition</value>
+  </data>
+  <data name="DiagnósticoDeEnfermidades" xml:space="preserve">
+    <value>Disease Diagnosis</value>
+  </data>
+  <data name="TratamentoViaÁgua" xml:space="preserve">
+    <value>Water Treatment</value>
+  </data>
+  <data name="AnáliseDeSalmonella" xml:space="preserve">
+    <value>Salmonella analysis</value>
+  </data>
+  <data name="Vacinas" xml:space="preserve">
+    <value>Vaccines</value>
+  </data>
+  <data name="Configurações" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="OQueVocêDesejaConfigurar" xml:space="preserve">
+    <value>What do you want to configure?</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="Lotes" xml:space="preserve">
+    <value>Flock</value>
+  </data>
+  <data name="Sincronização" xml:space="preserve">
+    <value>Synchronization</value>
+  </data>
+  <data name="Suporte" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="Atividades" xml:space="preserve">
+    <value>Activities</value>
+  </data>
+  <data name="Notificações" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Proprietários" xml:space="preserve">
+    <value>Owners</value>
+  </data>
+  <data name="Regionais" xml:space="preserve">
+    <value>Regionals</value>
+  </data>
+  <data name="UnidadesEpidemiológicas" xml:space="preserve">
+    <value>Epidemiological Units</value>
+  </data>
+  <data name="Propriedades" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="Deslogar" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="PolíticaDePrivacidade" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="MinhaConta" xml:space="preserve">
+    <value>My account</value>
+  </data>
+  <data name="GerencieSeusProprietários" xml:space="preserve">
+    <value>Manage your owners</value>
+  </data>
+  <data name="EditeAsInformaçõesAbaixo" xml:space="preserve">
+    <value>Edit the information below</value>
+  </data>
+  <data name="AdicioneAsInformaçõesAbaixo" xml:space="preserve">
+    <value>Add information below</value>
+  </data>
+  <data name="NovoProprietário" xml:space="preserve">
+    <value>New owner</value>
+  </data>
+  <data name="EditarProprietário" xml:space="preserve">
+    <value>Edit owner</value>
+  </data>
+  <data name="ProprietárioAlteradoComSucesso" xml:space="preserve">
+    <value>Owner changed successfully</value>
+  </data>
+  <data name="ProprietárioAdicionadoComSucesso" xml:space="preserve">
+    <value>Owner added successfully</value>
+  </data>
+  <data name="Nome" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="GerencieSuasRegionais" xml:space="preserve">
+    <value>Manage your regionals</value>
+  </data>
+  <data name="ReginonalAlteradaComSucesso" xml:space="preserve">
+    <value>Regional successfully changed</value>
+  </data>
+  <data name="RegionalAdicionadaComSucesso" xml:space="preserve">
+    <value>Regional successfully added</value>
+  </data>
+  <data name="EditarRegional" xml:space="preserve">
+    <value>Edit Regional</value>
+  </data>
+  <data name="NovaRegional" xml:space="preserve">
+    <value>New Regional</value>
+  </data>
+  <data name="GerencieSuaRegionais" xml:space="preserve">
+    <value>Manage your regionals</value>
+  </data>
+  <data name="GerencieSuasPropriedades" xml:space="preserve">
+    <value>Manage your properties</value>
+  </data>
+  <data name="Regional" xml:space="preserve">
+    <value>Regional</value>
+  </data>
+  <data name="PropriedadeAdicionadaComSucesso" xml:space="preserve">
+    <value>Property added successfully</value>
+  </data>
+  <data name="PropriedadeEditadaComSucesso" xml:space="preserve">
+    <value>Property edited successfully</value>
+  </data>
+  <data name="EditarPropriedade" xml:space="preserve">
+    <value>Edit property</value>
+  </data>
+  <data name="NovaPropriedade" xml:space="preserve">
+    <value>New property</value>
+  </data>
+  <data name="Proprietário" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="GerencieSuasUnidadesEpidemiológicas" xml:space="preserve">
+    <value>Manage your Epidemiological Units</value>
+  </data>
+  <data name="EditarUnidadeEpidemiológica" xml:space="preserve">
+    <value>Edit Epidemiological Unit</value>
+  </data>
+  <data name="NovaUnidadeEpidemiológica" xml:space="preserve">
+    <value>New Epidemiological Unit</value>
+  </data>
+  <data name="Longitude" xml:space="preserve">
+    <value>Longitude</value>
+  </data>
+  <data name="Latitude" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
+  <data name="Propriedade" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="UnidadeEpidemiológicaEditadaComSucesso" xml:space="preserve">
+    <value>Epidemiological Unit successfully edited</value>
+  </data>
+  <data name="UnidadeEpidemiológicaAdicionadaComSucesso" xml:space="preserve">
+    <value>Epidemiological Unit successfully added</value>
+  </data>
+  <data name="SincronizaçãoPendente" xml:space="preserve">
+    <value>Pending sync</value>
+  </data>
+  <data name="HáUmaSincronizaçãoObrigatóriaPendenteElaSeráEfetuadaAgora" xml:space="preserve">
+    <value>There is a mandatory synchronization pending, it will be performed now</value>
+  </data>
+  <data name="AdicionadoComSucesso" xml:space="preserve">
+    <value>Successfully added</value>
+  </data>
+  <data name="EditadoComSucesso" xml:space="preserve">
+    <value>Successfully edited</value>
+  </data>
+  <data name="PropriedadeAlteradaComSucesso" xml:space="preserve">
+    <value>Property successfully changed</value>
+  </data>
+  <data name="AsAlteraçõesForamSalvas" xml:space="preserve">
+    <value>Changes have been saved</value>
+  </data>
+  <data name="Erro" xml:space="preserve">
+    <value>Mistake</value>
+  </data>
+  <data name="PorFavorPreencherCamposObrigatórios" xml:space="preserve">
+    <value>Please fill in mandatory fields!</value>
+  </data>
+  <data name="UmCampoPendente" xml:space="preserve">
+    <value>1 pending field</value>
+  </data>
+  <data name="CamposPendentesQuantidade" xml:space="preserve">
+    <value>{0} pending fields</value>
+  </data>
+  <data name="ReviseOsCamposAbaixoECompleteOQueFaltaParaContinuar" xml:space="preserve">
+    <value>Review the fields below and complete what is missing to continue.</value>
+  </data>
+  <data name="Pendentes" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="NãoExisteNenhumProdutoCadastradoParaTratamentoDesteDiagnóstico" xml:space="preserve">
+    <value>There is no product registered to treat this diagnosis.</value>
+  </data>
+  <data name="LogadoComMesmoUsuarioSenha" xml:space="preserve">
+    <value>Someone logged in with the same username/password on another device! Please login again to continue.</value>
+  </data>
+  <data name="NaoTemSessaoValidaAtiva" xml:space="preserve">
+    <value>You no longer have a valid active session.</value>
+  </data>
+  <data name="ASincronizaçãoFalhou" xml:space="preserve">
+    <value>Sync Failed</value>
+  </data>
+  <data name="Sucesso" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="DadosEnviadosComSucesso" xml:space="preserve">
+    <value>Data sent successfully</value>
+  </data>
+  <data name="DadosRecebidosComSucesso" xml:space="preserve">
+    <value>Data received successfully</value>
+  </data>
+  <data name="AindaNãoEstamosNaDataMínimaParaPreenchimentoDesteFormulário" xml:space="preserve">
+    <value>We are not yet at the minimum date for filling out this form</value>
+  </data>
+  <data name="OLoteEstáFechado" xml:space="preserve">
+    <value>The flock is closed</value>
+  </data>
+  <data name="NãoPodeAlterarDadosEmLotesFechados" xml:space="preserve">
+    <value>Cannot change data in closed flocks</value>
+  </data>
+  <data name="AtualizarDados" xml:space="preserve">
+    <value>Update data</value>
+  </data>
+  <data name="NaoPodeAtualizarSemInternet" xml:space="preserve">
+    <value>Could not update now. Please check your internet connection and try again later.</value>
+  </data>
+  <data name="NenhumaSessãoVálidaAtiva" xml:space="preserve">
+    <value>No valid session active</value>
+  </data>
+  <data name="NenhumaSessaoValidaDetalhes" xml:space="preserve">
+    <value>You no longer have a valid active session. Someone logged in with the same username/password on another device! Please login again to continue.</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LoginInválido" xml:space="preserve">
+    <value>Invalid login!</value>
+  </data>
+  <data name="Aguarde" xml:space="preserve">
+    <value>Please wait...</value>
+  </data>
+  <data name="SeusDadosAindaNãoForamSalvos" xml:space="preserve">
+    <value>Your data has not yet been saved</value>
+  </data>
+  <data name="Sim" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Não" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="ASincronizaçãoFalhouComAMensagem" xml:space="preserve">
+    <value>Sync Failed with the message:</value>
+  </data>
+  <data name="DesejaTentarNovamente" xml:space="preserve">
+    <value>Do you want to try again?</value>
+  </data>
+  <data name="ConectadoAInternet" xml:space="preserve">
+    <value>You need to be connected to the internet to perform this operation! Try again?</value>
+  </data>
+  <data name="SemInternet" xml:space="preserve">
+    <value>No Internet Connection!</value>
+  </data>
+  <data name="FormulárioEmAndamento" xml:space="preserve">
+    <value>Form in progress</value>
+  </data>
+  <data name="RetomarPreenchimentoFormulario" xml:space="preserve">
+    <value>You have a form filling in progress. Do you want to resume filling it?</value>
+  </data>
+  <data name="Atenção" xml:space="preserve">
+    <value>Warning!</value>
+  </data>
+  <data name="ConfirmacaodeLogOff" xml:space="preserve">
+    <value>When you log out, you will lose all data that has not yet been synced. Are you really sure you want to log out? This data can no longer be recovered. Do you really want to log out?</value>
+  </data>
+  <data name="SimTenhoCerteza" xml:space="preserve">
+    <value>Yes, I'm sure</value>
+  </data>
+  <data name="Cancelar" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DesejaMesmaFinalizarEstaAtividade" xml:space="preserve">
+    <value>Do you really want to finish this activity?</value>
+  </data>
+  <data name="FinalizarAtividade" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="CancelarAtividade" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CancelarAtividadeConfirmacao" xml:space="preserve">
+    <value>Do you really want to cancel this activity?</value>
+  </data>
+  <data name="AveDoente" xml:space="preserve">
+    <value>This score is too high for a healthy bird. Do you want to confirm?</value>
+  </data>
+  <data name="SaveAndReturn_AveNãoSaudável" xml:space="preserve">
+    <value>Unhealthy Bird</value>
+  </data>
+  <data name="UsuarioJaLogado" xml:space="preserve">
+    <value>This user has an active session on device {0} since {1}. If you continue, any changes not yet synced on that device will be lost! Do you want to continue anyway?</value>
+  </data>
+  <data name="ISIMacroAdicionadoComSucesso" xml:space="preserve">
+    <value>ISI Macro Added Successfully!</value>
+  </data>
+  <data name="CadastrarMais1" xml:space="preserve">
+    <value>Register +1</value>
+  </data>
+  <data name="Voltar" xml:space="preserve">
+    <value>Come back</value>
+  </data>
+  <data name="FinalizarAVisita" xml:space="preserve">
+    <value>End the visit</value>
+  </data>
+  <data name="FinalizarVisitaConfirmacao" xml:space="preserve">
+    <value>Do you really want to end the visit?</value>
+  </data>
+  <data name="NotificacoesView_ArquivarNotificação" xml:space="preserve">
+    <value>Archive notification</value>
+  </data>
+  <data name="ArquivarNotificacaoDesc" xml:space="preserve">
+    <value>Do you really want to archive this notification?</value>
+  </data>
+  <data name="ScoreMédioTotal" xml:space="preserve">
+    <value>Total Average Score</value>
+  </data>
+  <data name="CarregandoDadosDoFormulário" xml:space="preserve">
+    <value>Loading form data...</value>
+  </data>
+  <data name="Vazio" xml:space="preserve">
+    <value>Empty</value>
+  </data>
+  <data name="Alojamento" xml:space="preserve">
+    <value>Accommodation</value>
+  </data>
+  <data name="Inicial" xml:space="preserve">
+    <value>Initial</value>
+  </data>
+  <data name="Crescimento1" xml:space="preserve">
+    <value>Growth 1</value>
+  </data>
+  <data name="Crescimento2" xml:space="preserve">
+    <value>Growth 2</value>
+  </data>
+  <data name="Final" xml:space="preserve">
+    <value>Final</value>
+  </data>
+  <data name="Biosseguridade" xml:space="preserve">
+    <value>Biosecurity</value>
+  </data>
+  <data name="Dias" xml:space="preserve">
+    <value>Days</value>
+  </data>
+  <data name="DiagnósticoDeEnfermidade" xml:space="preserve">
+    <value>Disease Diagnosis</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="DetalhesDaAnálise" xml:space="preserve">
+    <value>Analysis details:</value>
+  </data>
+  <data name="Observações" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="Fotos" xml:space="preserve">
+    <value>Photos</value>
+  </data>
+  <data name="VerFotos" xml:space="preserve">
+    <value>See pictures</value>
+  </data>
+  <data name="ScoreTotalDaAve" xml:space="preserve">
+    <value>Bird's total score:</value>
+  </data>
+  <data name="Score" xml:space="preserve">
+    <value>Score:</value>
+  </data>
+  <data name="Selecionar" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="Selecione" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="APartirDe" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="Até" xml:space="preserve">
+    <value>up until</value>
+  </data>
+  <data name="Ave" xml:space="preserve">
+    <value>Bird</value>
+  </data>
+  <data name="ResumoDasAnálisesDoLote" xml:space="preserve">
+    <value>Summary of flock analysis:</value>
+  </data>
+  <data name="AdicionarTratamento" xml:space="preserve">
+    <value>New Treatment</value>
+  </data>
+  <data name="Tratamentos" xml:space="preserve">
+    <value>Treatments</value>
+  </data>
+  <data name="DiagnósticosRealizadosNoLote" xml:space="preserve">
+    <value>Diagnostics performed on the flock:</value>
+  </data>
+  <data name="TratamentosViaÁguaNoLote" xml:space="preserve">
+    <value>Water treatments in the flock:</value>
+  </data>
+  <data name="VerDetalhes" xml:space="preserve">
+    <value>View Details &gt;</value>
+  </data>
+  <data name="VejaAbaixoAListaCompletaDeAtividades" xml:space="preserve">
+    <value>See below for the full list of activities</value>
+  </data>
+  <data name="CarregandoAtividades" xml:space="preserve">
+    <value>Loading Activities</value>
+  </data>
+  <data name="VejaDadosConta" xml:space="preserve">
+    <value>See below the data of the ISI App account that is logged in on this device</value>
+  </data>
+  <data name="NumeroDoDispositivo" xml:space="preserve">
+    <value>Device No.</value>
+  </data>
+  <data name="Sessão" xml:space="preserve">
+    <value>Session</value>
+  </data>
+  <data name="EnviarBancoDeDadosParaSuporte" xml:space="preserve">
+    <value>Submit database for support</value>
+  </data>
+  <data name="PorFavorAguarde" xml:space="preserve">
+    <value>Please wait...</value>
+  </data>
+  <data name="ChecandoDados" xml:space="preserve">
+    <value>Checking data...</value>
+  </data>
+  <data name="ChecandoLogin" xml:space="preserve">
+    <value>Checking login...</value>
+  </data>
+  <data name="IndoParaTelaDeLogin" xml:space="preserve">
+    <value>Going to login screen....</value>
+  </data>
+  <data name="Processando" xml:space="preserve">
+    <value>Processing...</value>
+  </data>
+  <data name="QuasePronto" xml:space="preserve">
+    <value>Almost ready...</value>
+  </data>
+  <data name="DeslogarConta" xml:space="preserve">
+    <value>Log out account</value>
+  </data>
+  <data name="EsqueceuASenha" xml:space="preserve">
+    <value>Forgot password</value>
+  </data>
+  <data name="Global" xml:space="preserve">
+    <value>Global</value>
+  </data>
+  <data name="Empresa" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="MeusResultados" xml:space="preserve">
+    <value>My Results</value>
+  </data>
+  <data name="Acomet" xml:space="preserve">
+    <value>Impair.</value>
+  </data>
+  <data name="Dispersão" xml:space="preserve">
+    <value>Dispersal</value>
+  </data>
+  <data name="LotesEmAlerta" xml:space="preserve">
+    <value>Flock with alerts:</value>
+  </data>
+  <data name="ÍndiceDoManejo" xml:space="preserve">
+    <value>Management Index</value>
+  </data>
+  <data name="IEP" xml:space="preserve">
+    <value>IEP</value>
+  </data>
+  <data name="ISIScoreTotal" xml:space="preserve">
+    <value>ISI Score Total</value>
+  </data>
+  <data name="ScoreSemDoisPontos" xml:space="preserve">
+    <value>Score</value>
+  </data>
+  <data name="LOTEMaiusculo" xml:space="preserve">
+    <value>Flock</value>
+  </data>
+  <data name="INÍCIO" xml:space="preserve">
+    <value>START</value>
+  </data>
+  <data name="UNIDADEEPID" xml:space="preserve">
+    <value>EPID. UNIT.</value>
+  </data>
+  <data name="SCOREMaiusculo" xml:space="preserve">
+    <value>SCORE</value>
+  </data>
+  <data name="ScoreMédioDoLote" xml:space="preserve">
+    <value>Average flock score:</value>
+  </data>
+  <data name="ISIScoreMédioDoLote" xml:space="preserve">
+    <value>Average ISI Score</value>
+  </data>
+  <data name="OpcoesDeMonitoramento" xml:space="preserve">
+    <value>Monitoring options</value>
+  </data>
+  <data name="Bom" xml:space="preserve">
+    <value>Good</value>
+  </data>
+  <data name="Regular" xml:space="preserve">
+    <value>Regular</value>
+  </data>
+  <data name="Ruim" xml:space="preserve">
+    <value>Bad</value>
+  </data>
+  <data name="QueAMédiaDaEmpresa" xml:space="preserve">
+    <value>than the company average.</value>
+  </data>
+  <data name="Pior" xml:space="preserve">
+    <value>worst</value>
+  </data>
+  <data name="Melhor" xml:space="preserve">
+    <value>best</value>
+  </data>
+  <data name="MesmoValor" xml:space="preserve">
+    <value>same value</value>
+  </data>
+  <data name="QueAMédiaGlobal" xml:space="preserve">
+    <value>than the global average</value>
+  </data>
+  <data name="SincronizarDados" xml:space="preserve">
+    <value>Synchronize data</value>
+  </data>
+  <data name="SincronizarDadosExplicacao" xml:space="preserve">
+    <value>Sync your account data with the ISI App cloud here. Below are the pending syncs:</value>
+  </data>
+  <data name="SincronizarAgora" xml:space="preserve">
+    <value>Sync Now</value>
+  </data>
+  <data name="ListaDeMudançasIdentificadas" xml:space="preserve">
+    <value>List of identified changes:</value>
+  </data>
+  <data name="NenhumaMudançaPendenteDeSincronização" xml:space="preserve">
+    <value>No pending changes to sync</value>
+  </data>
+  <data name="FormuláriosDosLotes" xml:space="preserve">
+    <value>Flock forms</value>
+  </data>
+  <data name="ImagensDosFormulários" xml:space="preserve">
+    <value>Forms Images</value>
+  </data>
+  <data name="AguardeEnviandoDados" xml:space="preserve">
+    <value>Please wait... Sending Data...</value>
+  </data>
+  <data name="Enviando0" xml:space="preserve">
+    <value>Sending {0}</value>
+  </data>
+  <data name="NuncaSincronizado" xml:space="preserve">
+    <value>Never synced...</value>
+  </data>
+  <data name="_0SegundosAtrás" xml:space="preserve">
+    <value>{0} seconds ago</value>
+  </data>
+  <data name="_0MinutosAtrás" xml:space="preserve">
+    <value>{0} minutes ago</value>
+  </data>
+  <data name="ÚltimaSincronização" xml:space="preserve">
+    <value>Last Sync</value>
+  </data>
+  <data name="DadosRecebidosDaNuvem" xml:space="preserve">
+    <value>Data received from the cloud</value>
+  </data>
+  <data name="EMail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Senha" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Versão" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="PesquisarLotes" xml:space="preserve">
+    <value>Search flocks</value>
+  </data>
+  <data name="Filtros" xml:space="preserve">
+    <value>Filters</value>
+  </data>
+  <data name="LimparFiltros" xml:space="preserve">
+    <value>Clear Filters</value>
+  </data>
+  <data name="ISIDispersãoScore" xml:space="preserve">
+    <value>Flocks dispersal</value>
+  </data>
+  <data name="Acometimento" xml:space="preserve">
+    <value>Impairment</value>
+  </data>
+  <data name="Acomentimento" xml:space="preserve">
+    <value>Comment:</value>
+  </data>
+  <data name="DataDoisPontos" xml:space="preserve">
+    <value>Date:</value>
+  </data>
+  <data name="MédiaScore" xml:space="preserve">
+    <value>Average Score:</value>
+  </data>
+  <data name="ISITotal" xml:space="preserve">
+    <value>ISI Total:</value>
+  </data>
+  <data name="DashLote" xml:space="preserve">
+    <value>Flock:</value>
+  </data>
+  <data name="DashPropriedade" xml:space="preserve">
+    <value>Property:</value>
+  </data>
+  <data name="DashUE" xml:space="preserve">
+    <value>E.U.:</value>
+  </data>
+  <data name="BaixandoParâmetrosDaNuvem" xml:space="preserve">
+    <value>Downloading parameters from the cloud...</value>
+  </data>
+  <data name="ApagandoTabelasAntigas" xml:space="preserve">
+    <value>Deleting old tables...</value>
+  </data>
+  <data name="BaixandoImagensDosParâmetrosDaNuvem" xml:space="preserve">
+    <value>Downloading Images of the parameters...</value>
+  </data>
+  <data name="BaixandoProprietáriosDaNuvem" xml:space="preserve">
+    <value>Downloading owners from the cloud...</value>
+  </data>
+  <data name="BaixandoRegionaisDaNuvem" xml:space="preserve">
+    <value>Downloading regionals from the cloud...</value>
+  </data>
+  <data name="BaixandoPropriedadesDaNuvem" xml:space="preserve">
+    <value>Downloading properties from the cloud...</value>
+  </data>
+  <data name="BaixandoUnidadesEpidemiológicasDaNuvem" xml:space="preserve">
+    <value>Downloading epidemiological units from the Cloud...</value>
+  </data>
+  <data name="BaixandoParâmetrosDasAtividadesDaNuvem" xml:space="preserve">
+    <value>Downloading activity from the cloud...</value>
+  </data>
+  <data name="BaixandoTipoDeAtividadesDaNuvem" xml:space="preserve">
+    <value>Downloading activity type from the cloud...</value>
+  </data>
+  <data name="BaixandoLotesFechadosDaNuvem" xml:space="preserve">
+    <value>Downloading closed flocks from the cloud...</value>
+  </data>
+  <data name="BaixandoParâmetrosDosLotesDaNuvem" xml:space="preserve">
+    <value>Downloading parameters from the cloud...</value>
+  </data>
+  <data name="BaixandoAtividadesDaNuvem" xml:space="preserve">
+    <value>Downloading cloud activities...</value>
+  </data>
+  <data name="BaixandoNotificaçõesDaNuvem" xml:space="preserve">
+    <value>Downloading notifications from the cloud...</value>
+  </data>
+  <data name="BaixandoFormuláriosDosLotesDaNuvem" xml:space="preserve">
+    <value>Downloading flock forms from the cloud...</value>
+  </data>
+  <data name="BaixandoFormulários" xml:space="preserve">
+    <value>Downloading forms...</value>
+  </data>
+  <data name="BaixandoPermissõesDaNuvem" xml:space="preserve">
+    <value>Downloading permissions from the cloud...</value>
+  </data>
+  <data name="AtualizandoScoreDosLotes" xml:space="preserve">
+    <value>Updating the scores of the flocks</value>
+  </data>
+  <data name="SincronizaçãoCompletada" xml:space="preserve">
+    <value>Sync Complete!</value>
+  </data>
+  <data name="ErroAoSincronizarDadosDaTabela0" xml:space="preserve">
+    <value>Error synchronizing data from table {0}.</value>
+  </data>
+  <data name="SuporteISIApp" xml:space="preserve">
+    <value>ISIApp support</value>
+  </data>
+  <data name="Horas" xml:space="preserve">
+    <value>hours</value>
+  </data>
+  <data name="Atividade" xml:space="preserve">
+    <value>Activity</value>
+  </data>
+  <data name="NovaAtividade" xml:space="preserve">
+    <value>New activity</value>
+  </data>
+  <data name="Hora" xml:space="preserve">
+    <value>Hour</value>
+  </data>
+  <data name="DataDeInício" xml:space="preserve">
+    <value>Start date</value>
+  </data>
+  <data name="Título" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Descrição" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="NenhumaAtividadeNesteDia" xml:space="preserve">
+    <value>No activity on this day</value>
+  </data>
+  <data name="Prazo" xml:space="preserve">
+    <value>Deadline</value>
+  </data>
+  <data name="AtividadeStatus_Cancelada" xml:space="preserve">
+    <value>Canceled</value>
+  </data>
+  <data name="AtividadeStatus_Atrasada" xml:space="preserve">
+    <value>Late</value>
+  </data>
+  <data name="AtividadeStatus_EmAndamento" xml:space="preserve">
+    <value>In progress</value>
+  </data>
+  <data name="AtividadeStatus_Finalizada" xml:space="preserve">
+    <value>Finished</value>
+  </data>
+  <data name="DetalhesDaAtividade" xml:space="preserve">
+    <value>Activity Details</value>
+  </data>
+  <data name="SobreAAtividade" xml:space="preserve">
+    <value>About the Activity</value>
+  </data>
+  <data name="AtividadeEdit_Datas" xml:space="preserve">
+    <value>Dates</value>
+  </data>
+  <data name="AtividadeEdit_Início" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="AtividadeView_A" xml:space="preserve">
+    <value>until</value>
+  </data>
+  <data name="NenhumTratamentoCadastrado" xml:space="preserve">
+    <value>There is no treatment registered. To register a treatment, use the Add Treatment button in the disease diagnosis.</value>
+  </data>
+  <data name="NenhumISIMacroCadastrado" xml:space="preserve">
+    <value>No ISI Macro registered...</value>
+  </data>
+  <data name="NunhumISIMicroCadastrado" xml:space="preserve">
+    <value>No ISI Micro Registered...</value>
+  </data>
+  <data name="NenhumaNutriçãoCadastrada" xml:space="preserve">
+    <value>No nutrition form registered...</value>
+  </data>
+  <data name="BuscarAtualizações" xml:space="preserve">
+    <value>Search for updates</value>
+  </data>
+  <data name="BuscarNovosDadosNaNuvem" xml:space="preserve">
+    <value>Get new data from the cloud...</value>
+  </data>
+  <data name="Procurar" xml:space="preserve">
+    <value>To search for</value>
+  </data>
+  <data name="Cadastrar" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Fechado" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="Aberto" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="ErroAoAcessarWebService" xml:space="preserve">
+    <value>Error accessing WebService! Please try again later!</value>
+  </data>
+  <data name="DadosDoFechamento" xml:space="preserve">
+    <value>Closing Data</value>
+  </data>
+  <data name="Arquivar" xml:space="preserve">
+    <value>Archieve</value>
+  </data>
+  <data name="NenhumaNotificaçãoPendente" xml:space="preserve">
+    <value>No pending notifications!</value>
+  </data>
+  <data name="NovaVersaoApp" xml:space="preserve">
+    <value>There is a new version of the app available! It is very important that you do this update now.</value>
+  </data>
+  <data name="AtualizaçãoDisponível" xml:space="preserve">
+    <value>Update available</value>
+  </data>
+  <data name="AtualizarAgora" xml:space="preserve">
+    <value>Update now</value>
+  </data>
+  <data name="SuasNotificacoes" xml:space="preserve">
+    <value>See all your notifications here</value>
+  </data>
+  <data name="Limpar" xml:space="preserve">
+    <value>Clean</value>
+  </data>
+  <data name="PreenchaOsFormuláriosAbaixo" xml:space="preserve">
+    <value>Fill out the forms below</value>
+  </data>
+  <data name="NenhumLoteEmAlerta" xml:space="preserve">
+    <value>No flocks with alert. Congratulations!</value>
+  </data>
+  <data name="FaleConoscoNoWhatsApp" xml:space="preserve">
+    <value>Contact us on WhatsApp</value>
+  </data>
+  <data name="NenhumDiagnósticoCadastrado" xml:space="preserve">
+    <value>No diagnoses registered...</value>
+  </data>
+  <data name="NenhumaAnáliseDeSalmonellaCadastrada" xml:space="preserve">
+    <value>No Salmonella analysis registered...</value>
+  </data>
+  <data name="VacinasAplicadasNoLote" xml:space="preserve">
+    <value>Vaccines applied in the flock:</value>
+  </data>
+  <data name="NenhumaVacidaAplicadaNesteLote" xml:space="preserve">
+    <value>No vaccine applied to this flock...</value>
+  </data>
+  <data name="AguardeAtualizandoDados" xml:space="preserve">
+    <value>Please wait... Updating Data...</value>
+  </data>
+  <data name="NosEnvieUmEmail" xml:space="preserve">
+    <value>Send us an e-mail</value>
+  </data>
+  <data name="AcesseNossoSite" xml:space="preserve">
+    <value>Access our site</value>
+  </data>
+  <data name="PesquisaISIMacro" xml:space="preserve">
+    <value>ISI Macro Search</value>
+  </data>
+  <data name="DigiteParaPesquisar" xml:space="preserve">
+    <value>Type to search...</value>
+  </data>
+  <data name="politicaPrivacidadeAceitar" xml:space="preserve">
+    <value>You need to accept our privacy policy to use this app!</value>
+  </data>
+  <data name="popUpPrivacy_EuAceito" xml:space="preserve">
+    <value>I accept</value>
+  </data>
+  <data name="VerPolíticaDePrivacidade" xml:space="preserve">
+    <value>Read Privacy Policy</value>
+  </data>
+  <data name="MédiaISI" xml:space="preserve">
+    <value>Average Score:</value>
+  </data>
+  <data name="Qtde" xml:space="preserve">
+    <value>Evaluated birds:</value>
+  </data>
+  <data name="IrParaOLote" xml:space="preserve">
+    <value>View birds from this flock</value>
+  </data>
+  <data name="BoaSaúde" xml:space="preserve">
+    <value>Good</value>
+  </data>
+  <data name="SaudeMédia" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="SaúdeBaixa" xml:space="preserve">
+    <value>Low</value>
+  </data>
+  <data name="BaixandoImagensDosFormuláriosDaNuvem" xml:space="preserve">
+    <value>Downloading form images from the cloud</value>
+  </data>
+  <data name="PesquisaDeSatisfacao" xml:space="preserve">
+    <value>Satisfaction survey</value>
+  </data>
+  <data name="NPSTexto" xml:space="preserve">
+    <value>On a scale of Zero to 10, what is the likelihood of you recommending the ISI Sys Tool (ISI App and Web Platform) to a colleague in the field?</value>
+  </data>
+  <data name="Votar" xml:space="preserve">
+    <value>Vote</value>
+  </data>
+  <data name="sairformulario" xml:space="preserve">
+    <value>Are you sure you want to exit without saving this form?</value>
+  </data>
+  <data name="confirmacao" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="DadosDeAbate" xml:space="preserve">
+    <value>Slaughter data</value>
+  </data>
+  <data name="AvisoAbateLote" xml:space="preserve">
+    <value>Attention: after synchronizing the app, the shooting data can only be edited on the platform</value>
+  </data>
+  <data name="OLote0FoiFechado" xml:space="preserve">
+    <value>The flock {0} was closed!</value>
+  </data>
+  <data name="OrdemDosLotes" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="Buscar" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="ProcessandoFormuláriosBaixadosDaNuvem" xml:space="preserve">
+    <value>Processing Downloaded Cloud Forms</value>
+  </data>
+  <data name="NenhumaAvaliacaoParametro" xml:space="preserve">
+    <value>No evaluation performed for this parameter</value>
+  </data>
+  <data name="SelecioneParametroAvaliacao" xml:space="preserve">
+    <value>Select a parameter for evaluation</value>
+  </data>
+  <data name="Resposta" xml:space="preserve">
+    <value>Response</value>
+  </data>
+  <data name="Registro" xml:space="preserve">
+    <value>Record</value>
+  </data>
+  <data name="Minimo" xml:space="preserve">
+    <value>Minimum</value>
+  </data>
+  <data name="Realizado" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="Media" xml:space="preserve">
+    <value>Average</value>
+  </data>
+  <data name="IdadeDoLote" xml:space="preserve">
+    <value>Batch Age</value>
+  </data>
+  <data name="QtdAvaliada" xml:space="preserve">
+    <value>Qty. Evaluated</value>
+  </data>
+  <data name="SelecioneUmParâmetro" xml:space="preserve">
+    <value>Select a parameter</value>
+  </data>
+  <data name="ErroSincronizarCompartilhe" xml:space="preserve">
+    <value>Error synchronizing data! Please share the file with the error log with support!</value>
+  </data>
+  <data name="Confirmar" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="NovoRegistro" xml:space="preserve">
+    <value>New Record</value>
+  </data>
+  <data name="Exibindo" xml:space="preserve">
+    <value>Displaying</value>
+  </data>
+  <data name="VerRegistros" xml:space="preserve">
+    <value>View Records</value>
+  </data>
+  <data name="RegistrosNesteFormulário" xml:space="preserve">
+    <value>Records in this form</value>
+  </data>
+  <data name="PressioneParaRetornarAUmRegistro" xml:space="preserve">
+    <value>Press to return to a record</value>
+  </data>
+  <data name="FormularioRegistros" xml:space="preserve">
+    <value>Form with {0} records successfully saved.</value>
+  </data>
+  <data name="UltimaNaoFoiPreenchido" xml:space="preserve">
+    <value>The record {0} was not filled and was discarded.</value>
+  </data>
+  <data name="RegistrosNaoPreenchidosDescartados" xml:space="preserve">
+    <value>{0} unfilled records were discarded.</value>
+  </data>
+  <data name="BaixandoAvaliaçõesDoGalpãoDaNuvem" xml:space="preserve">
+    <value>Downloading Warehouse evaluations from the Cloud</value>
+  </data>
+  <data name="ProcessandoAvaliacaoesGalpaoNuvem" xml:space="preserve">
+    <value>Processing Warehouse evaluations from the Cloud</value>
+  </data>
+  <data name="TirarFoto" xml:space="preserve">
+    <value>Take Picture</value>
+  </data>
+  <data name="JaFoiMaximoRespostas" xml:space="preserve">
+    <value>You have already registered the maximum ({0}) allowed responses!</value>
+  </data>
+  <data name="Saúde" xml:space="preserve">
+    <value>Health :</value>
+  </data>
+  <data name="BaixandoModelosDeISIMacro" xml:space="preserve">
+    <value>Downloading ISIMacro Models</value>
+  </data>
+  <data name="SelecioneUmModeloISIMacro" xml:space="preserve">
+    <value>Select an ISIMacro Model:</value>
+  </data>
+  <data name="Nao" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="PorFavorSelecionarUmLote" xml:space="preserve">
+    <value>Please select a flock!</value>
+  </data>
+  <data name="Aviso" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="ErroAoAbrir" xml:space="preserve">
+    <value>Error opening!</value>
+  </data>
+  <data name="ConfirmeOFechamentoDolote" xml:space="preserve">
+    <value>Do you really want to close the flock?</value>
+  </data>
+  <data name="ErroAoFecharLote" xml:space="preserve">
+    <value>Error closing the flock!</value>
+  </data>
+  <data name="UnidadeEp" xml:space="preserve">
+    <value>Epi. Unit:</value>
+  </data>
+  <data name="Faltam" xml:space="preserve">
+    <value>Missing</value>
+  </data>
+  <data name="Atencao" xml:space="preserve">
+    <value>Warning!</value>
+  </data>
+  <data name="OperaçãoCancelada" xml:space="preserve">
+    <value>Operation Cancelled</value>
+  </data>
+  <data name="Pendente" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="CompartilharBancoDeDados" xml:space="preserve">
+    <value>Share Database</value>
+  </data>
+  <data name="ForcarSincronizacaoCompleta" xml:space="preserve">
+    <value>Force Full Synchronization?</value>
+  </data>
+  <data name="Debug" xml:space="preserve">
+    <value>DEBUG</value>
+  </data>
+  <data name="ArquivoBackupNaoEncontrado" xml:space="preserve">
+    <value>Backup file not found.</value>
+  </data>
+  <data name="ErroAoEnviarBancoDados" xml:space="preserve">
+    <value>Error sending database</value>
+  </data>
+  <data name="OverrideGetViewDefaultComponents" xml:space="preserve">
+    <value>You must override GetViewDefaultComponentsOnAppearing to initialize components</value>
+  </data>
+  <data name="NenhumLoteTratamento" xml:space="preserve">
+    <value>No Flock/Treatment</value>
+  </data>
+  <data name="AltereCriteriosOuAdicioneNovoLote" xml:space="preserve">
+    <value>Change the search criteria or press + to add a new flock!</value>
+  </data>
+  <data name="NenhumModeloDisponivel" xml:space="preserve">
+    <value>No model available</value>
+  </data>
+  <data name="OperacaoCancelada" xml:space="preserve">
+    <value>Operation Cancelled</value>
+  </data>
+  <data name="NaoFoiPossivelAtualizarDadosGraficos" xml:space="preserve">
+    <value>The chart data couldn't be updated at this time. Please try again later. This issue does not affect the normal operation of the app.
+</value>
+  </data>
+  <data name="FalhaAoEnviarDados" xml:space="preserve">
+    <value>Data could not be sent at this time. Please try again later. </value>
+  </data>
+  <data name="AindaHa0RegistrosPendentes" xml:space="preserve">
+    <value>There are still {0} pending records...</value>
+  </data>
+  <data name="BaixandoAvaliacaoes" xml:space="preserve">
+    <value>Downloading Evaluations</value>
+  </data>
+  <data name="AbaGeral" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="AbaPorIdade" xml:space="preserve">
+    <value>By Age</value>
+  </data>
+  <data name="NenhumRegistroZootecnico" xml:space="preserve">
+    <value>No animal scientist record found. Tap "+" to add a new one.</value>
+  </data>
+  <data name="NenhumRegistroManejo" xml:space="preserve">
+    <value>No management record found.</value>
+  </data>
+  <data name="AbaPorFase" xml:space="preserve">
+    <value>By phase</value>
+  </data>
+  <data name="AdicionarFoto" xml:space="preserve">
+    <value>Add Photo</value>
+  </data>
+  <data name="Galeria" xml:space="preserve">
+    <value>Library</value>
+  </data>
+  <data name="Camera" xml:space="preserve">
+    <value>Camera</value>
+  </data>
+  <data name="SelecioneUmaFoto" xml:space="preserve">
+    <value>Select a photo</value>
+  </data>
+</root>

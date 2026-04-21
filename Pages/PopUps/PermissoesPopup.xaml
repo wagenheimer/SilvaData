@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<toolkit:Popup
+    x:Class="SilvaData.Pages.PopUps.PermissoesPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
+    xmlns:models="clr-namespace:SilvaData.Models"
+    x:DataType="viewmodels:PermissoesPopupViewModel"
+    BackgroundColor="Transparent"
+    CanBeDismissedByTappingOutsideOfPopup="True">
+
+    <Border
+        BackgroundColor="White"
+        Stroke="{StaticResource Gray200}"
+        StrokeShape="RoundRectangle 20"
+        StrokeThickness="1"
+        WidthRequest="380"
+        HeightRequest="600">
+
+        <Grid RowDefinitions="Auto,*,Auto" Padding="15">
+            <!-- Header -->
+            <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Margin="0,0,0,10">
+                <Label
+                    Grid.Column="0"
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    Text="Permissões do Usuário"
+                    TextColor="{StaticResource PrimaryColor}"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="1"
+                    FontSize="Small"
+                    Text="DEBUG MODE"
+                    TextColor="Red"
+                    FontAttributes="Bold"
+                    VerticalOptions="Center" />
+            </Grid>
+
+            <!-- Lista de Permissões por Categoria -->
+            <CollectionView
+                Grid.Row="1"
+                ItemsSource="{Binding Categorias}"
+                SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="viewmodels:PermissaoCategoriaViewModel">
+                        <VerticalStackLayout>
+                            <!-- Categoria Header -->
+                            <Label
+                                Text="{Binding Nome}"
+                                FontAttributes="Bold"
+                                FontSize="Small"
+                                TextColor="{StaticResource PrimaryColor}"
+                                BackgroundColor="{StaticResource Gray100}"
+                                Padding="10,5"
+                                Margin="0,5,0,0"/>
+                            <!-- Permissões da Categoria -->
+                            <CollectionView
+                                ItemsSource="{Binding Permissoes}"
+                                SelectionMode="None"
+                                HeightRequest="{Binding AlturaLista}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:PermissionItem">
+                                        <Grid ColumnDefinitions="*,Auto" Padding="10,3">
+                                            <Label
+                                                Grid.Column="0"
+                                                Text="{Binding Nome}"
+                                                FontSize="Small"
+                                                TextColor="{StaticResource DarkOnLightBackground}"
+                                                VerticalOptions="Center" />
+                                            <CheckBox
+                                                Grid.Column="1"
+                                                IsChecked="{Binding Valor, Mode=TwoWay}"
+                                                VerticalOptions="Center"
+                                                Color="{StaticResource PrimaryColor}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Footer Buttons -->
+            <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,10,0,0">
+                <buttons:SfButton
+                    Grid.Column="0"
+                    Command="{Binding FecharCommand}"
+                    Style="{StaticResource PrimaryButton}"
+                    Text="Fechar"
+                    BackgroundColor="{StaticResource Gray300}"
+                    TextColor="{StaticResource DarkOnLightBackground}" />
+                <buttons:SfButton
+                    Grid.Column="1"
+                    Command="{Binding SalvarCommand}"
+                    Style="{StaticResource PrimaryButton}"
+                    Text="Salvar"
+                    BackgroundColor="{StaticResource PrimaryColor}" />
+            </Grid>
+        </Grid>
+    </Border>
+</toolkit:Popup>

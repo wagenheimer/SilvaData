@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="SilvaData.Controls.ImagemSelecao"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Name="imagemSelecao">
+
+    <Border
+        Margin="3"
+        Padding="2"
+        Stroke="{StaticResource PrimaryColor}">
+
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding AddPhotoCommand, Source={x:Reference imagemSelecao}}" />
+        </Border.GestureRecognizers>
+
+        <Border.Behaviors>
+            <toolkit:TouchBehavior
+                DefaultOpacity="1"
+                DefaultScale="1"
+                PressedAnimationDuration="100"
+                PressedOpacity="0.6"
+                PressedScale="0.95" />
+        </Border.Behaviors>
+
+        <Grid RowDefinitions="150">
+
+            <!--  Placeholder: sem imagem  -->
+            <VerticalStackLayout
+                Grid.Row="0"
+                HorizontalOptions="Center"
+                IsVisible="{Binding NaoTemImagemSelecionada, Mode=OneWay, Source={x:Reference imagemSelecao}}"
+                Spacing="4"
+                VerticalOptions="Center">
+                <Label
+                    FontFamily="FontAwesomeRegular"
+                    FontSize="36"
+                    HorizontalTextAlignment="Center"
+                    Text="{x:Static fontawesome:FontAwesomeIcons.CirclePlus}"
+                    TextColor="{StaticResource PrimaryColor}" />
+                <Label
+                    FontSize="10"
+                    HorizontalTextAlignment="Center"
+                    Text="Toque para adicionar"
+                    TextColor="{StaticResource PrimaryColor}" />
+            </VerticalStackLayout>
+
+            <!--  Imagem selecionada  -->
+            <Image
+                x:Name="cachedImage"
+                Grid.Row="0"
+                Aspect="AspectFill"
+                IsVisible="{Binding NaoTemImagemSelecionada, Mode=OneWay, Source={x:Reference imagemSelecao}, Converter={StaticResource InvertBoolean}}" />
+
+        </Grid>
+    </Border>
+</ContentView>
