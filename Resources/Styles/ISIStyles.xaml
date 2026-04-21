@@ -32,17 +32,17 @@
     <Color x:Key="LightButtonColor">#f2f9fd</Color>
     <Color x:Key="FundoClarinhoBotao">#EFF3F8</Color>
 
-    <LinearGradientBrush x:Key="HeaderGradient" EndPoint="0,1">
+    <LinearGradientBrush x:Key="HeaderGradientBrush" EndPoint="0,1">
         <GradientStop Offset="0.1" Color="#282828" />
         <GradientStop Offset="1.0" Color="#373737" />
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="FooterGradient" EndPoint="0,1">
+    <LinearGradientBrush x:Key="FooterGradientBrush" EndPoint="0,1">
         <GradientStop Offset="1.0" Color="#282828" />
         <GradientStop Offset="0.1" Color="#373737" />
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="SoftGradient" EndPoint="0,1">
+    <LinearGradientBrush x:Key="SoftGradientBrush" EndPoint="0,1">
         <GradientStop Offset="0.1" Color="#F5F5F5" />
         <GradientStop Offset="1.0" Color="#E0E0E0" />
     </LinearGradientBrush>

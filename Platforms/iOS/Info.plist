@@ -28,10 +28,8 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.cwsoftware.ISIInstitute2</string>
 	<key>CFBundleDisplayName</key>
-	<string>ISI Sys</string>
+	<string>Silvadata</string>
 	<key>CFBundleShortVersionString</key>
 	<string>3.0.8</string>
 	<key>CFBundleDevelopmentRegion</key>

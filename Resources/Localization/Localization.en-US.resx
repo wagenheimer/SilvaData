@@ -1054,7 +1054,7 @@
     <value>Satisfaction survey</value>
   </data>
   <data name="NPSTexto" xml:space="preserve">
-    <value>On a scale of Zero to 10, what is the likelihood of you recommending the ISI Sys Tool (ISI App and Web Platform) to a colleague in the field?</value>
+    <value>On a scale of Zero to 10, what is the likelihood of you recommending Silvadata (Silvadata and Web Platform) to a colleague in the field?</value>
   </data>
   <data name="Votar" xml:space="preserve">
     <value>Vote</value>

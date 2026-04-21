@@ -53,7 +53,7 @@
                     FontFamily="Nunito"
                     FontSize="Large"
                     HorizontalTextAlignment="Start"
-                    Text="ISI Sys"
+                    Text="Silvadata"
                     TextColor="White"
                     VerticalOptions="Center" />
                 <Label
@@ -61,7 +61,7 @@
                     FontAttributes="Bold"
                     FontSize="Micro"
                     HorizontalTextAlignment="Start"
-                    Text="from ISI Institute"
+                    Text="from Silvateam"
                     TextColor="White"
                     VerticalOptions="End"
                     VerticalTextAlignment="End" />

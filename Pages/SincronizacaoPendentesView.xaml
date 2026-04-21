@@ -54,7 +54,7 @@
                         FontFamily="Nunito"
                         FontSize="Large"
                         HorizontalTextAlignment="Start"
-                        Text="ISI Sys"
+                        Text="Silvadata"
                         TextColor="White"
                         VerticalOptions="Center" />
                     <Label

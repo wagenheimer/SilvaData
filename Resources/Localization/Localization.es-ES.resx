@@ -1054,7 +1054,7 @@
     <value>Búsqueda de satisfacción</value>
   </data>
   <data name="NPSTexto" xml:space="preserve">
-    <value>En una escala de 0 a 10, ¿cuál es la probabilidad de que recomiende la herramienta ISI Sys (ISI App y Plataforma Web) a un colega del área?</value>
+    <value>En una escala de 0 a 10, ¿cuál es la probabilidad de que recomiende la herramienta Silvadata (Silvadata y Plataforma Web) a un colega del área?</value>
   </data>
   <data name="Votar" xml:space="preserve">
     <value>Votar</value>

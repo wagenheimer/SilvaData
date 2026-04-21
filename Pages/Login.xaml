@@ -49,14 +49,14 @@
                             Grid.Row="1"
                             FontSize="Micro"
                             HorizontalTextAlignment="Center"
-                            Text="ISI Sys ⬤ FROM"
+                            Text="Silvadata ⬤ FROM"
                             TextColor="Gray" />
                         <Label
                             Grid.Row="2"
                             FontAttributes="Bold"
                             FontSize="20"
                             HorizontalTextAlignment="Center"
-                            Text="ISI Institute"
+                            Text="Silvateam"
                             TextColor="{StaticResource PrimaryColor}" />
                         <Label
                             x:Name="labelVersion"

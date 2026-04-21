@@ -34,7 +34,7 @@
                 <Label
                     FontAttributes="Bold"
                     HorizontalTextAlignment="Center"
-                    Text="ISI Sys"
+                    Text="Silvadata"
                     TextColor="{StaticResource PrimaryColor}" />
 
                 <Label
