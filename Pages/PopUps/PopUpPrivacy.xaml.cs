@@ -1,7 +1,7 @@
 using CommunityToolkit.Maui.Views;
 using System.Windows.Input;
 
-namespace SilvaData_MAUI.Pages.PopUps
+namespace SilvaData.Pages.PopUps
 {
     public partial class PopUpPrivacy : Popup<Boolean>
     {

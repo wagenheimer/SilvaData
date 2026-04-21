@@ -2,7 +2,7 @@ using SkiaSharp;
 
 using System.Diagnostics;
 
-namespace SilvaData_MAUI.Utilities
+namespace SilvaData.Utilities
 {
     // --- Interfaces e Classes de Contexto ---
 

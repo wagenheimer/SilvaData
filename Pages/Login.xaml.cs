@@ -1,7 +1,7 @@
-using SilvaData_MAUI.Infrastructure;
-using SilvaData_MAUI.ViewModels;
+using SilvaData.Infrastructure;
+using SilvaData.ViewModels;
 
-namespace SilvaData_MAUI.Controls
+namespace SilvaData.Controls
 {
     /// <summary>
     /// View (Página) para Login. Esta página é modal e não pode ser fechada

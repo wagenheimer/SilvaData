@@ -1,12 +1,12 @@
 using CommunityToolkit.Mvvm.ComponentModel; // Adicionado
 using CommunityToolkit.Mvvm.Input;
-using SilvaData_MAUI.Models; // Para PageModelBase
-using SilvaData_MAUI.Utilities;
+using SilvaData.Models; // Para PageModelBase
+using SilvaData.Utilities;
 using System.IO; // Adicionado para File
 using System.Threading.Tasks; // Adicionado para Task
 using System; // Adicionado para Uri
 
-namespace SilvaData_MAUI.PageModels
+namespace SilvaData.PageModels
 {
     /// <summary>
     /// ViewModel da página de suporte.

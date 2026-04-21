@@ -5,13 +5,13 @@ using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input; // MUDAN�A: Necess�rio para [RelayCommand]
 
-using SilvaData_MAUI.Models;
+using SilvaData.Models;
 
 // Removido: using System.Windows.Input; (Substitu�do por CommunityToolkit.Mvvm.Input)
 
-using SilvaData_MAUI.Utilities;
+using SilvaData.Utilities;
 
-namespace SilvaData_MAUI.Pages.PopUps
+namespace SilvaData.Pages.PopUps
 {
     /// <summary>
     /// Popup para fechamento de lote com campos para data e observa��es.

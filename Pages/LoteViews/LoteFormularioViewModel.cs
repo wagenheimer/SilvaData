@@ -9,8 +9,6 @@ using SilvaData.Utils;
 using SilvaData.Utilities;
 
 using HapticHelper = SilvaData.Utilities.HapticHelper;
-using PopUpSuccessGalpao = SilvaData.Pages.PopUps.PopUpSuccessGalpao;
-using PopUpErrorGalpao = SilvaData.Pages.PopUps.PopUpErrorGalpao;
 
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -24,10 +22,41 @@ namespace SilvaData.ViewModels;
 /// ★★★ ViewModel otimizado para formulário de lote (MAUI) ★★★
 /// ✅ Cache, Paralelização, Debounce
 /// ✅ CORRIGIDO: Garante que campos de avaliação apareçam
-/// ✅ CORRIGIDO: Previne chamada dupla de CarregaAvaliacaoGalpaoAsync
 /// </summary>
 public partial class LoteFormularioViewModel : ViewModelBase
 {
+    /// <summary>
+    /// Força atualização de todos os bindings (refresh total)
+    /// </summary>
+    public void ForceRefreshAll()
+    {
+        // Notifica manualmente todas as propriedades relevantes para forçar refresh dos bindings
+        OnPropertyChanged(nameof(Title));
+        OnPropertyChanged(nameof(SubTitle));
+        OnPropertyChanged(nameof(LoteId));
+        OnPropertyChanged(nameof(ParametroTipo));
+        OnPropertyChanged(nameof(LoteFormId));
+        OnPropertyChanged(nameof(Fase));
+        OnPropertyChanged(nameof(ParametroSelecionado));
+        OnPropertyChanged(nameof(AlternativasParametroSelecionado));
+        OnPropertyChanged(nameof(Item));
+        OnPropertyChanged(nameof(Lote));
+        OnPropertyChanged(nameof(LoteFormVinculado));
+        OnPropertyChanged(nameof(LoteFormulario));
+        OnPropertyChanged(nameof(LoteFormImagem1));
+        OnPropertyChanged(nameof(LoteFormImagem2));
+        OnPropertyChanged(nameof(LoteFormImagem3));
+        OnPropertyChanged(nameof(PesquisaISIMacroDialogVisible));
+        OnPropertyChanged(nameof(ModeloIsiMacroSelecionado));
+        OnPropertyChanged(nameof(MostrarBotaoCarregar));
+        OnPropertyChanged(nameof(ScoreTotalDaAve));
+        OnPropertyChanged(nameof(PodeEditar));
+        OnPropertyChanged(nameof(IsReadOnly));
+        OnPropertyChanged(nameof(RealizadoColor));
+        OnPropertyChanged(nameof(IsISIMacro));
+        OnPropertyChanged(nameof(IdadeLote));
+        OnPropertyChanged(nameof(ScoreTotalDaAveCor));
+    }
     #region Observable Properties
 
     [ObservableProperty] private string title = string.Empty;
@@ -35,9 +64,6 @@ public partial class LoteFormularioViewModel : ViewModelBase
     [ObservableProperty] private int loteId = -1;
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(AvaliacaoGalpao))]
-    [NotifyPropertyChangedFor(nameof(AvaliacaoGalpaoQuantitativo))]
-    [NotifyPropertyChangedFor(nameof(AvaliacaoGalpaoQualitativo))]
     [NotifyPropertyChangedFor(nameof(IsISIMacro))]
     private int parametroTipo = -1;
 
@@ -45,9 +71,6 @@ public partial class LoteFormularioViewModel : ViewModelBase
     [ObservableProperty] private int? fase;
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(AvaliacaoGalpaoQualitativo))]
-    [NotifyPropertyChangedFor(nameof(AvaliacaoGalpao))]
-    [NotifyPropertyChangedFor(nameof(AvaliacaoGalpaoQuantitativo))]
     private Parametro? parametroSelecionado;
 
     [ObservableProperty] private ObservableCollection<ParametroAlternativas> alternativasParametroSelecionado = new();
@@ -69,6 +92,7 @@ public partial class LoteFormularioViewModel : ViewModelBase
 
     [ObservableProperty] private bool pesquisaISIMacroDialogVisible;
     [ObservableProperty] private int? modeloIsiMacroSelecionado;
+    [ObservableProperty] private bool mostrarBotaoCarregar;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(ScoreTotalDaAveCor))]
@@ -96,14 +120,11 @@ public partial class LoteFormularioViewModel : ViewModelBase
     private const int UPDATE_DEBOUNCE_MS = 150;
     private const int AUTOSAVE_DEBOUNCE_MS = 500;
 
-    // ★★★ NOVO: Previne chamadas duplas ★★★
-    private bool _isLoadingAvaliacoes = false;
     private bool _autoSaveEnabled = false;
     private WeakReference<Page>? _validationHostPage;
     private LoteFormulario? _subscribedLoteFormulario;
     private LoteForm? _subscribedLoteForm;
     private ObservableCollection<ParametroComAlternativas>? _subscribedParametrosCollection;
-    private List<LoteFormAvaliacaoGalpao>? _subscribedAvaliacoesGalpao;
 
     #endregion
 
@@ -176,9 +197,6 @@ public partial class LoteFormularioViewModel : ViewModelBase
     public string LoteDescricaoCompleta => Lote?.DescricaoCompleta ?? string.Empty;
 
     public bool IsISIMacro => ParametroTipo == 15;
-    public bool AvaliacaoGalpao => AvaliacaoGalpaoQualitativo || AvaliacaoGalpaoQuantitativo;
-    public bool AvaliacaoGalpaoQuantitativo => ParametroTipo == 20 && ParametroSelecionado != null && string.IsNullOrEmpty(ParametroSelecionado.campoTipo);
-    public bool AvaliacaoGalpaoQualitativo => ParametroTipo == 20 && ParametroSelecionado != null && (ParametroSelecionado.campoTipo == "1" || ParametroSelecionado.campoTipo == "2");
     public bool PrecisaMostrarEscoreAve => !IsBusy && ParametroTipo == 15;
 
     #endregion
@@ -198,23 +216,7 @@ public partial class LoteFormularioViewModel : ViewModelBase
 
         WeakReferenceMessenger.Default.Register<PropriedadeMudouMessage>(this, (r, m) =>
         {
-            if (AvaliacaoGalpao)
-                RecalculaTotaisAvaliacaoGalpao();
-            else
-                UpdateTotal();
-        });
-
-        WeakReferenceMessenger.Default.Register<RecalcularAvaliacaoGalpaoMessage>(this, (r, m) =>
-        {
-            try
-            {
-                Debug.WriteLine($"[LoteFormularioViewModel] 📊 RecalcularAvaliacaoGalpaoMessage recebida");
-                RecalculaTotaisAvaliacaoGalpao();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"[LoteFormularioViewModel] ❌ Erro ao recalcular: {ex.Message}");
-            }
+            UpdateTotal();
         });
 
         _internalMessagesRegistered = true;
@@ -251,7 +253,6 @@ public partial class LoteFormularioViewModel : ViewModelBase
 
         AttachLoteFormSubscription(value.LoteForm);
         AttachParametrosCollectionSubscription(value.Formulario_ParametrosComAlternativas);
-        AttachAvaliacoesGalpaoSubscription(value.ListaAvaliacoesGalpao);
     }
 
     private void DetachLoteFormularioSubscriptions(LoteFormulario value)
@@ -259,7 +260,6 @@ public partial class LoteFormularioViewModel : ViewModelBase
         value.PropertyChanged -= OnLoteFormularioDataChanged;
         DetachLoteFormSubscription();
         DetachParametrosCollectionSubscription();
-        DetachAvaliacoesGalpaoSubscription();
 
         if (ReferenceEquals(_subscribedLoteFormulario, value))
         {
@@ -279,10 +279,6 @@ public partial class LoteFormularioViewModel : ViewModelBase
         else if (e.PropertyName == nameof(LoteFormulario.Formulario_ParametrosComAlternativas))
         {
             AttachParametrosCollectionSubscription(loteFormulario.Formulario_ParametrosComAlternativas);
-        }
-        else if (e.PropertyName == nameof(LoteFormulario.ListaAvaliacoesGalpao))
-        {
-            AttachAvaliacoesGalpaoSubscription(loteFormulario.ListaAvaliacoesGalpao);
         }
     }
 
@@ -368,36 +364,6 @@ public partial class LoteFormularioViewModel : ViewModelBase
         }
     }
 
-    private void AttachAvaliacoesGalpaoSubscription(List<LoteFormAvaliacaoGalpao>? avaliacoes)
-    {
-        if (ReferenceEquals(_subscribedAvaliacoesGalpao, avaliacoes))
-            return;
-
-        DetachAvaliacoesGalpaoSubscription();
-        _subscribedAvaliacoesGalpao = avaliacoes;
-
-        if (_subscribedAvaliacoesGalpao == null)
-            return;
-
-        foreach (var avaliacao in _subscribedAvaliacoesGalpao)
-        {
-            avaliacao.PropertyChanged += OnGalpaoDataChanged;
-        }
-    }
-
-    private void DetachAvaliacoesGalpaoSubscription()
-    {
-        if (_subscribedAvaliacoesGalpao == null)
-            return;
-
-        foreach (var avaliacao in _subscribedAvaliacoesGalpao)
-        {
-            avaliacao.PropertyChanged -= OnGalpaoDataChanged;
-        }
-
-        _subscribedAvaliacoesGalpao = null;
-    }
-
     // ✅ Auto-save triggers para seleção de imagens
     partial void OnLoteFormImagem1Changed(LoteFormImagem? value) => _ = SalvaEmAndamentoDebounced();
     partial void OnLoteFormImagem2Changed(LoteFormImagem? value) => _ = SalvaEmAndamentoDebounced();
@@ -423,17 +389,6 @@ public partial class LoteFormularioViewModel : ViewModelBase
             e.PropertyName == nameof(ParametroComAlternativas.ValorInt) ||
             e.PropertyName == nameof(ParametroComAlternativas.ValorDouble) ||
             e.PropertyName == nameof(ParametroComAlternativas.ValorSimNao))
-        {
-            _ = SalvaEmAndamentoDebounced();
-        }
-    }
-
-    private void OnGalpaoDataChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
-    {
-        if (!_autoSaveEnabled || LoteFormAvaliacaoGalpao.IsLoadingData) return;
-
-        if (e.PropertyName == nameof(LoteFormAvaliacaoGalpao.RespostaQtde) ||
-            e.PropertyName == nameof(LoteFormAvaliacaoGalpao.AlternativaIdsJson))
         {
             _ = SalvaEmAndamentoDebounced();
         }
@@ -537,6 +492,24 @@ public partial class LoteFormularioViewModel : ViewModelBase
         Debug.WriteLine($"  Recuperado: {recoveredForm != null}");
     }
 
+    // Params saved by NavigationUtils for manual/delayed load
+    private bool _pendingLimpaFormulario;
+    private int? _pendingModeloIsiMacro;
+
+    public void SetPendingLoadParams(bool limpaFormularioAtual, int? modeloIsiMacroSelecionado)
+    {
+        _pendingLimpaFormulario = limpaFormularioAtual;
+        _pendingModeloIsiMacro = modeloIsiMacroSelecionado;
+    }
+
+    [RelayCommand]
+    public async Task Carregar()
+    {
+        Debug.WriteLine($"[LoteFormularioViewModel] ▶ Carregar() chamado | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread} | pendingModelo={_pendingModeloIsiMacro} | pendingLimpa={_pendingLimpaFormulario}");
+        await InicializaFormulario(limpaFormularioAtual: _pendingLimpaFormulario, modeloIsiMacroSelecionado: _pendingModeloIsiMacro);
+        Debug.WriteLine($"[LoteFormularioViewModel] ✓ Carregar() concluído | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
+    }
+
     partial void OnLoteFormVinculadoChanged(int value)
     {
         if (value == -1)
@@ -559,6 +532,7 @@ public partial class LoteFormularioViewModel : ViewModelBase
 
     public async Task InicializaFormulario(bool limpaFormularioAtual = true, int? modeloIsiMacroSelecionado = null)
     {
+        var initSw = System.Diagnostics.Stopwatch.StartNew();
         try
         {
             Debug.WriteLine($"[LoteFormularioViewModel] ═══════════════════════════════════");
@@ -568,10 +542,10 @@ public partial class LoteFormularioViewModel : ViewModelBase
             Debug.WriteLine($"  ParametroTipo: {ParametroTipo}");
             Debug.WriteLine($"  Thread: {System.Threading.Thread.CurrentThread.ManagedThreadId}, IsMainThread: {MainThread.IsMainThread}");
 
-            Debug.WriteLine($"[LoteFormularioViewModel] ▶ Aguardando InvokeOnMainThreadAsync inicial...");
+            Debug.WriteLine($"[LoteFormularioViewModel] ▶ Aguardando InvokeOnMainThreadAsync inicial... | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
             await MainThread.InvokeOnMainThreadAsync(() =>
             {
-                Debug.WriteLine($"[LoteFormularioViewModel] ▶ Dentro do InvokeOnMainThreadAsync inicial");
+                Debug.WriteLine($"[LoteFormularioViewModel] ▶ Dentro do InvokeOnMainThreadAsync inicial | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
                 SubTitle = Traducao.DetalhesDaAnálise;
                 ModeloIsiMacroSelecionado = modeloIsiMacroSelecionado;
                 IsBusy = true;
@@ -579,18 +553,19 @@ public partial class LoteFormularioViewModel : ViewModelBase
                 if (limpaFormularioAtual)
                     LoteFormulario = null;
                 Debug.WriteLine($"[LoteFormularioViewModel] ✓ InvokeOnMainThreadAsync inicial concluído");
-            });
-            Debug.WriteLine($"[LoteFormularioViewModel] ✓ Após InvokeOnMainThreadAsync inicial");
+            }).ConfigureAwait(false);
+            Debug.WriteLine($"[LoteFormularioViewModel] ✓ Após InvokeOnMainThreadAsync inicial | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
 
             // ★★★ OTIMIZAÇÃO: ConfigParametros.UpdateConfig() só atualiza se necessário (tem cache interno) ★★★
             // UnidadeEpidemiologica.PegaListaUE() também é cacheable, não precisa aguardar
-            Debug.WriteLine($"[LoteFormularioViewModel] ▶ ConfigParametros.UpdateConfig iniciando...");
-            await Task.Run(() => ConfigParametros.UpdateConfig());
-            Debug.WriteLine($"[LoteFormularioViewModel] ✓ ConfigParametros.UpdateConfig concluído");
+            Debug.WriteLine($"[LoteFormularioViewModel] ▶ ConfigParametros.UpdateConfig iniciando... | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
+            await ConfigParametros.UpdateConfig().ConfigureAwait(false);
+            Debug.WriteLine($"[LoteFormularioViewModel] ✓ ConfigParametros.UpdateConfig concluído | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
 
-            Debug.WriteLine($"[LoteFormularioViewModel] ▶ CarregaFormularioAsync iniciando...");
+            Debug.WriteLine($"[LoteFormularioViewModel] ▶ CarregaFormularioAsync iniciando... | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
             await CarregaFormularioAsync(modeloIsiMacroSelecionado);
-            Debug.WriteLine($"[LoteFormularioViewModel] ✓ CarregaFormularioAsync concluído");
+            await MainThread.InvokeOnMainThreadAsync(() => MostrarBotaoCarregar = false);
+            Debug.WriteLine($"[LoteFormularioViewModel] ✓ CarregaFormularioAsync concluído | ms={initSw.ElapsedMilliseconds} | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
 
             Debug.WriteLine($"[LoteFormularioViewModel] ═══════════════════════════════════");
         }
@@ -607,15 +582,18 @@ public partial class LoteFormularioViewModel : ViewModelBase
                 IsBusy = false;
                 SalvarCommand.NotifyCanExecuteChanged();
                 EditarCommand.NotifyCanExecuteChanged();
-            });
+                Debug.WriteLine($"[LoteFormularioViewModel] finally: IsBusy=false | ms={initSw.ElapsedMilliseconds} | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
+            }).ConfigureAwait(false);
         }
     }
 
     private async Task CarregaFormularioAsync(int? modeloIsiMacroSelecionado = null)
     {
-        Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ▶ Iniciando, LoteFormId={LoteFormId}");
-        await MainThread.InvokeOnMainThreadAsync(() => SetTitle());
-        Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ✓ SetTitle concluído");
+        var loadSw = System.Diagnostics.Stopwatch.StartNew();
+        Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ▶ Iniciando, LoteFormId={LoteFormId} | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
+        Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ▶ Antes de SetTitle(MainThread.InvokeOnMainThreadAsync) | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
+        await MainThread.InvokeOnMainThreadAsync(() => SetTitle()).ConfigureAwait(false);
+        Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ✓ SetTitle concluído | ms={loadSw.ElapsedMilliseconds} | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
 
         bool novoLoteForm = LoteFormId == -1;
 
@@ -629,21 +607,21 @@ public partial class LoteFormularioViewModel : ViewModelBase
 
         LoteFormulario ??= new LoteFormulario();
 
-        Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ▶ Carregando lote...");
-        var loteResult = await Lote.PegaLoteAsync(LoteId);
-        Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ✓ Lote carregado");
+        Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ▶ Carregando lote... | ms={loadSw.ElapsedMilliseconds} | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
+        var loteResult = await Lote.PegaLoteAsync(LoteId).ConfigureAwait(false);
+        Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ✓ Lote carregado | ms={loadSw.ElapsedMilliseconds} | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
         Debug.WriteLine($"[CF] B: loteResult={loteResult?.id}, chamando EnsureNames...");
         loteResult?.EnsureNames();
         Debug.WriteLine($"[CF] C: EnsureNames ok, carregando loteFormResult...");
         var loteFormResult = novoLoteForm || continuandoPreenchimento
             ? null
-            : await LoteForm.PegaFormulariosLotePorLoteFormId(LoteFormId);
+            : await LoteForm.PegaFormulariosLotePorLoteFormId(LoteFormId).ConfigureAwait(false);
         Debug.WriteLine($"[CF] D: loteFormResult ok");
 
-        Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ▶ InvokeOnMainThreadAsync Lote...");
-        await MainThread.InvokeOnMainThreadAsync(() =>
+        Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ▶ Postando para main thread Lote... | ms={loadSw.ElapsedMilliseconds} | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
+        MainThread.BeginInvokeOnMainThread(() =>
         {
-            Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ▶ Dentro do InvokeOnMainThreadAsync Lote");
+            Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ▶ Dentro do BeginInvokeOnMainThread Lote | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
             Lote = loteResult;
             if (!novoLoteForm && !continuandoPreenchimento)
             {
@@ -654,52 +632,13 @@ public partial class LoteFormularioViewModel : ViewModelBase
             {
                 LoteFormVinculado = LoteFormulario.LoteForm.loteFormVinculado ?? LoteFormVinculado;
             }
-            Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ✓ InvokeOnMainThreadAsync Lote concluído");
+            Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ✓ BeginInvokeOnMainThread Lote processado | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
         });
-        Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ✓ Após InvokeOnMainThreadAsync Lote");
+        Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ✓ Após postar Lote para main thread | ms={loadSw.ElapsedMilliseconds} | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
 
-        // ★★★ CRÍTICO: Carrega ParametroSelecionado ANTES de carregar avaliações ★★★
-        if (ParametroTipo == 20 && ParametroSelecionado == null)
-        {
-            try
-            {
-                Debug.WriteLine($"[LoteFormularioViewModel] ★ Carregando ParametroSelecionado para tipo 20");
-                var parametrosTipo20 = await Parametro.PegaParametroAsync(ParametroTipo).ConfigureAwait(false);
-
-                if (parametrosTipo20 != null && parametrosTipo20.Count > 0)
-                {
-                    var param = parametrosTipo20.FirstOrDefault();
-                    await MainThread.InvokeOnMainThreadAsync(() =>
-                        ParametroSelecionado = param);
-                    Debug.WriteLine($"[LoteFormularioViewModel] ✓ ParametroSelecionado: {ParametroSelecionado?.nome}");
-                    Debug.WriteLine($"[LoteFormularioViewModel]   - campoTipo: {ParametroSelecionado?.campoTipo ?? "VAZIO"}");
-                    Debug.WriteLine($"[LoteFormularioViewModel]   - qtdMinima: {ParametroSelecionado?.qtdMinima}");
-                }
-                else
-                {
-                    Debug.WriteLine($"[LoteFormularioViewModel] ⚠️ Nenhum parâmetro encontrado para tipo 20!");
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"[LoteFormularioViewModel] ✖ Erro ao carregar parâmetros tipo 20: {ex.Message}");
-            }
-        }
-
-        if (AvaliacaoGalpao)
-        {
-            Debug.WriteLine($"[LoteFormularioViewModel] ★ É Avaliação do Galpão");
-            Debug.WriteLine($"  - Quantitativo: {AvaliacaoGalpaoQuantitativo}");
-            Debug.WriteLine($"  - Qualitativo: {AvaliacaoGalpaoQualitativo}");
-
-            await CarregaAvaliacaoGalpaoAsync(novoLoteForm);
-        }
-        else
-        {
-            Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ▶ CarregaParametrosAsync...");
-            await CarregaParametrosAsync(novoLoteForm, modeloIsiMacroSelecionado);
-            Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ✓ CarregaParametrosAsync concluído");
-        }
+        Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ▶ CarregaParametrosAsync...");
+        await CarregaParametrosAsync(novoLoteForm, modeloIsiMacroSelecionado);
+        Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ✓ CarregaParametrosAsync concluído");
 
         if (LoteFormulario.LoteForm == null)
         {
@@ -717,7 +656,8 @@ public partial class LoteFormularioViewModel : ViewModelBase
         else
         {
             NovoFormulario = false;
-            _ = Task.Run(async () =>
+            _ = CarregaParametrosPreenchidosAsync();
+            async Task CarregaParametrosPreenchidosAsync()
             {
                 try
                 {
@@ -728,15 +668,15 @@ public partial class LoteFormularioViewModel : ViewModelBase
                 {
                     Debug.WriteLine($"Erro ao carregar parâmetros: {ex.Message}");
                 }
-            });
+            }
         }
 
-        // ★★★ OTIMIZAÇÃO: Carrega imagens em LOW PRIORITY (não bloqueia tela) ★★★
-        _ = Task.Run(async () =>
+        _ = CarregaImagensComDelayAsync();
+        async Task CarregaImagensComDelayAsync()
         {
-            await Task.Delay(300); // Aguarda tela estar totalmente renderizada
+            await Task.Delay(300);
             await CarregaImagensAsync();
-        });
+        }
 
         UpdateTotal();
 
@@ -744,7 +684,7 @@ public partial class LoteFormularioViewModel : ViewModelBase
         {
             WeakReferenceMessenger.Default.Send(new UpdateScoreMessage());
             OnPropertyChanged(nameof(PrecisaMostrarEscoreAve));
-        });
+        }).ConfigureAwait(false);
 
         // Salva o estado como "em andamento" para recuperação em caso de encerramento repentino
         // Otimização: Não salva se já salvou recentemente (evita I/O excessivo na carga)
@@ -771,136 +711,11 @@ public partial class LoteFormularioViewModel : ViewModelBase
             15 => Traducao.ISIMacro,
             16 => Traducao.Vacinas,
             17 => Traducao.ISIMicro,
-            20 => Traducao.AvaliacoesNoGalpao,
             21 => $"{Traducao.Manejo}", //Manejo Personalizado
             _ => Title
         };
 
         OnPropertyChanged(nameof(IsISIMacro));
-    }
-
-    /// <summary>
-    /// ★★★ CORRIGIDO: Previne chamadas duplas COM flag _isLoadingAvaliacoes ★★★
-    /// </summary>
-    private async Task CarregaAvaliacaoGalpaoAsync(bool novoLoteForm)
-    {
-        // ★★★ PROTEÇÃO ANTI-DUPLICAÇÃO ★★★
-        if (_isLoadingAvaliacoes)
-        {
-            Debug.WriteLine($"[CarregaAvaliacaoGalpaoAsync] ⏸️ JÁ ESTÁ CARREGANDO - IGNORANDO");
-            return;
-        }
-
-        _isLoadingAvaliacoes = true;
-
-        try
-        {
-            LoteFormAvaliacaoGalpao.IsLoadingData = true;
-            Debug.WriteLine($"[CarregaAvaliacaoGalpaoAsync] ═══════════════════════════════════");
-            Debug.WriteLine($"[CarregaAvaliacaoGalpaoAsync] ★ CHAMADO");
-            Debug.WriteLine($"  NovoLoteForm: {novoLoteForm}");
-            Debug.WriteLine($"  ParametroSelecionado: {ParametroSelecionado?.nome ?? "NULL"}");
-
-            // ★★★ RECUPERAÇÃO: Se já temos avaliações, não carregamos novamente ★★★
-            if (LoteFormulario.ListaAvaliacoesGalpao.Any())
-            {
-                Debug.WriteLine($"[CarregaAvaliacaoGalpaoAsync] ✓ Já possui dados de avaliação (Recovery?) - Ignorando carga");
-                return;
-            }
-
-            if (ParametroSelecionado == null)
-            {
-                Debug.WriteLine($"[CarregaAvaliacaoGalpaoAsync] ✖ ERRO: ParametroSelecionado é NULL!");
-                await MainThread.InvokeOnMainThreadAsync(() =>
-                {
-                    AlternativasParametroSelecionado.Clear();
-                    LoteFormulario.ListaAvaliacoesGalpao.Clear();
-                });
-                return;
-            }
-
-            Debug.WriteLine($"[CarregaAvaliacaoGalpaoAsync] ▶ Carregando alternativas...");
-            var alternativas = await ParametroAlternativas.PegaAlternativas(ParametroSelecionado.id);
-            Debug.WriteLine($"[CarregaAvaliacaoGalpaoAsync] ✓ Alternativas carregadas: {alternativas?.Count ?? 0}");
-
-            Debug.WriteLine($"[CarregaAvaliacaoGalpaoAsync] ▶ Carregando avaliações...");
-            var avaliacoes = novoLoteForm
-                ? new List<LoteFormAvaliacaoGalpao>()
-                : await LoteFormAvaliacaoGalpao.RespostasAvaliacaoGalpaoPorLote(LoteFormId);
-            Debug.WriteLine($"[CarregaAvaliacaoGalpaoAsync] ✓ Avaliações carregadas: {avaliacoes?.Count ?? 0}");
-
-            Debug.WriteLine($"  Alternativas carregadas: {alternativas?.Count ?? 0}");
-            Debug.WriteLine($"  Avaliações carregadas: {avaliacoes?.Count ?? 0}");
-
-            await MainThread.InvokeOnMainThreadAsync(() =>
-            {
-                AlternativasParametroSelecionado.Clear();
-                if (alternativas != null)
-                {
-                    foreach (var alt in alternativas)
-                        AlternativasParametroSelecionado.Add(alt);
-                }
-
-                // ★★★ CORREÇÃO: Substituir a lista inteira em vez de Clear()+Add() ★★★
-                // ListaAvaliacoesGalpao é List<>, não ObservableCollection<>.
-                // Ao fazer Clear()+Add() na mesma referência, o SfListView não recebe
-                // notificação quando LoteFormulario não é substituído (caso de edição).
-                // Atribuindo uma nova lista, [ObservableProperty] dispara OnPropertyChanged
-                // ("ListaAvaliacoesGalpao") no LoteFormulario, forçando o binding a atualizar.
-                var novaLista = new List<LoteFormAvaliacaoGalpao>();
-
-                if (novoLoteForm)
-                {
-                    var qtdMaxima = ParametroSelecionado?.qtdCampos ?? ParametroSelecionado?.qtdMinima ?? 1;
-                    var qtdMinima = ParametroSelecionado?.qtdMinima ?? 1;
-                    Debug.WriteLine($"  → Criando {qtdMaxima} registros vazios (mínimo: {qtdMinima})");
-
-                    for (int i = 1; i <= qtdMaxima; i++)
-                    {
-                        var novaAvaliacao = new LoteFormAvaliacaoGalpao
-                        {
-                            NumeroResposta = i,
-                            parametroId = ParametroSelecionado.id,
-                            Parametro = ParametroSelecionado,
-                            ParametroAlternativas = AlternativasParametroSelecionado,
-                            LoteFormId = LoteFormId == -1 ? null : LoteFormId
-                        };
-
-                        novaLista.Add(novaAvaliacao);
-                        Debug.WriteLine($"    ✓ Registro {i} criado");
-                    }
-                }
-                else
-                {
-                    Debug.WriteLine($"  → Carregando {avaliacoes.Count} registros existentes");
-
-                    foreach (var av in avaliacoes)
-                    {
-                        av.ParametroAlternativas = AlternativasParametroSelecionado;
-                        av.Parametro = ParametroSelecionado;
-                        novaLista.Add(av);
-
-                        Debug.WriteLine($"    ✓ Registro {av.NumeroResposta} - RespostaQtde: {av.RespostaQtde}");
-                    }
-                }
-
-                LoteFormulario.ListaAvaliacoesGalpao = novaLista;
-
-                Debug.WriteLine($"  ✓ ListaAvaliacoesGalpao.Count FINAL: {LoteFormulario.ListaAvaliacoesGalpao.Count}");
-            });
-
-            Debug.WriteLine($"[CarregaAvaliacaoGalpaoAsync] ✅ CONCLUÍDO");
-            Debug.WriteLine($"[CarregaAvaliacaoGalpaoAsync] ═══════════════════════════════════");
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"[CarregaAvaliacaoGalpaoAsync] ❌ Erro: {ex.Message}");
-        }
-        finally
-        {
-            LoteFormAvaliacaoGalpao.IsLoadingData = false;
-            _isLoadingAvaliacoes = false;
-        }
     }
 
     private async Task CarregaParametrosAsync(bool novoLoteForm, int? modeloIsiMacroSelecionado)
@@ -970,7 +785,7 @@ public partial class LoteFormularioViewModel : ViewModelBase
                 var imagens = await LoteFormImagem.PegaImagens((int)LoteFormulario.LoteForm.id)
                     .ConfigureAwait(false);
 
-                await MainThread.InvokeOnMainThreadAsync(() =>
+                MainThread.BeginInvokeOnMainThread(() =>
                 {
                     LoteFormImagensList.Clear();
 
@@ -981,7 +796,7 @@ public partial class LoteFormularioViewModel : ViewModelBase
                     LoteFormImagem1 = LoteFormImagensList.Count >= 1 ? LoteFormImagensList[0] : null;
                     LoteFormImagem2 = LoteFormImagensList.Count >= 2 ? LoteFormImagensList[1] : null;
                     LoteFormImagem3 = LoteFormImagensList.Count >= 3 ? LoteFormImagensList[2] : null;
-                }).ConfigureAwait(false);
+                });
             }
             catch (Exception ex)
             {
@@ -1119,58 +934,30 @@ public partial class LoteFormularioViewModel : ViewModelBase
         {
             int oldScore = ScoreTotalDaAve;
 
-            if (AvaliacaoGalpao)
+            // ★★★ OTIMIZAÇÃO: Cache de parâmetros com alternativas ★★★
+            var parametrosValidos = LoteFormulario.Formulario_ParametrosComAlternativas
+                .Where(p => p?.AlternativaSelecionada != null)
+                .ToList();
+
+            if (parametrosValidos.Count == 0)
             {
-                LoteFormulario.AtualizouDados();
-                ScoreTotalDaAve = AvaliacaoGalpaoQuantitativo
-                    ? LoteFormulario.AvaliacoesRealizadasQuantitativa
-                    : LoteFormulario.AvaliacoesRealizadasQualitativa;
-
-                // Lógica de Cor: Vermelho se < Min ou > Max
-                int min = ParametroSelecionado?.qtdMinima ?? 0;
-                int max = ParametroSelecionado?.qtdCampos ?? 0;
-                bool isForaDosLimites = (ScoreTotalDaAve < min) || (max > 0 && ScoreTotalDaAve > max);
-
-                if (isForaDosLimites)
-                {
-                    RealizadoColor = Colors.Red;
-                }
-                else
-                {
-                    if (Application.Current?.Resources.TryGetValue("SecondaryColor", out var color) == true && color is Color c)
-                        RealizadoColor = c;
-                    else
-                        RealizadoColor = Colors.Blue;
-                }
+                ScoreTotalDaAve = 0;
             }
             else
             {
-                // ★★★ OTIMIZAÇÃO: Cache de parâmetros com alternativas ★★★
-                var parametrosValidos = LoteFormulario.Formulario_ParametrosComAlternativas
-                    .Where(p => p?.AlternativaSelecionada != null)
-                    .ToList();
+                // Usa p.Nota (e não score * peso diretamente) para respeitar a regra
+                // dos parâmetros "Isolados" (Tipo = 1): eles aparecem no formulário
+                // mas a propriedade Nota retorna 0, portanto não somam ao score total.
+                ScoreTotalDaAve = parametrosValidos
+                    .Sum(p => p.Nota);
 
-                if (parametrosValidos.Count == 0)
+                if (oldScore != ScoreTotalDaAve)
                 {
-                    ScoreTotalDaAve = 0;
-                }
-                else
-                {
-                    // Usa p.Nota (e não score * peso diretamente) para respeitar a regra
-                    // dos parâmetros "Isolados" (Tipo = 1): eles aparecem no formulário
-                    // mas a propriedade Nota retorna 0, portanto não somam ao score total.
-                    ScoreTotalDaAve = parametrosValidos
-                        .Sum(p => p.Nota);
-
-                    // ★★★ DEBUG: Só loga se mudou ★★★
-                    if (oldScore != ScoreTotalDaAve)
+                    foreach (var p in parametrosValidos)
                     {
-                        foreach (var p in parametrosValidos)
-                        {
-                            Debug.WriteLine($"Param: {p.nome}, Score: {p.AlternativaSelecionada.score}, Peso: {p.peso}, Total: {p.AlternativaSelecionada.score * p.peso}");
-                        }
-                        Debug.WriteLine($"Score Total: {ScoreTotalDaAve}");
+                        Debug.WriteLine($"Param: {p.nome}, Score: {p.AlternativaSelecionada.score}, Peso: {p.peso}, Total: {p.AlternativaSelecionada.score * p.peso}");
                     }
+                    Debug.WriteLine($"Score Total: {ScoreTotalDaAve}");
                 }
             }
 
@@ -1205,21 +992,6 @@ public partial class LoteFormularioViewModel : ViewModelBase
             if (NovoFormulario)
                 LoteFormulario.LoteForm.dataTerminoPreenchimento = DateTime.Now;
 
-            if (AvaliacaoGalpao)
-            {
-                if (AvaliacaoGalpaoQuantitativo && LoteFormulario.AvaliacoesRealizadasQuantitativa < ParametroSelecionado.qtdMinima)
-                {
-                    await MostraErroAvaliacao((int)ParametroSelecionado.qtdMinima, LoteFormulario.AvaliacoesRealizadasQuantitativa);
-                    return;
-                }
-
-                if (AvaliacaoGalpaoQualitativo && LoteFormulario.AvaliacoesRealizadasQualitativa < ParametroSelecionado.qtdMinima)
-                {
-                    await MostraErroAvaliacao((int)ParametroSelecionado.qtdMinima, LoteFormulario.AvaliacoesRealizadasQualitativa);
-                    return;
-                }
-            }
-            else
             {
                 foreach (var parametro in LoteFormulario?.Formulario_ParametrosComAlternativas ?? Enumerable.Empty<ParametroComAlternativas>())
                 {
@@ -1272,43 +1044,11 @@ public partial class LoteFormularioViewModel : ViewModelBase
             IsBusy = true;
             await LoteForm.SalvaLoteFormularioAsync(LoteFormulario?.LoteForm);
 
-            if (AvaliacaoGalpao)
-            {
-                var avaliacoes = LoteFormulario.ListaAvaliacoesGalpao
-                    .Where(a => a.TemAlternativaSelecionada)
-                    .ToList();
-
-                if (avaliacoes.Any())
-                {
-                    foreach (var avaliacao in avaliacoes)
-                        avaliacao.LoteFormId = LoteFormulario?.LoteForm.id ?? 0;
-
-                    var tasks = avaliacoes.Select(async av =>
-                    {
-                        var table = await Db.Table<LoteFormAvaliacaoGalpao>();
-                        var existente = await table
-                            .Where(a => a.LoteFormId == av.LoteFormId &&
-                                      a.parametroId == av.parametroId &&
-                                      a.NumeroResposta == av.NumeroResposta)
-                            .FirstOrDefaultAsync();
-
-                        if (existente != null)
-                            await Db.UpdateAsync(av);
-                        else
-                            await Db.InsertAsync(av);
-                    });
-
-                    await Task.WhenAll(tasks);
-                }
-            }
-            else
-            {
-                await Parametros.SalvaParametros(
-                    LoteFormulario?.Formulario_ParametrosComAlternativas,
-                    "LoteFormParametro",
-                    "loteFormId",
-                    (LoteFormulario?.LoteForm.id ?? 0).ToString());
-            }
+            await Parametros.SalvaParametros(
+                LoteFormulario?.Formulario_ParametrosComAlternativas,
+                "LoteFormParametro",
+                "loteFormId",
+                (LoteFormulario?.LoteForm.id ?? 0).ToString());
 
             await LoteFormImagem.DeletaImagens(LoteFormulario?.LoteForm);
 
@@ -1344,42 +1084,7 @@ public partial class LoteFormularioViewModel : ViewModelBase
 
             WeakReferenceMessenger.Default.Send(new FormularioSalvoMessage(LoteFormulario.LoteForm));
 
-            if (NovoFormulario && AvaliacaoGalpao)
-            {
-                int min = ParametroSelecionado?.qtdMinima ?? 0;
-                int max = ParametroSelecionado?.qtdCampos ?? 0;
-                int realizado = ScoreTotalDaAve;
-                double media = AvaliacaoGalpaoQuantitativo ? LoteFormulario.AvaliacaoMediaQuantitativa : 0;
-
-                string msgDescarte = "";
-                int totalRegistrosDefinidos = LoteFormulario.ListaAvaliacoesGalpao.Count;
-
-                if (realizado < totalRegistrosDefinidos)
-                {
-                    int descartados = totalRegistrosDefinidos - realizado;
-                    if (descartados == 1)
-                    {
-                        // Se apenas o último não foi preenchido, informa qual foi
-                        msgDescarte = string.Format(Traducao.UltimaNaoFoiPreenchido, totalRegistrosDefinidos);
-                    }
-                    else
-                    {
-                        msgDescarte = string.Format(Traducao.RegistrosNaoPreenchidosDescartados, descartados);
-                    }
-                }
-
-                await PopUpSuccessGalpao.ShowAsync(
-                    Traducao.AvaliacoesNoGalpao,
-                    Traducao.AdicionadoComSucesso,
-                    min,
-                    realizado,
-                    max,
-                    media,
-                    AvaliacaoGalpaoQuantitativo,
-                    RealizadoColor,
-                    msgDescarte);
-            }
-            else if (NovoFormulario && IsISIMacro)
+            if (NovoFormulario && IsISIMacro)
             {
                 if (await PopUpYesNo.ShowAsync(
                     $"{Title} - {Traducao.ScoreSemDoisPontos}: {ScoreTotalDaAve}",
@@ -1393,19 +1098,7 @@ public partial class LoteFormularioViewModel : ViewModelBase
             }
             else if (NovoFormulario)
             {
-                if (AvaliacaoGalpaoQualitativo)
-                {
-                    var msg = string.Format(Traducao.FormularioRegistros, LoteFormulario.AvaliacoesRealizadasQualitativa);
-
-                    if (LoteFormulario.AvaliacoesRealizadasQualitativa < LoteFormulario.ListaAvaliacoesGalpao.Count)
-                        msg += $"\n\n{Traducao.UltimaNaoFoiPreenchido}";
-
-                    await PopUpOK.ShowAsync(Traducao.AvaliacoesNoGalpao, msg);
-                }
-                else
-                {
-                    await PopUpOK.ShowAsync(Title, Traducao.AdicionadoComSucesso);
-                }
+                await PopUpOK.ShowAsync(Title, Traducao.AdicionadoComSucesso);
             }
             else
             {
@@ -1423,32 +1116,6 @@ public partial class LoteFormularioViewModel : ViewModelBase
             IsBusy = false;
             OnPropertyChanged(nameof(PrecisaMostrarEscoreAve));
         }
-    }
-
-    private async Task MostraErroAvaliacao(int minimo, int realizado)
-    {
-        int max = ParametroSelecionado?.qtdCampos ?? 0;
-        double media = 0;
-
-        if (AvaliacaoGalpaoQuantitativo)
-        {
-            var valoresPreenchidos = LoteFormulario.ListaAvaliacoesGalpao
-                .Where(av => av.RespostaQtde.HasValue)
-                .Select(av => av.RespostaQtde.Value)
-                .ToList();
-
-            if (valoresPreenchidos.Any())
-                media = valoresPreenchidos.Average();
-        }
-
-        await PopUpErrorGalpao.ShowAsync(
-            Traducao.Atenção,
-            "Para salvar esta avaliação, você deve preencher pelo menos o número mínimo de registros exigido.",
-            minimo,
-            realizado,
-            max,
-            media,
-            AvaliacaoGalpaoQuantitativo);
     }
 
     [RelayCommand]
@@ -1517,74 +1184,6 @@ public partial class LoteFormularioViewModel : ViewModelBase
     [RelayCommand]
     public void ProcurarISIMacro() => PesquisaISIMacroDialogVisible = !PesquisaISIMacroDialogVisible;
 
-    [RelayCommand]
-    public async Task ProcurarAvaliacoes()
-    {
-        try
-        {
-            Debug.WriteLine("[LoteFormularioViewModel] 📊 Abrindo VerRegistrosPopup");
-
-            // Verifica se há registros para mostrar
-            if (LoteFormulario?.ListaAvaliacoesGalpao == null || LoteFormulario.ListaAvaliacoesGalpao.Count == 0)
-            {
-                await PopUpOK.ShowAsync(Traducao.Atenção, "Nenhum registro encontrado para visualizar.");
-                return;
-            }
-
-            // Abre o popup modal
-            var registroSelecionado = await VerRegistrosPopup.ShowAsync(
-                new ObservableCollection<LoteFormAvaliacaoGalpao>(LoteFormulario.ListaAvaliacoesGalpao ?? new List<LoteFormAvaliacaoGalpao>()),
-                AvaliacaoGalpaoQualitativo);
-
-            // Se um registro foi selecionado, navega até ele
-            if (registroSelecionado != null)
-            {
-                Debug.WriteLine($"[LoteFormularioViewModel] 🎯 Navegando para registro: {registroSelecionado.NumeroResposta}");
-
-                if (AvaliacaoGalpaoQualitativo)
-                {
-                    // Para avaliação qualitativa, envia mensagem para o controle de alternativas
-                    if (registroSelecionado.ParametroAlternativas != null)
-                    {
-                        AlternativasParametroSelecionado = registroSelecionado.ParametroAlternativas;
-                        WeakReferenceMessenger.Default.Send(new SelecionouAvaliacaoQualitativaMessage(registroSelecionado));
-                        Debug.WriteLine("[LoteFormularioViewModel] ✅ Mensagem de avaliação qualitativa enviada");
-                    }
-                    else
-                    {
-                        Debug.WriteLine("[LoteFormularioViewModel] ⚠️ ParametroAlternativas é nulo");
-                    }
-                }
-                else
-                {
-                    // Para avaliação quantitativa, faz scroll até o registro
-                    await MainThread.InvokeOnMainThreadAsync(async () =>
-                    {
-                        try
-                        {
-                            // Notifica o code-behind para fazer o scroll
-                            WeakReferenceMessenger.Default.Send(new NavigateToRegistroMessage(registroSelecionado));
-                            Debug.WriteLine("[LoteFormularioViewModel] ✅ Mensagem de navegação quantitativa enviada");
-                        }
-                        catch (Exception scrollEx)
-                        {
-                            Debug.WriteLine($"[LoteFormularioViewModel] ❌ Erro ao enviar mensagem de scroll: {scrollEx.Message}");
-                        }
-                    });
-                }
-            }
-            else
-            {
-                Debug.WriteLine("[LoteFormularioViewModel] ⚠️ Popup fechado sem seleção");
-            }
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"[LoteFormularioViewModel] ❌ Erro ao abrir VerRegistrosPopup: {ex.Message}");
-            await PopUpOK.ShowAsync(Traducao.Erro, $"Erro ao abrir registros: {ex.Message}");
-        }
-    }
-
     #endregion
 
     #region Navigation
@@ -1599,80 +1198,6 @@ public partial class LoteFormularioViewModel : ViewModelBase
 
         if (await NavigationUtils.PopModalSeConfirmar())
             LoteFormulario?.ApagaEmAndamento();
-    }
-
-    #endregion
-
-    #region Recálculo de Avaliações do Galpão
-
-    private void RecalculaTotaisAvaliacaoGalpao()
-    {
-        if (LoteFormulario?.ListaAvaliacoesGalpao == null || !AvaliacaoGalpao)
-        {
-            Debug.WriteLine($"[LoteFormularioViewModel] ⏸️ Recálculo ignorado (não é avaliação galpão)");
-            return;
-        }
-
-        try
-        {
-            var totalRespondidos = LoteFormulario.ListaAvaliacoesGalpao
-                .Count(av => av.TemAlternativaSelecionada);
-
-            double media = 0;
-            if (AvaliacaoGalpaoQuantitativo)
-            {
-                var valoresPreenchidos = LoteFormulario.ListaAvaliacoesGalpao
-                    .Where(av => av.RespostaQtde.HasValue)
-                    .Select(av => av.RespostaQtde.Value)
-                    .ToList();
-
-                if (valoresPreenchidos.Any())
-                {
-                    media = valoresPreenchidos.Average();
-                }
-            }
-
-            Debug.WriteLine($"[LoteFormularioViewModel] 📊 Recálculo:");
-            Debug.WriteLine($"  Total de registros: {LoteFormulario.ListaAvaliacoesGalpao.Count}");
-            Debug.WriteLine($"  Respondidos: {totalRespondidos}");
-            Debug.WriteLine($"  Média: {media:F2}");
-
-            MainThread.BeginInvokeOnMainThread(() =>
-            {
-                LoteFormulario.AtualizouDados();
-
-                ScoreTotalDaAve = AvaliacaoGalpaoQuantitativo
-                    ? LoteFormulario.AvaliacoesRealizadasQuantitativa
-                    : LoteFormulario.AvaliacoesRealizadasQualitativa;
-
-                // Lógica de Cor: Vermelho se < Min ou > Max
-                int min = ParametroSelecionado?.qtdMinima ?? 0;
-                int max = ParametroSelecionado?.qtdCampos ?? 0;
-                bool isForaDosLimites = (ScoreTotalDaAve < min) || (max > 0 && ScoreTotalDaAve > max);
-
-                if (isForaDosLimites)
-                {
-                    RealizadoColor = Colors.Red;
-                }
-                else
-                {
-                    if (Application.Current?.Resources.TryGetValue("SecondaryColor", out var color) == true && color is Color c)
-                        RealizadoColor = c;
-                    else
-                        RealizadoColor = Colors.Blue;
-                }
-
-                OnPropertyChanged(nameof(ScoreTotalDaAve));
-                OnPropertyChanged(nameof(ScoreTotalDaAveCor));
-                OnPropertyChanged(nameof(RealizadoColor));
-
-                Debug.WriteLine($"[LoteFormularioViewModel] ✅ UI atualizada: Score={ScoreTotalDaAve}, Color={RealizadoColor}");
-            });
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"[LoteFormularioViewModel] ❌ Erro: {ex.Message}");
-        }
     }
 
     #endregion
@@ -1751,8 +1276,6 @@ public partial class LoteFormularioViewModel : ViewModelBase
         _updateTotalCts?.Dispose();
         _updateTotalCts = null;
 
-        _isLoadingAvaliacoes = false;
-
         if (LoteFormulario != null)
         {
             DetachLoteFormularioSubscriptions(LoteFormulario);
@@ -1760,6 +1283,7 @@ public partial class LoteFormularioViewModel : ViewModelBase
 
         LoteFormParametros?.Clear();
         LoteFormImagensList?.Clear();
+        LoteFormulario = null;
 
         // Limpa estado do formulário para evitar persistência entre cadastros (Singleton VM)
         LoteFormImagem1 = null;

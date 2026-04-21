@@ -1,13 +1,13 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 
-using SilvaData_MAUI.Models;
-using SilvaData_MAUI.Utilities;
+using SilvaData.Models;
+using SilvaData.Utilities;
 
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace SilvaData_MAUI.Controls
+namespace SilvaData.Controls
 {
     /// <summary>
     /// Página para visualizar e gerenciar a lista de Proprietários.

@@ -2,7 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Maui.Views;
 
-namespace SilvaData_MAUI.Pages.PopUps
+namespace SilvaData.Pages.PopUps
 {
     /// <summary>
     /// Popup que exibe uma imagem em tela cheia com título.

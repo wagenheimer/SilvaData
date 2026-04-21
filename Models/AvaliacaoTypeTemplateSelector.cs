@@ -1,8 +1,8 @@
-using SilvaData_MAUI.Models;
+using SilvaData.Models;
 
 using Microsoft.Maui.Controls;
 
-namespace SilvaData_MAUI.Utilities
+namespace SilvaData.Utilities
 {
     /// <summary>
     /// ✅ Selector que escolhe qual template/content renderizar

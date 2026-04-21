@@ -44,14 +44,22 @@ namespace SilvaData.ViewModels
         {
             get
             {
-                var path = Alternativa?.urlImagemLocal;
-                if (string.IsNullOrEmpty(path) || !File.Exists(path))
+                var alternativa = Alternativa;
+                var rawUrl = alternativa?.urlImagem;
+                var normalized = ParametroAlternativasFromWebService.NormalizeImageFileName(rawUrl);
+                var path = ParametroAlternativasFromWebService.BuildLocalImagePath(rawUrl);
+                var exists = !string.IsNullOrEmpty(path) && File.Exists(path);
+
+                Debug.WriteLine($"[ISIMacroFotoVM] ResolveImage altId={alternativa?.id} raw='{rawUrl ?? ""}' normalized='{normalized}' path='{path}' exists={exists} platform={DeviceInfo.Platform}");
+
+                if (!exists)
                 {
                     Debug.WriteLine($"[ISIMacroFotoVM] ❌ Imagem não encontrada: {path ?? "NULL"}");
                     return null;
                 }
 
-                Debug.WriteLine($"[ISIMacroFotoVM] 🖼️ Carregando: {path}");
+                var fileInfo = new FileInfo(path);
+                Debug.WriteLine($"[ISIMacroFotoVM] 🖼️ Carregando: {path} | bytes={fileInfo.Length}");
 
                 // MemoryStream: stream re-legível, o SfImageEditor pode ler o stream múltiplas
                 // vezes (render inicial + re-layout). FileStream falha na segunda leitura.

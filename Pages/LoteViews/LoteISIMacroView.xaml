@@ -47,6 +47,7 @@
             <HorizontalStackLayout
                 Grid.RowSpan="3"
                 Grid.Column="1"
+                Spacing="8"
                 VerticalOptions="Center">
                 <buttons:SfButton
                     Command="{Binding VoltarCommand}"
@@ -92,13 +93,14 @@
         </Grid>
 
         <listView:SfListView
+            x:Name="isiMacroListView"
             Grid.Row="2"
             Margin="0,-50,0,0"
-            HeaderSize="60"
+            HeaderSize="50"
             IsScrollingEnabled="True"
             IsVisible="{Binding IsBusy, Converter={StaticResource InvertBoolean}}"
-            ItemSize="120"
-            ItemSpacing="5"
+            ItemSize="90"
+            ItemSpacing="4"
             ItemsSource="{Binding IsiMacroList}"
             SelectionMode="None"
             VerticalOptions="Fill">
@@ -172,11 +174,19 @@
                 <DataTemplate x:DataType="viewModels:ISIMacroButton">
 
                     <Border
-                        Padding="30,10"
+                        Padding="14,8"
                         Background="White"
                         Stroke="{Binding SaudeColor}"
-                        StrokeShape="RoundRectangle 20"
-                        StrokeThickness="1">
+                        StrokeShape="RoundRectangle 16"
+                        StrokeThickness="2.5">
+
+                        <Border.Shadow>
+                            <Shadow
+                                Brush="{Binding SaudeColor}"
+                                Opacity="0.2"
+                                Radius="6"
+                                Offset="0,2" />
+                        </Border.Shadow>
 
                         <Border.Behaviors>
                             <toolkit:TouchBehavior
@@ -193,52 +203,51 @@
 
                         <Grid
                             ColumnDefinitions="*,Auto"
-                            RowDefinitions="*,*"
-                            RowSpacing="0"
-                            VerticalOptions="Fill">
+                            RowDefinitions="Auto,Auto,Auto"
+                            RowSpacing="1"
+                            VerticalOptions="Center">
 
-                            <HorizontalStackLayout Grid.Row="0" VerticalOptions="End">
+                            <HorizontalStackLayout Grid.Row="0">
                                 <Label
-                                    FontSize="Large"
-                                    HorizontalTextAlignment="Start"
-                                    Text="{localization:Translate Ave}"
-                                    TextColor="{Binding SaudeColor}"
-                                    VerticalTextAlignment="Center" />
-                                <Label
-                                    Padding="5,0,0,0"
-                                    FontSize="Large"
-                                    HorizontalTextAlignment="Start"
-                                    Text="{Binding Numero, StringFormat='{0:00}'}"
-                                    TextColor="{Binding SaudeColor}"
-                                    VerticalTextAlignment="Center" />
-                            </HorizontalStackLayout>
-
-                            <HorizontalStackLayout Grid.Row="1" VerticalOptions="Start">
-                                <Label
-                                    FontSize="Medium"
-                                    HorizontalTextAlignment="Start"
-                                    Text="{localization:Translate Score}"
-                                    TextColor="{StaticResource SecondaryColor}"
-                                    VerticalTextAlignment="Center" />
-                                <Label
-                                    Padding="5,0,0,0"
                                     FontAttributes="Bold"
-                                    FontSize="Medium"
-                                    Text="{Binding Score}"
-                                    TextColor="{Binding SaudeColor}"
-                                    VerticalOptions="Fill"
-                                    VerticalTextAlignment="Center" />
+                                    FontSize="15"
+                                    Text="{localization:Translate Ave}"
+                                    TextColor="{Binding SaudeColor}" />
+                                <Label
+                                    Padding="4,0,0,0"
+                                    FontAttributes="Bold"
+                                    FontSize="15"
+                                    Text="{Binding Numero, StringFormat='{0:00}'}"
+                                    TextColor="{Binding SaudeColor}" />
                             </HorizontalStackLayout>
+
+                            <HorizontalStackLayout Grid.Row="1">
+                                <Label
+                                    FontSize="12"
+                                    Text="{localization:Translate Score}"
+                                    TextColor="{StaticResource SecondaryColor}" />
+                                <Label
+                                    Padding="4,0,0,0"
+                                    FontAttributes="Bold"
+                                    FontSize="12"
+                                    Text="{Binding Score, StringFormat='{0:F1}'}"
+                                    TextColor="{Binding SaudeColor}" />
+                            </HorizontalStackLayout>
+
+                            <Label
+                                Grid.Row="2"
+                                FontSize="11"
+                                Text="{Binding Data, StringFormat='{0:dd/MM/yy}'}"
+                                TextColor="Gray" />
 
                             <Ellipse
-                                Grid.RowSpan="2"
+                                Grid.RowSpan="3"
                                 Grid.Column="1"
-                                Margin="0"
                                 Fill="{Binding SaudeColor}"
-                                HeightRequest="25"
+                                HeightRequest="30"
                                 HorizontalOptions="Center"
                                 VerticalOptions="Center"
-                                WidthRequest="25" />
+                                WidthRequest="30" />
                         </Grid>
                     </Border>
 
@@ -258,8 +267,7 @@
         </listView:SfListView>
 
         <controls:LoadingView
-            Grid.Row="0"
-            Grid.RowSpan="3"
+            Grid.Row="2"
             IsVisible="{Binding IsBusy}"
             Text="{localization:Translate Aguarde}"
             VerticalOptions="Fill" />

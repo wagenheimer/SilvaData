@@ -1,6 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 
-using SilvaData_MAUI.Utils;
+using SilvaData.Utils;
 using Newtonsoft.Json;
 
 using SQLite;
@@ -9,7 +9,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 
-namespace SilvaData_MAUI.Models
+namespace SilvaData.Models
 {
 
     public class UpdateDataParametrosAtividade : UpdateDataParametros

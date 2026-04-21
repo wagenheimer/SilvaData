@@ -1,15 +1,15 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 
-using SilvaData_MAUI.Infrastructure;
-using SilvaData_MAUI.Models;
-using SilvaData_MAUI.Utilities;
-using SilvaData_MAUI.ViewModels;
+using SilvaData.Infrastructure;
+using SilvaData.Models;
+using SilvaData.Utilities;
+using SilvaData.ViewModels;
 
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace SilvaData_MAUI.Controls
+namespace SilvaData.Controls
 {
     /// <summary>
     /// Página para visualização e gerenciamento de Unidades Epidemiológicas (UE).

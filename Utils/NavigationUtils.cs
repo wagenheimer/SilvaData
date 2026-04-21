@@ -243,20 +243,21 @@ namespace SilvaData.Utils
                         {
                             LogNavigation($"Entrou na main thread para abrir modal | destino={destino} | origem={origem}");
 
-                            // Aplica status bar azul com ícones brancos em iOS e Android,
-                            // pois páginas modais não herdam a navigation bar do Shell.
-                            if (!page.Behaviors.OfType<StatusBarBehavior>().Any())
-                            {
-                                page.Behaviors.Add(new StatusBarBehavior
-                                {
-                                    StatusBarColor = Color.FromArgb("#70AC3E"),
-                                    StatusBarStyle = StatusBarStyle.LightContent
-                                });
-                            }
+                            // StatusBarBehavior desabilitado temporariamente para diagnóstico de crash na abertura modal.
 
                             LogNavigation($"Chamando PushModalAsync | destino={destino} | origem={origem}");
-                            await Navigation.PushModalAsync(page, animated);
-                            LogNavigation($"Modal aberta: {destino} | origem: {origem}");
+                            var pushStopwatch = Stopwatch.StartNew();
+                            var pushTask = Navigation.PushModalAsync(page, animated);
+                            var completed = await Task.WhenAny(pushTask, Task.Delay(12000));
+
+                            if (completed != pushTask)
+                            {
+                                LogNavigation($"PushModalAsync timeout após {pushStopwatch.ElapsedMilliseconds}ms | destino={destino} | origem={origem}");
+                                return;
+                            }
+
+                            await pushTask;
+                            LogNavigation($"Modal aberta: {destino} | origem: {origem} | ms={pushStopwatch.ElapsedMilliseconds}");
                         }
                         catch (Exception ex)
                         {
@@ -780,6 +781,15 @@ namespace SilvaData.Utils
             LoteFormulario? recoveredForm = null,
             int loteFormVinculado = -1)
         {
+            // Avaliação no Galpão tem fluxo dedicado: SetInitialState antes do push
+            // para que IsBusy=true e ParametroSelecionado estejam corretos no primeiro render.
+            if (parametroTipoId == 20)
+            {
+                return await OpenAvaliacaoGalpaoFormAsync(
+                    lote, loteFormId, fase, isReadOnly, podeEditar,
+                    limpaFormularioAtual, parametroSelecionado);
+            }
+
             try
             {
                 ArgumentNullException.ThrowIfNull(lote);
@@ -796,120 +806,151 @@ namespace SilvaData.Utils
                 LogNavigation($"OpenLoteFormularioAsync iniciado | lote={loteAtual.id} | loteFormId={loteFormId} | parametroTipoId={parametroTipoId} | fase={fase} | readOnly={isReadOnly} | podeEditar={podeEditar} | item={item} | modeloIsiMacroSelecionado={modeloIsiMacroSelecionado} | limpaFormularioAtual={limpaFormularioAtual} | recoveredForm={(recoveredForm != null ? "yes" : "no")} | loteFormVinculado={loteFormVinculado}");
 
                 var vm = services.GetRequiredService<SilvaData.ViewModels.LoteFormularioViewModel>();
-                var avaliacaoVm = services.GetService<SilvaData.ViewModels.AvaliacaoAlternativasViewModel>();
 
-                    if (limpaFormularioAtual)
-                        vm.Cleanup();
+                if (limpaFormularioAtual)
+                    vm.Cleanup();
 
-                // ★★★ 1. CONFIGURA ESTADO INICIAL (Rápido - sem I/O) ★★★
-                vm.SetInitialState(
-                    lote: loteAtual,
-                    loteFormId: loteFormId,
-                    parametroTipoId: parametroTipoId,
-                    fase: fase,
-                    isReadOnly: isReadOnly,
-                    podeEditar: podeEditar,
-                    recoveredForm: recoveredForm,
-                    loteFormVinculado: loteFormVinculado);
+                SilvaData.Controls.LoteFormularioView? formPage = null;
 
-                if (item.HasValue)
-                    vm.Item = item;
-
-                if (parametroSelecionado != null)
-                    vm.ParametroSelecionado = parametroSelecionado;
-
-                // ★★★ 2. ABRE A TELA IMEDIATAMENTE (com IsBusy=true) ★★★
-                vm.IsBusy = true;
-                
-                // Abre a view ANTES de carregar dados
-                LogNavigation("OpenLoteFormularioAsync criando openTask para LoteFormularioView");
-                Task openTask;
-
+                // Abre a view ANTES de carregar dados.
+                // Em iOS, manter o fluxo linear reduz race condition com transição modal.
                 if (DeviceInfo.Platform == DevicePlatform.iOS)
                 {
-                    var formPage = services.GetRequiredService<SilvaData.Controls.LoteFormularioView>();
-                    LogNavigation("OpenLoteFormularioAsync usando ShowPageAsModalAsync sem animacao no iOS para LoteFormularioView");
-                    openTask = ShowPageAsModalAsync(formPage, animated: false);
+                    LogNavigation("OpenLoteFormularioAsync aguardando estabilizacao iOS (350ms) antes de abrir modal");
+                    await Task.Delay(350);
+
+                    await MainThread.InvokeOnMainThreadAsync(async () =>
+                    {
+                        LogNavigation("OpenLoteFormularioAsync [iOS-inner] iniciando CreateInstance");
+                        formPage = ActivatorUtilities.CreateInstance<SilvaData.Controls.LoteFormularioView>(services);
+                        LogNavigation($"OpenLoteFormularioAsync [iOS-inner] CreateInstance concluido | hash={formPage.GetHashCode()}");
+
+                        var nav = Application.Current?.Windows.FirstOrDefault()?.Page?.Navigation;
+                        if (nav == null)
+                            throw new InvalidOperationException("Navigation indisponível para PushModalAsync direto no iOS.");
+
+                        LogNavigation($"OpenLoteFormularioAsync [iOS-inner] chamando PushModalAsync | modalStack={nav.ModalStack.Count}");
+                        await nav.PushModalAsync(formPage, false);
+                        LogNavigation("OpenLoteFormularioAsync [iOS-inner] PushModalAsync concluido");
+                    });
+
+                    // Cede um frame para a tela concluir o primeiro layout antes de continuar.
+                    await Task.Yield();
+                    LogNavigation("OpenLoteFormularioAsync modal iOS aberta");
                 }
                 else
                 {
-                    openTask = ShowViewAsModalAsync<SilvaData.Controls.LoteFormularioView>();
+                    LogNavigation("OpenLoteFormularioAsync abrindo modal padrão para LoteFormularioView");
+                    await ShowViewAsModalAsync<SilvaData.Controls.LoteFormularioView>();
+                    LogNavigation("OpenLoteFormularioAsync modal padrão aberta");
                 }
 
-                // Aguarda a abertura visual da tela antes de iniciar a carga pesada.
-                LogNavigation("OpenLoteFormularioAsync aguardando openTask");
-                await openTask.ConfigureAwait(false);
-                LogNavigation("OpenLoteFormularioAsync openTask concluida");
-
-                // ★★★ 3. CARREGA DADOS EM BACKGROUND (após a tela estar visível) ★★★
-                _ = Task.Run(async () =>
+                // ★★★ 2. CONFIGURA ESTADO INICIAL NA MAIN THREAD (evita race/crash iOS) ★★★
+                LogNavigation($"OpenLoteFormularioAsync checkpoint: antes do SetInitialState | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
+                await MainThread.InvokeOnMainThreadAsync(() =>
                 {
-                    try
-                    {
-                        // ★★★ OTIMIZAÇÃO: Delay mínimo (apenas garante que UI renderizou) ★★★
-                        LogNavigation("OpenLoteFormularioAsync background task iniciada");
-                        await Task.Yield(); // Libera thread imediatamente
-                        LogNavigation("OpenLoteFormularioAsync background task apos Task.Yield");
+                    LogNavigation($"OpenLoteFormularioAsync checkpoint: dentro do SetInitialState | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
+                    vm.SetInitialState(
+                        lote: loteAtual,
+                        loteFormId: loteFormId,
+                        parametroTipoId: parametroTipoId,
+                        fase: fase,
+                        isReadOnly: isReadOnly,
+                        podeEditar: podeEditar,
+                        recoveredForm: recoveredForm,
+                        loteFormVinculado: loteFormVinculado);
 
-                        // Agora carrega os dados pesados
-                        LogNavigation("OpenLoteFormularioAsync iniciando vm.InicializaFormulario em background");
-                        await vm.InicializaFormulario(
-                            limpaFormularioAtual: limpaFormularioAtual,
-                            modeloIsiMacroSelecionado: modeloIsiMacroSelecionado
-                        ).ConfigureAwait(false);
-                        LogNavigation("OpenLoteFormularioAsync vm.InicializaFormulario concluido");
+                    if (item.HasValue)
+                        vm.Item = item;
 
-                        // Configura ViewModel auxiliar (Singleton compartilhado com o controle AvaliacaoAlternativas)
-                        if (avaliacaoVm != null && vm.AvaliacaoGalpao)
-                        {
-                            LogNavigation("OpenLoteFormularioAsync preparando sincronizacao com AvaliacaoAlternativasViewModel");
-                            await MainThread.InvokeOnMainThreadAsync(() =>
-                            {
-                                LogNavigation("OpenLoteFormularioAsync entrou na main thread para sincronizar AvaliacaoAlternativasViewModel");
-                                avaliacaoVm.Reset();
-                                avaliacaoVm.PodeEditar = podeEditar && !isReadOnly;
-                                avaliacaoVm.PodeSelecionarMaisQueUm = vm.ParametroSelecionado?.campoTipo == "2";
+                    if (parametroSelecionado != null)
+                        vm.ParametroSelecionado = parametroSelecionado;
 
-                                 // Copia alternativas e avaliações do formulário para o ViewModel do controle
-                                 if (vm.AlternativasParametroSelecionado != null)
-                                 {
-                                     foreach (var alt in vm.AlternativasParametroSelecionado)
-                                         avaliacaoVm.AlternativasParametroSelecionado.Add(alt);
-                                 }
+                    vm.SetPendingLoadParams(limpaFormularioAtual, modeloIsiMacroSelecionado);
+                    vm.IsBusy = true;
+                    vm.MostrarBotaoCarregar = false;
 
-                                 if (vm.LoteFormulario?.ListaAvaliacoesGalpao != null)
-                                 {
-                                     foreach (var av in vm.LoteFormulario.ListaAvaliacoesGalpao)
-                                         avaliacaoVm.ListaAvaliacoesGalpao.Add(av);
-                                 }
-
-                                 avaliacaoVm.AtualizaComboBoxLista();
-                            });
-                            LogNavigation("OpenLoteFormularioAsync sincronizacao com AvaliacaoAlternativasViewModel concluida");
-                        }
-
-                        LogNavigation("OpenLoteFormularioAsync dados carregados com sucesso");
-                    }
-                    catch (Exception ex)
-                    {
-                        LogNavigationError(nameof(OpenLoteFormularioAsync), ex);
-                        
-                        await MainThread.InvokeOnMainThreadAsync(async () =>
-                        {
-                            LogNavigation("OpenLoteFormularioAsync entrou na main thread para tratamento de erro");
-                            vm.IsBusy = false;
-                            await PopUpOK.ShowAsync("Erro", $"Falha ao carregar formulário: {ex.Message}");
-                            await PopModalAsync(); // Fecha a tela em caso de erro
-                        });
-                    }
+                    LogNavigation($"OpenLoteFormularioAsync checkpoint: fim do SetInitialState | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
                 });
-                
+
+                LogNavigation("OpenLoteFormularioAsync estado inicial aplicado após abertura da modal (main thread)");
+
+                // IMPORTANT: não carregar aqui.
+                // O carregamento é disparado na própria View, em OnAppearing,
+                // depois do delay/injeção de templates pesados para evitar deadlock no iOS.
+                LogNavigation("OpenLoteFormularioAsync params salvos; carregamento sera disparado apos OnAppearing da View");
+
                 return true;
             }
             catch (Exception ex)
             {
                 LogNavigationError(nameof(OpenLoteFormularioAsync), ex);
                 await PopUpOK.ShowAsync("Erro", $"Falha ao abrir formulário: {ex.Message}");
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Abre a página dedicada de Avaliação no Galpão.
+        /// SetInitialState e IsBusy=true são definidos ANTES do PushModalAsync para que
+        /// o primeiro render já exiba o loading e o ParametroSelecionado correto.
+        /// </summary>
+        private static async Task<bool> OpenAvaliacaoGalpaoFormAsync(
+            Lote lote,
+            int loteFormId,
+            int? fase,
+            bool isReadOnly,
+            bool podeEditar,
+            bool limpaFormularioAtual,
+            SilvaData.Models.Parametro? parametroSelecionado)
+        {
+            try
+            {
+                var services = ServiceHelper.Services;
+                if (services is null)
+                {
+                    await PopUpOK.ShowAsync("Erro", "Serviços indisponíveis");
+                    return false;
+                }
+
+                var vm = services.GetRequiredService<SilvaData.ViewModels.AvaliacaoGalpaoFormViewModel>();
+
+                if (limpaFormularioAtual)
+                    vm.Cleanup();
+
+                // Define estado ANTES do push: IsBusy=true e ParametroSelecionado visíveis
+                // no primeiro render da página (sem precisar de notificação).
+                vm.SetInitialState(lote, loteFormId, fase, isReadOnly, podeEditar, parametroSelecionado);
+                vm.IsBusy = true;
+
+                LogNavigation($"OpenAvaliacaoGalpaoFormAsync | lote={lote.id} | loteFormId={loteFormId} | param={parametroSelecionado?.nome} | Qualitativo={vm.AvaliacaoGalpaoQualitativo}");
+
+                if (DeviceInfo.Platform == DevicePlatform.iOS)
+                {
+                    LogNavigation("OpenAvaliacaoGalpaoFormAsync aguardando estabilização iOS (350ms)");
+                    await Task.Delay(350);
+                }
+
+                await MainThread.InvokeOnMainThreadAsync(async () =>
+                {
+                    var page = Microsoft.Extensions.DependencyInjection.ActivatorUtilities
+                        .CreateInstance<SilvaData.Pages.LoteViews.AvaliacaoGalpaoFormView>(services);
+
+                    var nav = Application.Current?.Windows.FirstOrDefault()?.Page?.Navigation;
+                    if (nav == null)
+                        throw new InvalidOperationException("Navigation indisponível para AvaliacaoGalpaoFormView.");
+
+                    LogNavigation($"OpenAvaliacaoGalpaoFormAsync PushModalAsync | modalStack={nav.ModalStack.Count}");
+                    await nav.PushModalAsync(page, false);
+                    LogNavigation("OpenAvaliacaoGalpaoFormAsync PushModalAsync concluído");
+                });
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                LogNavigationError(nameof(OpenAvaliacaoGalpaoFormAsync), ex);
+                await PopUpOK.ShowAsync("Erro", $"Falha ao abrir avaliação: {ex.Message}");
                 return false;
             }
         }

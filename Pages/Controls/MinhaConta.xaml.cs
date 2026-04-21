@@ -1,7 +1,7 @@
-using SilvaData_MAUI.Infrastructure;
-using SilvaData_MAUI.Models;
-using SilvaData_MAUI.ViewModels;
-using SilvaData_MAUI.Utils; // Adicionado
+using SilvaData.Infrastructure;
+using SilvaData.Models;
+using SilvaData.ViewModels;
+using SilvaData.Utils; // Adicionado
 
 namespace ISIInstitute.Views // (Mantendo seu namespace original)
 {

@@ -27,6 +27,15 @@
             Text="{Binding Title}"
             TextColor="White"
             VerticalOptions="Center" />
+            <Label
+                Padding="5,0,0,0"
+                FontFamily="Nunito"
+                FontSize="Small"
+                HorizontalOptions="Start"
+                Text="{Binding ParametroSelecionado.nome, FallbackValue=''}"
+                TextColor="White"
+                VerticalOptions="Center"
+                LineBreakMode="TailTruncation" />
     </VerticalStackLayout>
 
     <!--  Botão Voltar  -->

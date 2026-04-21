@@ -1,13 +1,13 @@
-using SilvaData_MAUI.Models;
-using SilvaData_MAUI.Utilities;
-using SilvaData_MAUI.ViewModels;
+using SilvaData.Models;
+using SilvaData.Utilities;
+using SilvaData.ViewModels;
 
 using Newtonsoft.Json;
 
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
-namespace SilvaData_MAUI.Services
+namespace SilvaData.Services
 {
     /// <summary>
     /// Serviço responsável por baixar, processar e cachear dados de gráficos.

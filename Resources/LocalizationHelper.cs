@@ -1,4 +1,4 @@
-namespace SilvaData_MAUI.Resources
+namespace SilvaData.Resources
 {
     /// <summary>
     /// Helper para acesso simplificado a textos localizados

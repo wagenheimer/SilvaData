@@ -4,12 +4,12 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 
-using SilvaData_MAUI.Models;
+using SilvaData.Models;
 using ISIInstitute.Views;
 
-using SilvaData_MAUI.Utilities;
+using SilvaData.Utilities;
 
-namespace SilvaData_MAUI.ViewModels
+namespace SilvaData.ViewModels
 {
     public partial class AtividadeViewModel : ViewModelBase
     {

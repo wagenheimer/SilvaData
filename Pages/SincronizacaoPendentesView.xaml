@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ContentView
-    x:Class="SilvaData_MAUI.Controls.SincronizacaoPendentesView"
+    x:Class="SilvaData.Controls.SincronizacaoPendentesView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
-    xmlns:fontawesome="clr-namespace:SilvaData_MAUI.FontAwesome"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
     xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
     xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
-    xmlns:models="clr-namespace:SilvaData_MAUI.Models"
-    xmlns:viewModels="clr-namespace:SilvaData_MAUI.ViewModels"
+    xmlns:models="clr-namespace:SilvaData.Models"
+    xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
     x:Name="DadosSyncViewRoot"
     x:DataType="viewModels:SincronizacaoPendentesViewModel"
     Background="{StaticResource QuaseBranco}">

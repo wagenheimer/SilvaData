@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 
-namespace SilvaData_MAUI.Utilities
+namespace SilvaData.Utilities
 {
     /// <summary>
     /// Agrega m�ltiplos downloads e reporta o progresso consolidado

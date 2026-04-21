@@ -5,7 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Threading.Tasks;
 
-namespace SilvaData_MAUI.Pages.PopUps
+namespace SilvaData.Pages.PopUps
 {
     public partial class PopUpYesNo : Popup<bool>
     {

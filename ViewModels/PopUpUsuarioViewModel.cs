@@ -4,16 +4,16 @@ using CommunityToolkit.Mvvm.Input;
 
 using ISIInstitute.Views;
 
-using SilvaData_MAUI.Controls;
-using SilvaData_MAUI.Models;
-using SilvaData_MAUI.Pages.PopUps;
-using SilvaData_MAUI.Utilities;
-using SilvaData_MAUI.Utils;
+using SilvaData.Controls;
+using SilvaData.Models;
+using SilvaData.Pages.PopUps;
+using SilvaData.Utilities;
+using SilvaData.Utils;
 
 using System;
 using System.Threading.Tasks;
 
-namespace SilvaData_MAUI.ViewModels
+namespace SilvaData.ViewModels
 {
     /// <summary>
     /// ViewModel para o PopUp do Menu do Usuário (Minha Conta, Privacidade, Sair).

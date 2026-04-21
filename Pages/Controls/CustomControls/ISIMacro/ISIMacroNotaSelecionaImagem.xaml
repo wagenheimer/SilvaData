@@ -66,11 +66,19 @@
                     <SwipeGestureRecognizer Command="{Binding NextCommand}" Direction="Left" />
                 </Border.GestureRecognizers>
 
-                <imageEditor:SfImageEditor
-                    x:Name="sfImageEditor"
-                    BackgroundColor="White"
-                    ShowToolbar="False"
-                    Source="{Binding AlternativaImageSource}" />
+                <Grid>
+                    <imageEditor:SfImageEditor
+                        x:Name="sfImageEditor"
+                        BackgroundColor="White"
+                        ShowToolbar="False"
+                        Source="{Binding AlternativaImageSource}" />
+
+                    <Image
+                        x:Name="iosFallbackImage"
+                        Aspect="AspectFit"
+                        BackgroundColor="White"
+                        IsVisible="False" />
+                </Grid>
 
             </Border>
 

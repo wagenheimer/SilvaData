@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SilvaData_MAUI.Resources.Localization {
+namespace SilvaData.Resources.Localization {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace SilvaData_MAUI.Resources.Localization {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SilvaData_MAUI.Resources.Localization.Localization", typeof(Localization).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SilvaData.Resources.Localization.Localization", typeof(Localization).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

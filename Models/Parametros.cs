@@ -111,7 +111,7 @@ namespace SilvaData.Models
 
         public static async Task<ConfigParametros> UpdateConfig()
         {
-            var table = await Db.Table<ConfigParametros>();
+            var table = await Db.Table<ConfigParametros>().ConfigureAwait(false);
             _config = await table.FirstOrDefaultAsync().ConfigureAwait(false);
 
             if (_config != null)
@@ -758,7 +758,45 @@ namespace SilvaData.Models
             public string urlImagem { get; set; } = string.Empty;
 
             [Ignore]
-            public string urlImagemLocal => !string.IsNullOrEmpty(urlImagem) ? Path.Combine(FileSystem.AppDataDirectory, urlImagem) : string.Empty;
+            public string urlImagemLocal => BuildLocalImagePath(urlImagem);
+
+            [Ignore]
+            public string urlImagemArquivo => NormalizeImageFileName(urlImagem);
+
+            public static string BuildLocalImagePath(string? rawUrl)
+            {
+                var fileName = NormalizeImageFileName(rawUrl);
+                return string.IsNullOrEmpty(fileName)
+                    ? string.Empty
+                    : Path.Combine(FileSystem.AppDataDirectory, fileName);
+            }
+
+            public static string NormalizeImageFileName(string? rawUrl)
+            {
+                if (string.IsNullOrWhiteSpace(rawUrl))
+                    return string.Empty;
+
+                try
+                {
+                    if (Uri.TryCreate(rawUrl, UriKind.Absolute, out var absoluteUri))
+                    {
+                        var localPath = Uri.UnescapeDataString(absoluteUri.LocalPath);
+                        return Path.GetFileName(localPath);
+                    }
+
+                    var trimmed = rawUrl.Trim();
+                    var queryIndex = trimmed.IndexOfAny(['?', '#']);
+                    if (queryIndex >= 0)
+                        trimmed = trimmed[..queryIndex];
+
+                    trimmed = Uri.UnescapeDataString(trimmed).Replace('\\', '/');
+                    return Path.GetFileName(trimmed);
+                }
+                catch
+                {
+                    return Path.GetFileName(rawUrl);
+                }
+            }
 
 
 

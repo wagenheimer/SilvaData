@@ -4,16 +4,16 @@ using CommunityToolkit.Mvvm.Messaging;
 
 using ISIInstitute.Views.LoteViews;
 
-using SilvaData_MAUI.FontAwesome;
-using SilvaData_MAUI.Models;
-using SilvaData_MAUI.Pages.PopUps;
-using SilvaData_MAUI.Services; // Para HomeService
-using SilvaData_MAUI.Utilities;
+using SilvaData.FontAwesome;
+using SilvaData.Models;
+using SilvaData.Pages.PopUps;
+using SilvaData.Services; // Para HomeService
+using SilvaData.Utilities;
 
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
-namespace SilvaData_MAUI.ViewModels
+namespace SilvaData.ViewModels
 {
     /// <summary>
     /// ViewModel para a tela principal (Home), que exibe os cartões de

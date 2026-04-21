@@ -2,7 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 using Newtonsoft.Json;
 
-namespace SilvaData_MAUI.Models
+namespace SilvaData.Models
 {
     /// <summary>
     /// DTO para os parâmetros de requisição dos gráficos.

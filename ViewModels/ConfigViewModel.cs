@@ -4,10 +4,10 @@ using CommunityToolkit.Mvvm.Messaging;
 
 using ISIInstitute.Views;
 
-using SilvaData_MAUI.Pages.PopUps;
-using SilvaData_MAUI.Utilities; 
+using SilvaData.Pages.PopUps;
+using SilvaData.Utilities; 
 
-namespace SilvaData_MAUI.ViewModels
+namespace SilvaData.ViewModels
 {
     public partial class ConfigViewModel : ObservableObject
     {

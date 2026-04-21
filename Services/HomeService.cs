@@ -1,8 +1,8 @@
-using SilvaData_MAUI.Models;
+using SilvaData.Models;
 using System.Diagnostics;
 using Newtonsoft.Json;
 
-namespace SilvaData_MAUI.Services
+namespace SilvaData.Services
 {
     /// <summary>
     /// Serviço responsável por buscar e armazenar em cache os dados

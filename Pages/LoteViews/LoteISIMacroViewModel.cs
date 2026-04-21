@@ -78,30 +78,24 @@ namespace SilvaData.ViewModels
             if (lote is null) return;
             try
             {
-                // Set busy on UI thread to ensure bindings that depend on IsBusy update correctly
-                await MainThread.InvokeOnMainThreadAsync(() => IsBusy = true);
-
+                IsBusy = true;
                 Lote = lote;
                 var loteId = lote.id ?? throw new InvalidOperationException("Lote sem id para carregar ISI Macro.");
                 lote.EnsureNames();
 
                 NavigationUtils.LogExternal(nameof(LoteISIMacroViewModel), $"CarregaDados consultando formularios | lote={loteId}");
-                var forms = await LoteForm.PegaListaFormulariosLoteList(loteId, 15, null);
-                NavigationUtils.LogExternal(nameof(LoteISIMacroViewModel), $"CarregaDados formularios concluidos | forms={forms?.Count ?? 0}");
 
-                NavigationUtils.LogExternal(nameof(LoteISIMacroViewModel), $"CarregaDados consultando scores | lote={loteId}");
-                var scoresPorFormulario = await ISIMacro.GetScoresPorFormularioDoLoteAsync(loteId);
-                NavigationUtils.LogExternal(nameof(LoteISIMacroViewModel), $"CarregaDados scores concluidos | scores={scoresPorFormulario.Count}");
+                var forms = await LoteForm.PegaListaFormulariosLoteList(loteId, 15, null) ?? [];
+                var scoresPorFormulario = await ISIMacro.GetScoresPorFormularioDoLoteAsync(loteId) ?? [];
 
-                // assign backing lists (no UI thread required)
-                IsiMacroListForm = forms ?? new List<LoteForm>();
+                NavigationUtils.LogExternal(nameof(LoteISIMacroViewModel), $"CarregaDados concluido | forms={forms.Count} | scores={scoresPorFormulario.Count}");
 
-                // Cria a lista fora da UI thread
+                IsiMacroListForm = forms;
+
                 var tempList = new List<ISIMacroButton>();
-
-                for (var index = IsiMacroListForm.Count - 1; index >= 0; index--)
+                for (var index = forms.Count - 1; index >= 0; index--)
                 {
-                    var form = IsiMacroListForm[index];
+                    var form = forms[index];
                     var score = form.id.HasValue && scoresPorFormulario.TryGetValue(form.id.Value, out var scoreFormulario)
                         ? scoreFormulario
                         : 0;
@@ -118,16 +112,10 @@ namespace SilvaData.ViewModels
 
                 NavigationUtils.LogExternal(nameof(LoteISIMacroViewModel), $"CarregaDados lista preparada | itens={tempList.Count}");
 
-                // Atualiza a ObservableCollection de uma vez na UI thread
                 await MainThread.InvokeOnMainThreadAsync(() =>
                 {
-                    // replace collection to ensure ListView picks up the change reliably
                     IsiMacroList = new ObservableCollection<ISIMacroButton>(tempList);
-
-                    // Update Title based on actual items
                     Title = $"{Traducao.ISIMacro} ({IsiMacroList.Count})";
-
-                    // Clear busy
                     IsBusy = false;
                 });
 
@@ -135,7 +123,9 @@ namespace SilvaData.ViewModels
             }
             catch (Exception ex)
             {
-                // Ensure IsBusy cleared and user notified on UI thread
+                System.Diagnostics.Debug.WriteLine($"[LoteISIMacroViewModel] Erro inesperado em CarregaDados: {ex}");
+                SentryHelper.CaptureExceptionWithUser(ex, ISIWebService.Instance?.LoggedUser?.nome ?? "unknown", "CarregaDados_Unhandled");
+
                 await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
                     IsBusy = false;
@@ -195,17 +185,24 @@ namespace SilvaData.ViewModels
 
                 if (ModelosIsiMacro.Count > 0)
                 {
-                    var popup = ServiceHelper.GetRequiredService<SelectModeloPopup>();
+                    var popup = ActivatorUtilities.CreateInstance<SelectModeloPopup>(ServiceHelper.Services!);
                     popup.UpdateModelos(ModelosIsiMacro);
                     var selectedModeloObj = await NavigationUtils.ShowPopupAsync<ModeloIsiMacroComParametros>(popup);
                     if (selectedModeloObj is not ModeloIsiMacroComParametros selectedModelo) return;
                     ModeloIsiMacroSelecionado = selectedModelo;
 
-                    // iOS: aguarda a animação de dismiss do popup terminar antes de empurrar modal.
-                    // PresentViewController não pode ser chamado enquanto DismissViewController ainda está animando.
+                    // iOS: aguarda mais tempo após o dismiss do popup e devolve um ciclo à UI.
+                    // Este fluxo é o principal suspeito, pois o ISIMacro é a tela que abre o formulário
+                    // logo após fechar SelectModeloPopup.
                     if (DeviceInfo.Platform == DevicePlatform.iOS)
-                        await Task.Delay(600);
+                    {
+                        NavigationUtils.LogExternal(nameof(LoteISIMacroViewModel), "NovoISIMacro aguardando settle do popup no iOS (1200ms)");
+                        await Task.Delay(1200);
+                        await MainThread.InvokeOnMainThreadAsync(() => Task.CompletedTask);
+                        NavigationUtils.LogExternal(nameof(LoteISIMacroViewModel), "NovoISIMacro popup settle concluido no iOS");
+                    }
                 }
+
                 await NavigationUtils.OpenLoteFormularioAsync(
                     lote: Lote,
                     loteFormId: -1,

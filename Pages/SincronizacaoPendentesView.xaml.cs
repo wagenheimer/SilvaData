@@ -1,6 +1,6 @@
-using SilvaData_MAUI.ViewModels;
+using SilvaData.ViewModels;
 
-namespace SilvaData_MAUI.Controls
+namespace SilvaData.Controls
 {
     public partial class SincronizacaoPendentesView : ContentView
     {

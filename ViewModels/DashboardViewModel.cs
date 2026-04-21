@@ -3,10 +3,10 @@ using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using SilvaData_MAUI.FontAwesome;
-using SilvaData_MAUI.Models;
-using SilvaData_MAUI.Pages.PopUps;
-using SilvaData_MAUI.Services;
+using SilvaData.FontAwesome;
+using SilvaData.Models;
+using SilvaData.Pages.PopUps;
+using SilvaData.Services;
 using ISIInstitute.Views.LoteViews;
 using Newtonsoft.Json;
 using Microsoft.Maui.Storage; // Preferences
@@ -14,7 +14,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq; // LINQ para ordenação
 
-namespace SilvaData_MAUI.ViewModels
+namespace SilvaData.ViewModels
 {
     public class AtualizarGraficosMessage
     {

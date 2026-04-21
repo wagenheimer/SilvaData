@@ -1,4 +1,4 @@
-namespace SilvaData_MAUI.Models
+namespace SilvaData.Models
 {
     public class ISIMacroResumoFormulario
     {

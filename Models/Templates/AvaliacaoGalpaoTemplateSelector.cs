@@ -1,5 +1,5 @@
-using SilvaData_MAUI.Models;
-using SilvaData_MAUI.ViewModels;
+using SilvaData.Models;
+using SilvaData.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;

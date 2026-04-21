@@ -1,10 +1,10 @@
-using SilvaData_MAUI.Models;
+using SilvaData.Models;
 
 using Microsoft.Maui.Controls;
 
 using System.Diagnostics;
 
-namespace SilvaData_MAUI.Utilities
+namespace SilvaData.Utilities
 {
     // ═══════════════════════════════════════════════════════════════════════════════
     // SEÇÃO 1: NAVEGAÇÃO E INTERFACE (MainPage Tabs)

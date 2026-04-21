@@ -2,21 +2,16 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 
-using SilvaData.Infrastructure;
-using SilvaData.Pages;
+using SilvaData.Models;
+using SilvaData.Pages.PopUps;
 using SilvaData.Services;
-using SilvaData.ViewModels;
-
-using SilvaData_MAUI.Models;
-using SilvaData_MAUI.Pages.PopUps;
-using SilvaData_MAUI.Services;
-using SilvaData_MAUI.Utilities;
+using SilvaData.Utilities;
 
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading;
 
-namespace SilvaData_MAUI.ViewModels
+namespace SilvaData.ViewModels
 {
     public partial class SincronizacaoViewModel : ViewModelBase
     {

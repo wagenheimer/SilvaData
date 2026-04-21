@@ -1,8 +1,8 @@
 using DateChangedEventArgs = Microsoft.Maui.Controls.DateChangedEventArgs;
 
-using SilvaData_MAUI.ViewModels;
+using SilvaData.ViewModels;
 
-namespace SilvaData_MAUI.Controls
+namespace SilvaData.Controls
 {
     public partial class LoteFormHeader : ContentView
     {

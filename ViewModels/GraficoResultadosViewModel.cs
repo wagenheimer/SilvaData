@@ -2,14 +2,14 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 
-using SilvaData_MAUI.Models;
-using SilvaData_MAUI.Utilities;
+using SilvaData.Models;
+using SilvaData.Utilities;
 
 using Syncfusion.Maui.Toolkit.Charts;
 
 using System.Collections.ObjectModel;
 
-namespace SilvaData_MAUI.ViewModels
+namespace SilvaData.ViewModels
 {
     /// <summary>
     /// ViewModel para a aba "Meus Resultados" (Gráficos).

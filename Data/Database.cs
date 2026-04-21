@@ -1,6 +1,6 @@
 using SQLite;
 
-namespace SilvaData_MAUI.Models
+namespace SilvaData.Models
 {
     /// <summary>
     /// Gerencia a conexão singleton assíncrona com o banco de dados SQLite.

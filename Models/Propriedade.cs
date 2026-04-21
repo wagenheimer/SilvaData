@@ -1,7 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 
-using SilvaData_MAUI.Utilities;
+using SilvaData.Utilities;
 
 using Newtonsoft.Json;
 
@@ -9,7 +9,7 @@ using SQLite;
 
 using System.Security.AccessControl;
 
-namespace SilvaData_MAUI.Models
+namespace SilvaData.Models
 {
     public class UpdateDataParametrosPropriedade : UpdateDataParametros
     {

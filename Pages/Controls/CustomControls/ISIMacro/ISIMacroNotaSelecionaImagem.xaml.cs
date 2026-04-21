@@ -9,6 +9,7 @@ namespace SilvaData.Controls
     public partial class ISIMacroNotaSelecionaImagem : ContentPage
     {
         private readonly ISIMacroNotaSelecionaImagemViewModel _viewModel;
+        private readonly bool _isIos;
         private string? _nome;
         private ParametroComAlternativas? _parametro;
 
@@ -19,6 +20,7 @@ namespace SilvaData.Controls
         {
             _nome = nome;
             _parametro = parametro;
+            _isIos = DeviceInfo.Platform == DevicePlatform.iOS;
 
             _viewModel = ServiceHelper.GetRequiredService<ISIMacroNotaSelecionaImagemViewModel>();
 
@@ -27,12 +29,21 @@ namespace SilvaData.Controls
             _viewModel.SetInitialState(nome, parametro);
 
             // ★ Diagnóstico: Verifica existência do arquivo
-            var path = _viewModel.Alternativa?.urlImagemLocal;
+            var alt = _viewModel.Alternativa;
+            var rawUrl = alt?.urlImagem;
+            var normalized = ParametroAlternativasFromWebService.NormalizeImageFileName(rawUrl);
+            var path = ParametroAlternativasFromWebService.BuildLocalImagePath(rawUrl);
             bool exists = !string.IsNullOrEmpty(path) && File.Exists(path);
-            Debug.WriteLine($"[ISIMacroFoto] ★ Verificando Imagem: {path ?? "NULL"}");
-            Debug.WriteLine($"[ISIMacroFoto] ★ Existe no disco? {exists}");
+            long size = exists ? new FileInfo(path).Length : 0;
+            Debug.WriteLine($"[ISIMacroFoto] ★ ctor altId={alt?.id} raw='{rawUrl ?? ""}' normalized='{normalized}' path='{path ?? "NULL"}' exists={exists} size={size} platform={DeviceInfo.Platform}");
 
             InitializeComponent();
+
+            sfImageEditor.IsVisible = true;
+            iosFallbackImage.IsVisible = false;
+            Debug.WriteLine(_isIos
+                ? "[ISIMacroFoto] Renderer ativo: SfImageEditor (iOS - stream mode)"
+                : "[ISIMacroFoto] Renderer ativo: SfImageEditor");
 
             BindingContext = _viewModel;
 
@@ -47,37 +58,68 @@ namespace SilvaData.Controls
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            // Força reload explícito na primeira exibição (cobre edge case iOS/Android)
-            _ = ReloadImageEditorAsync();
+            _ = ReloadImageEditorAsync(isFirstAppearance: true);
         }
 
-        /// <summary>
-        /// Recarrega a imagem no SfImageEditor via code-behind com o padrão null→source
-        /// documentado pela Syncfusion para garantir reload confiável em ambas as plataformas.
-        /// </summary>
-        private async Task ReloadImageEditorAsync()
+        private async Task ReloadImageEditorAsync(bool isFirstAppearance = false)
         {
+            // iOS: OnAppearing dispara DURANTE a animação do PushModalAsync.
+            // Aguarda a animação terminar antes de tentar renderizar no SfImageEditor.
+            if (isFirstAppearance && DeviceInfo.Platform == DevicePlatform.iOS)
+                await Task.Delay(500);
+
             var path = _viewModel.Alternativa?.urlImagemLocal;
             if (string.IsNullOrEmpty(path) || !File.Exists(path))
             {
-                Debug.WriteLine($"[ISIMacroFoto] ⚠️ ReloadImage: arquivo não existe: {path ?? "NULL"}");
+                var rawUrl = _viewModel.Alternativa?.urlImagem;
+                var normalized = ParametroAlternativasFromWebService.NormalizeImageFileName(rawUrl);
+                var rebuiltPath = ParametroAlternativasFromWebService.BuildLocalImagePath(rawUrl);
+                var rebuiltExists = !string.IsNullOrEmpty(rebuiltPath) && File.Exists(rebuiltPath);
+                Debug.WriteLine($"[ISIMacroFoto] ⚠️ ReloadImage: pathBinding='{path ?? "NULL"}' raw='{rawUrl ?? ""}' normalized='{normalized}' rebuilt='{rebuiltPath}' rebuiltExists={rebuiltExists}");
                 sfImageEditor.Source = null;
+                iosFallbackImage.Source = null;
+
                 return;
             }
 
-            Debug.WriteLine($"[ISIMacroFoto] 🔄 ReloadImage: {path}");
+            var fileInfo = new FileInfo(path);
+            Debug.WriteLine($"[ISIMacroFoto] 🔄 ReloadImage: {path} | bytes={fileInfo.Length}");
 
-            // Padrão null → source força o SfImageEditor a limpar o estado interno
-            // antes de carregar a nova imagem, evitando cache stale.
             sfImageEditor.Source = null;
-            await Task.Delay(30);
+            await Task.Delay(50);
 
-            // MemoryStream: stream re-legível (SfImageEditor pode tentar ler múltiplas vezes).
-            // Padrão documentado pela Syncfusion para carregamento confiável via stream.
-            var bytes = await Task.Run(() => File.ReadAllBytes(path));
-            sfImageEditor.Source = ImageSource.FromStream(() => new MemoryStream(bytes));
+            // Syncfusion recomenda stream com nova instância para reprocessamentos no iOS.
+            if (_isIos)
+            {
+                var bytes = await File.ReadAllBytesAsync(path);
+                sfImageEditor.Source = ImageSource.FromStream(() => new MemoryStream(bytes));
+                Debug.WriteLine($"[ISIMacroFoto] ℹ️ Source aplicada no SfImageEditor via stream (iOS) | bytes={bytes.Length}");
+            }
+            else
+            {
+                sfImageEditor.Source = ImageSource.FromFile(path);
+            }
 
-            Debug.WriteLine($"[ISIMacroFoto] ✅ ReloadImage concluído");
+            await Task.Delay(220);
+
+            var originalSize = sfImageEditor.OriginalImageSize;
+            var renderedSize = sfImageEditor.ImageRenderedSize;
+            var sfLoaded = originalSize.Width > 0 && originalSize.Height > 0;
+
+            Debug.WriteLine($"[ISIMacroFoto] 📐 SfImageEditor sizes original=({originalSize.Width},{originalSize.Height}) rendered=({renderedSize.Width},{renderedSize.Height}) loaded={sfLoaded}");
+
+            if (_isIos && !sfLoaded)
+            {
+                iosFallbackImage.Source = ImageSource.FromFile(path);
+                iosFallbackImage.IsVisible = true;
+                sfImageEditor.IsVisible = false;
+                Debug.WriteLine($"[ISIMacroFoto] ⚠️ SfImageEditor não renderizou no iOS, fallback nativo ativado: {path}");
+                return;
+            }
+
+            iosFallbackImage.IsVisible = false;
+            sfImageEditor.IsVisible = true;
+            Debug.WriteLine($"[ISIMacroFoto] ✅ ReloadImage concluído (SfImageEditor): {path}");
         }
 
         private void OnViewModelPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)

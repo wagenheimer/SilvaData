@@ -8,6 +8,7 @@ using SilvaData.Services;
 using SilvaData.ViewModels;
 using SilvaData.Utilities;
 using SilvaData.Controls;
+using SilvaData.Pages.LoteViews;
 
 using LocalizationResourceManager.Maui;
 
@@ -141,14 +142,18 @@ namespace SilvaData
             builder.Services.AddTransient<LoteMonitoramentoView>();
             builder.Services.AddSingleton<LoteMonitoramentoViewModel>();
 
-            //LoteView Formulário (Singleton: InitializeComponent() roda uma vez no startup, aberturas são instantâneas)
+            //LoteView Formulário (View transient para evitar reuso de Page/handler no iOS)
             builder.Services.AddSingleton<LoteFormularioViewModel>();
-            builder.Services.AddSingleton<LoteFormularioView>();
+            builder.Services.AddTransient<LoteFormularioView>();
+
+            //Avaliação no Galpão — página dedicada (evita conflitos com formulários normais)
+            builder.Services.AddSingleton<AvaliacaoGalpaoFormViewModel>();
+            builder.Services.AddTransient<AvaliacaoGalpaoFormView>();
 
             //ISI Macro (Transient: evita reuso de visual tree e estado de lista no iOS)
             builder.Services.AddTransient<LoteISIMacroView>();
             builder.Services.AddTransient<LoteISIMacroViewModel>();
-            builder.Services.AddSingleton<SelectModeloPopup>();
+            builder.Services.AddTransient<SelectModeloPopup>();
             builder.Services.AddTransient<ISIMacroNotaSelecionaImagem>();
             builder.Services.AddTransient<ISIMacroNotaSelecionaImagemViewModel>();
 

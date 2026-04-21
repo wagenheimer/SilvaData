@@ -3,7 +3,7 @@ using System.Linq;
 
 using Microsoft.Maui.Graphics;
 
-namespace SilvaData_MAUI.Models
+namespace SilvaData.Models
 {
     /// <summary>
     /// Gerencia a paleta de cores dinâmicas para os gráficos.

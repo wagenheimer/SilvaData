@@ -1,6 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel; // Necessário para ObservableObject
 
-namespace SilvaData_MAUI.Models
+namespace SilvaData.Models
 {
     /// <summary>
     /// Modelo de dados (DTO) que armazena as médias

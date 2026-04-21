@@ -1,9 +1,9 @@
-using SilvaData_MAUI.Infrastructure;
-using SilvaData_MAUI.Models;
-using SilvaData_MAUI.Utilities;
-using SilvaData_MAUI.ViewModels;
+using SilvaData.Infrastructure;
+using SilvaData.Models;
+using SilvaData.Utilities;
+using SilvaData.ViewModels;
 
-namespace SilvaData_MAUI.Controls
+namespace SilvaData.Controls
 {
     /// <summary>
     /// View para editar ou criar uma Regional.

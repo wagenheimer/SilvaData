@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace SilvaData_MAUI.Utilities
+namespace SilvaData.Utilities
 {
     /// <summary>
     /// Extensões para <see cref="HttpClient"/> que facilitam download com progresso.

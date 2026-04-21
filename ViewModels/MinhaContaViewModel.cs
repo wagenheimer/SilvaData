@@ -2,9 +2,9 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 
-using SilvaData_MAUI.Models;
-using SilvaData_MAUI.Pages.PopUps;
-using SilvaData_MAUI.Utilities;
+using SilvaData.Models;
+using SilvaData.Pages.PopUps;
+using SilvaData.Utilities;
 
 using System;
 using System.ComponentModel;
@@ -13,7 +13,7 @@ using System.IO.Compression;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace SilvaData_MAUI.ViewModels
+namespace SilvaData.ViewModels
 {
     /// <summary>
     /// ViewModel para a página "Minha Conta".

@@ -1,9 +1,9 @@
 using CommunityToolkit.Mvvm.Input;
 // Custom Usings (Migrated)
-using SilvaData_MAUI.Models;
-using SilvaData_MAUI.Utils; // For ContentPageWithLocalization
-using SilvaData_MAUI.Pages.PopUps; // For PopUpYesNo
-using SilvaData_MAUI.Utilities; // For NavigationUtils
+using SilvaData.Models;
+using SilvaData.Utils; // For ContentPageWithLocalization
+using SilvaData.Pages.PopUps; // For PopUpYesNo
+using SilvaData.Utilities; // For NavigationUtils
 
 using System.Collections.ObjectModel;
 

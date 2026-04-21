@@ -1,6 +1,6 @@
-using SilvaData_MAUI.Models;
+using SilvaData.Models;
 
-namespace SilvaData_MAUI.Extensions
+namespace SilvaData.Extensions
 {
     /// <summary>
     /// Extens�es para facilitar o uso de popups em toda a aplica��o

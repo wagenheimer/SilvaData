@@ -1,4 +1,4 @@
-using SilvaData_MAUI.Utils;
+using SilvaData.Utils;
 using Newtonsoft.Json;
 using Plugin.LocalNotification;
 using SQLite;
@@ -7,7 +7,7 @@ using System.Threading;
 using Microsoft.Maui.ApplicationModel;
 using Plugin.LocalNotification.Core.Models; // Para MainThread
 
-namespace SilvaData_MAUI.Models
+namespace SilvaData.Models
 {
     public class Notificacao
     {

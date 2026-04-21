@@ -13,6 +13,14 @@ namespace SilvaData.ViewModels
     /// </summary>
     public partial class ViewModelBase : ObservableObject, IReadyOnly
     {
+        /// <summary>
+        /// Força notificação de alteração de todas as propriedades
+        /// </summary>
+        protected void RaiseAllPropertiesChanged()
+        {
+            // CommunityToolkit.Mvvm: string.Empty notifica todos os bindings
+            OnPropertyChanged(string.Empty);
+        }
 
         /// <summary>
         /// Event for when IsBusy changes

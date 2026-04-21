@@ -1,7 +1,7 @@
-using SilvaData_MAUI.Utils;
+using SilvaData.Utils;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace SilvaData_MAUI.Models
+namespace SilvaData.Models
 {
     public class UpdateResult
     {
@@ -94,7 +94,7 @@ namespace SilvaData_MAUI.Models
         internal async static Task<int> GetNextId(object table)
         {
             var tabela = table.GetType().ToString();
-            tabela = tabela.Replace("SilvaData_MAUI.Models.", "");
+            tabela = tabela.Replace("SilvaData.Models.", "");
 
             var id = await Db.FindWithQueryAsync<MaxId>($"select max(id)+1 as maxid from {tabela}");
             if (id.maxid < 50000)

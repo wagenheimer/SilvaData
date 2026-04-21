@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <controls:ValidatableFieldBase
-    x:Class="SilvaData_MAUI.Controls.RegionalComboBox"
+    x:Class="SilvaData.Controls.RegionalComboBox"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:comboBox="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
-    xmlns:controls="clr-namespace:SilvaData_MAUI.Controls"
-    xmlns:fontawesome="clr-namespace:SilvaData_MAUI.FontAwesome"
+    xmlns:controls="clr-namespace:SilvaData.Controls"
+    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
     xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
-    xmlns:models="clr-namespace:SilvaData_MAUI.Models"
+    xmlns:models="clr-namespace:SilvaData.Models"
     x:Name="reginalComboBox"
     Padding="0">
 

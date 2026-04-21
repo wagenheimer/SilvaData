@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 using SQLite;
 
-namespace SilvaData_MAUI.Models
+namespace SilvaData.Models
 {
     /// <summary>
     /// Fachada estática para simplificar o acesso assíncrono ao banco de dados.

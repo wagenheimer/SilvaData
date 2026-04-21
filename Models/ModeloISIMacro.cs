@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
-namespace SilvaData_MAUI.Models
+namespace SilvaData.Models
 {
     public class ListaModelosIsiMacroFromWeb
     {

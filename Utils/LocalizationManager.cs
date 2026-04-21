@@ -7,7 +7,7 @@ using LocalizationResourceManager.Maui;
 
 using Microsoft.Maui.Controls;
 
-namespace SilvaData_MAUI.Utils
+namespace SilvaData.Utils
 {
     public class LocalizationManager : ObservableObject
     {

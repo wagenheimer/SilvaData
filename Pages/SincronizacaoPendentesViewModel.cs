@@ -1,10 +1,10 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SilvaData_MAUI.Models;
-using SilvaData_MAUI.Pages.PopUps;
-using SilvaData_MAUI.Utils;
-using SilvaData_MAUI.Pages;
-using SilvaData_MAUI.Infrastructure;
+using SilvaData.Models;
+using SilvaData.Pages.PopUps;
+using SilvaData.Utils;
+using SilvaData.Pages;
+using SilvaData.Infrastructure;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -12,7 +12,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Maui.Storage;
 using Microsoft.Maui.Controls;
 
-namespace SilvaData_MAUI.ViewModels
+namespace SilvaData.ViewModels
 {
     public partial class SincronizacaoPendentesViewModel : ViewModelBase
     {

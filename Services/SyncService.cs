@@ -325,7 +325,12 @@ namespace SilvaData.Services
                     foreach (var alternativa in parametro.alternativas)
                     {
                         if (string.IsNullOrEmpty(alternativa.descricao)) continue;
-                        var partedURL = alternativa.urlImagem?.Split('/') ?? Array.Empty<string>();
+                        var normalizedImageName = ParametroAlternativasFromWebService.NormalizeImageFileName(alternativa.urlImagem);
+                        if (!string.IsNullOrEmpty(alternativa.urlImagem))
+                        {
+                            Debug.WriteLine($"[Sync.ParametroImagem] Param={parametro.id} Alt={alternativa.id} raw='{alternativa.urlImagem}' normalized='{normalizedImageName}'");
+                        }
+
                         nonAsyncConnection.Execute($"delete from ParametroAlternativas where idParametro={parametro.id} and id={alternativa.id}");
                         nonAsyncConnection.InsertOrReplace(new ParametroAlternativas
                         {
@@ -335,7 +340,7 @@ namespace SilvaData.Services
                             ordem = alternativa.ordem,
                             score = alternativa.score,
                             valorPadrao = alternativa.valorPadrao,
-                            urlImagem = !string.IsNullOrEmpty(alternativa.urlImagem) && partedURL.Length > 0 ? partedURL[^1] : "",
+                            urlImagem = normalizedImageName,
                             excluido = alternativa.excluido
                         });
                     }
@@ -408,11 +413,28 @@ namespace SilvaData.Services
                 try
                 {
                     var seq = Interlocked.Increment(ref downloadNuvem);
+                    var normalizedImageName = ParametroAlternativasFromWebService.NormalizeImageFileName(item.Alternativa.urlImagem);
+                    var expectedLocalPath = ParametroAlternativasFromWebService.BuildLocalImagePath(item.Alternativa.urlImagem);
+
                     Interlocked.Increment(ref _pendingDownloads);
                     try
                     {
-                        if (!await _webService.DownloadImage(seq, item.Alternativa.urlImagem, null, ct).ConfigureAwait(false))
-                            Debug.WriteLine($"[Sync] Falha ao baixar imagem (ignorado): {item.Alternativa.urlImagem}");
+                        Debug.WriteLine($"[Sync.ParametroImagem] ↓ Download start seq={seq} alt={item.Alternativa.id} raw='{item.Alternativa.urlImagem}' normalized='{normalizedImageName}' expected='{expectedLocalPath}'");
+
+                        var success = await _webService.DownloadImage(
+                            seq,
+                            item.Alternativa.urlImagem,
+                            null,
+                            ct,
+                            normalizedImageName).ConfigureAwait(false);
+
+                        var exists = !string.IsNullOrEmpty(expectedLocalPath) && File.Exists(expectedLocalPath);
+                        var size = exists ? new FileInfo(expectedLocalPath).Length : 0;
+
+                        Debug.WriteLine($"[Sync.ParametroImagem] ↑ Download end seq={seq} success={success} exists={exists} size={size} path='{expectedLocalPath}'");
+
+                        if (!success)
+                            Debug.WriteLine($"[Sync.ParametroImagem] Falha ao baixar imagem (ignorado): {item.Alternativa.urlImagem}");
                     }
                     finally { Interlocked.Decrement(ref _pendingDownloads); }
 

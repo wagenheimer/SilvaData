@@ -1,12 +1,12 @@
-using SilvaData_MAUI.ViewModels;
-using SilvaData_MAUI.Utilities;
-using SilvaData_MAUI.Models;
+using SilvaData.ViewModels;
+using SilvaData.Utilities;
+using SilvaData.Models;
 
 using System.Diagnostics;
 
 using Syncfusion.Maui.ListView; // Necessário para ItemTappedEventArgs
 
-namespace SilvaData_MAUI.Controls
+namespace SilvaData.Controls
 {
     public partial class AvaliacaoAlternativas : ContentView
     {

@@ -198,58 +198,6 @@ namespace SilvaData.Models
     /// </summary>
     public class LoteForm : ObservableObject
     {
-        private sealed class LoteFormQueryRow
-        {
-            public int DBId { get; set; }
-            public int? id { get; set; }
-            public int? idApp { get; set; }
-            public int? loteFormVinculado { get; set; }
-            public int? item { get; set; }
-            public DateTime data { get; set; }
-            public DateTime? dataInicioPreenchimento { get; set; }
-            public DateTime? dataTerminoPreenchimento { get; set; }
-            public double latitude { get; set; }
-            public double longitute { get; set; }
-            public int? parametroTipoId { get; set; }
-            public int? loteFormFase { get; set; }
-            public int? loteVisita { get; set; }
-            public int? loteId { get; set; }
-            public DateTime dataUltimaAtualizacao { get; set; }
-            public string? observacoes { get; set; }
-            public bool temmudanca { get; set; }
-            public int? modeloisimacro { get; set; }
-            public int? excluido { get; set; }
-
-            public LoteForm ToLoteForm()
-            {
-                var loteForm = new LoteForm
-                {
-                    DBId = DBId,
-                    id = id,
-                    idApp = idApp,
-                    loteFormVinculado = loteFormVinculado,
-                    item = item,
-                    dataInicioPreenchimento = dataInicioPreenchimento,
-                    dataTerminoPreenchimento = dataTerminoPreenchimento,
-                    latitude = latitude,
-                    longitute = longitute,
-                    parametroTipoId = parametroTipoId,
-                    loteFormFase = loteFormFase,
-                    loteVisita = loteVisita,
-                    loteId = loteId,
-                    dataUltimaAtualizacao = dataUltimaAtualizacao,
-                    temmudanca = temmudanca,
-                    modeloisimacro = modeloisimacro,
-                    excluido = excluido
-                };
-
-                loteForm._data = data;
-                loteForm._observacoes = observacoes;
-
-                return loteForm;
-            }
-        }
-
         private DateTime _data;
 
         [Ignore]
@@ -363,33 +311,21 @@ namespace SilvaData.Models
         /// </summary>
         public static async Task<List<LoteForm>> PegaListaFormulariosLoteList(int loteId, int parametroTipo, int? loteFormFase = null)
         {
-            const string sqlComFase = @"
-                SELECT *
-                FROM LoteForm
-                WHERE loteId = ?
-                  AND parametroTipoId = ?
-                  AND loteFormFase = ?
-                ORDER BY item DESC, data DESC";
+            try
+            {
+                var table = await Db.Table<LoteForm>().ConfigureAwait(false);
 
-            const string sqlSemFase = @"
-                SELECT *
-                FROM LoteForm
-                WHERE loteId = ?
-                  AND parametroTipoId = ?
-                  AND loteFormFase IS NULL
-                ORDER BY item DESC, data DESC";
+                var query = loteFormFase.HasValue
+                    ? table.Where(lf => lf.loteId == loteId && lf.parametroTipoId == parametroTipo && lf.loteFormFase == loteFormFase)
+                    : table.Where(lf => lf.loteId == loteId && lf.parametroTipoId == parametroTipo && lf.loteFormFase == null);
 
-            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
-            System.Diagnostics.Debug.WriteLine($"[LoteForm] PegaListaFormulariosLoteList iniciando | lote={loteId} | tipo={parametroTipo} | fase={(loteFormFase?.ToString() ?? "null")}");
-
-            var rows = loteFormFase.HasValue
-                ? await Db.QueryAsync<LoteFormQueryRow>(sqlComFase, loteId, parametroTipo, loteFormFase.Value)
-                : await Db.QueryAsync<LoteFormQueryRow>(sqlSemFase, loteId, parametroTipo);
-
-            var result = rows.Select(row => row.ToLoteForm()).ToList();
-
-            System.Diagnostics.Debug.WriteLine($"[LoteForm] PegaListaFormulariosLoteList concluído | lote={loteId} | tipo={parametroTipo} | itens={result.Count} | ms={stopwatch.ElapsedMilliseconds}");
-            return result;
+                return await query.OrderByDescending(lf => lf.item).ThenByDescending(lf => lf.data).ToListAsync().ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[LoteForm] PegaListaFormulariosLoteList falhou | lote={loteId} | tipo={parametroTipo} | fase={(loteFormFase?.ToString() ?? "null")} | erro={ex}");
+                return new List<LoteForm>();
+            }
         }
 
         /// <summary>
@@ -435,9 +371,8 @@ namespace SilvaData.Models
         /// </summary>
         public static async Task<int> TotalVinculados(int? loteFormId)
         {
-            var sql = $"select * from LoteForm WHERE LoteFormVinculado={loteFormId}";
-            var alteracoes = await Db.QueryAsync<LoteForm>(sql);
-            return alteracoes.Count;
+            var table = await Db.Table<LoteForm>();
+            return await table.Where(lf => lf.loteFormVinculado == loteFormId).CountAsync();
         }
 
         /// <summary>

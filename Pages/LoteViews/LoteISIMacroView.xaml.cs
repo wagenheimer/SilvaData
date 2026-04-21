@@ -41,21 +41,63 @@ namespace SilvaData.Controls
             ArgumentNullException.ThrowIfNull(lote);
 
             _lote = lote;
+            _viewModel.Lote = lote;
             _pendingReload = true;
             _loadedLoteId = null;
 
             NavigationUtils.LogExternal(nameof(LoteISIMacroView), $"SetInitialState | lote={lote.id}");
         }
 
-        private bool _isFirstAppearance = true;
 
-        /// <summary>
-        /// Carrega dados quando aparece.
-        /// </summary>
+        private bool _isFirstAppearance = true;
+        private int _previousIsiMacroCount = 0;
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            _viewModel.PropertyChanged += OnViewModelPropertyChanged;
             _ = OnAppearingInternalAsync();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            _viewModel.PropertyChanged -= OnViewModelPropertyChanged;
+        }
+
+        private void OnViewModelPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName != nameof(LoteISIMacroViewModel.IsiMacroList)) return;
+
+            var newCount = _viewModel.IsiMacroList.Count;
+            var wasNonEmpty = _previousIsiMacroCount > 0;
+            var itemAdded = newCount > _previousIsiMacroCount;
+            _previousIsiMacroCount = newCount;
+
+            if (itemAdded && wasNonEmpty)
+                _ = AnimateNewItemAsync();
+        }
+
+        private async Task AnimateNewItemAsync()
+        {
+            try
+            {
+                // Dá tempo pro SfListView renderizar o novo item
+                await Task.Delay(150);
+
+                // Scroll suave para o topo onde está o item mais recente
+                isiMacroListView.ScrollTo(0, Microsoft.Maui.Controls.ScrollToPosition.Start, true);
+
+                await Task.Delay(300);
+
+                // Animação de "bounce" suave no container da lista
+                await isiMacroListView.ScaleTo(1.015, 120, Easing.CubicOut);
+                await isiMacroListView.ScaleTo(1.0, 200, Easing.SpringOut);
+            }
+            catch (Exception ex)
+            {
+                NavigationUtils.LogExternal(nameof(LoteISIMacroView), $"AnimateNewItem erro: {ex.Message}");
+            }
         }
 
         private async Task OnAppearingInternalAsync()
@@ -76,17 +118,19 @@ namespace SilvaData.Controls
                     return;
                 }
 
-                // Carrega na primeira vez ou quando uma nova abertura pediu recarga explícita.
                 if (_isFirstAppearance || _pendingReload || _loadedLoteId != _lote.id)
                 {
                     _isFirstAppearance = false;
                     _pendingReload = false;
                     _loadedLoteId = _lote.id;
-                    NavigationUtils.LogExternal(nameof(LoteISIMacroView), "Cedendo frame antes de iniciar CarregaDados");
-                    await Task.Yield();
-                    NavigationUtils.LogExternal(nameof(LoteISIMacroView), "CarregaDados iniciando");
+
+                    // No iOS, OnAppearing dispara DURANTE a animação do modal.
+                    // Aguarda a animação terminar (~350ms) antes de tocar no SQLite,
+                    // evitando o deadlock no GCD thread pool.
+                    if (DeviceInfo.Platform == DevicePlatform.iOS)
+                        await Task.Delay(500);
+
                     await _viewModel.CarregaDados(_lote);
-                    NavigationUtils.LogExternal(nameof(LoteISIMacroView), "CarregaDados concluido");
                 }
             }
             catch (Exception ex)

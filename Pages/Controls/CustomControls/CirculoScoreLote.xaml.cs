@@ -1,8 +1,8 @@
 using Microsoft.Maui.Graphics;
 
-using SilvaData_MAUI.Models;
+using SilvaData.Models;
 
-namespace SilvaData_MAUI.Controls
+namespace SilvaData.Controls
 {
     public partial class CirculoScoreLote : ContentView
     {

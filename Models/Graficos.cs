@@ -1,6 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 
-using SilvaData_MAUI.Infrastructure;
+using SilvaData.Infrastructure;
 
 using Newtonsoft.Json;
 
@@ -9,7 +9,7 @@ using System.Diagnostics;
 using Microsoft.Maui.Controls; // for Brush, SolidColorBrush
 using Microsoft.Maui.Graphics;
 
-namespace SilvaData_MAUI.Models
+namespace SilvaData.Models
 {
     /// <summary>
     /// Classe de Lógica de Negócios para buscar e processar dados de gráficos.

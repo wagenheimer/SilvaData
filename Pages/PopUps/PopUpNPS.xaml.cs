@@ -1,14 +1,14 @@
 using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-using SilvaData_MAUI.Utils;
+using SilvaData.Utils;
 
-using SilvaData_MAUI.Models;
-using SilvaData_MAUI.Utilities;
+using SilvaData.Models;
+using SilvaData.Utilities;
 
 using System.Windows.Input;
 
-namespace SilvaData_MAUI.Pages.PopUps
+namespace SilvaData.Pages.PopUps
 {
     /// <summary>
     /// Popup para avalia��o Net Promoter Score (NPS).

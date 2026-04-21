@@ -1,7 +1,7 @@
-using SilvaData_MAUI.Infrastructure; // Para ServiceHelper
-using SilvaData_MAUI.PageModels; // Para SuportePageViewModel
+using SilvaData.Infrastructure; // Para ServiceHelper
+using SilvaData.PageModels; // Para SuportePageViewModel
 
-namespace SilvaData_MAUI.Controls
+namespace SilvaData.Controls
 {
     /// <summary>
     /// View (ContentView) para a p�gina de Suporte.

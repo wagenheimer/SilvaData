@@ -21,7 +21,6 @@ namespace SilvaData.Controls
     #region Private Fields
 
     private readonly LoteFormularioViewModel _loteFormViewModel;
-    private readonly AvaliacaoAlternativasViewModel _avaliacaoAlternativasViewModel;
 
     private CancellationTokenSource? _filterCts;
     private const int FILTER_DEBOUNCE_MS = 300;
@@ -30,14 +29,13 @@ namespace SilvaData.Controls
 
     // ★★★ NOVO: Previne inicialização dupla ★★★
     private bool _isInitialized = false;
+    private bool _isBusyHandlerSubscribed = false;
 
     #endregion
 
     #region Public Properties
 
     public LoteFormularioViewModel LoteFormViewModel => _loteFormViewModel;
-    public bool CanReloadData = true;
-    public bool InserindoOuAlterandoAvaliacaoGalpao = false;
     public static bool CarregandoFoto { get; set; }
 
     #endregion
@@ -47,20 +45,20 @@ namespace SilvaData.Controls
     /// <summary>
     /// Construtor com injeção de dependência via construtor
     /// </summary>
-    public LoteFormularioView(LoteFormularioViewModel loteFormViewModel, AvaliacaoAlternativasViewModel avaliacaoAlternativasViewModel)
+    public LoteFormularioView(LoteFormularioViewModel loteFormViewModel)
     {
-        InitializeComponent();
-
         _loteFormViewModel = loteFormViewModel;
-        _avaliacaoAlternativasViewModel = avaliacaoAlternativasViewModel;
-        _loteFormViewModel.SetValidationHost(this);
-
-        BindingContext = _loteFormViewModel;
-
-        // ★ iOS fix: força visual state do botão Salvar quando IsBusy muda
-        _loteFormViewModel.IsBusyChanged += OnIsBusyChangedRefreshButtons;
+        InitializeRealContent();
 
         Debug.WriteLine($"[LoteFormularioView] ★ Construtor com DI chamado - ViewModel HashCode: {_loteFormViewModel.GetHashCode()}");
+    }
+
+    private void InitializeRealContent()
+    {
+        InitializeComponent();
+        _loteFormViewModel.SetValidationHost(this);
+        BindingContext = _loteFormViewModel;
+        SubscribeIsBusyHandler();
     }
 
     #endregion
@@ -76,6 +74,8 @@ namespace SilvaData.Controls
 
         try
         {
+            SubscribeIsBusyHandler();
+
             Debug.WriteLine($"[LoteFormularioView] ═══════════════════════════════════");
             Debug.WriteLine($"[LoteFormularioView] OnNavigatedTo");
             Debug.WriteLine($"  _isInitialized: {_isInitialized}");
@@ -94,13 +94,12 @@ namespace SilvaData.Controls
 
             Debug.WriteLine($"[LoteFormularioView] ▶️ Navegação real - registrando mensagens");
 
-            // ★★★ OTIMIZAÇÃO: Apenas registra mensagens, dados JÁ ESTÃO CARREGANDO ★★★
+            // ★★★ OTIMIZAÇÃO: apenas registra mensagens; o carregamento ocorre no OnAppearing ★★★
             RegisterMessages();
-            CanReloadData = true;
-            _isInitialized = true; // Marca como inicializado
+            _isInitialized = true;
 
-            // ★★★ NÃO CARREGA DADOS AQUI - NavigationUtils.OpenLoteFormularioAsync já está carregando! ★★★
-            Debug.WriteLine($"[LoteFormularioView] ✅ Mensagens registradas (dados carregando em background)");
+            // ★★★ NÃO CARREGA DADOS AQUI: evita competição com animação/modal no iOS ★★★
+            Debug.WriteLine($"[LoteFormularioView] ✅ Mensagens registradas (carregamento será disparado no OnAppearing)");
             Debug.WriteLine($"[LoteFormularioView] ═══════════════════════════════════");
         }
         catch (Exception ex)
@@ -110,9 +109,43 @@ namespace SilvaData.Controls
     }
 
 
+    private bool _heavyTemplatesInjected = false;
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (!_heavyTemplatesInjected)
+            _ = InjectHeavyTemplatesAsync();
+    }
+
+    private async Task InjectHeavyTemplatesAsync()
+    {
+        if (_heavyTemplatesInjected) return;
+        _heavyTemplatesInjected = true;
+
+        // iOS: OnAppearing dispara DURANTE a animação do PushModalAsync (~400ms).
+        // Aguarda a animação terminar antes de instanciar templates Syncfusion,
+        // que criam views nativas via GCD e causam deadlock se chamados durante animação.
+        if (DeviceInfo.Platform == DevicePlatform.iOS)
+            await Task.Delay(700);
+
+        camposaPreencher.HeaderTemplate = (DataTemplate)Resources["CommonHeaderTemplate"];
+        camposaPreencher.FooterTemplate = (DataTemplate)Resources["CommonFooterTemplate"];
+        camposaPreencher.AutoFitMode = Syncfusion.Maui.ListView.AutoFitMode.DynamicHeight;
+        camposaPreencher.CachingStrategy = Syncfusion.Maui.ListView.CachingStrategy.RecycleTemplate;
+
+        Debug.WriteLine("[LoteFormularioView] Templates pesados injetados após animação iOS (700ms delay)");
+
+        Debug.WriteLine("[LoteFormularioView] ▶ Disparando Carregar() pós-OnAppearing/pós-injeção");
+        await _loteFormViewModel.Carregar();
+    }
+
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
+
+        UnsubscribeIsBusyHandler();
 
         Debug.WriteLine($"[LoteFormularioView] OnDisappearing");
 
@@ -154,6 +187,20 @@ namespace SilvaData.Controls
         _filterCts?.Cancel();
         _filterCts?.Dispose();
         _filterCts = null;
+    }
+
+    private void SubscribeIsBusyHandler()
+    {
+        if (_isBusyHandlerSubscribed) return;
+        _loteFormViewModel.IsBusyChanged += OnIsBusyChangedRefreshButtons;
+        _isBusyHandlerSubscribed = true;
+    }
+
+    private void UnsubscribeIsBusyHandler()
+    {
+        if (!_isBusyHandlerSubscribed) return;
+        _loteFormViewModel.IsBusyChanged -= OnIsBusyChangedRefreshButtons;
+        _isBusyHandlerSubscribed = false;
     }
 
     /// <summary>
@@ -261,8 +308,27 @@ namespace SilvaData.Controls
                 // ★★★ MARCA COMO INICIALIZADO (previne OnNavigatedTo de carregar novamente) ★★★
                 _isInitialized = true;
 
-                if (m.DeveLimpar)
-                    _loteFormViewModel.Cleanup();
+
+                // LIMPA E MOSTRA LOADING IMEDIATAMENTE (sempre no MainThread)
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    _loteFormViewModel.IsBusy = true;
+                    if (m.DeveLimpar)
+                        _loteFormViewModel.Cleanup();
+
+                    // Cria novo formulário vazio para limpar ItemsSource imediatamente
+                    _loteFormViewModel.LoteFormulario = new LoteFormulario();
+                    _loteFormViewModel.ParametroSelecionado = null;
+                    _loteFormViewModel.AlternativasParametroSelecionado?.Clear();
+
+                    // Força reset do tipo para forçar troca de DataTemplate
+                    _loteFormViewModel.ParametroTipo = -1;
+
+                    // Força refresh imediato dos bindings
+                    _loteFormViewModel.ForceRefreshAll();
+                });
+
+                await Task.Delay(100); // Garante refresh visual e criação de controles
 
                 _loteFormViewModel.SetInitialState(
                     lote: m.Lote,
@@ -277,8 +343,6 @@ namespace SilvaData.Controls
                     _loteFormViewModel.ParametroSelecionado = m.ParametroSelecionado;
                     Debug.WriteLine($"[LoteFormularioView]   ParametroSelecionado definido: {m.ParametroSelecionado.nome}");
                 }
-
-                _loteFormViewModel.IsBusy = true;
 
                 Debug.WriteLine($"[LoteFormularioView] ★ Iniciando CarregaDadosAsync VIA MENSAGEM");
                 await CarregaDadosAsync(limpaFormularioAtual: m.DeveLimpar);
@@ -380,19 +444,11 @@ namespace SilvaData.Controls
 
             _loteFormViewModel.IsBusy = true;
 
-            // 1. Inicializa formulário
-            var initTask = InicializaFormulario(limpaFormularioAtual, modeloIsiMacroSelecionado);
+            // 1. Inicializa formulário primeiro para garantir ParametroSelecionado/alternativas.
+            await InicializaFormulario(limpaFormularioAtual, modeloIsiMacroSelecionado);
 
-            // 2. Tasks paralelas
-            var tasks = new List<Task> { initTask };
-
-            if (_loteFormViewModel.ParametroSelecionado != null)
-                tasks.Add(CarregaAvaliacoesEAlternativasAsync());
-
-            tasks.Add(CarregaImagensAsync());
-
-            // 3. Aguarda tudo
-            await Task.WhenAll(tasks);
+            // 2. Após init, carrega dependências de UI.
+            await CarregaImagensAsync();
 
             Debug.WriteLine($"[LoteFormularioView.CarregaDadosAsync] ✅ Dados carregados com sucesso");
             Debug.WriteLine($"[LoteFormularioView.CarregaDadosAsync] ═══════════════════════════════════");
@@ -431,122 +487,6 @@ namespace SilvaData.Controls
             Debug.WriteLine($"[LoteFormularioView] Erro ao carregar imagens: {ex.Message}");
         }
     }
-
-    /// <summary>
-    /// ★ Carrega avaliações e alternativas de forma otimizada
-    /// </summary>
-    private async Task CarregaAvaliacoesEAlternativasAsync()
-    {
-        try
-        {
-            Debug.WriteLine($"[LoteFormularioView] ═══════════════════════════════════");
-            Debug.WriteLine($"[LoteFormularioView] 📊 CarregaAvaliacoesEAlternativasAsync INICIADO");
-
-            // ★★★ VERIFICAÇÃO CRÍTICA ★★★
-            if (_loteFormViewModel.LoteFormulario?.ListaAvaliacoesGalpao == null)
-            {
-                Debug.WriteLine($"[LoteFormularioView] ❌ ERRO: ListaAvaliacoesGalpao é NULL!");
-                return;
-            }
-
-            if (_loteFormViewModel.AlternativasParametroSelecionado == null)
-            {
-                Debug.WriteLine($"[LoteFormularioView] ❌ ERRO: AlternativasParametroSelecionado é NULL!");
-                return;
-            }
-
-            await Task.Run(async () =>
-            {
-                var avaliacoes = _loteFormViewModel.LoteFormulario?.ListaAvaliacoesGalpao?.ToList()
-                    ?? new List<LoteFormAvaliacaoGalpao>();
-                var alternativas = _loteFormViewModel.AlternativasParametroSelecionado?.ToList()
-                    ?? new List<ParametroAlternativas>();
-
-                Debug.WriteLine($"[LoteFormularioView] ★ Origem:");
-                Debug.WriteLine($"  LoteFormulario.ListaAvaliacoesGalpao: {_loteFormViewModel.LoteFormulario?.ListaAvaliacoesGalpao?.Count ?? 0} itens");
-                Debug.WriteLine($"  AlternativasParametroSelecionado: {_loteFormViewModel.AlternativasParametroSelecionado?.Count ?? 0} itens");
-                Debug.WriteLine($"  Copiados para local: {avaliacoes.Count} avaliações, {alternativas.Count} alternativas");
-
-                // ★ Imprime detalhes das alternativas
-                foreach (var alt in alternativas)
-                {
-                    Debug.WriteLine($"    Alternativa {alt.id}: {alt.descricao}");
-                }
-
-                await MainThread.InvokeOnMainThreadAsync(() =>
-                {
-                    Debug.WriteLine($"[LoteFormularioView] ★ Atualizando AvaliacaoAlternativasViewModel");
-
-                    var avaliacaoViewModel = avaliacaoAlternativas.ViewModel;
-
-                    if (avaliacaoViewModel == null)
-                    {
-                        Debug.WriteLine($"[LoteFormularioView] ❌ ERRO CRÍTICO: avaliacaoViewModel é NULL!");
-                        return;
-                    }
-
-                    Debug.WriteLine($"  AvaliacaoAlternativasViewModel encontrado: HashCode={avaliacaoViewModel.GetHashCode()}");
-
-                    // ★ Limpa
-                    avaliacaoViewModel.ListaAvaliacoesGalpao.Clear();
-                    avaliacaoViewModel.AlternativasParametroSelecionado.Clear();
-
-                    Debug.WriteLine($"  Listas limpas:");
-                    Debug.WriteLine($"    ListaAvaliacoesGalpao.Count: {avaliacaoViewModel.ListaAvaliacoesGalpao.Count}");
-                    Debug.WriteLine($"    AlternativasParametroSelecionado.Count: {avaliacaoViewModel.AlternativasParametroSelecionado.Count}");
-
-                    // ★ Adiciona avaliações
-                    Debug.WriteLine($"  Adicionando {avaliacoes.Count} avaliações...");
-                    foreach (var avaliacao in avaliacoes)
-                    {
-                        avaliacaoViewModel.ListaAvaliacoesGalpao.Add(avaliacao);
-                        Debug.WriteLine($"    ✓ Avaliação {avaliacao.NumeroResposta} adicionada");
-                    }
-
-                    // ★ Adiciona alternativas
-                    Debug.WriteLine($"  Adicionando {alternativas.Count} alternativas...");
-                    foreach (var alternativa in alternativas)
-                    {
-                        avaliacaoViewModel.AlternativasParametroSelecionado.Add(alternativa);
-                        Debug.WriteLine($"    ✓ Alternativa {alternativa.id}: {alternativa.descricao} adicionada");
-                    }
-
-                    Debug.WriteLine($"  Listas FINAIS:");
-                    Debug.WriteLine($"    ListaAvaliacoesGalpao.Count: {avaliacaoViewModel.ListaAvaliacoesGalpao.Count}");
-                    Debug.WriteLine($"    AlternativasParametroSelecionado.Count: {avaliacaoViewModel.AlternativasParametroSelecionado.Count}");
-
-                    if (alternativas.Any())
-                    {
-                        Debug.WriteLine($"  Chamando AtualizaTotalLiberado e AtualizaComboBoxLista...");
-                        avaliacaoViewModel.AtualizaTotalLiberado();
-                        avaliacaoViewModel.AtualizaComboBoxLista();
-                    }
-
-                    avaliacaoViewModel.PodeSelecionarMaisQueUm =
-                        (_loteFormViewModel.ParametroSelecionado?.campoTipo == "2");
-
-                    // Configura a quantidade máxima de registros permitidos
-                    var qtdMaxima = _loteFormViewModel.ParametroSelecionado?.qtdCampos ?? 
-                                   _loteFormViewModel.ParametroSelecionado?.qtdMinima ?? 1;
-                    avaliacaoViewModel.ConfigurarQuantidadeMaxima(qtdMaxima);
-
-                    Debug.WriteLine($"  PodeSelecionarMaisQueUm: {avaliacaoViewModel.PodeSelecionarMaisQueUm}");
-                    Debug.WriteLine($"  Quantidade máxima configurada: {qtdMaxima}");
-                    Debug.WriteLine($"  ✓ AvaliacaoAlternativasViewModel atualizado com sucesso!");
-                });
-            });
-
-            Debug.WriteLine($"[LoteFormularioView] ✅ CarregaAvaliacoesEAlternativasAsync CONCLUÍDO");
-            Debug.WriteLine($"[LoteFormularioView] ═══════════════════════════════════");
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"[LoteFormularioView] ❌ Erro: {ex.Message}");
-            Debug.WriteLine($"[LoteFormularioView] StackTrace: {ex.StackTrace}");
-        }
-    }
-
-
 
     public async Task InicializaFormulario(bool limpaFormularioAtual = true, int? modeloIsiMacroSelecionado = null)
     {
@@ -981,137 +921,6 @@ namespace SilvaData.Controls
                 if (_loteFormViewModel != null)
                 {
                     _loteFormViewModel.PesquisaISIMacroDialogVisible = false;
-                }
-            }
-            catch (Exception recoveryEx)
-            {
-                Debug.WriteLine($"[LoteFormularioView] 🚨 Recovery falhou: {recoveryEx.Message}");
-            }
-        }
-    }
-
-    private void ListViewFiltroAvaliacoes_OnItemTapped(object sender, Syncfusion.Maui.ListView.ItemTappedEventArgs e)
-    {
-        try
-        {
-            // ★★★ DEFENSIVE: Verifica se o evento é válido ★★★
-            if (e == null || e.DataItem == null)
-            {
-                Debug.WriteLine("[LoteFormularioView] ⚠️ ItemTappedEventArgs ou DataItem é nulo - ignorando");
-                return;
-            }
-
-            // ★★★ DEFENSIVE: Verifica se o ViewModel ainda é válido ★★★
-            if (_loteFormViewModel == null)
-            {
-                Debug.WriteLine("[LoteFormularioView] ⚠️ ViewModel é nulo - ignorando item tap");
-                return;
-            }
-
-            if (e.DataItem is not LoteFormAvaliacaoGalpao avaliacao)
-            {
-                Debug.WriteLine($"[LoteFormularioView] ⚠️ DataItem não é LoteFormAvaliacaoGalpao: {e.DataItem?.GetType().Name}");
-                return;
-            }
-
-            Debug.WriteLine($"[LoteFormularioView] 📊 Avaliação selecionada: {avaliacao.NumeroResposta}");
-
-            // ★★★ SAFE: Fecha diálogo ★★★
-            // PesquisaAvaliacoesDialogVisible removido - substituído por VerRegistrosPopup
-
-            // ★★★ SAFE: Verifica se o ListView é válido antes de fazer scroll ★★★
-            MainThread.BeginInvokeOnMainThread(() =>
-            {
-                try
-                {
-                    if (camposaPreencherGalpao != null && avaliacao != null)
-                    {
-                        camposaPreencherGalpao.ScrollTo(avaliacao, ScrollToPosition.Center, true);
-                        Debug.WriteLine("[LoteFormularioView] ✅ Scroll para avaliação concluído");
-                    }
-                    else
-                    {
-                        Debug.WriteLine("[LoteFormularioView] ⚠️ camposaPreencherGalpao ou avaliacao é nulo - não foi possível fazer scroll");
-                    }
-                }
-                catch (Exception scrollEx)
-                {
-                    Debug.WriteLine($"[LoteFormularioView] ❌ Erro ao fazer scroll: {scrollEx.Message}");
-                }
-            });
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"[LoteFormularioView] ❌ Erro em ListViewFiltroAvaliacoes_OnItemTapped: {ex.Message}");
-            
-            // ★★★ RECOVERY: Tenta fechar o diálogo em caso de erro ★★★
-            try
-            {
-                if (_loteFormViewModel != null)
-                {
-                    // PesquisaAvaliacoesDialogVisible removido - substituído por VerRegistrosPopup
-                }
-            }
-            catch (Exception recoveryEx)
-            {
-                Debug.WriteLine($"[LoteFormularioView] 🚨 Recovery falhou: {recoveryEx.Message}");
-            }
-        }
-    }
-
-    private void listViewFiltroAvaliacoesQualitativo_ItemTapped(object sender, Syncfusion.Maui.ListView.ItemTappedEventArgs e)
-    {
-        try
-        {
-            // ★★★ DEFENSIVE: Verifica se o evento é válido ★★★
-            if (e == null || e.DataItem == null)
-            {
-                Debug.WriteLine("[LoteFormularioView] ⚠️ ItemTappedEventArgs ou DataItem é nulo - ignorando");
-                return;
-            }
-
-            // ★★★ DEFENSIVE: Verifica se o ViewModel ainda é válido ★★★
-            if (_loteFormViewModel == null)
-            {
-                Debug.WriteLine("[LoteFormularioView] ⚠️ ViewModel é nulo - ignorando item tap");
-                return;
-            }
-
-            if (e.DataItem is not LoteFormAvaliacaoGalpao avaliacao)
-            {
-                Debug.WriteLine($"[LoteFormularioView] ⚠️ DataItem não é LoteFormAvaliacaoGalpao: {e.DataItem?.GetType().Name}");
-                return;
-            }
-
-            Debug.WriteLine($"[LoteFormularioView] 📊 Avaliação qualitativa selecionada: {avaliacao.NumeroResposta}");
-
-            // ★★★ SAFE: Fecha diálogo ★★★
-            // PesquisaAvaliacoesDialogVisible removido - substituído por VerRegistrosPopup
-
-            // ★★★ SAFE: Verifica se as alternativas são válidas ★★★
-            if (avaliacao.ParametroAlternativas != null)
-            {
-                _loteFormViewModel.AlternativasParametroSelecionado = avaliacao.ParametroAlternativas;
-                
-                // ★★★ SAFE: Envia mensagem apenas se tudo estiver válido ★★★
-                WeakReferenceMessenger.Default.Send(new SelecionouAvaliacaoQualitativaMessage(avaliacao));
-                Debug.WriteLine("[LoteFormularioView] ✅ Mensagem de avaliação qualitativa enviada");
-            }
-            else
-            {
-                Debug.WriteLine("[LoteFormularioView] ⚠️ ParametroAlternativas é nulo - não é possível selecionar avaliação");
-            }
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"[LoteFormularioView] ❌ Erro em listViewFiltroAvaliacoesQualitativo_ItemTapped: {ex.Message}");
-            
-            // ★★★ RECOVERY: Tenta fechar o diálogo em caso de erro ★★★
-            try
-            {
-                if (_loteFormViewModel != null)
-                {
-                    // PesquisaAvaliacoesDialogVisible removido - substituído por VerRegistrosPopup
                 }
             }
             catch (Exception recoveryEx)

@@ -1,4 +1,4 @@
-namespace SilvaData_MAUI.Controls
+namespace SilvaData.Controls
 {
     /// <summary>
     /// Essa INTERFACE serve para permitir o controle de campos obrigatórios no Form

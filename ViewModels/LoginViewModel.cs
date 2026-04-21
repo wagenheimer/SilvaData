@@ -1,14 +1,14 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SilvaData_MAUI.Controls; // Para a classe Login
-using SilvaData_MAUI.Models;
-using SilvaData_MAUI.Pages.PopUps;
-using SilvaData_MAUI.Utilities;
+using SilvaData.Controls; // Para a classe Login
+using SilvaData.Models;
+using SilvaData.Pages.PopUps;
+using SilvaData.Utilities;
 using System;
 using System.Threading.Tasks;
 using LocalizationResourceManager.Maui; // Para o LocalizationManager
 
-namespace SilvaData_MAUI.ViewModels
+namespace SilvaData.ViewModels
 {
     /// <summary>
     /// ViewModel para a página de Login.

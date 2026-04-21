@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Diagnostics;
 
-namespace SilvaData_MAUI.Utils
+namespace SilvaData.Utils
 {
     public static class EncryptDecrypt
     {

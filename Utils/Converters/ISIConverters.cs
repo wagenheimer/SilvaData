@@ -133,9 +133,9 @@ namespace SilvaData.Converters
             var status = value.ToString()?.Trim().ToLowerInvariant();
             return status switch
             {
-                "aberto" => Color.FromArgb("#70AC3E"),
+                "aberto" => Color.FromArgb("#0888CD"),
                 "fechado" => Color.FromArgb("#E0E0E0"),
-                _ => Color.FromArgb("#5A8A32")
+                _ => Color.FromArgb("#26558D")
             };
         }
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
@@ -259,8 +259,8 @@ namespace SilvaData.Converters
     public class BoolToColorConverter : IValueConverter
     {
         public Color TrueColor { get; set; } = Colors.LightGray;
-        public Color FalseColor { get; set; } = Color.FromArgb("#70AC3E"); // Primary
-        public Color AccentColor { get; set; } = Color.FromArgb("#70AC3E");
+        public Color FalseColor { get; set; } = Color.FromArgb("#0888CD"); // Primary
+        public Color AccentColor { get; set; } = Color.FromArgb("#07AD53");
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             var useAccent = parameter is string p && p.Equals("Accent", StringComparison.OrdinalIgnoreCase);

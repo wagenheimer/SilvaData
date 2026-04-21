@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <toolkit:Popup
-    x:Class="SilvaData_MAUI.Pages.PopUps.PopUpNPS"
+    x:Class="SilvaData.Pages.PopUps.PopUpNPS"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
-    xmlns:models="clr-namespace:SilvaData_MAUI.Models"
+    xmlns:models="clr-namespace:SilvaData.Models"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:TypeArguments="models:NPSResult">
     <Border
