@@ -1,20 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <utils:ContentPageWithLocalization
     x:Class="ISIInstitute.Views.NotificacoesView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
-    xmlns:controls="clr-namespace:SilvaData.Controls"
-    xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
+    xmlns:controls="clr-namespace:SilvaData_MAUI.Controls"
+    xmlns:fontawesome="clr-namespace:SilvaData_MAUI.FontAwesome"
     xmlns:isiInstitute="clr-namespace:ISIInstitute"
     xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
-    xmlns:models="clr-namespace:SilvaData.Models"
+    xmlns:models="clr-namespace:SilvaData_MAUI.Models"
     xmlns:pageModels="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    xmlns:utils="clr-namespace:SilvaData.Utils"
-    xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
+    xmlns:utils="clr-namespace:SilvaData_MAUI.Utils"
+    xmlns:viewModels="clr-namespace:SilvaData_MAUI.ViewModels"
     x:Name="AtividadesView"
-    Title="{localization:Translate Notificaï¿½ï¿½es}"
+    Title="{localization:Translate Notificações}"
     BackgroundColor="{StaticResource PrimaryColor}"
     Shell.NavBarIsVisible="false"
     Shell.TabBarIsVisible="false">
@@ -116,7 +116,7 @@
                     FontFamily="Nunito"
                     FontSize="Large"
                     HorizontalTextAlignment="Start"
-                    Text="{localization:Translate Notificaï¿½ï¿½es}"
+                    Text="{localization:Translate Notificações}"
                     TextColor="{StaticResource PrimaryColor}"
                     VerticalOptions="Center" />
 
@@ -236,7 +236,7 @@
                 HorizontalOptions="Fill"
                 HorizontalTextAlignment="Center"
                 IsVisible="{Binding NaoTemNotificacao, Source={x:Reference AtividadesView}}"
-                Text="{localization:Translate NenhumaNotificaï¿½ï¿½oPendente}"
+                Text="{localization:Translate NenhumaNotificaçãoPendente}"
                 VerticalOptions="Fill"
                 VerticalTextAlignment="Center" />
         </Grid>

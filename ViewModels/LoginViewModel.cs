@@ -1,17 +1,17 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SilvaData.Controls; // Para a classe Login
-using SilvaData.Models;
-using SilvaData.Pages.PopUps;
-using SilvaData.Utilities;
+using SilvaData_MAUI.Controls; // Para a classe Login
+using SilvaData_MAUI.Models;
+using SilvaData_MAUI.Pages.PopUps;
+using SilvaData_MAUI.Utilities;
 using System;
 using System.Threading.Tasks;
 using LocalizationResourceManager.Maui; // Para o LocalizationManager
 
-namespace SilvaData.ViewModels
+namespace SilvaData_MAUI.ViewModels
 {
     /// <summary>
-    /// ViewModel para a p�gina de Login.
+    /// ViewModel para a página de Login.
     /// </summary>
     public partial class LoginViewModel : ObservableObject
     {
@@ -45,14 +45,14 @@ namespace SilvaData.ViewModels
         private readonly ConfigViewModel _configViewModel;
 
         /// <summary>
-        /// Inicializa uma nova inst�ncia da classe <see cref="LoginViewModel"/>.
+        /// Inicializa uma nova instância da classe <see cref="LoginViewModel"/>.
         /// </summary>
         public LoginViewModel(ConfigViewModel configViewModel)
         {
             _configViewModel = configViewModel;
 
-            // Define o texto da vers�o
-            VersionText = $"{Traducao.Vers�o} {AppInfo.Current.VersionString}";
+            // Define o texto da versão
+            VersionText = $"{Traducao.Versão} {AppInfo.Current.VersionString}";
 
             // Define o idioma inicial
             UpdateLanguage();
@@ -86,7 +86,7 @@ namespace SilvaData.ViewModels
             {
                 string mensagem = string.Format(Traducao.UsuarioJaLogado, sessionAtiva.dispositivoDescricao, sessionAtiva.dataInicio);
 
-                if (!await PopUpYesNo.ShowAsync(Traducao.Aten��o, mensagem, Traducao.Sim, Traducao.N�o))
+                if (!await PopUpYesNo.ShowAsync(Traducao.Atenção, mensagem, Traducao.Sim, Traducao.Não))
                 {
                     IsBusy = false;
                     return;
@@ -100,7 +100,7 @@ namespace SilvaData.ViewModels
             if (logged is LoginResult.FailedWebService or LoginResult.Wrong)
             {
                 if (logged == LoginResult.Wrong)
-                    await PopUpOK.ShowAsync(Traducao.Login, Traducao.LoginInv�lido);
+                    await PopUpOK.ShowAsync(Traducao.Login, Traducao.LoginInválido);
                 else
                     await PopUpOK.ShowAsync(Traducao.SemInternet, Traducao.NaoPodeAtualizarSemInternet);
 
@@ -111,7 +111,7 @@ namespace SilvaData.ViewModels
             Preferences.Set("PrecisaSincronizacaoCompleta", true);
             Graficos.ZeraDadosGraficos();
 
-            // Define a flag que o MainPageModel verificar�
+            // Define a flag que o MainPageModel verificará
             Login.AcabouDeLogar = true;
 
             _ = NavigationUtils.PopModalAsync();
@@ -120,7 +120,7 @@ namespace SilvaData.ViewModels
         }
 
         /// <summary>
-        /// Comando para mostrar a pol�tica de privacidade.
+        /// Comando para mostrar a política de privacidade.
         /// </summary>
         [RelayCommand]
         private async Task PolicyPrivacyAsync()
@@ -129,7 +129,7 @@ namespace SilvaData.ViewModels
         }
 
         /// <summary>
-        /// Comando para abrir a p�gina de "Esqueci a Senha".
+        /// Comando para abrir a página de "Esqueci a Senha".
         /// </summary>
         [RelayCommand]
         private async Task ForgotPasswordAsync()
@@ -139,7 +139,7 @@ namespace SilvaData.ViewModels
         }
 
         /// <summary>
-        /// Comando para alterar o idioma da aplica��o.
+        /// Comando para alterar o idioma da aplicação.
         /// </summary>
         [RelayCommand]
         private void SetLanguage(string culture)
@@ -149,7 +149,7 @@ namespace SilvaData.ViewModels
         }
 
         /// <summary>
-        /// Atualiza a opacidade das bandeiras de idioma com base na sele��o atual.
+        /// Atualiza a opacidade das bandeiras de idioma com base na seleção atual.
         /// </summary>
         private void UpdateLanguage()
         {

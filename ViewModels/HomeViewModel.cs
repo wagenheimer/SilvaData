@@ -4,20 +4,20 @@ using CommunityToolkit.Mvvm.Messaging;
 
 using ISIInstitute.Views.LoteViews;
 
-using SilvaData.FontAwesome;
-using SilvaData.Models;
-using SilvaData.Pages.PopUps;
-using SilvaData.Services; // Para HomeService
-using SilvaData.Utilities;
+using SilvaData_MAUI.FontAwesome;
+using SilvaData_MAUI.Models;
+using SilvaData_MAUI.Pages.PopUps;
+using SilvaData_MAUI.Services; // Para HomeService
+using SilvaData_MAUI.Utilities;
 
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
-namespace SilvaData.ViewModels
+namespace SilvaData_MAUI.ViewModels
 {
     /// <summary>
-    /// ViewModel para a tela principal (Home), que exibe os cart�es de
-    /// pontua��o e os lotes em alerta.
+    /// ViewModel para a tela principal (Home), que exibe os cartões de
+    /// pontuação e os lotes em alerta.
     /// </summary>
     public partial class HomeViewModel : ViewModelBase, IDisposable
     {
@@ -45,7 +45,7 @@ namespace SilvaData.ViewModels
 
         public HomeViewModel(HomeService homeService)
         {
-            _homeService = homeService; // Injeta o novo servi�o
+            _homeService = homeService; // Injeta o novo serviço
         }
 
         public async Task InitializeAsync(bool forceRefresh = false)
@@ -55,12 +55,12 @@ namespace SilvaData.ViewModels
             try
             {
                 IsBusy = true;
-                await CarregaDados(forceRefresh); // Usa a vers�o segura que voc� j� tem
-                Debug.WriteLine("[Home] Inicializa��o conclu�da");
+                await CarregaDados(forceRefresh); // Usa a versão segura que você já tem
+                Debug.WriteLine("[Home] Inicialização concluída");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[Home] Erro na inicializa��o: {ex.Message}");
+                Debug.WriteLine($"[Home] Erro na inicialização: {ex.Message}");
             }
             finally
             {
@@ -88,14 +88,14 @@ namespace SilvaData.ViewModels
 
         public async Task CarregaDados(bool forceWebFetch = false)
         {
-            // 1. Ignora se j� est� em execu��o (prote��o imediata)
+            // 1. Ignora se já está em execução (proteção imediata)
             if (IsBusy)
             {
-                Debug.WriteLine("CarregaDados ignorado: j� em execu��o");
+                Debug.WriteLine("CarregaDados ignorado: já em execução");
                 return;
             }
 
-            // 2. Ignora se dentro do per�odo de cooldown (a menos que seja for�ado)
+            // 2. Ignora se dentro do período de cooldown (a menos que seja forçado)
             if (!forceWebFetch &&
                 (DateTime.Now - _ultimaExecucaoConcluida).TotalMilliseconds < MinimoTempoEntreExecucoes)
             {
@@ -106,17 +106,17 @@ namespace SilvaData.ViewModels
             // 3. Tenta adquirir lock com timeout (evita deadlock)
             if (!await _carregaDadosLock.WaitAsync(TimeSpan.FromMilliseconds(500)))
             {
-                Debug.WriteLine("CarregaDados ignorado: lock ocupado por outra opera��o");
+                Debug.WriteLine("CarregaDados ignorado: lock ocupado por outra operação");
                 return;
             }
 
             try
             {
-                // 4. Re-verifica��o cr�tica ap�s adquirir o lock
+                // 4. Re-verificação crítica após adquirir o lock
                 if (!forceWebFetch &&
                     (DateTime.Now - _ultimaExecucaoConcluida).TotalMilliseconds < MinimoTempoEntreExecucoes)
                 {
-                    Debug.WriteLine("CarregaDados ignorado: cooldown verificado ap�s lock");
+                    Debug.WriteLine("CarregaDados ignorado: cooldown verificado após lock");
                     return;
                 }
 
@@ -141,16 +141,16 @@ namespace SilvaData.ViewModels
                 var ultimaAtualizacao = Preferences.Get("UltimaAtualizacaoTodasMediasISIMacro", DateTime.MinValue);
                 if (ultimaAtualizacao == DateTime.MinValue)
                 {
-                    // Executa em background para n�o travar a UI
+                    // Executa em background para não travar a UI
                     await Task.Run(Lote.AtualizaTodasMediasISIMacro).ConfigureAwait(false);
                 }
 
                 // Busca Lotes em Alerta
                 var lotesEmAlertaList = await Lote.PegaListaLotesEmAlertaAsync().ConfigureAwait(false);
-                // Garante nomes (UE/Propriedade/Regional) caso a consulta mude e n�o traga JOINs
+                // Garante nomes (UE/Propriedade/Regional) caso a consulta mude e não traga JOINs
                 lotesEmAlertaList.EnsureNames();
 
-                // Busca Dados do Dashboard (do cache ou web) usando o servi�o
+                // Busca Dados do Dashboard (do cache ou web) usando o serviço
                 var dashboardData = await _homeService.AtualizaDadosMediaAsync(forceWebFetch).ConfigureAwait(false);
 
                 // Atualiza a UI na thread principal
@@ -166,7 +166,7 @@ namespace SilvaData.ViewModels
                     AtualizaUI(); // Atualiza as propriedades calculadas (Media, Score, etc.)
                 });
 
-                _ultimaExecucaoConcluida = DateTime.Now; // Atualiza timestamp S� SE CONCLUIR
+                _ultimaExecucaoConcluida = DateTime.Now; // Atualiza timestamp SÓ SE CONCLUIR
             }
             catch (Exception ex)
             {
@@ -180,8 +180,8 @@ namespace SilvaData.ViewModels
         }
 
         /// <summary>
-        /// Comando chamado pelo bot�o "Atualizar". Solicita ao Dashboard (pai)
-        /// para iniciar uma sincroniza��o completa.
+        /// Comando chamado pelo botão "Atualizar". Solicita ao Dashboard (pai)
+        /// para iniciar uma sincronização completa.
         /// </summary>
         [RelayCommand]
         private async Task PerformAtualizaAgora()
@@ -191,7 +191,7 @@ namespace SilvaData.ViewModels
             try
             {
                 IsBusy = true;
-                // Obt�m o DashboardViewModel diretamente (sem mensagens)
+                // Obtém o DashboardViewModel diretamente (sem mensagens)
                 var dashboardVm = ServiceHelper.GetRequiredService<DashboardViewModel>();
                 if (dashboardVm != null)
                 {
@@ -199,7 +199,7 @@ namespace SilvaData.ViewModels
                 }
                 else
                 {
-                    await PopUpOK.ShowAsync(Traducao.Aten��o, "Dashboard n�o carregado");
+                    await PopUpOK.ShowAsync(Traducao.Atenção, "Dashboard não carregado");
                 }
             }
             finally
@@ -265,7 +265,7 @@ namespace SilvaData.ViewModels
                     MediaIcon = FontAwesomeIcons.CircleArrowDown;
                     TextoMedia = $"{DoubleToPercentageString(CalculateChange(DadosDashboard.mediaIsiMacroCliente, DadosDashboard.mediaIsiMacroClienteUsuario))} " + Traducao.Pior;
                 }
-                TextoMedia2 = Traducao.QueAM�diaDaEmpresa;
+                TextoMedia2 = Traducao.QueAMédiaDaEmpresa;
             }
             else if (EmpresaVisible)
             {
@@ -283,11 +283,11 @@ namespace SilvaData.ViewModels
                     MediaIcon = FontAwesomeIcons.CircleArrowDown;
                     TextoMedia = $"{DoubleToPercentageString(CalculateChange(DadosDashboard.mediaIsiMacroGlobal, DadosDashboard.mediaIsiMacroCliente))} " + Traducao.Pior;
                 }
-                TextoMedia2 = Traducao.QueAM�diaGlobal;
+                TextoMedia2 = Traducao.QueAMédiaGlobal;
             }
             else // GlobalVisible
             {
-                // Reseta para valores padr�o
+                // Reseta para valores padrão
                 MediaTextColor = ISIUtils.GetResourceColor("TextEnabled", Colors.Black);
                 MediaBackground = Colors.Transparent;
                 MediaIcon = string.Empty;

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SilvaData.Resources.Localization {
+namespace SilvaData_MAUI.Resources.Localization {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace SilvaData.Resources.Localization {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SilvaData.Resources.Localization.Localization", typeof(Localization).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SilvaData_MAUI.Resources.Localization.Localization", typeof(Localization).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,20 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} minutos atr�s.
+        ///   Looks up a localized string similar to {0} minutos atrás.
         /// </summary>
-        public static string _0MinutosAtr�s {
+        public static string _0MinutosAtrás {
             get {
-                return ResourceManager.GetString("_0MinutosAtr�s", resourceCulture);
+                return ResourceManager.GetString("_0MinutosAtrás", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} segundos atr�s.
+        ///   Looks up a localized string similar to {0} segundos atrás.
         /// </summary>
-        public static string _0SegundosAtr�s {
+        public static string _0SegundosAtrás {
             get {
-                return ResourceManager.GetString("_0SegundosAtr�s", resourceCulture);
+                return ResourceManager.GetString("_0SegundosAtrás", resourceCulture);
             }
         }
         
@@ -187,11 +187,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Adicione as informa��es abaixo.
+        ///   Looks up a localized string similar to Adicione as informações abaixo.
         /// </summary>
-        public static string AdicioneAsInforma��esAbaixo {
+        public static string AdicioneAsInformaçõesAbaixo {
             get {
-                return ResourceManager.GetString("AdicioneAsInforma��esAbaixo", resourceCulture);
+                return ResourceManager.GetString("AdicioneAsInformaçõesAbaixo", resourceCulture);
             }
         }
         
@@ -223,7 +223,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ainda h� {0} registros pendentes....
+        ///   Looks up a localized string similar to Ainda há {0} registros pendentes....
         /// </summary>
         public static string AindaHa0RegistrosPendentes {
             get {
@@ -232,11 +232,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ainda n�o estamos na data m�nima para preenchimento deste formul�rio.
+        ///   Looks up a localized string similar to Ainda não estamos na data mínima para preenchimento deste formulário.
         /// </summary>
-        public static string AindaN�oEstamosNaDataM�nimaParaPreenchimentoDesteFormul�rio {
+        public static string AindaNãoEstamosNaDataMínimaParaPreenchimentoDesteFormulário {
             get {
-                return ResourceManager.GetString("AindaN�oEstamosNaDataM�nimaParaPreenchimentoDesteFormul�rio", resourceCulture);
+                return ResourceManager.GetString("AindaNãoEstamosNaDataMínimaParaPreenchimentoDesteFormulário", resourceCulture);
             }
         }
         
@@ -250,7 +250,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Altere os crit�rios de pesquisa ou aperte no + pra adicionar um novo lote..
+        ///   Looks up a localized string similar to Altere os critérios de pesquisa ou aperte no + pra adicionar um novo lote..
         /// </summary>
         public static string AltereCriteriosOuAdicioneNovoLote {
             get {
@@ -259,11 +259,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An�lise de Salmonella.
+        ///   Looks up a localized string similar to Análise de Salmonella.
         /// </summary>
-        public static string An�liseDeSalmonella {
+        public static string AnáliseDeSalmonella {
             get {
-                return ResourceManager.GetString("An�liseDeSalmonella", resourceCulture);
+                return ResourceManager.GetString("AnáliseDeSalmonella", resourceCulture);
             }
         }
         
@@ -295,7 +295,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deseja mesmo arquivar essa notifica��o?.
+        ///   Looks up a localized string similar to Deseja mesmo arquivar essa notificação?.
         /// </summary>
         public static string ArquivarNotificacaoDesc {
             get {
@@ -304,7 +304,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Arquivo de backup n�o encontrado..
+        ///   Looks up a localized string similar to Arquivo de backup não encontrado..
         /// </summary>
         public static string ArquivoBackupNaoEncontrado {
             get {
@@ -313,43 +313,43 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to As altera��es foram salvas.
+        ///   Looks up a localized string similar to As alterações foram salvas.
         /// </summary>
-        public static string AsAltera��esForamSalvas {
+        public static string AsAlteraçõesForamSalvas {
             get {
-                return ResourceManager.GetString("AsAltera��esForamSalvas", resourceCulture);
+                return ResourceManager.GetString("AsAlteraçõesForamSalvas", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A Sincroniza��o falhou.
+        ///   Looks up a localized string similar to A Sincronização falhou.
         /// </summary>
-        public static string ASincroniza��oFalhou {
+        public static string ASincronizaçãoFalhou {
             get {
-                return ResourceManager.GetString("ASincroniza��oFalhou", resourceCulture);
+                return ResourceManager.GetString("ASincronizaçãoFalhou", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A Sincroniza��o Falhou com a mensagem:.
+        ///   Looks up a localized string similar to A Sincronização Falhou com a mensagem:.
         /// </summary>
-        public static string ASincroniza��oFalhouComAMensagem {
+        public static string ASincronizaçãoFalhouComAMensagem {
             get {
-                return ResourceManager.GetString("ASincroniza��oFalhouComAMensagem", resourceCulture);
+                return ResourceManager.GetString("ASincronizaçãoFalhouComAMensagem", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to at�.
+        ///   Looks up a localized string similar to até.
         /// </summary>
-        public static string At� {
+        public static string Até {
             get {
-                return ResourceManager.GetString("At�", resourceCulture);
+                return ResourceManager.GetString("Até", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Aten��o!.
+        ///   Looks up a localized string similar to Atenção!.
         /// </summary>
         public static string Atencao {
             get {
@@ -358,11 +358,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Aten��o!.
+        ///   Looks up a localized string similar to Atenção!.
         /// </summary>
-        public static string Aten��o {
+        public static string Atenção {
             get {
-                return ResourceManager.GetString("Aten��o", resourceCulture);
+                return ResourceManager.GetString("Atenção", resourceCulture);
             }
         }
         
@@ -385,11 +385,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In�cio.
+        ///   Looks up a localized string similar to Início.
         /// </summary>
-        public static string AtividadeEdit_In�cio {
+        public static string AtividadeEdit_Início {
             get {
-                return ResourceManager.GetString("AtividadeEdit_In�cio", resourceCulture);
+                return ResourceManager.GetString("AtividadeEdit_Início", resourceCulture);
             }
         }
         
@@ -448,11 +448,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Atualiza��o dispon�vel.
+        ///   Looks up a localized string similar to Atualização disponível.
         /// </summary>
-        public static string Atualiza��oDispon�vel {
+        public static string AtualizaçãoDisponível {
             get {
-                return ResourceManager.GetString("Atualiza��oDispon�vel", resourceCulture);
+                return ResourceManager.GetString("AtualizaçãoDisponível", resourceCulture);
             }
         }
         
@@ -484,7 +484,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Avalia��es no Galp�o.
+        ///   Looks up a localized string similar to Avaliações no Galpão.
         /// </summary>
         public static string AvaliacoesNoGalpao {
             get {
@@ -502,7 +502,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Essa pontua��o est� muito alta para uma ave saud�vel. Deseja confirmar?.
+        ///   Looks up a localized string similar to Essa pontuação está muito alta para uma ave saudável. Deseja confirmar?.
         /// </summary>
         public static string AveDoente {
             get {
@@ -520,7 +520,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Aten��o: ap�s a sincroniza��o do app, os dados de abate s� poder�o ser editados na plataforma.
+        ///   Looks up a localized string similar to Atenção: após a sincronização do app, os dados de abate só poderão ser editados na plataforma.
         /// </summary>
         public static string AvisoAbateLote {
             get {
@@ -538,7 +538,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Baixando Avalia��oes.
+        ///   Looks up a localized string similar to Baixando Avaliaçãoes.
         /// </summary>
         public static string BaixandoAvaliacaoes {
             get {
@@ -547,47 +547,47 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Baixando avalia��es do galp�o da Nuvem.
+        ///   Looks up a localized string similar to Baixando avaliações do galpão da Nuvem.
         /// </summary>
-        public static string BaixandoAvalia��esDoGalp�oDaNuvem {
+        public static string BaixandoAvaliaçõesDoGalpãoDaNuvem {
             get {
-                return ResourceManager.GetString("BaixandoAvalia��esDoGalp�oDaNuvem", resourceCulture);
+                return ResourceManager.GetString("BaixandoAvaliaçõesDoGalpãoDaNuvem", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Baixando formul�rios....
+        ///   Looks up a localized string similar to Baixando formulários....
         /// </summary>
-        public static string BaixandoFormul�rios {
+        public static string BaixandoFormulários {
             get {
-                return ResourceManager.GetString("BaixandoFormul�rios", resourceCulture);
+                return ResourceManager.GetString("BaixandoFormulários", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Baixando formul�rios dos lotes da nuvem....
+        ///   Looks up a localized string similar to Baixando formulários dos lotes da nuvem....
         /// </summary>
-        public static string BaixandoFormul�riosDosLotesDaNuvem {
+        public static string BaixandoFormuláriosDosLotesDaNuvem {
             get {
-                return ResourceManager.GetString("BaixandoFormul�riosDosLotesDaNuvem", resourceCulture);
+                return ResourceManager.GetString("BaixandoFormuláriosDosLotesDaNuvem", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Baixando imagens dos formul�rios da nuvem.
+        ///   Looks up a localized string similar to Baixando imagens dos formulários da nuvem.
         /// </summary>
-        public static string BaixandoImagensDosFormul�riosDaNuvem {
+        public static string BaixandoImagensDosFormuláriosDaNuvem {
             get {
-                return ResourceManager.GetString("BaixandoImagensDosFormul�riosDaNuvem", resourceCulture);
+                return ResourceManager.GetString("BaixandoImagensDosFormuláriosDaNuvem", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Baixando imagens dos par�metros da nuvem....
+        ///   Looks up a localized string similar to Baixando imagens dos parâmetros da nuvem....
         /// </summary>
-        public static string BaixandoImagensDosPar�metrosDaNuvem {
+        public static string BaixandoImagensDosParâmetrosDaNuvem {
             get {
-                return ResourceManager.GetString("BaixandoImagensDosPar�metrosDaNuvem", resourceCulture);
+                return ResourceManager.GetString("BaixandoImagensDosParâmetrosDaNuvem", resourceCulture);
             }
         }
         
@@ -610,47 +610,47 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Baixando notifica��es da nuvem....
+        ///   Looks up a localized string similar to Baixando notificações da nuvem....
         /// </summary>
-        public static string BaixandoNotifica��esDaNuvem {
+        public static string BaixandoNotificaçõesDaNuvem {
             get {
-                return ResourceManager.GetString("BaixandoNotifica��esDaNuvem", resourceCulture);
+                return ResourceManager.GetString("BaixandoNotificaçõesDaNuvem", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Baixando par�metros da nuvem....
+        ///   Looks up a localized string similar to Baixando parâmetros da nuvem....
         /// </summary>
-        public static string BaixandoPar�metrosDaNuvem {
+        public static string BaixandoParâmetrosDaNuvem {
             get {
-                return ResourceManager.GetString("BaixandoPar�metrosDaNuvem", resourceCulture);
+                return ResourceManager.GetString("BaixandoParâmetrosDaNuvem", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Baixando par�metros das atividades da nuvem....
+        ///   Looks up a localized string similar to Baixando parâmetros das atividades da nuvem....
         /// </summary>
-        public static string BaixandoPar�metrosDasAtividadesDaNuvem {
+        public static string BaixandoParâmetrosDasAtividadesDaNuvem {
             get {
-                return ResourceManager.GetString("BaixandoPar�metrosDasAtividadesDaNuvem", resourceCulture);
+                return ResourceManager.GetString("BaixandoParâmetrosDasAtividadesDaNuvem", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Baixando par�metros dos lotes da nuvem....
+        ///   Looks up a localized string similar to Baixando parâmetros dos lotes da nuvem....
         /// </summary>
-        public static string BaixandoPar�metrosDosLotesDaNuvem {
+        public static string BaixandoParâmetrosDosLotesDaNuvem {
             get {
-                return ResourceManager.GetString("BaixandoPar�metrosDosLotesDaNuvem", resourceCulture);
+                return ResourceManager.GetString("BaixandoParâmetrosDosLotesDaNuvem", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Baixando permiss�es da nuvem....
+        ///   Looks up a localized string similar to Baixando permissões da nuvem....
         /// </summary>
-        public static string BaixandoPermiss�esDaNuvem {
+        public static string BaixandoPermissõesDaNuvem {
             get {
-                return ResourceManager.GetString("BaixandoPermiss�esDaNuvem", resourceCulture);
+                return ResourceManager.GetString("BaixandoPermissõesDaNuvem", resourceCulture);
             }
         }
         
@@ -664,11 +664,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Baixando propriet�rios da nuvem....
+        ///   Looks up a localized string similar to Baixando proprietários da nuvem....
         /// </summary>
-        public static string BaixandoPropriet�riosDaNuvem {
+        public static string BaixandoProprietáriosDaNuvem {
             get {
-                return ResourceManager.GetString("BaixandoPropriet�riosDaNuvem", resourceCulture);
+                return ResourceManager.GetString("BaixandoProprietáriosDaNuvem", resourceCulture);
             }
         }
         
@@ -691,11 +691,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Baixando unidades epidemiol�gicas da nuvem....
+        ///   Looks up a localized string similar to Baixando unidades epidemiológicas da nuvem....
         /// </summary>
-        public static string BaixandoUnidadesEpidemiol�gicasDaNuvem {
+        public static string BaixandoUnidadesEpidemiológicasDaNuvem {
             get {
-                return ResourceManager.GetString("BaixandoUnidadesEpidemiol�gicasDaNuvem", resourceCulture);
+                return ResourceManager.GetString("BaixandoUnidadesEpidemiológicasDaNuvem", resourceCulture);
             }
         }
         
@@ -711,9 +711,9 @@ namespace SilvaData.Resources.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Boa.
         /// </summary>
-        public static string BoaSa�de {
+        public static string BoaSaúde {
             get {
-                return ResourceManager.GetString("BoaSa�de", resourceCulture);
+                return ResourceManager.GetString("BoaSaúde", resourceCulture);
             }
         }
         
@@ -736,11 +736,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Buscar Mudan�as.
+        ///   Looks up a localized string similar to Buscar Mudanças.
         /// </summary>
-        public static string BuscarAtualiza��es {
+        public static string BuscarAtualizações {
             get {
-                return ResourceManager.GetString("BuscarAtualiza��es", resourceCulture);
+                return ResourceManager.GetString("BuscarAtualizações", resourceCulture);
             }
         }
         
@@ -772,7 +772,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C�mera.
+        ///   Looks up a localized string similar to Câmera.
         /// </summary>
         public static string Camera {
             get {
@@ -826,11 +826,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Carregando dados do formul�rio....
+        ///   Looks up a localized string similar to Carregando dados do formulário....
         /// </summary>
-        public static string CarregandoDadosDoFormul�rio {
+        public static string CarregandoDadosDoFormulário {
             get {
-                return ResourceManager.GetString("CarregandoDadosDoFormul�rio", resourceCulture);
+                return ResourceManager.GetString("CarregandoDadosDoFormulário", resourceCulture);
             }
         }
         
@@ -862,7 +862,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to � precisar estar conectado na internet para efetuar essa opera��o! Tentar Novamente?.
+        ///   Looks up a localized string similar to É precisar estar conectado na internet para efetuar essa operação! Tentar Novamente?.
         /// </summary>
         public static string ConectadoAInternet {
             get {
@@ -871,16 +871,16 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configura��es.
+        ///   Looks up a localized string similar to Configurações.
         /// </summary>
-        public static string Configura��es {
+        public static string Configurações {
             get {
-                return ResourceManager.GetString("Configura��es", resourceCulture);
+                return ResourceManager.GetString("Configurações", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Confirma��o.
+        ///   Looks up a localized string similar to Confirmação.
         /// </summary>
         public static string confirmacao {
             get {
@@ -889,7 +889,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ao deslogar, voc� perder� todas os dados que ainda n�o foram sincronizados! Voc� tem mesmo certeza que deseja deslogar? Esses dados n�o poder�o mais ser recuperados. Deseja mesmo deslogar?.
+        ///   Looks up a localized string similar to Ao deslogar, você perderá todas os dados que ainda não foram sincronizados! Você tem mesmo certeza que deseja deslogar? Esses dados não poderão mais ser recuperados. Deseja mesmo deslogar?.
         /// </summary>
         public static string ConfirmacaodeLogOff {
             get {
@@ -916,7 +916,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Convers�o Alimentar Real.
+        ///   Looks up a localized string similar to Conversão Alimentar Real.
         /// </summary>
         public static string ConversaoAlimentarReal {
             get {
@@ -1033,11 +1033,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data de In�cio.
+        ///   Looks up a localized string similar to Data de Início.
         /// </summary>
-        public static string DataDeIn�cio {
+        public static string DataDeInício {
             get {
-                return ResourceManager.GetString("DataDeIn�cio", resourceCulture);
+                return ResourceManager.GetString("DataDeInício", resourceCulture);
             }
         }
         
@@ -1060,7 +1060,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data de In�cio.
+        ///   Looks up a localized string similar to Data de Início.
         /// </summary>
         public static string DataInicio {
             get {
@@ -1087,11 +1087,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Descri��o.
+        ///   Looks up a localized string similar to Descrição.
         /// </summary>
-        public static string Descri��o {
+        public static string Descrição {
             get {
-                return ResourceManager.GetString("Descri��o", resourceCulture);
+                return ResourceManager.GetString("Descrição", resourceCulture);
             }
         }
         
@@ -1105,7 +1105,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deseja salvar as altera��es?.
+        ///   Looks up a localized string similar to Deseja salvar as alterações?.
         /// </summary>
         public static string DesejaSalvarAlteracoes {
             get {
@@ -1141,11 +1141,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Detalhes da an�lise:.
+        ///   Looks up a localized string similar to Detalhes da análise:.
         /// </summary>
-        public static string DetalhesDaAn�lise {
+        public static string DetalhesDaAnálise {
             get {
-                return ResourceManager.GetString("DetalhesDaAn�lise", resourceCulture);
+                return ResourceManager.GetString("DetalhesDaAnálise", resourceCulture);
             }
         }
         
@@ -1159,29 +1159,29 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Diagn�stico de Enfermidade.
+        ///   Looks up a localized string similar to Diagnóstico de Enfermidade.
         /// </summary>
-        public static string Diagn�sticoDeEnfermidade {
+        public static string DiagnósticoDeEnfermidade {
             get {
-                return ResourceManager.GetString("Diagn�sticoDeEnfermidade", resourceCulture);
+                return ResourceManager.GetString("DiagnósticoDeEnfermidade", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Diagn�stico de Enfermidades.
+        ///   Looks up a localized string similar to Diagnóstico de Enfermidades.
         /// </summary>
-        public static string Diagn�sticoDeEnfermidades {
+        public static string DiagnósticoDeEnfermidades {
             get {
-                return ResourceManager.GetString("Diagn�sticoDeEnfermidades", resourceCulture);
+                return ResourceManager.GetString("DiagnósticoDeEnfermidades", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Diagn�sticos realizados no lote:.
+        ///   Looks up a localized string similar to Diagnósticos realizados no lote:.
         /// </summary>
-        public static string Diagn�sticosRealizadosNoLote {
+        public static string DiagnósticosRealizadosNoLote {
             get {
-                return ResourceManager.GetString("Diagn�sticosRealizadosNoLote", resourceCulture);
+                return ResourceManager.GetString("DiagnósticosRealizadosNoLote", resourceCulture);
             }
         }
         
@@ -1204,11 +1204,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dispers�o.
+        ///   Looks up a localized string similar to Dispersão.
         /// </summary>
-        public static string Dispers�o {
+        public static string Dispersão {
             get {
-                return ResourceManager.GetString("Dispers�o", resourceCulture);
+                return ResourceManager.GetString("Dispersão", resourceCulture);
             }
         }
         
@@ -1240,11 +1240,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Editar propriet�rio.
+        ///   Looks up a localized string similar to Editar proprietário.
         /// </summary>
-        public static string EditarPropriet�rio {
+        public static string EditarProprietário {
             get {
-                return ResourceManager.GetString("EditarPropriet�rio", resourceCulture);
+                return ResourceManager.GetString("EditarProprietário", resourceCulture);
             }
         }
         
@@ -1258,20 +1258,20 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Editar Unidade Epidemiol�gica.
+        ///   Looks up a localized string similar to Editar Unidade Epidemiológica.
         /// </summary>
-        public static string EditarUnidadeEpidemiol�gica {
+        public static string EditarUnidadeEpidemiológica {
             get {
-                return ResourceManager.GetString("EditarUnidadeEpidemiol�gica", resourceCulture);
+                return ResourceManager.GetString("EditarUnidadeEpidemiológica", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edite as informa��es abaixo.
+        ///   Looks up a localized string similar to Edite as informações abaixo.
         /// </summary>
-        public static string EditeAsInforma��esAbaixo {
+        public static string EditeAsInformaçõesAbaixo {
             get {
-                return ResourceManager.GetString("EditeAsInforma��esAbaixo", resourceCulture);
+                return ResourceManager.GetString("EditeAsInformaçõesAbaixo", resourceCulture);
             }
         }
         
@@ -1402,7 +1402,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to N�o foi poss�vel enviar os dados no momento. Por favor, tente novamente mais tarde. .
+        ///   Looks up a localized string similar to Não foi possível enviar os dados no momento. Por favor, tente novamente mais tarde. .
         /// </summary>
         public static string FalhaAoEnviarDados {
             get {
@@ -1483,7 +1483,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For�ar Sincroniza��o Completa?.
+        ///   Looks up a localized string similar to Forçar Sincronização Completa?.
         /// </summary>
         public static string ForcarSincronizacaoCompleta {
             get {
@@ -1492,16 +1492,16 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Formul�rio em andamento.
+        ///   Looks up a localized string similar to Formulário em andamento.
         /// </summary>
-        public static string Formul�rioEmAndamento {
+        public static string FormulárioEmAndamento {
             get {
-                return ResourceManager.GetString("Formul�rioEmAndamento", resourceCulture);
+                return ResourceManager.GetString("FormulárioEmAndamento", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Formul�rio com {0} registros salvo com sucesso..
+        ///   Looks up a localized string similar to Formulário com {0} registros salvo com sucesso..
         /// </summary>
         public static string FormularioRegistros {
             get {
@@ -1510,11 +1510,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Formul�rios dos lotes.
+        ///   Looks up a localized string similar to Formulários dos lotes.
         /// </summary>
-        public static string Formul�riosDosLotes {
+        public static string FormuláriosDosLotes {
             get {
-                return ResourceManager.GetString("Formul�riosDosLotes", resourceCulture);
+                return ResourceManager.GetString("FormuláriosDosLotes", resourceCulture);
             }
         }
         
@@ -1537,11 +1537,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gerencie seus propriet�rios.
+        ///   Looks up a localized string similar to Gerencie seus proprietários.
         /// </summary>
-        public static string GerencieSeusPropriet�rios {
+        public static string GerencieSeusProprietários {
             get {
-                return ResourceManager.GetString("GerencieSeusPropriet�rios", resourceCulture);
+                return ResourceManager.GetString("GerencieSeusProprietários", resourceCulture);
             }
         }
         
@@ -1573,11 +1573,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gerencie suas Unidades Epidemiol�gicas.
+        ///   Looks up a localized string similar to Gerencie suas Unidades Epidemiológicas.
         /// </summary>
-        public static string GerencieSuasUnidadesEpidemiol�gicas {
+        public static string GerencieSuasUnidadesEpidemiológicas {
             get {
-                return ResourceManager.GetString("GerencieSuasUnidadesEpidemiol�gicas", resourceCulture);
+                return ResourceManager.GetString("GerencieSuasUnidadesEpidemiológicas", resourceCulture);
             }
         }
         
@@ -1591,11 +1591,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to H� uma sincroniza��o obrigat�ria pendente, ela ser� efetuada agora.
+        ///   Looks up a localized string similar to Há uma sincronização obrigatória pendente, ela será efetuada agora.
         /// </summary>
-        public static string H�UmaSincroniza��oObrigat�riaPendenteElaSer�EfetuadaAgora {
+        public static string HáUmaSincronizaçãoObrigatóriaPendenteElaSeráEfetuadaAgora {
             get {
-                return ResourceManager.GetString("H�UmaSincroniza��oObrigat�riaPendenteElaSer�EfetuadaAgora", resourceCulture);
+                return ResourceManager.GetString("HáUmaSincronizaçãoObrigatóriaPendenteElaSeráEfetuadaAgora", resourceCulture);
             }
         }
         
@@ -1636,20 +1636,20 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Imagens dos Formul�rios.
+        ///   Looks up a localized string similar to Imagens dos Formulários.
         /// </summary>
-        public static string ImagensDosFormul�rios {
+        public static string ImagensDosFormulários {
             get {
-                return ResourceManager.GetString("ImagensDosFormul�rios", resourceCulture);
+                return ResourceManager.GetString("ImagensDosFormulários", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to �ndice do Manejo.
+        ///   Looks up a localized string similar to Índice do Manejo.
         /// </summary>
-        public static string �ndiceDoManejo {
+        public static string ÍndiceDoManejo {
             get {
-                return ResourceManager.GetString("�ndiceDoManejo", resourceCulture);
+                return ResourceManager.GetString("ÍndiceDoManejo", resourceCulture);
             }
         }
         
@@ -1663,20 +1663,20 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Informa��es do Lote.
+        ///   Looks up a localized string similar to Informações do Lote.
         /// </summary>
-        public static string Informa��esDoLote {
+        public static string InformaçõesDoLote {
             get {
-                return ResourceManager.GetString("Informa��esDoLote", resourceCulture);
+                return ResourceManager.GetString("InformaçõesDoLote", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Informa��es do Tratamento.
+        ///   Looks up a localized string similar to Informações do Tratamento.
         /// </summary>
-        public static string Informa��esDoTratamento {
+        public static string InformaçõesDoTratamento {
             get {
-                return ResourceManager.GetString("Informa��esDoTratamento", resourceCulture);
+                return ResourceManager.GetString("InformaçõesDoTratamento", resourceCulture);
             }
         }
         
@@ -1690,11 +1690,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to IN�CIO.
+        ///   Looks up a localized string similar to INÍCIO.
         /// </summary>
-        public static string IN�CIO {
+        public static string INÍCIO {
             get {
-                return ResourceManager.GetString("IN�CIO", resourceCulture);
+                return ResourceManager.GetString("INÍCIO", resourceCulture);
             }
         }
         
@@ -1708,11 +1708,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dispers�o dos lotes.
+        ///   Looks up a localized string similar to Dispersão dos lotes.
         /// </summary>
-        public static string ISIDispers�oScore {
+        public static string ISIDispersãoScore {
             get {
-                return ResourceManager.GetString("ISIDispers�oScore", resourceCulture);
+                return ResourceManager.GetString("ISIDispersãoScore", resourceCulture);
             }
         }
         
@@ -1744,11 +1744,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ISI Score m�dio.
+        ///   Looks up a localized string similar to ISI Score médio.
         /// </summary>
-        public static string ISIScoreM�dioDoLote {
+        public static string ISIScoreMédioDoLote {
             get {
-                return ResourceManager.GetString("ISIScoreM�dioDoLote", resourceCulture);
+                return ResourceManager.GetString("ISIScoreMédioDoLote", resourceCulture);
             }
         }
         
@@ -1771,7 +1771,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voc� j� registrou o m�ximo ({0}) de respostas permitidas!.
+        ///   Looks up a localized string similar to Você já registrou o máximo ({0}) de respostas permitidas!.
         /// </summary>
         public static string JaFoiMaximoRespostas {
             get {
@@ -1807,16 +1807,16 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Lista de mudan�as identificadas:.
+        ///   Looks up a localized string similar to Lista de mudanças identificadas:.
         /// </summary>
-        public static string ListaDeMudan�asIdentificadas {
+        public static string ListaDeMudançasIdentificadas {
             get {
-                return ResourceManager.GetString("ListaDeMudan�asIdentificadas", resourceCulture);
+                return ResourceManager.GetString("ListaDeMudançasIdentificadas", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Algu�m logou com o mesmo usu�rio/senha em outro dispositivo! Por favor, efetue o login novamente para continuar.
+        ///   Looks up a localized string similar to Alguém logou com o mesmo usuário/senha em outro dispositivo! Por favor, efetue o login novamente para continuar.
         /// </summary>
         public static string LogadoComMesmoUsuarioSenha {
             get {
@@ -1834,11 +1834,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Login Inv�lido!.
+        ///   Looks up a localized string similar to Login Inválido!.
         /// </summary>
-        public static string LoginInv�lido {
+        public static string LoginInválido {
             get {
-                return ResourceManager.GetString("LoginInv�lido", resourceCulture);
+                return ResourceManager.GetString("LoginInválido", resourceCulture);
             }
         }
         
@@ -1915,7 +1915,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to M�ximo.
+        ///   Looks up a localized string similar to Máximo.
         /// </summary>
         public static string Maximo {
             get {
@@ -1924,7 +1924,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to M�dia.
+        ///   Looks up a localized string similar to Média.
         /// </summary>
         public static string Media {
             get {
@@ -1933,20 +1933,20 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Score m�dio:.
+        ///   Looks up a localized string similar to Score médio:.
         /// </summary>
-        public static string M�diaISI {
+        public static string MédiaISI {
             get {
-                return ResourceManager.GetString("M�diaISI", resourceCulture);
+                return ResourceManager.GetString("MédiaISI", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Score m�dio:.
+        ///   Looks up a localized string similar to Score médio:.
         /// </summary>
-        public static string M�diaScore {
+        public static string MédiaScore {
             get {
-                return ResourceManager.GetString("M�diaScore", resourceCulture);
+                return ResourceManager.GetString("MédiaScore", resourceCulture);
             }
         }
         
@@ -2005,7 +2005,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to M�nimo.
+        ///   Looks up a localized string similar to Mínimo.
         /// </summary>
         public static string Minimo {
             get {
@@ -2041,7 +2041,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to N�o.
+        ///   Looks up a localized string similar to Não.
         /// </summary>
         public static string Nao {
             get {
@@ -2050,25 +2050,25 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to N�o.
+        ///   Looks up a localized string similar to Não.
         /// </summary>
-        public static string N�o {
+        public static string Não {
             get {
-                return ResourceManager.GetString("N�o", resourceCulture);
+                return ResourceManager.GetString("Não", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to N�o existe nenhum produto cadastrado para tratamento deste diagn�stico.
+        ///   Looks up a localized string similar to Não existe nenhum produto cadastrado para tratamento deste diagnóstico.
         /// </summary>
-        public static string N�oExisteNenhumProdutoCadastradoParaTratamentoDesteDiagn�stico {
+        public static string NãoExisteNenhumProdutoCadastradoParaTratamentoDesteDiagnóstico {
             get {
-                return ResourceManager.GetString("N�oExisteNenhumProdutoCadastradoParaTratamentoDesteDiagn�stico", resourceCulture);
+                return ResourceManager.GetString("NãoExisteNenhumProdutoCadastradoParaTratamentoDesteDiagnóstico", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Os dados dos gr�ficos n�o puderam ser atualizados no momento. Por favor, tente novamente mais tarde. Essa falha n�o afeta o funcionamento.
+        ///   Looks up a localized string similar to Os dados dos gráficos não puderam ser atualizados no momento. Por favor, tente novamente mais tarde. Essa falha não afeta o funcionamento.
         /// </summary>
         public static string NaoFoiPossivelAtualizarDadosGraficos {
             get {
@@ -2077,16 +2077,16 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to N�o � poss�vel alterar dados em lotes fechados.
+        ///   Looks up a localized string similar to Não é possível alterar dados em lotes fechados.
         /// </summary>
-        public static string N�oPodeAlterarDadosEmLotesFechados {
+        public static string NãoPodeAlterarDadosEmLotesFechados {
             get {
-                return ResourceManager.GetString("N�oPodeAlterarDadosEmLotesFechados", resourceCulture);
+                return ResourceManager.GetString("NãoPodeAlterarDadosEmLotesFechados", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to N�o foi poss�vel atualizar agora. Por favor verifique sua conex�o com a internet e tente novamente mais tarde..
+        ///   Looks up a localized string similar to Não foi possível atualizar agora. Por favor verifique sua conexão com a internet e tente novamente mais tarde..
         /// </summary>
         public static string NaoPodeAtualizarSemInternet {
             get {
@@ -2095,7 +2095,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voc� n�o tem mais uma sess�o v�lida ativa..
+        ///   Looks up a localized string similar to Você não tem mais uma sessão válida ativa..
         /// </summary>
         public static string NaoTemSessaoValidaAtiva {
             get {
@@ -2104,11 +2104,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nenhuma an�lise de Salmonella cadastrada....
+        ///   Looks up a localized string similar to Nenhuma análise de Salmonella cadastrada....
         /// </summary>
-        public static string NenhumaAn�liseDeSalmonellaCadastrada {
+        public static string NenhumaAnáliseDeSalmonellaCadastrada {
             get {
-                return ResourceManager.GetString("NenhumaAn�liseDeSalmonellaCadastrada", resourceCulture);
+                return ResourceManager.GetString("NenhumaAnáliseDeSalmonellaCadastrada", resourceCulture);
             }
         }
         
@@ -2122,7 +2122,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nenhuma avalia��o realizada para este par�metro.
+        ///   Looks up a localized string similar to Nenhuma avaliação realizada para este parâmetro.
         /// </summary>
         public static string NenhumaAvaliacaoParametro {
             get {
@@ -2131,43 +2131,43 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nenhuma mudan�a pendente de sincroniza��o!.
+        ///   Looks up a localized string similar to Nenhuma mudança pendente de sincronização!.
         /// </summary>
-        public static string NenhumaMudan�aPendenteDeSincroniza��o {
+        public static string NenhumaMudançaPendenteDeSincronização {
             get {
-                return ResourceManager.GetString("NenhumaMudan�aPendenteDeSincroniza��o", resourceCulture);
+                return ResourceManager.GetString("NenhumaMudançaPendenteDeSincronização", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nenhuma notifica��o pendente!.
+        ///   Looks up a localized string similar to Nenhuma notificação pendente!.
         /// </summary>
-        public static string NenhumaNotifica��oPendente {
+        public static string NenhumaNotificaçãoPendente {
             get {
-                return ResourceManager.GetString("NenhumaNotifica��oPendente", resourceCulture);
+                return ResourceManager.GetString("NenhumaNotificaçãoPendente", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nenhum formul�rio de nutri��o cadastrado....
+        ///   Looks up a localized string similar to Nenhum formulário de nutrição cadastrado....
         /// </summary>
-        public static string NenhumaNutri��oCadastrada {
+        public static string NenhumaNutriçãoCadastrada {
             get {
-                return ResourceManager.GetString("NenhumaNutri��oCadastrada", resourceCulture);
+                return ResourceManager.GetString("NenhumaNutriçãoCadastrada", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nenhuma sess�o v�lida ativa.
+        ///   Looks up a localized string similar to Nenhuma sessão válida ativa.
         /// </summary>
-        public static string NenhumaSess�oV�lidaAtiva {
+        public static string NenhumaSessãoVálidaAtiva {
             get {
-                return ResourceManager.GetString("NenhumaSess�oV�lidaAtiva", resourceCulture);
+                return ResourceManager.GetString("NenhumaSessãoVálidaAtiva", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voc� n�o tem mais uma sess�o v�lida ativa. Algu�m logou com o mesmo usu�rio/senha em outro dispositivo! Por favor, efetue o login novamente para continuar..
+        ///   Looks up a localized string similar to Você não tem mais uma sessão válida ativa. Alguém logou com o mesmo usuário/senha em outro dispositivo! Por favor, efetue o login novamente para continuar..
         /// </summary>
         public static string NenhumaSessaoValidaDetalhes {
             get {
@@ -2185,11 +2185,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nenhum diagn�stico cadastrado....
+        ///   Looks up a localized string similar to Nenhum diagnóstico cadastrado....
         /// </summary>
-        public static string NenhumDiagn�sticoCadastrado {
+        public static string NenhumDiagnósticoCadastrado {
             get {
-                return ResourceManager.GetString("NenhumDiagn�sticoCadastrado", resourceCulture);
+                return ResourceManager.GetString("NenhumDiagnósticoCadastrado", resourceCulture);
             }
         }
         
@@ -2203,7 +2203,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nenhum lote em alerta. Parab�ns!.
+        ///   Looks up a localized string similar to Nenhum lote em alerta. Parabéns!.
         /// </summary>
         public static string NenhumLoteEmAlerta {
             get {
@@ -2221,7 +2221,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nenhum Modelo Dispon�vel.
+        ///   Looks up a localized string similar to Nenhum Modelo Disponível.
         /// </summary>
         public static string NenhumModeloDisponivel {
             get {
@@ -2239,7 +2239,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nenhum registro de zoot�cnico encontrado.
+        ///   Looks up a localized string similar to Nenhum registro de zootécnico encontrado.
         /// </summary>
         public static string NenhumRegistroZootecnico {
             get {
@@ -2248,7 +2248,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to N�o h� nenhum tratamento cadastrado. Para cadastrar um tratamento, use o bot�o Adicionar Tratamento no diagn�stico de enfermidade..
+        ///   Looks up a localized string similar to Não há nenhum tratamento cadastrado. Para cadastrar um tratamento, use o botão Adicionar Tratamento no diagnóstico de enfermidade..
         /// </summary>
         public static string NenhumTratamentoCadastrado {
             get {
@@ -2275,20 +2275,20 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Notifica��es.
+        ///   Looks up a localized string similar to Notificações.
         /// </summary>
-        public static string Notifica��es {
+        public static string Notificações {
             get {
-                return ResourceManager.GetString("Notifica��es", resourceCulture);
+                return ResourceManager.GetString("Notificações", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Arquivar notifica��o.
+        ///   Looks up a localized string similar to Arquivar notificação.
         /// </summary>
-        public static string NotificacoesView_ArquivarNotifica��o {
+        public static string NotificacoesView_ArquivarNotificação {
             get {
-                return ResourceManager.GetString("NotificacoesView_ArquivarNotifica��o", resourceCulture);
+                return ResourceManager.GetString("NotificacoesView_ArquivarNotificação", resourceCulture);
             }
         }
         
@@ -2320,16 +2320,16 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nova unidade epidemiol�gica.
+        ///   Looks up a localized string similar to Nova unidade epidemiológica.
         /// </summary>
-        public static string NovaUnidadeEpidemiol�gica {
+        public static string NovaUnidadeEpidemiológica {
             get {
-                return ResourceManager.GetString("NovaUnidadeEpidemiol�gica", resourceCulture);
+                return ResourceManager.GetString("NovaUnidadeEpidemiológica", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Existe uma nova vers�o do aplicativo dispon�vel! � muito importante que voc� fa�a essa atualiza��o agora..
+        ///   Looks up a localized string similar to Existe uma nova versão do aplicativo disponível! É muito importante que você faça essa atualização agora..
         /// </summary>
         public static string NovaVersaoApp {
             get {
@@ -2347,11 +2347,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Novo propriet�rio.
+        ///   Looks up a localized string similar to Novo proprietário.
         /// </summary>
-        public static string NovoPropriet�rio {
+        public static string NovoProprietário {
             get {
-                return ResourceManager.GetString("NovoPropriet�rio", resourceCulture);
+                return ResourceManager.GetString("NovoProprietário", resourceCulture);
             }
         }
         
@@ -2374,7 +2374,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Em uma escala de Zero a 10, qual � a probabilidade de voc� recomendar a ferramenta ISI Sys (ISI App e Plataforma da Web) para um colega da �rea?.
+        ///   Looks up a localized string similar to Em uma escala de Zero a 10, qual é a probabilidade de você recomendar a ferramenta ISI Sys (ISI App e Plataforma da Web) para um colega da área?.
         /// </summary>
         public static string NPSTexto {
             get {
@@ -2383,7 +2383,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to N�mero.
+        ///   Looks up a localized string similar to Número.
         /// </summary>
         public static string Numero {
             get {
@@ -2392,7 +2392,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to N� do dispositivo.
+        ///   Looks up a localized string similar to Nº do dispositivo.
         /// </summary>
         public static string NumeroDoDispositivo {
             get {
@@ -2401,11 +2401,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to N�mero do Lote.
+        ///   Looks up a localized string similar to Número do Lote.
         /// </summary>
-        public static string N�meroDoLote {
+        public static string NúmeroDoLote {
             get {
-                return ResourceManager.GetString("N�meroDoLote", resourceCulture);
+                return ResourceManager.GetString("NúmeroDoLote", resourceCulture);
             }
         }
         
@@ -2428,20 +2428,20 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nutri��o.
+        ///   Looks up a localized string similar to Nutrição.
         /// </summary>
-        public static string Nutri��o {
+        public static string Nutrição {
             get {
-                return ResourceManager.GetString("Nutri��o", resourceCulture);
+                return ResourceManager.GetString("Nutrição", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Observa��es.
+        ///   Looks up a localized string similar to Observações.
         /// </summary>
-        public static string Observa��es {
+        public static string Observações {
             get {
-                return ResourceManager.GetString("Observa��es", resourceCulture);
+                return ResourceManager.GetString("Observações", resourceCulture);
             }
         }
         
@@ -2464,16 +2464,16 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to O lote est� fechado.
+        ///   Looks up a localized string similar to O lote está fechado.
         /// </summary>
-        public static string OLoteEst�Fechado {
+        public static string OLoteEstáFechado {
             get {
-                return ResourceManager.GetString("OLoteEst�Fechado", resourceCulture);
+                return ResourceManager.GetString("OLoteEstáFechado", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Op��es de monitoramento.
+        ///   Looks up a localized string similar to Opções de monitoramento.
         /// </summary>
         public static string OpcoesDeMonitoramento {
             get {
@@ -2482,7 +2482,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Opera��o Cancelada.
+        ///   Looks up a localized string similar to Operação Cancelada.
         /// </summary>
         public static string OperacaoCancelada {
             get {
@@ -2491,20 +2491,20 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Opera��o Cancelada.
+        ///   Looks up a localized string similar to Operação Cancelada.
         /// </summary>
-        public static string Opera��oCancelada {
+        public static string OperaçãoCancelada {
             get {
-                return ResourceManager.GetString("Opera��oCancelada", resourceCulture);
+                return ResourceManager.GetString("OperaçãoCancelada", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to O que voc� deseja configurar?.
+        ///   Looks up a localized string similar to O que você deseja configurar?.
         /// </summary>
-        public static string OQueVoc�DesejaConfigurar {
+        public static string OQueVocêDesejaConfigurar {
             get {
-                return ResourceManager.GetString("OQueVoc�DesejaConfigurar", resourceCulture);
+                return ResourceManager.GetString("OQueVocêDesejaConfigurar", resourceCulture);
             }
         }
         
@@ -2518,7 +2518,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voc� tem que dar Override do GetViewDefaultComponentsOnAppearing para inicializar os componentes.
+        ///   Looks up a localized string similar to Você tem que dar Override do GetViewDefaultComponentsOnAppearing para inicializar os componentes.
         /// </summary>
         public static string OverrideGetViewDefaultComponents {
             get {
@@ -2563,7 +2563,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pesquisa de Satisfa��o.
+        ///   Looks up a localized string similar to Pesquisa de Satisfação.
         /// </summary>
         public static string PesquisaDeSatisfacao {
             get {
@@ -2599,16 +2599,16 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pol�tica de Privacidade.
+        ///   Looks up a localized string similar to Política de Privacidade.
         /// </summary>
-        public static string Pol�ticaDePrivacidade {
+        public static string PolíticaDePrivacidade {
             get {
-                return ResourceManager.GetString("Pol�ticaDePrivacidade", resourceCulture);
+                return ResourceManager.GetString("PolíticaDePrivacidade", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voc� precisa aceitar nossa pol�tica de privacidade para utilizar esse app!.
+        ///   Looks up a localized string similar to Você precisa aceitar nossa política de privacidade para utilizar esse app!.
         /// </summary>
         public static string politicaPrivacidadeAceitar {
             get {
@@ -2635,11 +2635,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Por favor preencher campos obrigat�rios!.
+        ///   Looks up a localized string similar to Por favor preencher campos obrigatórios!.
         /// </summary>
-        public static string PorFavorPreencherCamposObrigat�rios {
+        public static string PorFavorPreencherCamposObrigatórios {
             get {
-                return ResourceManager.GetString("PorFavorPreencherCamposObrigat�rios", resourceCulture);
+                return ResourceManager.GetString("PorFavorPreencherCamposObrigatórios", resourceCulture);
             }
         }
         
@@ -2662,11 +2662,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Preencha os formul�rios abaixo.
+        ///   Looks up a localized string similar to Preencha os formulários abaixo.
         /// </summary>
-        public static string PreenchaOsFormul�riosAbaixo {
+        public static string PreenchaOsFormuláriosAbaixo {
             get {
-                return ResourceManager.GetString("PreenchaOsFormul�riosAbaixo", resourceCulture);
+                return ResourceManager.GetString("PreenchaOsFormuláriosAbaixo", resourceCulture);
             }
         }
         
@@ -2689,7 +2689,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Processando Avalia��es Galp�o Baixadas da Nuvem.
+        ///   Looks up a localized string similar to Processando Avaliações Galpão Baixadas da Nuvem.
         /// </summary>
         public static string ProcessandoAvaliacaoesGalpaoNuvem {
             get {
@@ -2698,11 +2698,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Processando Formul�rios Baixados da Nuvem.
+        ///   Looks up a localized string similar to Processando Formulários Baixados da Nuvem.
         /// </summary>
-        public static string ProcessandoFormul�riosBaixadosDaNuvem {
+        public static string ProcessandoFormuláriosBaixadosDaNuvem {
             get {
-                return ResourceManager.GetString("ProcessandoFormul�riosBaixadosDaNuvem", resourceCulture);
+                return ResourceManager.GetString("ProcessandoFormuláriosBaixadosDaNuvem", resourceCulture);
             }
         }
         
@@ -2761,38 +2761,38 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Propriet�rio.
+        ///   Looks up a localized string similar to Proprietário.
         /// </summary>
-        public static string Propriet�rio {
+        public static string Proprietário {
             get {
-                return ResourceManager.GetString("Propriet�rio", resourceCulture);
+                return ResourceManager.GetString("Proprietário", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Propriet�rio adicionado com sucesso.
+        ///   Looks up a localized string similar to Proprietário adicionado com sucesso.
         /// </summary>
-        public static string Propriet�rioAdicionadoComSucesso {
+        public static string ProprietárioAdicionadoComSucesso {
             get {
-                return ResourceManager.GetString("Propriet�rioAdicionadoComSucesso", resourceCulture);
+                return ResourceManager.GetString("ProprietárioAdicionadoComSucesso", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Propriet�rio alterado com sucesso.
+        ///   Looks up a localized string similar to Proprietário alterado com sucesso.
         /// </summary>
-        public static string Propriet�rioAlteradoComSucesso {
+        public static string ProprietárioAlteradoComSucesso {
             get {
-                return ResourceManager.GetString("Propriet�rioAlteradoComSucesso", resourceCulture);
+                return ResourceManager.GetString("ProprietárioAlteradoComSucesso", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Propriet�rios.
+        ///   Looks up a localized string similar to Proprietários.
         /// </summary>
-        public static string Propriet�rios {
+        public static string Proprietários {
             get {
-                return ResourceManager.GetString("Propriet�rios", resourceCulture);
+                return ResourceManager.GetString("Proprietários", resourceCulture);
             }
         }
         
@@ -2824,20 +2824,20 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to que a m�dia da empresa..
+        ///   Looks up a localized string similar to que a média da empresa..
         /// </summary>
-        public static string QueAM�diaDaEmpresa {
+        public static string QueAMédiaDaEmpresa {
             get {
-                return ResourceManager.GetString("QueAM�diaDaEmpresa", resourceCulture);
+                return ResourceManager.GetString("QueAMédiaDaEmpresa", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to que a m�dia global.
+        ///   Looks up a localized string similar to que a média global.
         /// </summary>
-        public static string QueAM�diaGlobal {
+        public static string QueAMédiaGlobal {
             get {
-                return ResourceManager.GetString("QueAM�diaGlobal", resourceCulture);
+                return ResourceManager.GetString("QueAMédiaGlobal", resourceCulture);
             }
         }
         
@@ -2896,7 +2896,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} registros n�o preenchidos foram descartados..
+        ///   Looks up a localized string similar to {0} registros não preenchidos foram descartados..
         /// </summary>
         public static string RegistrosNaoPreenchidosDescartados {
             get {
@@ -2905,11 +2905,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Registros neste formul�rio.
+        ///   Looks up a localized string similar to Registros neste formulário.
         /// </summary>
-        public static string RegistrosNesteFormul�rio {
+        public static string RegistrosNesteFormulário {
             get {
-                return ResourceManager.GetString("RegistrosNesteFormul�rio", resourceCulture);
+                return ResourceManager.GetString("RegistrosNesteFormulário", resourceCulture);
             }
         }
         
@@ -2932,16 +2932,16 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Resumo das an�lises do lote:.
+        ///   Looks up a localized string similar to Resumo das análises do lote:.
         /// </summary>
-        public static string ResumoDasAn�lisesDoLote {
+        public static string ResumoDasAnálisesDoLote {
             get {
-                return ResourceManager.GetString("ResumoDasAn�lisesDoLote", resourceCulture);
+                return ResourceManager.GetString("ResumoDasAnálisesDoLote", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voc� tem um preenchimento de formul�rio em andamento. Deseja retomar o preenchimento dele?.
+        ///   Looks up a localized string similar to Você tem um preenchimento de formulário em andamento. Deseja retomar o preenchimento dele?.
         /// </summary>
         public static string RetomarPreenchimentoFormulario {
             get {
@@ -2968,7 +2968,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tem certeza que deseja sair sem salvar este formul�rio?.
+        ///   Looks up a localized string similar to Tem certeza que deseja sair sem salvar este formulário?.
         /// </summary>
         public static string sairformulario {
             get {
@@ -2995,38 +2995,38 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sa�de :.
+        ///   Looks up a localized string similar to Saúde :.
         /// </summary>
-        public static string Sa�de {
+        public static string Saúde {
             get {
-                return ResourceManager.GetString("Sa�de", resourceCulture);
+                return ResourceManager.GetString("Saúde", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Baixa.
         /// </summary>
-        public static string Sa�deBaixa {
+        public static string SaúdeBaixa {
             get {
-                return ResourceManager.GetString("Sa�deBaixa", resourceCulture);
+                return ResourceManager.GetString("SaúdeBaixa", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Mediana.
         /// </summary>
-        public static string SaudeM�dia {
+        public static string SaudeMédia {
             get {
-                return ResourceManager.GetString("SaudeM�dia", resourceCulture);
+                return ResourceManager.GetString("SaudeMédia", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ave n�o saud�vel.
+        ///   Looks up a localized string similar to Ave não saudável.
         /// </summary>
-        public static string SaveAndReturn_AveN�oSaud�vel {
+        public static string SaveAndReturn_AveNãoSaudável {
             get {
-                return ResourceManager.GetString("SaveAndReturn_AveN�oSaud�vel", resourceCulture);
+                return ResourceManager.GetString("SaveAndReturn_AveNãoSaudável", resourceCulture);
             }
         }
         
@@ -3049,20 +3049,20 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Score m�dio do lote:.
+        ///   Looks up a localized string similar to Score médio do lote:.
         /// </summary>
-        public static string ScoreM�dioDoLote {
+        public static string ScoreMédioDoLote {
             get {
-                return ResourceManager.GetString("ScoreM�dioDoLote", resourceCulture);
+                return ResourceManager.GetString("ScoreMédioDoLote", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Score M�dio Total.
+        ///   Looks up a localized string similar to Score Médio Total.
         /// </summary>
-        public static string ScoreM�dioTotal {
+        public static string ScoreMédioTotal {
             get {
-                return ResourceManager.GetString("ScoreM�dioTotal", resourceCulture);
+                return ResourceManager.GetString("ScoreMédioTotal", resourceCulture);
             }
         }
         
@@ -3103,7 +3103,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Selecione um par�metro para avalia��o.
+        ///   Looks up a localized string similar to Selecione um parâmetro para avaliação.
         /// </summary>
         public static string SelecioneParametroAvaliacao {
             get {
@@ -3130,11 +3130,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Selecione um par�metro.
+        ///   Looks up a localized string similar to Selecione um parâmetro.
         /// </summary>
-        public static string SelecioneUmPar�metro {
+        public static string SelecioneUmParâmetro {
             get {
-                return ResourceManager.GetString("SelecioneUmPar�metro", resourceCulture);
+                return ResourceManager.GetString("SelecioneUmParâmetro", resourceCulture);
             }
         }
         
@@ -3157,20 +3157,20 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sess�o.
+        ///   Looks up a localized string similar to Sessão.
         /// </summary>
-        public static string Sess�o {
+        public static string Sessão {
             get {
-                return ResourceManager.GetString("Sess�o", resourceCulture);
+                return ResourceManager.GetString("Sessão", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Seus dados ainda n�o foram salvos.
+        ///   Looks up a localized string similar to Seus dados ainda não foram salvos.
         /// </summary>
-        public static string SeusDadosAindaN�oForamSalvos {
+        public static string SeusDadosAindaNãoForamSalvos {
             get {
-                return ResourceManager.GetString("SeusDadosAindaN�oForamSalvos", resourceCulture);
+                return ResourceManager.GetString("SeusDadosAindaNãoForamSalvos", resourceCulture);
             }
         }
         
@@ -3193,29 +3193,29 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sincroniza��o.
+        ///   Looks up a localized string similar to Sincronização.
         /// </summary>
-        public static string Sincroniza��o {
+        public static string Sincronização {
             get {
-                return ResourceManager.GetString("Sincroniza��o", resourceCulture);
+                return ResourceManager.GetString("Sincronização", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sincroniza��o Completada!.
+        ///   Looks up a localized string similar to Sincronização Completada!.
         /// </summary>
-        public static string Sincroniza��oCompletada {
+        public static string SincronizaçãoCompletada {
             get {
-                return ResourceManager.GetString("Sincroniza��oCompletada", resourceCulture);
+                return ResourceManager.GetString("SincronizaçãoCompletada", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sincroniza��o pendente.
+        ///   Looks up a localized string similar to Sincronização pendente.
         /// </summary>
-        public static string Sincroniza��oPendente {
+        public static string SincronizaçãoPendente {
             get {
-                return ResourceManager.GetString("Sincroniza��oPendente", resourceCulture);
+                return ResourceManager.GetString("SincronizaçãoPendente", resourceCulture);
             }
         }
         
@@ -3238,7 +3238,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sincronize aqui os dados da sua conta com a nuvem do ISI App. Abaixo est�o as sincroniza��o pendentes:.
+        ///   Looks up a localized string similar to Sincronize aqui os dados da sua conta com a nuvem do ISI App. Abaixo estão as sincronização pendentes:.
         /// </summary>
         public static string SincronizarDadosExplicacao {
             get {
@@ -3265,7 +3265,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Veja aqui todas suas notifica��es.
+        ///   Looks up a localized string similar to Veja aqui todas suas notificações.
         /// </summary>
         public static string SuasNotificacoes {
             get {
@@ -3310,11 +3310,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to T�tulo.
+        ///   Looks up a localized string similar to Título.
         /// </summary>
-        public static string T�tulo {
+        public static string Título {
             get {
-                return ResourceManager.GetString("T�tulo", resourceCulture);
+                return ResourceManager.GetString("Título", resourceCulture);
             }
         }
         
@@ -3337,25 +3337,25 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tratamentos via �gua no lote:.
+        ///   Looks up a localized string similar to Tratamentos via água no lote:.
         /// </summary>
-        public static string TratamentosVia�guaNoLote {
+        public static string TratamentosViaÁguaNoLote {
             get {
-                return ResourceManager.GetString("TratamentosVia�guaNoLote", resourceCulture);
+                return ResourceManager.GetString("TratamentosViaÁguaNoLote", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tratamento via �gua.
+        ///   Looks up a localized string similar to Tratamento via água.
         /// </summary>
-        public static string TratamentoVia�gua {
+        public static string TratamentoViaÁgua {
             get {
-                return ResourceManager.GetString("TratamentoVia�gua", resourceCulture);
+                return ResourceManager.GetString("TratamentoViaÁgua", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to O registro {0} n�o foi preenchido e foi descartado..
+        ///   Looks up a localized string similar to O registro {0} não foi preenchido e foi descartado..
         /// </summary>
         public static string UltimaNaoFoiPreenchido {
             get {
@@ -3364,11 +3364,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to �ltima Sincroniza��o.
+        ///   Looks up a localized string similar to Última Sincronização.
         /// </summary>
-        public static string �ltimaSincroniza��o {
+        public static string ÚltimaSincronização {
             get {
-                return ResourceManager.GetString("�ltimaSincroniza��o", resourceCulture);
+                return ResourceManager.GetString("ÚltimaSincronização", resourceCulture);
             }
         }
         
@@ -3400,43 +3400,43 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unidade Epidemiol�gica.
+        ///   Looks up a localized string similar to Unidade Epidemiológica.
         /// </summary>
-        public static string UnidadeEpidemiol�gica {
+        public static string UnidadeEpidemiológica {
             get {
-                return ResourceManager.GetString("UnidadeEpidemiol�gica", resourceCulture);
+                return ResourceManager.GetString("UnidadeEpidemiológica", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unidade Epidemiol�gica adicionada com sucesso.
+        ///   Looks up a localized string similar to Unidade Epidemiológica adicionada com sucesso.
         /// </summary>
-        public static string UnidadeEpidemiol�gicaAdicionadaComSucesso {
+        public static string UnidadeEpidemiológicaAdicionadaComSucesso {
             get {
-                return ResourceManager.GetString("UnidadeEpidemiol�gicaAdicionadaComSucesso", resourceCulture);
+                return ResourceManager.GetString("UnidadeEpidemiológicaAdicionadaComSucesso", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unidade Epidemiol�gica editada com sucesso.
+        ///   Looks up a localized string similar to Unidade Epidemiológica editada com sucesso.
         /// </summary>
-        public static string UnidadeEpidemiol�gicaEditadaComSucesso {
+        public static string UnidadeEpidemiológicaEditadaComSucesso {
             get {
-                return ResourceManager.GetString("UnidadeEpidemiol�gicaEditadaComSucesso", resourceCulture);
+                return ResourceManager.GetString("UnidadeEpidemiológicaEditadaComSucesso", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unidades Epidemiol�gicas.
+        ///   Looks up a localized string similar to Unidades Epidemiológicas.
         /// </summary>
-        public static string UnidadesEpidemiol�gicas {
+        public static string UnidadesEpidemiológicas {
             get {
-                return ResourceManager.GetString("UnidadesEpidemiol�gicas", resourceCulture);
+                return ResourceManager.GetString("UnidadesEpidemiológicas", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Este usu�rio tem uma sess�o ativa no dispositivo {0} desde {1}. Se voc� continuar, todas as altera��es ainda n�o sincronizadas naquele dispositivo ser�o perdidas! Deseja continuar mesmo assim?.
+        ///   Looks up a localized string similar to Este usuário tem uma sessão ativa no dispositivo {0} desde {1}. Se você continuar, todas as alterações ainda não sincronizadas naquele dispositivo serão perdidas! Deseja continuar mesmo assim?.
         /// </summary>
         public static string UsuarioJaLogado {
             get {
@@ -3481,7 +3481,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Veja abaixo os dados da conta ISI App que est� logada neste dispositivo.
+        ///   Looks up a localized string similar to Veja abaixo os dados da conta ISI App que está logada neste dispositivo.
         /// </summary>
         public static string VejaDadosConta {
             get {
@@ -3508,11 +3508,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ler Pol�tica de Privacidade.
+        ///   Looks up a localized string similar to Ler Política de Privacidade.
         /// </summary>
-        public static string VerPol�ticaDePrivacidade {
+        public static string VerPolíticaDePrivacidade {
             get {
-                return ResourceManager.GetString("VerPol�ticaDePrivacidade", resourceCulture);
+                return ResourceManager.GetString("VerPolíticaDePrivacidade", resourceCulture);
             }
         }
         
@@ -3526,11 +3526,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Vers�o.
+        ///   Looks up a localized string similar to Versão.
         /// </summary>
-        public static string Vers�o {
+        public static string Versão {
             get {
-                return ResourceManager.GetString("Vers�o", resourceCulture);
+                return ResourceManager.GetString("Versão", resourceCulture);
             }
         }
         
@@ -3553,11 +3553,11 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Zoot�cnico.
+        ///   Looks up a localized string similar to Zootécnico.
         /// </summary>
-        public static string Zoot�cnico {
+        public static string Zootécnico {
             get {
-                return ResourceManager.GetString("Zoot�cnico", resourceCulture);
+                return ResourceManager.GetString("Zootécnico", resourceCulture);
             }
         }
         
@@ -3571,7 +3571,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Avalia��es ordenadas por idade (dias).
+        ///   Looks up a localized string similar to Avaliações ordenadas por idade (dias).
         /// </summary>
         public static string Zootecnico_AbaPorIdade_Dica {
             get {
@@ -3589,7 +3589,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Preencha os formul�rios abaixo.
+        ///   Looks up a localized string similar to Preencha os formulários abaixo.
         /// </summary>
         public static string Zootecnico_Header_Subtitulo {
             get {

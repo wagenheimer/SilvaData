@@ -3,18 +3,18 @@ using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using SilvaData.FontAwesome;
-using SilvaData.Models;
-using SilvaData.Pages.PopUps;
-using SilvaData.Services;
+using SilvaData_MAUI.FontAwesome;
+using SilvaData_MAUI.Models;
+using SilvaData_MAUI.Pages.PopUps;
+using SilvaData_MAUI.Services;
 using ISIInstitute.Views.LoteViews;
 using Newtonsoft.Json;
 using Microsoft.Maui.Storage; // Preferences
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq; // LINQ para ordena��o
+using System.Linq; // LINQ para ordenação
 
-namespace SilvaData.ViewModels
+namespace SilvaData_MAUI.ViewModels
 {
     public class AtualizarGraficosMessage
     {
@@ -24,7 +24,7 @@ namespace SilvaData.ViewModels
 
     /// <summary>
     /// ViewModel principal da Dashboard (abas Meus Resultados/Empresa/Global).
-    /// Migrado de HomeViewModel incorporando l�gica de compara��o, mensagens e carregamento de dados.
+    /// Migrado de HomeViewModel incorporando lógica de comparação, mensagens e carregamento de dados.
     /// </summary>
     public partial class DashboardViewModel : ViewModelBase, IDisposable
     {
@@ -34,25 +34,25 @@ namespace SilvaData.ViewModels
         private DateTime _lastFullReload = DateTime.MinValue;
         private static readonly TimeSpan MinReloadInterval = TimeSpan.FromSeconds(3);
 
-        // Sub-ViewModels dos gr�ficos (inje��o)
+        // Sub-ViewModels dos gráficos (injeção)
         [ObservableProperty] private GraficoResultadosViewModel meusResultadosViewModel;
         [ObservableProperty] private GraficoResultadosViewModel empresaViewModel;
         [ObservableProperty] private GraficoResultadosViewModel globalViewModel;
 
-        // Dados do Dashboard (m�dias cacheadas)
+        // Dados do Dashboard (médias cacheadas)
         [ObservableProperty] private DashboardMedia dadosDashboard = new();
 
         // Lotes em Alerta
         [ObservableProperty] private ObservableCollection<Lote> lotesEmAlerta = new();
         private DateTime _lastAlertRefresh = DateTime.MinValue;
-        private bool _updatingAlerts; // evita reentr�ncia
+        private bool _updatingAlerts; // evita reentrância
 
         // Score total da aba atual
         [ObservableProperty] private double iSIScoreTotal;
         public string ISIScoreText => ISIMacro.StatusText(ISIScoreTotal);
         public Color ISIScoreTextColor => ISIMacro.StatusColor(ISIScoreTotal);
 
-        // Compara��o
+        // Comparação
         [ObservableProperty] private Color mediaBackground = Colors.Transparent;
         [ObservableProperty] private Color mediaTextColor = Colors.Gray;
         [ObservableProperty] private string mediaIcon = string.Empty;
@@ -104,13 +104,13 @@ namespace SilvaData.ViewModels
             try
             {
                 IsBusy = true;
-                await AtualizaDadosGraficos(forceRefresh); // J� inclui CarregaLotesEmAlerta
-                Debug.WriteLine("[Dashboard] Inicializa��o conclu�da");
+                await AtualizaDadosGraficos(forceRefresh); // Já inclui CarregaLotesEmAlerta
+                Debug.WriteLine("[Dashboard] Inicialização concluída");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[Dashboard] Erro na inicializa��o: {ex.Message}");
-                // N�o crasha a app, s� loga
+                Debug.WriteLine($"[Dashboard] Erro na inicialização: {ex.Message}");
+                // Não crasha a app, só loga
             }
             finally
             {
@@ -119,7 +119,7 @@ namespace SilvaData.ViewModels
         }
 
         private async Task RefreshDashboard() => await AtualizaDadosGraficos(false);
-        private void OnGraficosAtualizados(Graficos g) { /* j� tratado */ }
+        private void OnGraficosAtualizados(Graficos g) { /* já tratado */ }
 
         private async Task OnShowDashboardAsync()
         {
@@ -129,7 +129,7 @@ namespace SilvaData.ViewModels
         }
 
         /// <summary>
-        /// Comando para atualizar manualmente os dados dos gr�ficos (Sync/Refresh externo).
+        /// Comando para atualizar manualmente os dados dos gráficos (Sync/Refresh externo).
         /// </summary>
         [RelayCommand]
         public async Task AtualizaDadosGraficos(bool showError = true)
@@ -178,7 +178,7 @@ namespace SilvaData.ViewModels
             finally { IsBusy = false; }
         }
 
-        // NOVO: for�a recarga completa (dados + lotes em alerta) ignorando popups de erro.
+        // NOVO: força recarga completa (dados + lotes em alerta) ignorando popups de erro.
         private async Task ForceReloadAsync()
         {
             try
@@ -198,7 +198,7 @@ namespace SilvaData.ViewModels
         {
             try
             {
-                if (_updatingAlerts) return; // prote��o reentrante
+                if (_updatingAlerts) return; // proteção reentrante
                 _updatingAlerts = true;
                 if ((DateTime.UtcNow - _lastAlertRefresh).TotalSeconds < 3) return;
                 _lastAlertRefresh = DateTime.UtcNow;
@@ -274,7 +274,7 @@ namespace SilvaData.ViewModels
                 MediaIcon = FontAwesomeIcons.CircleArrowDown;
                 TextoMedia = $"{DoubleToPercentageString(percentual)} {Traducao.Pior}";
             }
-            TextoMedia2 = comparaComEmpresa ? Traducao.QueAM�diaDaEmpresa : Traducao.QueAM�diaGlobal;
+            TextoMedia2 = comparaComEmpresa ? Traducao.QueAMédiaDaEmpresa : Traducao.QueAMédiaGlobal;
         }
 
         private void ResetMedia()
@@ -301,7 +301,7 @@ namespace SilvaData.ViewModels
             if (value == 2) IsGlobalTabLoaded = true;
         }
 
-        #region Comandos de navega��o e intera��o
+        #region Comandos de navegação e interação
 
         [RelayCommand]
         private async Task ShowUsuario(View button)
@@ -310,7 +310,7 @@ namespace SilvaData.ViewModels
         [RelayCommand] private void Empresa() => TabIndexSelecionado = 1;
         [RelayCommand] private void Global() => TabIndexSelecionado = 2;
 
-        // Abre p�gina de gr�ficos com tipo inicial
+        // Abre página de gráficos com tipo inicial
         [RelayCommand]
         private async Task AbrirGraficoAsync(DashboardTipoGrafico tipo)
         {

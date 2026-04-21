@@ -4,10 +4,10 @@ using CommunityToolkit.Mvvm.Messaging;
 
 using ISIInstitute.Views;
 
-using SilvaData.Pages.PopUps;
-using SilvaData.Utilities; 
+using SilvaData_MAUI.Pages.PopUps;
+using SilvaData_MAUI.Utilities; 
 
-namespace SilvaData.ViewModels
+namespace SilvaData_MAUI.ViewModels
 {
     public partial class ConfigViewModel : ObservableObject
     {
@@ -108,7 +108,7 @@ namespace SilvaData.ViewModels
 
         public async Task PerguntaLogOff()
         {
-            if (await PopUpYesNo.ShowAsync(Traducao.Aten��o, Traducao.ConfirmacaodeLogOff, Traducao.Sim, Traducao.Cancelar))
+            if (await PopUpYesNo.ShowAsync(Traducao.Atenção, Traducao.ConfirmacaodeLogOff, Traducao.Sim, Traducao.Cancelar))
             {
                 if (await ISIWebService.Instance.LogOut())
                 {

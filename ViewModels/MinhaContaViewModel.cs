@@ -2,9 +2,9 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 
-using SilvaData.Models;
-using SilvaData.Pages.PopUps;
-using SilvaData.Utilities;
+using SilvaData_MAUI.Models;
+using SilvaData_MAUI.Pages.PopUps;
+using SilvaData_MAUI.Utilities;
 
 using System;
 using System.ComponentModel;
@@ -13,11 +13,11 @@ using System.IO.Compression;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace SilvaData.ViewModels
+namespace SilvaData_MAUI.ViewModels
 {
     /// <summary>
-    /// ViewModel para a p�gina "Minha Conta".
-    /// MIGRADO: Usa CacheService ao inv�s de DadosStatic.
+    /// ViewModel para a página "Minha Conta".
+    /// MIGRADO: Usa CacheService ao invés de DadosStatic.
     /// </summary>
     public partial class MinhaContaViewModel : ViewModelBase
     {
@@ -30,7 +30,7 @@ namespace SilvaData.ViewModels
         [ObservableProperty]
         private bool _isDebug = false;
 
-        // Paths para download tempor�rio
+        // Paths para download temporário
         private static string PathZipTemp => Path.Combine(FileSystem.CacheDirectory, "TempDownload");
         private static string PathZipTempFileName => Path.Combine(PathZipTemp, "download.zip");
 
@@ -42,7 +42,7 @@ namespace SilvaData.ViewModels
             _webService = webService;
             _cacheService = cacheService;
 
-            // Carrega o usu�rio inicial
+            // Carrega o usuário inicial
             CarregarDadosUsuario();
 
 #if DEBUG
@@ -51,7 +51,7 @@ namespace SilvaData.ViewModels
         }
 
         /// <summary>
-        /// Ouve mudan�as na propriedade IsBusy da classe base.
+        /// Ouve mudanças na propriedade IsBusy da classe base.
         /// </summary>
         protected override void OnPropertyChanged(PropertyChangedEventArgs e)
         {
@@ -68,7 +68,7 @@ namespace SilvaData.ViewModels
         }
 
         /// <summary>
-        /// Comando para carregar ou atualizar os dados do usu�rio logado.
+        /// Comando para carregar ou atualizar os dados do usuário logado.
         /// </summary>
         [RelayCommand]
         public void CarregarDadosUsuario()
@@ -91,18 +91,18 @@ namespace SilvaData.ViewModels
                 Traducao.Deslogar,
                 Traducao.ConfirmacaodeLogOff,
                 Traducao.Sim,
-                Traducao.N�o))
+                Traducao.Não))
             {
-                return; // Usu�rio cancelou
+                return; // Usuário cancelou
             }
 
             IsBusy = true;
             await _webService.LogOut();
 
-            // MIGRADO: Limpa o cache ao inv�s de DadosStatic
+            // MIGRADO: Limpa o cache ao invés de DadosStatic
             _cacheService.ClearAllData();
 
-            // Limpa o cache de gr�ficos
+            // Limpa o cache de gráficos
             Graficos.ZeraDadosGraficos();
 
             IsBusy = false;
@@ -142,19 +142,19 @@ namespace SilvaData.ViewModels
         private async Task EnviarReset()
         {
             var result = await ISIWebService.Instance.SendData("", "reset");
-            await PopUpOK.ShowAsync("Debug", "M�todo Reset Enviado com Sucesso");
+            await PopUpOK.ShowAsync("Debug", "Método Reset Enviado com Sucesso");
         }
 
         /// <summary>
         /// (DEBUG) Baixa dados de um link externo (OneDrive, Google Drive, Dropbox, etc).
-        /// Solicita o link ao usu�rio, baixa o ZIP, extrai e atualiza credenciais.
+        /// Solicita o link ao usuário, baixa o ZIP, extrai e atualiza credenciais.
         /// </summary>
         [RelayCommand(CanExecute = nameof(CanExecuteCommands))]
         private async Task DownloadDataWeb()
         {
             try
             {
-                // Solicita o link ao usu�rio
+                // Solicita o link ao usuário
                 var link = await Application.Current!.Windows[0].Page!.DisplayPromptAsync(
                     "Download de Dados",
                     "Cole o link do OneDrive ou URL direta do ZIP:",
@@ -166,7 +166,7 @@ namespace SilvaData.ViewModels
 
                 if (string.IsNullOrWhiteSpace(link))
                 {
-                    Debug.WriteLine("[DownloadDataFromWeb] Usu�rio cancelou ou link vazio");
+                    Debug.WriteLine("[DownloadDataFromWeb] Usuário cancelou ou link vazio");
                     return;
                 }
 
@@ -174,11 +174,11 @@ namespace SilvaData.ViewModels
                 link = ConvertCloudLinkToDirectDownload(link.Trim());
                 Debug.WriteLine($"[DownloadDataFromWeb] Link convertido: {link}");
 
-                // Valida se � uma URL v�lida
+                // Valida se é uma URL válida
                 if (!Uri.TryCreate(link, UriKind.Absolute, out var uri) ||
                     (uri.Scheme != Uri.UriSchemeHttp && uri.Scheme != Uri.UriSchemeHttps))
                 {
-                    await PopUpOK.ShowAsync(Traducao.Erro, "Link inv�lido. Certifique-se de que � uma URL v�lida (http:// ou https://).");
+                    await PopUpOK.ShowAsync(Traducao.Erro, "Link inválido. Certifique-se de que é uma URL válida (http:// ou https://).");
                     return;
                 }
 
@@ -189,7 +189,7 @@ namespace SilvaData.ViewModels
 
                 try
                 {
-                    // Cria diret�rio tempor�rio se n�o existir
+                    // Cria diretório temporário se não existir
                     if (!Directory.Exists(PathZipTemp))
                         Directory.CreateDirectory(PathZipTemp);
 
@@ -199,7 +199,7 @@ namespace SilvaData.ViewModels
 
                     if (bytes == null || bytes.Length == 0)
                     {
-                        await PopUpOK.ShowAsync(Traducao.Erro, "Falha ao baixar o arquivo. Verifique se o link est� correto e acess�vel.");
+                        await PopUpOK.ShowAsync(Traducao.Erro, "Falha ao baixar o arquivo. Verifique se o link está correto e acessível.");
                         return;
                     }
 
@@ -217,16 +217,16 @@ namespace SilvaData.ViewModels
                     try
                     {
                         ZipFile.ExtractToDirectory(PathZipTempFileName, PathZipTemp, overwriteFiles: true);
-                        Debug.WriteLine("[DownloadDataFromWeb] ZIP extra�do com sucesso");
+                        Debug.WriteLine("[DownloadDataFromWeb] ZIP extraído com sucesso");
                     }
                     catch (InvalidDataException zipEx)
                     {
-                        Debug.WriteLine($"[DownloadDataFromWeb] ? Erro ZIP inv�lido: {zipEx.Message}");
+                        Debug.WriteLine($"[DownloadDataFromWeb] ❌ Erro ZIP inválido: {zipEx.Message}");
 
                         // Oferece compartilhar o arquivo para debug
                         var compartilhar = await PopUpYesNo.ShowAsync(
                             Traducao.Erro,
-                            $"O arquivo baixado n�o � um ZIP v�lido.\n\nTamanho: {bytes.Length:N0} bytes\n\nDeseja compartilhar o arquivo para verificar?",
+                            $"O arquivo baixado não é um ZIP válido.\n\nTamanho: {bytes.Length:N0} bytes\n\nDeseja compartilhar o arquivo para verificar?",
                             "Compartilhar",
                             "Fechar");
 
@@ -241,7 +241,7 @@ namespace SilvaData.ViewModels
                         return;
                     }
 
-                    // L� e aplica logininfo.txt
+                    // Lê e aplica logininfo.txt
                     var loginInfoPath = Path.Combine(PathZipTemp, "logininfo.txt");
                     if (File.Exists(loginInfoPath))
                     {
@@ -251,10 +251,10 @@ namespace SilvaData.ViewModels
                     }
                     else
                     {
-                        Debug.WriteLine("[DownloadDataFromWeb] ?? logininfo.txt n�o encontrado no ZIP");
+                        Debug.WriteLine("[DownloadDataFromWeb] ⚠️ logininfo.txt não encontrado no ZIP");
                     }
 
-                    // L� e aplica deviceid.txt
+                    // Lê e aplica deviceid.txt
                     var deviceIdPath = Path.Combine(PathZipTemp, "deviceid.txt");
                     if (File.Exists(deviceIdPath))
                     {
@@ -264,7 +264,7 @@ namespace SilvaData.ViewModels
                     }
                     else
                     {
-                        Debug.WriteLine("[DownloadDataFromWeb] ?? deviceid.txt n�o encontrado no ZIP");
+                        Debug.WriteLine("[DownloadDataFromWeb] ⚠️ deviceid.txt não encontrado no ZIP");
                     }
 
                     // (Opcional) Copia o banco de dados se existir
@@ -279,12 +279,12 @@ namespace SilvaData.ViewModels
                 }
                 catch (HttpRequestException httpEx)
                 {
-                    Debug.WriteLine($"[DownloadDataFromWeb] ? Erro HTTP: {httpEx.Message}");
+                    Debug.WriteLine($"[DownloadDataFromWeb] ❌ Erro HTTP: {httpEx.Message}");
                     await PopUpOK.ShowAsync(Traducao.Erro, $"Erro de rede ao baixar:\n{httpEx.Message}");
                 }
                 catch (IOException ioEx)
                 {
-                    Debug.WriteLine($"[DownloadDataFromWeb] ? Erro de I/O: {ioEx.Message}");
+                    Debug.WriteLine($"[DownloadDataFromWeb] ❌ Erro de I/O: {ioEx.Message}");
                     await PopUpOK.ShowAsync(Traducao.Erro, $"Erro ao manipular arquivos:\n{ioEx.Message}");
                 }
                 finally
@@ -295,7 +295,7 @@ namespace SilvaData.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[DownloadDataFromWeb] ? Erro inesperado: {ex}");
+                Debug.WriteLine($"[DownloadDataFromWeb] ❌ Erro inesperado: {ex}");
                 await PopUpOK.ShowAsync(Traducao.Erro, $"Erro inesperado:\n{ex.Message}");
             }
             finally
@@ -305,13 +305,13 @@ namespace SilvaData.ViewModels
         }
 
         /// <summary>
-        /// Converte links de compartilhamento de servi�os de nuvem para download direto.
+        /// Converte links de compartilhamento de serviços de nuvem para download direto.
         /// Suporta: OneDrive (1drv.ms, onedrive.live.com), SharePoint, Google Drive, Dropbox.
         /// </summary>
         private static string ConvertCloudLinkToDirectDownload(string url)
         {
             // Link curto do OneDrive (1drv.ms) - converte para download direto
-            // https://1drv.ms/u/s!ABC123 ? https://api.onedrive.com/v1.0/shares/u!{base64}/root/content
+            // https://1drv.ms/u/s!ABC123 → https://api.onedrive.com/v1.0/shares/u!{base64}/root/content
             if (url.Contains("1drv.ms"))
             {
                 var base64Value = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(url))
@@ -347,7 +347,7 @@ namespace SilvaData.ViewModels
             }
 
             // Google Drive
-            // https://drive.google.com/file/d/FILE_ID/view ? download direto
+            // https://drive.google.com/file/d/FILE_ID/view → download direto
             if (url.Contains("drive.google.com/file/d/"))
             {
                 var match = System.Text.RegularExpressions.Regex.Match(url, @"drive\.google\.com/file/d/([^/]+)");
@@ -364,7 +364,7 @@ namespace SilvaData.ViewModels
                 return url.Replace("dl=0", "dl=1").Replace("www.dropbox.com", "dl.dropboxusercontent.com");
             }
 
-            // Retorna sem modifica��o se n�o for reconhecido
+            // Retorna sem modificação se não for reconhecido
             return url;
         }
 
@@ -385,13 +385,13 @@ namespace SilvaData.ViewModels
                 using var httpClient = new HttpClient(handler) { Timeout = TimeSpan.FromMinutes(5) };
 
                 // User-Agent ajuda a evitar bloqueios
-                httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; SilvaData)");
+                httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; SilvaData-MAUI)");
 
                 var response = await httpClient.GetAsync(url);
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    Debug.WriteLine($"[DownloadFileAsync] ? Status: {response.StatusCode} - {response.ReasonPhrase}");
+                    Debug.WriteLine($"[DownloadFileAsync] ❌ Status: {response.StatusCode} - {response.ReasonPhrase}");
                     return null;
                 }
 
@@ -403,12 +403,12 @@ namespace SilvaData.ViewModels
             }
             catch (TaskCanceledException)
             {
-                Debug.WriteLine("[DownloadFileAsync] ? Timeout - download demorou demais");
+                Debug.WriteLine("[DownloadFileAsync] ❌ Timeout - download demorou demais");
                 return null;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[DownloadFileAsync] ? Exce��o: {ex.Message}");
+                Debug.WriteLine($"[DownloadFileAsync] ❌ Exceção: {ex.Message}");
                 throw;
             }
         }
