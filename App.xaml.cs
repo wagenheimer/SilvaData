@@ -1,5 +1,5 @@
-using SilvaData_MAUI.Pages.PopUps;
-using SilvaData_MAUI.Models;
+using SilvaData.Pages.PopUps;
+using SilvaData.Models;
 
 using Microsoft.Maui.Storage;
 using Sentry;
@@ -7,7 +7,7 @@ using Sentry;
 using Syncfusion.Licensing;
 using System.Diagnostics;
 
-namespace SilvaData_MAUI
+namespace SilvaData
 {
     public partial class App : Application
     {
@@ -15,7 +15,7 @@ namespace SilvaData_MAUI
         {
             // Inicializa o ServiceHelper o mais cedo possível,
             // antes que as views XAML comecem a resolver ViewModels.
-            SilvaData_MAUI.Infrastructure.ServiceHelper.Initialize(serviceProvider);
+            SilvaData.Infrastructure.ServiceHelper.Initialize(serviceProvider);
 
             RegisterGlobalExceptionHandlers();
 

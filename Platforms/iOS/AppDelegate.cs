@@ -1,7 +1,7 @@
 using Foundation;
 using UIKit;
 
-namespace SilvaData_MAUI
+namespace SilvaData
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

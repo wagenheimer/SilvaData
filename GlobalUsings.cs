@@ -22,5 +22,5 @@ global using SilvaData.ViewModels;
 global using SilvaData.Services;
 global using SilvaData.Utils;
 global using SilvaData.Infrastructure;
-global using Traducao = SilvaData_MAUI.Resources.Localization.Localization;
+global using Traducao = SilvaData.Resources.Localization.Localization;
 global using Microsoft.Maui.ApplicationModel.DataTransfer;

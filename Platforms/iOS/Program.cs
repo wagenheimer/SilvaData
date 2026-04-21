@@ -2,7 +2,7 @@ using Foundation;
 using ObjCRuntime;
 using UIKit;
 
-namespace SilvaData_MAUI
+namespace SilvaData
 {
     public class Program
     {
