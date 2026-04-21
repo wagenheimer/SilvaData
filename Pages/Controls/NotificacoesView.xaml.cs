@@ -1,9 +1,9 @@
 using CommunityToolkit.Mvvm.Input;
 // Custom Usings (Migrated)
-using SilvaData.Models;
-using SilvaData.Utils; // For ContentPageWithLocalization
-using SilvaData.Pages.PopUps; // For PopUpYesNo
-using SilvaData.Utilities; // For NavigationUtils
+using SilvaData_MAUI.Models;
+using SilvaData_MAUI.Utils; // For ContentPageWithLocalization
+using SilvaData_MAUI.Pages.PopUps; // For PopUpYesNo
+using SilvaData_MAUI.Utilities; // For NavigationUtils
 
 using System.Collections.ObjectModel;
 
@@ -70,7 +70,7 @@ namespace ISIInstitute.Views
         {
             if (notificacaoSelecionada is Notificacao notificacao)
             {
-                if (await PopUpYesNo.ShowAsync(Traducao.NotificacoesView_ArquivarNotifica��o, Traducao.ArquivarNotificacaoDesc, Traducao.Sim, Traducao.Nao))
+                if (await PopUpYesNo.ShowAsync(Traducao.NotificacoesView_ArquivarNotificação, Traducao.ArquivarNotificacaoDesc, Traducao.Sim, Traducao.Nao))
                 {
                     var busy = this.FindByName<LoadingView>("busyindicator");
                     if (busy != null) busy.IsVisible = true;

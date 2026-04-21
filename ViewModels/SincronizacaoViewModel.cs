@@ -2,16 +2,16 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 
-using SilvaData.Models;
-using SilvaData.Pages.PopUps;
-using SilvaData.Services;
-using SilvaData.Utilities;
+using SilvaData_MAUI.Models;
+using SilvaData_MAUI.Pages.PopUps;
+using SilvaData_MAUI.Services;
+using SilvaData_MAUI.Utilities;
 
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading;
 
-namespace SilvaData.ViewModels
+namespace SilvaData_MAUI.ViewModels
 {
     public partial class SincronizacaoViewModel : ViewModelBase
     {
@@ -57,8 +57,8 @@ namespace SilvaData.ViewModels
         [ObservableProperty]
         private bool mostrarLogs;
 
-        // Timer pr�prio para o cron�metro de tempo decorrido � independente do CancellationToken
-        // da sincroniza��o para que continue vis�vel mesmo durante popups de erro/retry.
+        // Timer próprio para o cronômetro de tempo decorrido — independente do CancellationToken
+        // da sincronização para que continue visível mesmo durante popups de erro/retry.
         private CancellationTokenSource? _timerCts;
 
         public SincronizacaoViewModel(SyncService syncService, CacheService cacheService)
@@ -88,7 +88,7 @@ namespace SilvaData.ViewModels
                             ? $"{elapsed.Minutes:00}m {elapsed.Seconds:00}s"
                             : $"{elapsed.Seconds:00}s";
 
-                        // Atualiza apenas se necess�rio (evita marshaling desnecess�rio)
+                        // Atualiza apenas se necessário (evita marshaling desnecessário)
                         if (tempo != TempoDecorrido)
                         {
                             MainThread.BeginInvokeOnMainThread(() => TempoDecorrido = tempo);
@@ -110,7 +110,7 @@ namespace SilvaData.ViewModels
         [RelayCommand(CanExecute = nameof(CanExecuteSync))]
         public async Task IniciaSincronizacao()
         {
-            // ? Inicia antes de tudo
+            // ✅ Inicia antes de tudo
             StartTimer();
 
             Cancelado = false;
@@ -163,7 +163,7 @@ namespace SilvaData.ViewModels
                 {
                     if (Cancelado)
                     {
-                        await PopUpOK.ShowAsync(Traducao.Atencao, Traducao.Opera��oCancelada);
+                        await PopUpOK.ShowAsync(Traducao.Atencao, Traducao.OperaçãoCancelada);
                         repeat = false;
                         break;
                     }
@@ -171,9 +171,9 @@ namespace SilvaData.ViewModels
                     Debug.WriteLine($"[Sync] Erro: {e.Message}");
                     bool querTentarNovamente = await PopUpYesNo.ShowAsync(
                         Traducao.Erro,
-                        $"{Traducao.ASincroniza��oFalhouComAMensagem}\n\n'{e.Message}'\n\n{Traducao.DesejaTentarNovamente}",
+                        $"{Traducao.ASincronizaçãoFalhouComAMensagem}\n\n'{e.Message}'\n\n{Traducao.DesejaTentarNovamente}",
                         Traducao.Sim,
-                        Traducao.N�o);
+                        Traducao.Não);
 
                     if (querTentarNovamente)
                     {
@@ -183,7 +183,7 @@ namespace SilvaData.ViewModels
                             bool continueChecking = true;
                             while (continueChecking && !temInternet)
                             {
-                                if (!await PopUpYesNo.ShowAsync(Traducao.SemInternet, Traducao.ConectadoAInternet, Traducao.Sim, Traducao.N�o))
+                                if (!await PopUpYesNo.ShowAsync(Traducao.SemInternet, Traducao.ConectadoAInternet, Traducao.Sim, Traducao.Não))
                                     continueChecking = false;
                                 await Task.Delay(2000);
                                 temInternet = Connectivity.NetworkAccess == NetworkAccess.Internet;
@@ -198,7 +198,7 @@ namespace SilvaData.ViewModels
                 }
             }
 
-            // ? Garante que o timer � parado SEMPRE no fim
+            // ✅ Garante que o timer é parado SEMPRE no fim
             StopTimer();
 
             IsBusy = false;
@@ -207,10 +207,10 @@ namespace SilvaData.ViewModels
 
             if (!Cancelado)
             {
-                // Mostra spinner de "finalizando" enquanto o trabalho p�s-sync roda,
-                // para que o popup de sucesso apare�a s� quando tudo estiver pronto
-                // e o OK feche a tela sem delay percept�vel.
-                EtapaAtual = "Sincroniza��o conclu�da!";
+                // Mostra spinner de "finalizando" enquanto o trabalho pós-sync roda,
+                // para que o popup de sucesso apareça só quando tudo estiver pronto
+                // e o OK feche a tela sem delay perceptível.
+                EtapaAtual = "Sincronização concluída!";
                 SubTexto = "Atualizando dados locais, aguarde...";
                 IndicadorVisivel = true;
 
