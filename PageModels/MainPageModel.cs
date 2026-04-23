@@ -68,6 +68,7 @@ namespace SilvaData.PageModels
             WeakReferenceMessenger.Default.Register<ShowDashboardMessage>(this, (r, m) => ShowMercados());
             WeakReferenceMessenger.Default.Register<ShowSyncMessage>(this, (r, m) => ShowSync());
             WeakReferenceMessenger.Default.Register<ShowSuporteMessage>(this, (r, m) => ShowConta());
+            WeakReferenceMessenger.Default.Register<LogoutSuccessMessage>(this, (r, m) => HandleLogout());
 
             // Recebe mudanças de total de pendências (badge)
             WeakReferenceMessenger.Default.Register<SyncPendentesTotalChangedMessage>(this, (r, m) =>
@@ -86,6 +87,13 @@ namespace SilvaData.PageModels
         public void ShowLotes() => SelectedIndex = 2;
         public void ShowSync() => SelectedIndex = 3;
         public void ShowConta() => SelectedIndex = 4;
+
+        private async void HandleLogout()
+        {
+            _jaInicializou = false; // Reset state to allow re-initialization
+            await Task.Delay(100);
+            await NavigationUtils.ShowViewAsModalAsync<Login>();
+        }
 
         #endregion
 
