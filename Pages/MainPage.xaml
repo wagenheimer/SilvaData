@@ -71,10 +71,16 @@
 
             <sf:SfTabItem Style="{StaticResource MercadosTabStyle}">
                 <sf:SfTabItem.HeaderContent>
-                    <Grid HeightRequest="28" WidthRequest="28">
+                    <Grid
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        HeightRequest="28"
+                        WidthRequest="28">
                         <!-- Unselected Icon -->
                         <Image
                             Aspect="AspectFit"
+                            HeightRequest="24"
+                            WidthRequest="24"
                             Source="iconmercado.svg">
                             <Image.Behaviors>
                                 <toolkit:IconTintColorBehavior TintColor="{StaticResource Gray300}" />
@@ -91,6 +97,8 @@
                         <!-- Selected Icon -->
                         <Image
                             Aspect="AspectFit"
+                            HeightRequest="24"
+                            WidthRequest="24"
                             IsVisible="False"
                             Source="iconmercado.svg">
                             <Image.Behaviors>
@@ -112,9 +120,15 @@
 
             <sf:SfTabItem Style="{StaticResource GalpoesTabStyle}">
                 <sf:SfTabItem.HeaderContent>
-                    <Grid HeightRequest="28" WidthRequest="28">
+                    <Grid
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        HeightRequest="28"
+                        WidthRequest="28">
                         <Image
                             Aspect="AspectFit"
+                            HeightRequest="24"
+                            WidthRequest="24"
                             Source="icongalpao.svg">
                             <Image.Behaviors>
                                 <toolkit:IconTintColorBehavior TintColor="{StaticResource Gray300}" />
@@ -130,6 +144,8 @@
                         </Image>
                         <Image
                             Aspect="AspectFit"
+                            HeightRequest="24"
+                            WidthRequest="24"
                             IsVisible="False"
                             Source="icongalpao.svg">
                             <Image.Behaviors>
@@ -151,9 +167,15 @@
 
             <sf:SfTabItem Style="{StaticResource LotesTabStyle}">
                 <sf:SfTabItem.HeaderContent>
-                    <Grid HeightRequest="28" WidthRequest="28">
+                    <Grid
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        HeightRequest="28"
+                        WidthRequest="28">
                         <Image
                             Aspect="AspectFit"
+                            HeightRequest="24"
+                            WidthRequest="24"
                             Source="iconlotes.svg">
                             <Image.Behaviors>
                                 <toolkit:IconTintColorBehavior TintColor="{StaticResource Gray300}" />
@@ -169,6 +191,8 @@
                         </Image>
                         <Image
                             Aspect="AspectFit"
+                            HeightRequest="24"
+                            WidthRequest="24"
                             IsVisible="False"
                             Source="iconlotes.svg">
                             <Image.Behaviors>
@@ -190,44 +214,48 @@
 
             <sf:SfTabItem Style="{StaticResource SyncTabStyle}">
                 <sf:SfTabItem.HeaderContent>
-                    <Label
-                        FontFamily="FontAwesomeSolid"
-                        FontSize="28"
-                        HorizontalOptions="Center"
-                        Text="&#xf021;"
-                        TextColor="{StaticResource Gray300}"
-                        VerticalOptions="Center">
-                        <Label.Triggers>
-                            <DataTrigger
-                                Binding="{Binding SelectedIndex, Source={x:Reference mainTabView}}"
-                                TargetType="Label"
-                                Value="3">
-                                <Setter Property="TextColor" Value="{StaticResource Primary}" />
-                            </DataTrigger>
-                        </Label.Triggers>
-                    </Label>
+                    <Grid HeightRequest="28" WidthRequest="28">
+                        <Label
+                            FontFamily="FontAwesomeSolid"
+                            FontSize="24"
+                            HorizontalOptions="Center"
+                            Text="&#xf021;"
+                            TextColor="{StaticResource Gray300}"
+                            VerticalOptions="Center">
+                            <Label.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding SelectedIndex, Source={x:Reference mainTabView}}"
+                                    TargetType="Label"
+                                    Value="3">
+                                    <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </Grid>
                 </sf:SfTabItem.HeaderContent>
                 <controls:SincronizacaoPendentesView />
             </sf:SfTabItem>
 
             <sf:SfTabItem Style="{StaticResource ContaTabStyle}">
                 <sf:SfTabItem.HeaderContent>
-                    <Label
-                        FontFamily="FontAwesomeSolid"
-                        FontSize="28"
-                        HorizontalOptions="Center"
-                        Text="&#xf007;"
-                        TextColor="{StaticResource Gray300}"
-                        VerticalOptions="Center">
-                        <Label.Triggers>
-                            <DataTrigger
-                                Binding="{Binding SelectedIndex, Source={x:Reference mainTabView}}"
-                                TargetType="Label"
-                                Value="4">
-                                <Setter Property="TextColor" Value="{StaticResource Primary}" />
-                            </DataTrigger>
-                        </Label.Triggers>
-                    </Label>
+                    <Grid HeightRequest="28" WidthRequest="28">
+                        <Label
+                            FontFamily="FontAwesomeSolid"
+                            FontSize="24"
+                            HorizontalOptions="Center"
+                            Text="&#xf007;"
+                            TextColor="{StaticResource Gray300}"
+                            VerticalOptions="Center">
+                            <Label.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding SelectedIndex, Source={x:Reference mainTabView}}"
+                                    TargetType="Label"
+                                    Value="4">
+                                    <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </Grid>
                 </sf:SfTabItem.HeaderContent>
                 <controls:MinhaConta />
             </sf:SfTabItem>

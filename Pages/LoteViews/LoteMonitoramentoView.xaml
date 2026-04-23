@@ -249,7 +249,7 @@
                             IsVisible="{Binding IsManejoVisible}"
                             Style="{StaticResource MonitoramentoButton}"
                             Text="{localization:Translate Manejo}"
-                            WidthRequest="150"
+                            WidthRequest="165"
                             Margin="5" />
 
                         <buttons:SfButton
@@ -258,7 +258,7 @@
                             IsVisible="{Binding IsZootecnicoVisible}"
                             Style="{StaticResource MonitoramentoButton}"
                             Text="{localization:Translate Zootécnico}"
-                            WidthRequest="150"
+                            WidthRequest="165"
                             Margin="5" />
 
                         <buttons:SfButton
@@ -267,17 +267,32 @@
                             IsVisible="{Binding IsIsiMacroVisible}"
                             Style="{StaticResource MonitoramentoButton}"
                             Text="{localization:Translate ISIMacro}"
-                            WidthRequest="150"
+                            WidthRequest="165"
                             Margin="5" />
 
                         <buttons:SfButton
                             Command="{Binding AvaliacoesGalpaoCommand}"
-                            ImageSource="avaliacaogalpao.png"
                             IsVisible="{Binding IsAvaliacaoGalpaoVisible}"
                             Style="{StaticResource MonitoramentoButton}"
-                            Text="{localization:Translate AvaliacoesNoGalpao}"
-                            WidthRequest="150"
-                            Margin="5" />
+                            WidthRequest="165"
+                            Margin="5">
+                            <VerticalStackLayout VerticalOptions="Center" Spacing="4">
+                                <Image Source="icongalpao.svg" 
+                                       HeightRequest="40" 
+                                       WidthRequest="40" 
+                                       HorizontalOptions="Center">
+                                    <Image.Behaviors>
+                                        <toolkit:IconTintColorBehavior TintColor="{StaticResource SecondaryColor}" />
+                                    </Image.Behaviors>
+                                </Image>
+                                <Label Text="{localization:Translate AvaliacoesNoGalpao}" 
+                                       HorizontalTextAlignment="Center"
+                                       FontFamily="Nunito"
+                                       FontSize="Small"
+                                       FontAttributes="Bold"
+                                       TextColor="{StaticResource SecondaryColor}" />
+                            </VerticalStackLayout>
+                        </buttons:SfButton>
 
                         <buttons:SfButton
                             Command="{Binding ShowHideSanidadeCommand}"
@@ -285,7 +300,7 @@
                             IsVisible="{Binding IsSanidadeVisible}"
                             Style="{StaticResource MonitoramentoButton}"
                             Text="{localization:Translate Sanidade}"
-                            WidthRequest="150"
+                            WidthRequest="165"
                             Margin="5" />
 
                         <buttons:SfButton
@@ -294,7 +309,7 @@
                             IsVisible="{Binding IsNutricaoVisible}"
                             Style="{StaticResource MonitoramentoButton}"
                             Text="{localization:Translate Nutrição}"
-                            WidthRequest="150"
+                            WidthRequest="165"
                             Margin="5" />
                     </FlexLayout>
 

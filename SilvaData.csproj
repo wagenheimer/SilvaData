@@ -162,7 +162,7 @@
 
 	<ItemGroup>
 		<MauiImage Include="Resources\Images\Icons\analisesalmonela.png" />
-		<MauiImage Include="Resources\Images\Icons\avaliacaogalpao.png" />
+
 		<MauiImage Include="Resources\Images\Icons\config.png" />
 		<MauiImage Include="Resources\Images\Icons\configselected.png" />
 		<MauiImage Include="Resources\Images\Icons\dashboard.png" />

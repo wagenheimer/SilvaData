@@ -315,7 +315,9 @@ xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=Loca
                 <Label
                     FontAttributes="Bold"
                     FontFamily="Nunito"
-                    FontSize="24"
+                    FontSize="20"
+                    LineBreakMode="TailTruncation"
+                    MaxLines="1"
                     Text="{localization:Translate AvaliacoesNoGalpao}"
                     TextColor="White" />
             </VerticalStackLayout>
