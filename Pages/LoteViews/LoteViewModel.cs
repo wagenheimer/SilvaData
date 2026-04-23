@@ -69,13 +69,9 @@ namespace SilvaData.ViewModels
         // Cache de filtros (otimização)
         private string? _pesquisaNormalizada;
         private int? _filtroUEId;
-        private int? _filtroRegionalId;
-        private int? _filtroPropriedadeId;
 
         // Dicionários para lookup O(1)
         private Dictionary<int, UnidadeEpidemiologicaComDetalhes> _ueDict = new();
-        private Dictionary<int, Propriedade> _propriedadeDict = new();
-        private Dictionary<int, Regional> _regionalDict = new();
 
         // ═══════════════════════════════════════════════════════════
         // ★★★ CONSTRUTOR ★★★
@@ -172,15 +168,7 @@ namespace SilvaData.ViewModels
                       .Where(ue => ue.id > 0)
                       .ToDictionary(ue => ue.id);
 
-                _propriedadeDict = _cacheService.PropriedadeList
-                    .Where(p => p.id.HasValue && p.id.Value > 0)
-                    .ToDictionary(p => p.id.Value);
-
-                _regionalDict = _cacheService.RegionalList
-                    .Where(r => r.id.HasValue && r.id.Value > 0)
-                    .ToDictionary(r => r.id.Value);
-
-                Debug.WriteLine($"[LoteViewModel] Dicionários reconstruídos: {_ueDict.Count} UEs, {_propriedadeDict.Count} Propriedades, {_regionalDict.Count} Regionais");
+                Debug.WriteLine($"[LoteViewModel] Dicionários reconstruídos: {_ueDict.Count} UEs");
             }
             catch (Exception ex)
             {
@@ -398,8 +386,6 @@ namespace SilvaData.ViewModels
         public async Task LimparFiltros()
         {
             SelectedFiltroUE = null;
-            SelectedFiltroRegional = null;
-            SelectedFiltroPropriedade = null;
             PesquisaLoteText = string.Empty;
             await CarregaLotes();
         }
@@ -459,28 +445,6 @@ namespace SilvaData.ViewModels
             if (_filtroUEId.HasValue && ueId != _filtroUEId.Value)
                 return false;
 
-            // ★★★ FILTRO 2: Propriedade ★★★
-            if (_filtroPropriedadeId.HasValue)
-            {
-                if (!_ueDict.TryGetValue(ueId, out var ue) ||
-                    !ue.propriedadeId.HasValue ||
-                    ue.propriedadeId.Value != _filtroPropriedadeId.Value)
-                    return false;
-            }
-
-            // ★★★ FILTRO 3: Regional ★★★
-            if (_filtroRegionalId.HasValue)
-            {
-                if (!_ueDict.TryGetValue(ueId, out var ue) ||
-                    !ue.propriedadeId.HasValue ||
-                    !_propriedadeDict.TryGetValue(ue.propriedadeId.Value, out var prop) ||
-                    !prop.regionalId.HasValue ||
-                    prop.regionalId.Value != _filtroRegionalId.Value)
-                {
-                    return false;
-                }
-            }
-
             // ★★★ FILTRO 4: Texto ★★★
             if (string.IsNullOrEmpty(_pesquisaNormalizada))
                 return true;
@@ -508,18 +472,6 @@ namespace SilvaData.ViewModels
         [ObservableProperty]
         private UnidadeEpidemiologicaComDetalhes? selectedFiltroUE;
 
-        [ObservableProperty]
-        private Regional? selectedFiltroRegional;
-
-        [ObservableProperty]
-        private Propriedade? selectedFiltroPropriedade;
-
-        public ObservableCollection<Regional> RegionalList =>
-            _isDisposed ? new() : _cacheService.RegionalList;
-
-        public ObservableCollection<Propriedade> PropriedadeList =>
-            _isDisposed ? new() : _cacheService.PropriedadeList;
-
         public ObservableCollection<UnidadeEpidemiologicaComDetalhes> UEList =>
             _isDisposed ? new() : _cacheService.UEList;
 
@@ -527,18 +479,6 @@ namespace SilvaData.ViewModels
         partial void OnSelectedFiltroUEChanged(UnidadeEpidemiologicaComDetalhes? value)
         {
             _filtroUEId = value?.id;
-            if (!IsBusy) _ = CarregaLotes();
-        }
-
-        partial void OnSelectedFiltroRegionalChanged(Regional? value)
-        {
-            _filtroRegionalId = value?.id;
-            if (!IsBusy) _ = CarregaLotes();
-        }
-
-        partial void OnSelectedFiltroPropriedadeChanged(Propriedade? value)
-        {
-            _filtroPropriedadeId = value?.id;
             if (!IsBusy) _ = CarregaLotes();
         }
 
