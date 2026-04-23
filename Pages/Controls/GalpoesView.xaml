@@ -147,7 +147,6 @@
                                 Background="Transparent"
                                 FontFamily="FontAwesomeSolid"
                                 FontSize="20"
-                                HasShadow="False"
                                 ShowIcon="False"
                                 Text="&#xf044;"
                                 TextColor="{StaticResource SecondaryColor}"
@@ -160,7 +159,6 @@
                                 Background="Transparent"
                                 FontFamily="FontAwesomeSolid"
                                 FontSize="20"
-                                HasShadow="False"
                                 ShowIcon="False"
                                 Text="&#xf65e;"
                                 TextColor="{StaticResource PrimaryColor}"
@@ -193,7 +191,6 @@
                 WidthRequest="56"
                 FontFamily="FontAwesomeSolid"
                 FontSize="22"
-                HasShadow="True"
                 ShowIcon="False"
                 Text="&#xf067;"
                 TextColor="White" />

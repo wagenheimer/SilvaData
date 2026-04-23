@@ -64,11 +64,9 @@
             IndicatorWidthMode="Stretch"
             IsVisible="{Binding IsBusy, Converter={StaticResource InvertBoolean}}"
             SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
-            SelectedTabItemFontColor="{StaticResource Primary}"
             TabBarBackground="{StaticResource QuaseBranco}"
             TabBarHeight="70"
             TabBarPlacement="Bottom"
-            TabItemFontColor="{StaticResource Gray300}"
             VerticalOptions="Fill">
 
             <sf:SfTabItem Style="{StaticResource MercadosTabStyle}">
