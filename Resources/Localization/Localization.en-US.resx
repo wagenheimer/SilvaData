@@ -865,7 +865,7 @@
     <value>Downloading properties from the cloud...</value>
   </data>
   <data name="BaixandoUnidadesEpidemiológicasDaNuvem" xml:space="preserve">
-    <value>Downloading epidemiological units from the Cloud...</value>
+    <value>Downloading warehouses from the Cloud...</value>
   </data>
   <data name="BaixandoParâmetrosDasAtividadesDaNuvem" xml:space="preserve">
     <value>Downloading activity from the cloud...</value>
