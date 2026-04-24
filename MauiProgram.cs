@@ -120,9 +120,9 @@ namespace SilvaData
             //Dashboard
             builder.Services.AddSingleton<DashboardView>();
             builder.Services.AddSingleton<DashboardViewModel>();
-            builder.Services.AddTransient<MercadosDashboardViewModel>();
-            builder.Services.AddTransient<GalpoesViewModel>();
-            builder.Services.AddTransient<GalpoesView>();
+            builder.Services.AddSingleton<MercadosDashboardViewModel>();
+            builder.Services.AddSingleton<GalpoesViewModel>();
+            builder.Services.AddSingleton<GalpoesView>();
 
             //Gráficos
             builder.Services.AddSingleton<GraficoResultadosPage>();

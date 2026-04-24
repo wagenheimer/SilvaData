@@ -143,6 +143,8 @@ namespace SilvaData.Models
             NotifyStaticPropertyChanged(nameof(PodeVerGalpao));
             NotifyStaticPropertyChanged(nameof(PodeEditarZootecnico));
             NotifyStaticPropertyChanged(nameof(TratamentoEmVezDeLote));
+            NotifyStaticPropertyChanged(nameof(PodeAdicionarUE));
+            NotifyStaticPropertyChanged(nameof(PodeEditarUE));
         }
 
         /// <summary>
@@ -186,6 +188,8 @@ namespace SilvaData.Models
                 NotifyStaticPropertyChanged(nameof(PodeVerGalpao));
                 NotifyStaticPropertyChanged(nameof(PodeEditarZootecnico));
                 NotifyStaticPropertyChanged(nameof(TratamentoEmVezDeLote));
+                NotifyStaticPropertyChanged(nameof(PodeAdicionarUE));
+                NotifyStaticPropertyChanged(nameof(PodeEditarUE));
             }
         }
 

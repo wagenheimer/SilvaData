@@ -1,4 +1,5 @@
 using CommunityToolkit.Mvvm.Messaging;
+using System.Diagnostics;
 
 namespace SilvaData.ViewModels
 {
@@ -22,6 +23,11 @@ namespace SilvaData.ViewModels
 
         public GalpoesViewModel(CacheService cacheService)
         {
+            Debug.WriteLine("=== GalpoesViewModel Criado ===");
+            Debug.WriteLine($"ShowLoteCommand: {ShowLoteCommand}");
+            Debug.WriteLine($"EditarCommand: {EditarCommand}");
+            Debug.WriteLine($"AdicionarGalpaoCommand: {AdicionarGalpaoCommand}");
+
             _cacheService = cacheService;
 
             // Escuta mudanças na lista global do cache
@@ -39,6 +45,16 @@ namespace SilvaData.ViewModels
                 {
                     AplicaFiltro();
                 }));
+
+            // Escuta mudanças nas permissões
+            Permissoes.StaticPropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == nameof(Permissoes.PodeAdicionarUE) || e.PropertyName == nameof(Permissoes.PodeEditarUE))
+                {
+                    OnPropertyChanged(nameof(PodeAdicionarUE));
+                    OnPropertyChanged(nameof(PodeEditarUE));
+                }
+            };
         }
 
         public Task InitializeAsync()
@@ -72,17 +88,18 @@ namespace SilvaData.ViewModels
         }
 
         [RelayCommand]
-        private async Task Editar(UnidadeEpidemiologicaComDetalhes ue)
+        private async Task Editar(object parameter)
         {
+            var ue = parameter as UnidadeEpidemiologicaComDetalhes;
             if (ue == null) return;
             await NavigationUtils.ShowViewAsModalAsync<UnidadeEpidemiologicaView_Edit>(ue);
         }
 
         [RelayCommand]
-        private async Task ShowLote(UnidadeEpidemiologicaComDetalhes ue)
+        private async Task ShowLote(object parameter)
         {
+            var ue = parameter as UnidadeEpidemiologicaComDetalhes;
             if (ue == null) return;
-
             var loteViewModel = ServiceHelper.GetRequiredService<LoteViewModel>();
             await loteViewModel.LimparFiltros();
             loteViewModel.SelectedFiltroUE = loteViewModel.UEList.FirstOrDefault(u => u?.id == ue.id);
