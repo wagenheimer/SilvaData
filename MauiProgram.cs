@@ -42,6 +42,13 @@ namespace SilvaData
 #if IOS || MACCATALYST
     				handlers.AddHandler<Microsoft.Maui.Controls.CollectionView, Microsoft.Maui.Controls.Handlers.Items2.CollectionViewHandler2>();
 #endif
+#if ANDROID
+                    // Substitui o EntryHandler padrão para desabilitar EmojiCompat em todos os Entry.
+                    // Necessário por bug do AndroidX emoji2: EmojiTextWatcher lança IllegalArgumentException
+                    // ao processar spans após NumberKeyListener.replace() em campos numéricos.
+                    // Ver: Platforms/Android/NumericEntryHandler.cs
+                    handlers.AddHandler<Microsoft.Maui.Controls.Entry, SilvaData.Platforms.Android.NumericEntryHandler>();
+#endif
                 }).UseLocalizationResourceManager(settings =>
                 {
                     settings.AddResource(Traducao.ResourceManager);
