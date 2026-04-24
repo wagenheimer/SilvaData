@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.cwsoftware.silvadata" android:versionCode="268" android:versionName="3.2.1">
-	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:supportsRtl="true" android:label="Silvadata"></application>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" package="com.cwsoftware.silvadata" android:versionCode="268" android:versionName="3.2.1">
+	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:supportsRtl="true" android:label="Silvadata">
+		<!--
+		    Desabilita a inicialização automática do EmojiCompat (androidx.emoji2).
+		    Sem isso, o EmojiTextWatcher é instalado em todos os EditText e lança
+		    IllegalArgumentException ao processar spans após NumberKeyListener.replace()
+		    em campos numéricos no Android 13+.
+		    Referência: https://developer.android.com/jetpack/androidx/releases/emoji2
+		-->
+		<provider
+			android:name="androidx.startup.InitializationProvider"
+			android:authorities="${applicationId}.androidx-startup"
+			android:exported="false"
+			tools:node="merge">
+			<meta-data
+				android:name="androidx.emoji2.text.EmojiCompatInitializer"
+				tools:node="remove" />
+		</provider>
+	</application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.BATTERY_STATS" />
