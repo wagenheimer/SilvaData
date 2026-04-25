@@ -99,6 +99,21 @@ namespace SilvaData.Models
 
         [JsonIgnore][Ignore] public Color StatusColor => ISIMacro.StatusColor(ISIMacroScoreMedio);
 
+        /// <summary>
+        /// Copia propriedades que no vm do banco de dados (Ignore) de outro objeto.
+        /// Evita que nomes de Propriedade/Regional desapaream em updates parciais.
+        /// </summary>
+        public void TransferMetadataFrom(Lote source)
+        {
+            if (source == null) return;
+            UnidadeEpidemiologicaNome = source.UnidadeEpidemiologicaNome;
+            RegionalNome = source.RegionalNome;
+            PropriedadeNome = source.PropriedadeNome;
+            // Preserva tambm o score mdio se o novo objeto no tiver (calculado localmente)
+            if (ISIMacroScoreMedio == 0 && source.ISIMacroScoreMedio != 0)
+                ISIMacroScoreMedio = source.ISIMacroScoreMedio;
+        }
+
         [JsonIgnore]
         [Ignore]
         public string Status => loteStatus is null or 1 ? Traducao.Aberto : Traducao.Fechado;

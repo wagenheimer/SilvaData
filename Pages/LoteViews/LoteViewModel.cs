@@ -198,6 +198,7 @@ namespace SilvaData.ViewModels
                 var existente = ListaLotes.FirstOrDefault(l => l?.id == m.Lote.id);
                 if (existente != null)
                 {
+                    m.Lote.TransferMetadataFrom(existente);
                     var index = ListaLotes.IndexOf(existente);
                     ListaLotes[index] = m.Lote;
                 }
@@ -226,6 +227,7 @@ namespace SilvaData.ViewModels
                     var existente = ListaLotes.FirstOrDefault(l => l?.id == loteId);
                     if (existente != null)
                     {
+                        loteAtualizado.TransferMetadataFrom(existente);
                         var index = ListaLotes.IndexOf(existente);
                         ListaLotes[index] = loteAtualizado;
                     }

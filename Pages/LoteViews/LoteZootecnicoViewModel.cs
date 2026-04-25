@@ -184,7 +184,7 @@ namespace SilvaData.ViewModels
             {
                 // ★ Carrega formulários do banco (Fase 7 = Geral, null = Legado/Outros)
                 var forms7Task = LoteForm.PegaListaFormulariosLoteList((int)Lote.id, 11, 7);
-                var formsNullTask = LoteForm.PegaListaFormulariosLoteList((int)Lote.id, 11, null);
+                var formsNullTask = LoteForm.PegaListaFormulariosLoteList((int)Lote.id, 11, null, filtrarFaseNula: true);
 
                 await Task.WhenAll(forms7Task, formsNullTask);
 

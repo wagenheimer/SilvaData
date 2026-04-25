@@ -309,15 +309,22 @@ namespace SilvaData.Models
         /// <summary>
         /// Busca lista de formulários do lote.
         /// </summary>
-        public static async Task<List<LoteForm>> PegaListaFormulariosLoteList(int loteId, int parametroTipo, int? loteFormFase = null)
+        public static async Task<List<LoteForm>> PegaListaFormulariosLoteList(int loteId, int parametroTipo, int? loteFormFase = null, bool filtrarFaseNula = false)
         {
             try
             {
                 var table = await Db.Table<LoteForm>().ConfigureAwait(false);
 
-                var query = loteFormFase.HasValue
-                    ? table.Where(lf => lf.loteId == loteId && lf.parametroTipoId == parametroTipo && lf.loteFormFase == loteFormFase)
-                    : table.Where(lf => lf.loteId == loteId && lf.parametroTipoId == parametroTipo && lf.loteFormFase == null);
+                var query = table.Where(lf => lf.loteId == loteId && lf.parametroTipoId == parametroTipo);
+
+                if (loteFormFase.HasValue)
+                {
+                    query = query.Where(lf => lf.loteFormFase == loteFormFase);
+                }
+                else if (filtrarFaseNula)
+                {
+                    query = query.Where(lf => lf.loteFormFase == null);
+                }
 
                 return await query.OrderByDescending(lf => lf.item).ThenByDescending(lf => lf.data).ToListAsync().ConfigureAwait(false);
             }

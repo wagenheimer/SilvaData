@@ -673,6 +673,10 @@ namespace SilvaData.Services
             {
                 foreach (var l in lotesWeb.lotes.Where(x => x.loteStatus != 2 && x.excluido != 1))
                 {
+                    // Preserva ISIMacroScoreMedio calculado localmente — o servidor não envia esse campo
+                    // e InsertOrReplace zeraria o score calculado antes de AtualizaTodasMediasISIMacroComTransacao rodar
+                    var scoreExistente = conn.Find<Lote>(l.id)?.ISIMacroScoreMedio ?? 0;
+
                     conn.InsertOrReplace(new Lote
                     {
                         id = l.id,
@@ -687,7 +691,8 @@ namespace SilvaData.Services
                         pesoInicial = l.pesoInicial ?? 0,
                         pesoFinal = l.pesoFinal ?? 0f,
                         loteStatus = l.loteStatus,
-                        unidadeEpidemiologicaId = l.unidadeEpidemiologicaId
+                        unidadeEpidemiologicaId = l.unidadeEpidemiologicaId,
+                        ISIMacroScoreMedio = scoreExistente
                     });
                     foreach (var parametro in l.parametros)
                         conn.InsertOrReplace(new LoteParametro { parametroId = parametro.parametroId, loteId = l.id, valor = parametro.valor });
@@ -767,6 +772,9 @@ namespace SilvaData.Services
                     return;
 
                 var jsonPermissoes = permissoesElement.GetRawText();
+#if DEBUG
+                Debug.WriteLine($"[Sync] JSON de permissoes bruto: {jsonPermissoes}");
+#endif
                 var permissoes = JsonConvert.DeserializeObject<Permissoes>(jsonPermissoes);
                 if (permissoes == null)
                     return;

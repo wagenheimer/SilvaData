@@ -994,6 +994,13 @@ public partial class LoteFormularioViewModel : ViewModelBase
 
         try
         {
+            if (ParametroTipo == 11)
+            {
+                if (LoteFormulario.LoteForm.dataInicioPreenchimento == DateTime.MinValue)
+                    LoteFormulario.LoteForm.dataInicioPreenchimento = DateTime.Now;
+
+                LoteFormulario.LoteForm.dataTerminoPreenchimento = DateTime.Now;
+            }
 
             if (NovoFormulario)
                 LoteFormulario.LoteForm.dataTerminoPreenchimento = DateTime.Now;
