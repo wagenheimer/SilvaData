@@ -1,6 +1,10 @@
 # Script para Gerenciamento de Versão e Build (.NET MAUI)
 # Salve como manage_version.ps1 na raiz do projeto
 
+# Forçar codificação UTF8 para evitar erros de acentuação no console
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+$OutputEncoding = [System.Text.Encoding]::UTF8
+
 $projFile = Get-ChildItem *.csproj | Select-Object -First 1
 $manifestPath = "Platforms/Android/AndroidManifest.xml"
 $plistPath = "Platforms/iOS/Info.plist"
