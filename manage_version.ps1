@@ -6,6 +6,8 @@ param (
     [int]$Action = 0
 )
 
+Set-Location $PSScriptRoot
+
 # Forçar codificação UTF8 para evitar erros de acentuação no console
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [System.Text.Encoding]::UTF8

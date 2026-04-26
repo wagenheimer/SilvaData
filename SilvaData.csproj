@@ -16,7 +16,7 @@
 		<ApplicationTitle>SilvaData</ApplicationTitle>
 		<ApplicationId>com.cwsoftware.silvadata</ApplicationId>
 		<ApplicationDisplayVersion>3.2.3</ApplicationDisplayVersion>
-		<ApplicationVersion>272</ApplicationVersion>
+		<ApplicationVersion>280</ApplicationVersion>
 
 		<WindowsPackageType>None</WindowsPackageType>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">12.2</SupportedOSPlatformVersion>
@@ -361,4 +361,12 @@
 	</ItemGroup>
 
 </Project>
+
+
+
+
+
+
+
+
 
