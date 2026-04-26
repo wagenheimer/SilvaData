@@ -5,12 +5,12 @@
             "label": "MAUI: Incrementar Versao e Build",
             "type": "shell",
             "windows": {
-                "command": ".\\manage.bat",
-                "args": ["1"]
+                "command": "powershell",
+                "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "manage_version.ps1", "1"]
             },
             "osx": {
-                "command": "./manage.sh",
-                "args": ["1"]
+                "command": "pwsh",
+                "args": ["manage_version.ps1", "1"]
             },
             "group": "build",
             "presentation": {
@@ -23,12 +23,12 @@
             "label": "MAUI: Incrementar Build",
             "type": "shell",
             "windows": {
-                "command": ".\\manage.bat",
-                "args": ["2"]
+                "command": "powershell",
+                "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "manage_version.ps1", "2"]
             },
             "osx": {
-                "command": "./manage.sh",
-                "args": ["2"]
+                "command": "pwsh",
+                "args": ["manage_version.ps1", "2"]
             },
             "group": "build",
             "presentation": {
@@ -41,12 +41,12 @@
             "label": "MAUI: Publish iOS",
             "type": "shell",
             "windows": {
-                "command": ".\\manage.bat",
-                "args": ["3"]
+                "command": "powershell",
+                "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "manage_version.ps1", "3"]
             },
             "osx": {
-                "command": "./manage.sh",
-                "args": ["3"]
+                "command": "pwsh",
+                "args": ["manage_version.ps1", "3"]
             },
             "group": "build",
             "presentation": {
