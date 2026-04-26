@@ -694,6 +694,7 @@ namespace SilvaData.Services
                         unidadeEpidemiologicaId = l.unidadeEpidemiologicaId,
                         ISIMacroScoreMedio = scoreExistente
                     });
+                    conn.Execute($"DELETE FROM LoteParametro WHERE loteId = {l.id}");
                     foreach (var parametro in l.parametros)
                         conn.InsertOrReplace(new LoteParametro { parametroId = parametro.parametroId, loteId = l.id, valor = parametro.valor });
                 }
