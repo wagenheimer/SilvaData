@@ -473,8 +473,7 @@ namespace SilvaData.Services
                 foreach (var modeloIsiMacro in modeloIsiMacroFromWeb.ModelosIsiMacro)
                 {
                     conn.InsertOrReplace(new ModeloIsiMacro { Id = modeloIsiMacro.Id, NomeModelo = modeloIsiMacro.NomeModelo });
-                    var parametrosIds = string.Join(",", modeloIsiMacro.Parametros.Select(p => p.id));
-                    conn.Execute($"delete from ModeloIsiMacroParametro where ModeloIsiMacroId={modeloIsiMacro.Id} and ParametroId not in ({parametrosIds})");
+                    conn.Execute($"DELETE FROM ModeloIsiMacroParametro WHERE ModeloIsiMacroId = {modeloIsiMacro.Id}");
                     foreach (var parametro in modeloIsiMacro.Parametros)
                         conn.InsertOrReplace(new ModeloIsiMacroParametro { ModeloIsiMacroId = modeloIsiMacro.Id, ParametroId = parametro.id });
                 }
