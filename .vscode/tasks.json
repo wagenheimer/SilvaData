@@ -1,44 +1,59 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "Publish iOS - Archive",
-			"type": "shell",
-			"command": "dotnet",
-			"args": [
-				"publish",
-				"SilvaData.csproj",
-				"-f",
-				"net10.0-ios",
-				"-c",
-				"Release",
-				"/p:ArchiveOnBuild=true",
-				"/p:RuntimeIdentifier=ios-arm64"
-			],
-			"problemMatcher": [],
-			"group": "build"
-		},
-		{
-			"label": "Git Sync Clean (pull --rebase, commit, push)",
-			"type": "shell",
-			"command": "sh",
-			"args": [
-				"-c",
-				"git pull --rebase && git add . && git commit -m 'sync: atualiza e sincroniza alterações locais' && git push"
-			],
-			"problemMatcher": [],
-			"group": "build"
-		},
-		{
-			"label": "Git Commit, Rebase Pull, Push (Clean)",
-			"type": "shell",
-			"command": "sh",
-			"args": [
-				"-c",
-				"git add . && git commit -m 'sync: atualiza e sincroniza alterações locais' && git pull --rebase && git push"
-			],
-			"problemMatcher": [],
-			"group": "build"
-		}
-	]
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "MAUI: Incrementar Versao e Build",
+            "type": "shell",
+            "windows": {
+                "command": ".\\manage.bat",
+                "args": ["1"]
+            },
+            "osx": {
+                "command": "./manage.sh",
+                "args": ["1"]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "MAUI: Incrementar Build",
+            "type": "shell",
+            "windows": {
+                "command": ".\\manage.bat",
+                "args": ["2"]
+            },
+            "osx": {
+                "command": "./manage.sh",
+                "args": ["2"]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "MAUI: Publish iOS",
+            "type": "shell",
+            "windows": {
+                "command": ".\\manage.bat",
+                "args": ["3"]
+            },
+            "osx": {
+                "command": "./manage.sh",
+                "args": ["3"]
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        }
+    ]
 }

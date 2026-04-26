@@ -41,6 +41,52 @@ get_codesign_info() {
     CODESIGN_PROV=$(grep -o '<CodesignProvision>[^<]*</CodesignProvision>' "$PROJ_FILE" | sed 's|<CodesignProvision>||;s|</CodesignProvision>||')
 }
 
+execute_action() {
+    local choice=$1
+    case $choice in
+        1)
+            IFS='.' read -ra ADDR <<< "$VERSION_NAME"
+            LAST_INDEX=$((${#ADDR[@]} - 1))
+            ADDR[$LAST_INDEX]=$((ADDR[$LAST_INDEX] + 1))
+            NEW_NAME=$(IFS='.'; echo "${ADDR[*]}")
+            NEW_CODE=$((VERSION_CODE + 1))
+            update_files "$NEW_NAME" "$NEW_CODE"
+            if [ -z "$ACTION" ]; then read -p "Pressione Enter para continuar..."; fi
+            ;;
+        2)
+            NEW_CODE=$((VERSION_CODE + 1))
+            update_files "$VERSION_NAME" "$NEW_CODE"
+            if [ -z "$ACTION" ]; then read -p "Pressione Enter para continuar..."; fi
+            ;;
+        3)
+            get_codesign_info
+            echo "Iniciando Publish para iOS (Release)..."
+            CMD="dotnet publish -f net10.0-ios -c Release -r ios-arm64 /p:ArchiveOnBuild=true"
+            if [ ! -z "$CODESIGN_KEY" ]; then CMD="$CMD /p:CodesignKey=\"$CODESIGN_KEY\""; fi
+            if [ ! -z "$CODESIGN_PROV" ]; then CMD="$CMD /p:CodesignProvision=\"$CODESIGN_PROV\""; fi
+            echo "Executando: $CMD"
+            eval $CMD
+            if [ -z "$ACTION" ]; then read -p "Pressione Enter para continuar..."; fi
+            ;;
+        q)
+            exit 0
+            ;;
+        *)
+            if [ -z "$ACTION" ]; then
+                echo "Opcao invalida!"
+                sleep 1
+            fi
+            ;;
+    esac
+}
+
+ACTION=$1
+if [ ! -z "$ACTION" ]; then
+    get_version
+    execute_action $ACTION
+    exit 0
+fi
+
 while true; do
     get_version
     clear
@@ -56,38 +102,5 @@ while true; do
     echo "q - Sair"
     echo "----------------------------------------"
     read -p "Escolha uma opcao: " choice
-
-    case $choice in
-        1)
-            IFS='.' read -ra ADDR <<< "$VERSION_NAME"
-            LAST_INDEX=$((${#ADDR[@]} - 1))
-            ADDR[$LAST_INDEX]=$((ADDR[$LAST_INDEX] + 1))
-            NEW_NAME=$(IFS='.'; echo "${ADDR[*]}")
-            NEW_CODE=$((VERSION_CODE + 1))
-            update_files "$NEW_NAME" "$NEW_CODE"
-            read -p "Pressione Enter para continuar..."
-            ;;
-        2)
-            NEW_CODE=$((VERSION_CODE + 1))
-            update_files "$VERSION_NAME" "$NEW_CODE"
-            read -p "Pressione Enter para continuar..."
-            ;;
-        3)
-            get_codesign_info
-            echo "Iniciando Publish para iOS (Release)..."
-            CMD="dotnet publish -f net10.0-ios -c Release -r ios-arm64 /p:ArchiveOnBuild=true"
-            if [ ! -z "$CODESIGN_KEY" ]; then CMD="$CMD /p:CodesignKey=\"$CODESIGN_KEY\""; fi
-            if [ ! -z "$CODESIGN_PROV" ]; then CMD="$CMD /p:CodesignProvision=\"$CODESIGN_PROV\""; fi
-            echo "Executando: $CMD"
-            eval $CMD
-            read -p "Pressione Enter para continuar..."
-            ;;
-        q)
-            exit 0
-            ;;
-        *)
-            echo "Opcao invalida!"
-            sleep 1
-            ;;
-    esac
+    execute_action $choice
 done

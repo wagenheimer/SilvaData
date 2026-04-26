@@ -6,6 +6,11 @@
 $OutputEncoding = [System.Text.Encoding]::UTF8
 $PSDefaultParameterValues['*:Encoding'] = 'utf8'
 
+param (
+    [Parameter(Mandatory=$false)]
+    [int]$Action = 0
+)
+
 $projFile = Get-ChildItem *.csproj | Select-Object -First 1
 $manifestPath = "Platforms/Android/AndroidManifest.xml"
 $plistPath = "Platforms/iOS/Info.plist"
@@ -53,6 +58,13 @@ function Update-VersionFiles($newName, $newCode) {
 
 function Show-Menu {
     $v = Get-CurrentVersion
+    
+    # Se uma acao foi passada por parametro, executa direto e sai
+    if ($Action -gt 0) {
+        Execute-Action $Action $v
+        return
+    }
+
     Clear-Host
     Write-Host "========================================" -ForegroundColor Cyan
     Write-Host " PROJETO: $($projFile.BaseName)" -ForegroundColor White
@@ -67,7 +79,13 @@ function Show-Menu {
     Write-Host "----------------------------------------"
     
     $choice = Read-Host "Escolha uma opcao"
+    if ($choice -eq "q") { return }
     
+    Execute-Action $choice $v
+    Show-Menu
+}
+
+function Execute-Action($choice, $v) {
     switch ($choice) {
         "1" {
             $parts = $v.Name -split '\.'
@@ -77,12 +95,12 @@ function Show-Menu {
                 $newCode = [int]$v.Code + 1
                 Update-VersionFiles $newName $newCode
             }
-            pause
+            if ($Action -eq 0) { Read-Host "`nPressione Enter para continuar..." }
         }
         "2" {
             $newCode = [int]$v.Code + 1
             Update-VersionFiles $v.Name $newCode
-            pause
+            if ($Action -eq 0) { Read-Host "`nPressione Enter para continuar..." }
         }
         "3" {
             $info = Get-CodesignInfo
@@ -93,15 +111,15 @@ function Show-Menu {
             
             Write-Host "Executando: $cmd" -ForegroundColor Gray
             Invoke-Expression $cmd
-            pause
+            if ($Action -eq 0) { Read-Host "`nPressione Enter para continuar..." }
         }
-        "q" { return }
         default { 
-            Write-Host "Opção inválida!" -ForegroundColor Red
-            Start-Sleep -Seconds 1
+            if ($Action -eq 0) {
+                Write-Host "Opcao invalida!" -ForegroundColor Red
+                Start-Sleep -Seconds 1
+            }
         }
     }
-    Show-Menu
 }
 
 Show-Menu
