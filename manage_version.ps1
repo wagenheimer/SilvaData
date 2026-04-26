@@ -4,14 +4,22 @@
 # Forçar codificação UTF8 para evitar erros de acentuação no console
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [System.Text.Encoding]::UTF8
+$PSDefaultParameterValues['*:Encoding'] = 'utf8'
 
 $projFile = Get-ChildItem *.csproj | Select-Object -First 1
 $manifestPath = "Platforms/Android/AndroidManifest.xml"
 $plistPath = "Platforms/iOS/Info.plist"
 
 if (-not (Test-Path $projFile)) { 
-    Write-Host "Erro: Arquivo .csproj não encontrado!" -ForegroundColor Red
+    Write-Host "Erro: Arquivo .csproj nao encontrado!" -ForegroundColor Red
     exit 
+}
+
+function Get-CodesignInfo {
+    $content = Get-Content $projFile -Raw
+    $key = ([regex]'<CodesignKey>([^<]+)</CodesignKey>').Match($content).Groups[1].Value
+    $prov = ([regex]'<CodesignProvision>([^<]+)</CodesignProvision>').Match($content).Groups[1].Value
+    return @{ Key = $key; Provision = $prov }
 }
 
 function Get-CurrentVersion {
@@ -49,16 +57,16 @@ function Show-Menu {
     Write-Host "========================================" -ForegroundColor Cyan
     Write-Host " PROJETO: $($projFile.BaseName)" -ForegroundColor White
     Write-Host "========================================" -ForegroundColor Cyan
-    Write-Host " Versão Atual: $($v.Name)"
+    Write-Host " Versao Atual: $($v.Name)"
     Write-Host " Build Atual:  $($v.Code)"
     Write-Host "----------------------------------------"
-    Write-Host "1 - Incrementar Versão e Build Number"
+    Write-Host "1 - Incrementar Versao e Build Number"
     Write-Host "2 - Incrementar Build Number"
     Write-Host "3 - Publish Archive for iOS"
     Write-Host "q - Sair"
     Write-Host "----------------------------------------"
     
-    $choice = Read-Host "Escolha uma opção"
+    $choice = Read-Host "Escolha uma opcao"
     
     switch ($choice) {
         "1" {
@@ -77,8 +85,14 @@ function Show-Menu {
             pause
         }
         "3" {
+            $info = Get-CodesignInfo
             Write-Host "`nIniciando Publish para iOS (Release)..." -ForegroundColor Yellow
-            dotnet publish -f net10.0-ios -c Release /p:ArchiveOnBuild=true
+            $cmd = "dotnet publish -f net10.0-ios -c Release -r ios-arm64 /p:ArchiveOnBuild=true"
+            if ($info.Key) { $cmd += " /p:CodesignKey=`"$($info.Key)`"" }
+            if ($info.Provision) { $cmd += " /p:CodesignProvision=`"$($info.Provision)`"" }
+            
+            Write-Host "Executando: $cmd" -ForegroundColor Gray
+            Invoke-Expression $cmd
             pause
         }
         "q" { return }
