@@ -178,7 +178,16 @@ namespace SilvaData.ViewModels
                     NavigationUtils.LogExternal(nameof(LoteISIMacroViewModel), $"NovoISIMacro modelos carregados | total={ModelosIsiMacro.Count}");
                 }
 
-                if (ModelosIsiMacro.Count > 0)
+                if (ModelosIsiMacro.Count == 0)
+                {
+                    await PopUpOK.ShowAsync(Traducao.Atenção, Traducao.NenhumModeloDisponivel);
+                    return;
+                }
+                else if (ModelosIsiMacro.Count == 1)
+                {
+                    ModeloIsiMacroSelecionado = ModelosIsiMacro[0];
+                }
+                else
                 {
                     var popup = ActivatorUtilities.CreateInstance<SelectModeloPopup>(ServiceHelper.Services!);
                     popup.UpdateModelos(ModelosIsiMacro);
