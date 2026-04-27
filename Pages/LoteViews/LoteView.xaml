@@ -376,7 +376,7 @@
             CornerRadius="35"
             HeightRequest="70"
             WidthRequest="70"
-            Margin="{OnPlatform iOS='5,5,5,60', Default='5'}"
+            Margin="5"
             VerticalOptions="End"
             HorizontalOptions="End">
             <Button.Shadow>
