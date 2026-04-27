@@ -76,7 +76,7 @@
                 Grid.Row="1"
                 HeaderSize="50"
                 IsScrollingEnabled="True"
-                ItemSeparatorSize="0"
+                ItemBorderThickness="0"
                 ItemSize="70"
                 ItemSpacing="5"
                 ItemsSource="{Binding ListaRegionais}"
