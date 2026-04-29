@@ -256,8 +256,8 @@ public partial class LoteManejoViewModel : ViewModelBase
 
         try
         {
-            // Busca TODOS os formulários de manejo (tipos 4-10 + 21) para este lote
-            var tiposManejoQuery = new[] { 4, 5, 6, 7, 8, 9, 10, 21 }; // ★ Incluído tipo 21 (Manejo Personalizado)
+            // Busca apenas os formulários de Manejo Geral (tipo 21) para este lote
+            var tiposManejoQuery = new[] { 21 }; 
             var allForms = new List<LoteForm>();
 
             foreach (var tipo in tiposManejoQuery)

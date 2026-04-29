@@ -1291,6 +1291,12 @@
   <data name="AbaPorFase" xml:space="preserve">
     <value>By phase</value>
   </data>
+  <data name="Manejo_AbaGeral_Dica" xml:space="preserve">
+    <value>General Management</value>
+  </data>
+  <data name="Manejo_AbaPorFase_Dica" xml:space="preserve">
+    <value>Organized by phase</value>
+  </data>
   <data name="AdicionarFoto" xml:space="preserve">
     <value>Add Photo</value>
   </data>

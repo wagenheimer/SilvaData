@@ -1285,7 +1285,7 @@
     <value>Nenhum registro de manejo encontrado</value>
   </data>
   <data name="Manejo_AbaGeral_Dica" xml:space="preserve">
-    <value>Todos os registros</value>
+    <value>Manejo Geral</value>
   </data>
   <data name="Manejo_AbaPorFase_Dica" xml:space="preserve">
     <value>Organizado por fase</value>
