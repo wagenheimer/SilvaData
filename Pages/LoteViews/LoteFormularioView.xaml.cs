@@ -117,7 +117,7 @@ namespace SilvaData.Controls
 
         if (!_heavyTemplatesInjected)
             _ = InjectHeavyTemplatesAsync();
-        else
+        else if (!NavigationUtils.TemModalAberta(this) && !CarregandoFoto)
             _ = CarregarAposAppearingAsync();
     }
 
@@ -164,8 +164,8 @@ namespace SilvaData.Controls
         // ★★★ ENHANCED: Limpeza segura de botões e recursos ★★★
         try
         {
-            // Só limpa se não está abrindo modal
-            if (!NavigationUtils.TemModalAberta(this))
+            // Só limpa se não está abrindo modal nem selecionando foto
+            if (!NavigationUtils.TemModalAberta(this) && !CarregandoFoto)
             {
                 Debug.WriteLine($"[LoteFormularioView] 🧹 Limpando recursos");
 
@@ -186,7 +186,7 @@ namespace SilvaData.Controls
             }
             else
             {
-                Debug.WriteLine($"[LoteFormularioView] ⏸️ Modal aberta - mantém estado");
+                Debug.WriteLine($"[LoteFormularioView] ⏸️ Modal/galeria aberta - mantém estado");
                 // ★★★ EVEN WITH MODAL: Still ensure button safety during modal operations ★★★
                 SafeButtonStateCheck();
             }

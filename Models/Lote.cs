@@ -91,9 +91,20 @@ namespace SilvaData.Models
         public bool temmudanca { get; set; }
         public int? excluido { get; set; }
 
-        [JsonIgnore][Ignore] public string UnidadeEpidemiologicaNome { get; set; }
-        [JsonIgnore][Ignore] public string RegionalNome { get; set; }
-        [JsonIgnore][Ignore] public string PropriedadeNome { get; set; }
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(DescricaoCompleta))]
+        [JsonIgnore]
+        private string? unidadeEpidemiologicaNome;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(DescricaoCompleta))]
+        [JsonIgnore]
+        private string? regionalNome;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(DescricaoCompleta))]
+        [JsonIgnore]
+        private string? propriedadeNome;
 
         [JsonIgnore][Ignore] public bool EstaFechado => loteStatus == 2;
 
@@ -147,7 +158,10 @@ namespace SilvaData.Models
             get
             {
                 // Fallback: garante nomes preenchidos caso não tenham sido via JOIN ou ViewModel
-                if (string.IsNullOrWhiteSpace(UnidadeEpidemiologicaNome) && unidadeEpidemiologicaId.HasValue)
+                if ((string.IsNullOrWhiteSpace(UnidadeEpidemiologicaNome) || 
+                     string.IsNullOrWhiteSpace(PropriedadeNome) || 
+                     string.IsNullOrWhiteSpace(RegionalNome)) && 
+                    unidadeEpidemiologicaId.HasValue)
                 {
                     this.EnsureNames();
                 }
@@ -320,8 +334,10 @@ namespace SilvaData.Models
             int result = 0;
 
             // Para novo lote: obtém o ID antes de entrar na transação,
-            // evitando deadlock pois GetNextId usa o mesmo Db
-            if (lote.id == 0)
+            // evitando deadlock pois GetNextId usa o mesmo Db.
+            // Guarda se era novo para controlar qual mensagem enviar.
+            bool eraNovo = lote.id == 0;
+            if (eraNovo)
             {
                 lote.id = await Alteracao.GetNextId(lote).ConfigureAwait(false);
             }
@@ -338,7 +354,13 @@ namespace SilvaData.Models
                 }
             }).ConfigureAwait(false);
 
-            WeakReferenceMessenger.Default.Send(new LoteAlteradoMessage(lote));
+            // Para novos lotes, o LoteEditViewModel já envia NovoLoteMessage com o lote completo.
+            // Enviar LoteAlteradoMessage aqui causaria HandleLoteAlterado a substituir um lote
+            // existente cujo ID coincida com o ID gerado pelo GetNextId (ID server-side).
+            if (!eraNovo)
+            {
+                WeakReferenceMessenger.Default.Send(new LoteAlteradoMessage(lote));
+            }
             return result;
         }
 

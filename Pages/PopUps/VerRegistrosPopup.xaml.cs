@@ -1,4 +1,4 @@
-using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.Messaging;
 
 using SilvaData.Models;
@@ -36,22 +36,22 @@ namespace SilvaData.Pages.PopUps
         {
             try
             {
-                // Validações defensivas
+                // ValidaÃ§Ãµes defensivas
                 if (e?.DataItem == null)
                 {
-                    Debug.WriteLine("[VerRegistrosPopup] ⚠️ ItemTappedEventArgs ou DataItem é nulo");
+                    Debug.WriteLine("[VerRegistrosPopup] âš ï¸ ItemTappedEventArgs ou DataItem Ã© nulo");
                     return;
                 }
 
                 if (e.DataItem is not LoteFormAvaliacaoGalpao registro)
                 {
-                    Debug.WriteLine($"[VerRegistrosPopup] ⚠️ DataItem não é LoteFormAvaliacaoGalpao: {e.DataItem?.GetType().Name}");
+                    Debug.WriteLine($"[VerRegistrosPopup] âš ï¸ DataItem nÃ£o Ã© LoteFormAvaliacaoGalpao: {e.DataItem?.GetType().Name}");
                     return;
                 }
 
-                Debug.WriteLine($"[VerRegistrosPopup] 📊 Registro selecionado: {registro.NumeroResposta}");
+                Debug.WriteLine($"[VerRegistrosPopup] ðŸ“Š Registro selecionado: {registro.NumeroResposta}");
 
-                // Feedback tátil imediato
+                // Feedback tÃ¡til imediato
                 HapticHelper.VibrateClick();
 
                 // Fecha o popup com o registro selecionado
@@ -59,7 +59,7 @@ namespace SilvaData.Pages.PopUps
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[VerRegistrosPopup] ❌ Erro ao processar item selecionado: {ex.Message}");
+                Debug.WriteLine($"[VerRegistrosPopup] âŒ Erro ao processar item selecionado: {ex.Message}");
                 
                 // Recovery: tenta fechar o popup mesmo com erro
                 try
@@ -68,34 +68,33 @@ namespace SilvaData.Pages.PopUps
                 }
                 catch (Exception recoveryEx)
                 {
-                    Debug.WriteLine($"[VerRegistrosPopup] 🚨 Recovery falhou: {recoveryEx.Message}");
+                    Debug.WriteLine($"[VerRegistrosPopup] ðŸš¨ Recovery falhou: {recoveryEx.Message}");
                 }
             }
         }
 
         /// <summary>
-        /// Override do método CloseAsync para incluir logging
+        /// Override do mÃ©todo CloseAsync para incluir logging
         /// </summary>
-        public new async Task CloseAsync(LoteFormAvaliacaoGalpao? result)
-        {
+        public new async Task CloseAsync(LoteFormAvaliacaoGalpao? result) { if (_isClosing) return; _isClosing = true;
             try
             {
                 Debug.WriteLine($"[VerRegistrosPopup] Fechando popup - Resultado: {(result?.NumeroResposta.ToString() ?? "NULL")}");
                 
-                // Chama o método base da classe Popup
+                // Chama o mÃ©todo base da classe Popup
                 await base.CloseAsync(result);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[VerRegistrosPopup] ❌ Erro ao fechar popup: {ex.Message}");
+                Debug.WriteLine($"[VerRegistrosPopup] âŒ Erro ao fechar popup: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// Método estático para facilitar o uso do popup
+        /// MÃ©todo estÃ¡tico para facilitar o uso do popup
         /// </summary>
-        /// <param name="registros">Lista de registros da avaliação</param>
-        /// <param name="isQualitativo">Indica se é avaliação qualitativa</param>
+        /// <param name="registros">Lista de registros da avaliaÃ§Ã£o</param>
+        /// <param name="isQualitativo">Indica se Ã© avaliaÃ§Ã£o qualitativa</param>
         /// <returns>Registro selecionado ou null se cancelado</returns>
         public static async Task<LoteFormAvaliacaoGalpao?> ShowAsync(
             ObservableCollection<LoteFormAvaliacaoGalpao> registros, 
@@ -114,9 +113,10 @@ namespace SilvaData.Pages.PopUps
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[VerRegistrosPopup] ❌ Erro ao mostrar popup: {ex.Message}");
+                Debug.WriteLine($"[VerRegistrosPopup] âŒ Erro ao mostrar popup: {ex.Message}");
                 return null;
             }
         }
     }
 }
+

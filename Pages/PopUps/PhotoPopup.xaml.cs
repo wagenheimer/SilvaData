@@ -1,19 +1,19 @@
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Maui.Views;
 
 namespace SilvaData.Pages.PopUps
 {
     /// <summary>
-    /// Popup que exibe uma imagem em tela cheia com título.
+    /// Popup que exibe uma imagem em tela cheia com tÃ­tulo.
     /// </summary>
     public partial class PhotoPopup : Popup
     {
         /// <summary>
-        /// Inicializa uma nova instância do popup de foto.
+        /// Inicializa uma nova instÃ¢ncia do popup de foto.
         /// </summary>
         /// <param name="photoUrl">URL ou caminho da imagem a ser exibida</param>
-        /// <param name="titulo">Título a ser mostrado acima da imagem</param>
+        /// <param name="titulo">TÃ­tulo a ser mostrado acima da imagem</param>
         public PhotoPopup(string photoUrl, string titulo)
         {
             InitializeComponent();
@@ -24,20 +24,21 @@ namespace SilvaData.Pages.PopUps
         /// Exibe um popup com uma imagem em tela cheia.
         /// </summary>
         /// <param name="photoUrl">URL ou caminho da imagem a ser exibida</param>
-        /// <param name="titulo">Título a ser mostrado acima da imagem</param>
-        /// <returns>Task que completa quando o popup é fechado</returns>
+        /// <param name="titulo">TÃ­tulo a ser mostrado acima da imagem</param>
+        /// <returns>Task que completa quando o popup Ã© fechado</returns>
         public static Task ShowAsync(string photoUrl, string titulo)
         {
             var popup = new PhotoPopup(photoUrl, titulo);
 
-            // Usa o método do NavigationUtils para exibir o popup
+            // Usa o mÃ©todo do NavigationUtils para exibir o popup
             return NavigationUtils.ShowPopupAsync(popup);
         }
     }
 
     public partial class PhotoPopupViewModel : ObservableObject
     {
-        private readonly Popup _popup; // Tipo Popup simples (correto)
+        private readonly Popup _popup;
+        private bool _isClosing; // Tipo Popup simples (correto)
 
         [ObservableProperty] ImageSource? photoSource;
         [ObservableProperty] string titulo;
@@ -57,9 +58,10 @@ namespace SilvaData.Pages.PopUps
         /// Comando para fechar o popup.
         /// </summary>
         [RelayCommand]
-        private Task CloseAsync() // **MUDANÇA:** Renomeado e tornado assíncrono para Task
+        private Task CloseAsync() // **MUDANÃ‡A:** Renomeado e tornado assÃ­ncrono para Task
         {
             return _popup.CloseAsync();
         }
     }
 }
+

@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Microsoft.Maui.ApplicationModel.DataTransfer;
 
 namespace SilvaData.Pages.PopUps
@@ -6,6 +6,7 @@ namespace SilvaData.Pages.PopUps
     public partial class HtmlErrorPopup : ContentPage
     {
         private readonly string _htmlContent;
+        private bool _isClosing;
         private readonly string _methodName;
         private readonly DateTime _timestamp;
 
@@ -17,7 +18,7 @@ namespace SilvaData.Pages.PopUps
             _methodName = methodName ?? "Unknown";
             _timestamp = DateTime.Now;
 
-            MethodLabel.Text = $"Método: {_methodName}";
+            MethodLabel.Text = $"MÃ©todo: {_methodName}";
             TimestampLabel.Text = $"Data/Hora: {_timestamp:dd/MM/yyyy HH:mm:ss}";
 
             // Carrega o HTML no WebView
@@ -26,7 +27,7 @@ namespace SilvaData.Pages.PopUps
                 Html = _htmlContent
             };
 
-            Debug.WriteLine($"[HtmlErrorPopup] Exibindo erro HTML do método: {_methodName}");
+            Debug.WriteLine($"[HtmlErrorPopup] Exibindo erro HTML do mÃ©todo: {_methodName}");
         }
 
         private void OnCloseClicked(object sender, EventArgs e)
@@ -34,8 +35,7 @@ namespace SilvaData.Pages.PopUps
             _ = OnCloseClickedAsync();
         }
 
-        private async Task OnCloseClickedAsync()
-        {
+        private async Task OnCloseClickedAsync() { if (_isClosing) return; _isClosing = true;
             try
             {
                 await Navigation.PopModalAsync();
@@ -70,7 +70,7 @@ namespace SilvaData.Pages.PopUps
             catch (Exception ex)
             {
                 Debug.WriteLine($"[HtmlErrorPopup] Erro ao compartilhar: {ex.Message}");
-                await DisplayAlertAsync("Erro", $"Não foi possível compartilhar: {ex.Message}", "OK");
+                await DisplayAlertAsync("Erro", $"NÃ£o foi possÃ­vel compartilhar: {ex.Message}", "OK");
             }
         }
 
@@ -83,13 +83,13 @@ namespace SilvaData.Pages.PopUps
         {
             try
             {
-                // Prepara o conteúdo para copiar com metadados
+                // Prepara o conteÃºdo para copiar com metadados
                 var contentToCopy = $@"=== ERRO HTML DO SERVIDOR ===
-Método: {_methodName}
+MÃ©todo: {_methodName}
 Data/Hora: {_timestamp:dd/MM/yyyy HH:mm:ss}
 Tamanho do HTML: {_htmlContent.Length:N0} caracteres
 
-=== CONTEÚDO HTML ===
+=== CONTEÃšDO HTML ===
 {_htmlContent}
 
 ==========================";
@@ -103,15 +103,16 @@ Tamanho do HTML: {_htmlContent.Length:N0} caracteres
 #endif
 
                 // Feedback visual
-                await DisplayAlertAsync("Copiado!", "O conteúdo HTML foi copiado para a área de transferência.", "OK");
+                await DisplayAlertAsync("Copiado!", "O conteÃºdo HTML foi copiado para a Ã¡rea de transferÃªncia.", "OK");
                 
                 Debug.WriteLine($"[HtmlErrorPopup] HTML copiado para clipboard ({_htmlContent.Length} caracteres)");
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[HtmlErrorPopup] Erro ao copiar: {ex.Message}");
-                await DisplayAlertAsync("Erro", $"Não foi possível copiar: {ex.Message}", "OK");
+                await DisplayAlertAsync("Erro", $"NÃ£o foi possÃ­vel copiar: {ex.Message}", "OK");
             }
         }
     }
 }
+

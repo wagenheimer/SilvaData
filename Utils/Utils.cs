@@ -61,12 +61,8 @@ namespace SilvaData.Utils
                 if (currentIndex >= 0 && currentIndex < camposaPreencher.DataSource.DisplayItems.Count - 1)
                 {
                     var nextItem = camposaPreencher.DataSource.DisplayItems[currentIndex + 1];
-                    // Calcula a altura do item e a posição de rolagem
-                    var scrollView = camposaPreencher.GetScrollView();
-                    var itemHeight = 300; // Você pode ajustar essa altura com base no seu layout de item.
-
-                    // Rola para a próxima posição suavemente
-                    await scrollView.ScrollToAsync(0, scrollView.ScrollY + itemHeight, true);
+                    await MainThread.InvokeOnMainThreadAsync(() =>
+                        camposaPreencher.ScrollTo(nextItem, ScrollToPosition.Start, true));
                 }
             }
         }
@@ -84,7 +80,7 @@ namespace SilvaData.Utils
                 {
                     if (parametroComAlternativas.nome == nome && parametroComAlternativas.Categoria == categoria)
                     {
-                        await MainThread.InvokeOnMainThreadAsync(() => sfListView.ScrollTo(item, ScrollToPosition.End)).ConfigureAwait(false);
+                        await MainThread.InvokeOnMainThreadAsync(() => sfListView.ScrollTo(item, ScrollToPosition.Start, true)).ConfigureAwait(false);
                         break;
                     }
                 }

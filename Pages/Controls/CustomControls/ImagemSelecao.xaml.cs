@@ -175,8 +175,17 @@ namespace SilvaData.Controls
             {
                 Debug.WriteLine("[ImagemSelecao] Abrindo galeria com Android Photo Picker...");
 
-                // Android Photo Picker não requer permissões READ_MEDIA_IMAGES
-                var photoResult = await PhotoPickerService.PickPhotoAsync();
+                LoteFormularioView.CarregandoFoto = true;
+                FileResult? photoResult;
+                try
+                {
+                    // Android Photo Picker não requer permissões READ_MEDIA_IMAGES
+                    photoResult = await PhotoPickerService.PickPhotoAsync();
+                }
+                finally
+                {
+                    LoteFormularioView.CarregandoFoto = false;
+                }
 
                 if (photoResult == null)
                 {

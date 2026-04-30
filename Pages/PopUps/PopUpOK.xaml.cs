@@ -1,4 +1,4 @@
-using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -18,13 +18,14 @@ namespace SilvaData.Pages.PopUps
             await NavigationUtils.ShowPopupAsync(popup);
         }
 
-        [Obsolete("O m�todo PopUpOK.Show � obsoleto. Use PopUpOK.ShowAsync.", false)]
+        [Obsolete("O mï¿½todo PopUpOK.Show ï¿½ obsoleto. Use PopUpOK.ShowAsync.", false)]
         public static Task Show(string titulo, string mensagem) => ShowAsync(titulo, mensagem);
     }
 
     public partial class PopUpOKViewModel : ObservableObject
     {
         private readonly PopUpOK _popup;
+        private bool _isClosing;
 
         public string Titulo { get; }
         public string Mensagem { get; }
@@ -37,9 +38,6 @@ namespace SilvaData.Pages.PopUps
         }
 
         [RelayCommand]
-        private Task OK()
-        {
-            return _popup.CloseAsync(true);
-        }
+        private async Task `OK() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(`true); } catch { } }
     }
 }

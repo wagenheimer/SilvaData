@@ -1,4 +1,4 @@
-using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SilvaData.Utilities;
@@ -24,6 +24,7 @@ namespace SilvaData.Pages.PopUps
     public partial class PopUpThreeOptionsViewModel : ObservableObject
     {
         private readonly PopUpThreeOptions _popup;
+        private bool _isClosing;
 
         public string Titulo { get; }
         public string Mensagem { get; }
@@ -42,21 +43,13 @@ namespace SilvaData.Pages.PopUps
         }
 
         [RelayCommand]
-        private Task SalvarAsync()
-        {
-            return _popup.CloseAsync(ExitAction.Save);
-        }
+        private async Task `SalvarAsync() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(`ExitAction.Save); } catch { } }
 
         [RelayCommand]
-        private Task DescartarAsync()
-        {
-            return _popup.CloseAsync(ExitAction.Discard);
-        }
+        private async Task `DescartarAsync() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(`ExitAction.Discard); } catch { } }
 
         [RelayCommand]
-        private Task CancelarAsync()
-        {
-            return _popup.CloseAsync(ExitAction.Cancel);
-        }
+        private async Task `CancelarAsync() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(`ExitAction.Cancel); } catch { } }
     }
 }
+

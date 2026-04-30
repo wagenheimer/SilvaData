@@ -158,10 +158,15 @@ namespace SilvaData.ViewModels
 
             try
             {
-                Debug.WriteLine($"[ISIMacroNotaSelecionaImagemViewModel] Selecionado: {Alternativa?.descricao} (Score: {Alternativa?.score})");
+                // Commit the currently displayed alternativa before sending the score update.
+                // When SelectedIndex == -1, Alternativa falls back to ListaAlternativas[0] for display
+                // but SelectedIndex stays -1 → AlternativaSelecionada would be null and no score is saved.
+                if (ISIMacroParametro.SelectedIndex == -1 && ISIMacroParametro.ListaAlternativas.Count > 0)
+                    ISIMacroParametro.SelectedIndex = 0;
+
+                Debug.WriteLine($"[ISIMacroNotaSelecionaImagemViewModel] Selecionado: {Alternativa?.descricao} (Score: {Alternativa?.score}) Index={ISIMacroParametro.SelectedIndex}");
 
                 HapticHelper.VibrateClick();
-                // ✅ Envia mensagem de atualização de score
                 WeakReferenceMessenger.Default.Send(new UpdateScoreMessage());
 
                 // Fecha a página

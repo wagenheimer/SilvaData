@@ -1,4 +1,4 @@
-using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 using SilvaData.Utils;
@@ -11,15 +11,15 @@ using System.Windows.Input;
 namespace SilvaData.Pages.PopUps
 {
     /// <summary>
-    /// Popup para avalia��o Net Promoter Score (NPS).
+    /// Popup para avaliaï¿½ï¿½o Net Promoter Score (NPS).
     /// </summary>
     public partial class PopUpNPS : Popup<NPSResult>
     {
         /// <summary>
-        /// Inicializa uma nova inst�ncia do popup de avalia��o NPS.
+        /// Inicializa uma nova instï¿½ncia do popup de avaliaï¿½ï¿½o NPS.
         /// </summary>
-        /// <param name="titulo">T�tulo do popup</param>
-        /// <param name="mensagem">Mensagem explicativa sobre a avalia��o</param>
+        /// <param name="titulo">Tï¿½tulo do popup</param>
+        /// <param name="mensagem">Mensagem explicativa sobre a avaliaï¿½ï¿½o</param>
         public PopUpNPS(string titulo, string mensagem)
         {
             InitializeComponent();
@@ -27,73 +27,74 @@ namespace SilvaData.Pages.PopUps
         }
 
         /// <summary>
-        /// Exibe um popup de avalia��o NPS e retorna o resultado da avalia��o.
+        /// Exibe um popup de avaliaï¿½ï¿½o NPS e retorna o resultado da avaliaï¿½ï¿½o.
         /// </summary>
-        /// <param name="titulo">T�tulo do popup</param>
-        /// <param name="mensagem">Mensagem explicativa sobre a avalia��o</param>
-        /// <returns>Resultado da avalia��o (nota e coment�rios) ou valores padr�o se cancelado</returns>
+        /// <param name="titulo">Tï¿½tulo do popup</param>
+        /// <param name="mensagem">Mensagem explicativa sobre a avaliaï¿½ï¿½o</param>
+        /// <returns>Resultado da avaliaï¿½ï¿½o (nota e comentï¿½rios) ou valores padrï¿½o se cancelado</returns>
         public static async Task<NPSResult> ShowAsync(string titulo, string mensagem)
         {
             var popup = new PopUpNPS(titulo, mensagem);
 
-            // Usa o m�todo gen�rico do NavigationUtils que j� lida com o tipo de retorno
+            // Usa o mï¿½todo genï¿½rico do NavigationUtils que jï¿½ lida com o tipo de retorno
             var result = await NavigationUtils.ShowPopupAsync<NPSResult>(popup);
 
-            // Garante que nunca retorne nulo, mesmo se o usu�rio fechar o popup sem selecionar
+            // Garante que nunca retorne nulo, mesmo se o usuï¿½rio fechar o popup sem selecionar
             return result ?? NPSResult.Default();
         }
     }
 
     /// <summary>
-    /// ViewModel para o popup de avalia��o NPS.
+    /// ViewModel para o popup de avaliaï¿½ï¿½o NPS.
     /// </summary>
     public partial class PopUpNPSViewModel : ObservableObject
     {
         private readonly PopUpNPS _popup;
+        private bool _isClosing;
 
         /// <summary>
-        /// T�tulo do popup.
+        /// Tï¿½tulo do popup.
         /// </summary>
         public string Titulo { get; }
 
         /// <summary>
-        /// Mensagem explicativa sobre a avalia��o.
+        /// Mensagem explicativa sobre a avaliaï¿½ï¿½o.
         /// </summary>
         public string Mensagem { get; }
 
         /// <summary>
-        /// Nota dada pelo usu�rio (0-10).
+        /// Nota dada pelo usuï¿½rio (0-10).
         /// </summary>
         [ObservableProperty]
         private double rating = 5;
 
         /// <summary>
-        /// Coment�rios adicionais fornecidos pelo usu�rio.
+        /// Comentï¿½rios adicionais fornecidos pelo usuï¿½rio.
         /// </summary>
         [ObservableProperty]
         private string comments = string.Empty;
 
         /// <summary>
-        /// Comando para enviar a avalia��o.
+        /// Comando para enviar a avaliaï¿½ï¿½o.
         /// </summary>
         public ICommand EnviarCommand { get; }
 
         /// <summary>
-        /// Comando para cancelar a avalia��o.
+        /// Comando para cancelar a avaliaï¿½ï¿½o.
         /// </summary>
         public ICommand CancelarCommand { get; }
 
         /// <summary>
-        /// Inicializa uma nova inst�ncia do ViewModel.
+        /// Inicializa uma nova instï¿½ncia do ViewModel.
         /// </summary>
-        /// <param name="popup">Refer�ncia para o popup</param>
-        /// <param name="titulo">T�tulo do popup</param>
-        /// <param name="mensagem">Mensagem explicativa sobre a avalia��o</param>
+        /// <param name="popup">Referï¿½ncia para o popup</param>
+        /// <param name="titulo">Tï¿½tulo do popup</param>
+        /// <param name="mensagem">Mensagem explicativa sobre a avaliaï¿½ï¿½o</param>
         public PopUpNPSViewModel(PopUpNPS popup, string titulo, string mensagem)
         {
             _popup = popup ?? throw new ArgumentNullException(nameof(popup));
-            Titulo = titulo ?? "Avalia��o";
-            Mensagem = mensagem ?? "Avalie nossa solu��o";
+            Titulo = titulo ?? "Avaliaï¿½ï¿½o";
+            Mensagem = mensagem ?? "Avalie nossa soluï¿½ï¿½o";
 
             EnviarCommand = new Command(Enviar);
             CancelarCommand = new Command(Cancelar);
@@ -108,10 +109,7 @@ namespace SilvaData.Pages.PopUps
             });
         }
 
-        private void Cancelar()
-        {
-            _popup.CloseAsync();
-        }
+        private async void `Cancelar() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(`); } catch { } }
 
         public static bool JaDeuNotaNPS => (!string.IsNullOrEmpty(ISIWebService.Instance.LoggedUser.nps) && ISIWebService.Instance.LoggedUser.nps != "-1");
 

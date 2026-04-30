@@ -1,4 +1,4 @@
-using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -16,13 +16,14 @@ using System.Threading.Tasks;
 namespace SilvaData.ViewModels
 {
     /// <summary>
-    /// ViewModel para o PopUp do Menu do Usuário (Minha Conta, Privacidade, Sair).
+    /// ViewModel para o PopUp do Menu do UsuÃ¡rio (Minha Conta, Privacidade, Sair).
     /// </summary>
     public partial class PopUpUsuarioViewModel : ObservableObject
     {
         private readonly ConfigViewModel _configViewModel;
         private readonly ISIWebService _webService;
-        private Action? _closePopupAction;
+        private Func<Task>? _closePopupAction;
+        private bool _isClosing;
 
         [ObservableProperty]
         private string loggedUserName;
@@ -47,7 +48,7 @@ namespace SilvaData.ViewModels
             LoggedUserEmail = _webService.LoggedUser?.email ?? string.Empty;
         }
 
-        public void SetCloseAction(Action closeAction)
+        public void SetCloseAction(Func<Task> closeAction)
         {
             _closePopupAction = closeAction;
         }
@@ -55,7 +56,7 @@ namespace SilvaData.ViewModels
         [RelayCommand]
         private async Task MinhaContaAsync()
         {
-            _closePopupAction?.Invoke();
+            if (_isClosing) return; _isClosing = true; if (_closePopupAction != null) await _closePopupAction();
             await NavigationUtils.ShowViewAsModalAsync<MinhaConta>();
         }
 
@@ -63,7 +64,7 @@ namespace SilvaData.ViewModels
         [RelayCommand]
         private async Task PermissoesAsync()
         {
-            _closePopupAction?.Invoke();
+            if (_isClosing) return; _isClosing = true; if (_closePopupAction != null) await _closePopupAction();
             var popup = new PermissoesPopup();
             await NavigationUtils.ShowPopupAsync(popup);
         }
@@ -72,17 +73,17 @@ namespace SilvaData.ViewModels
         [RelayCommand]
         private async Task PrivacidadeAsync()
         {
-            _closePopupAction?.Invoke(); // Fecha o popup
+            if (_isClosing) return; _isClosing = true; if (_closePopupAction != null) await _closePopupAction(); // Fecha o popup
             await _configViewModel.MostraPrivacidade();
         }
 
         /// <summary>
-        /// Fecha o popup e pergunta se o usuário quer deslogar.
+        /// Fecha o popup e pergunta se o usuÃ¡rio quer deslogar.
         /// </summary>
         [RelayCommand]
         private async Task LogOffAsync()
         {
-            _closePopupAction?.Invoke(); // Fecha o popup
+            if (_isClosing) return; _isClosing = true; if (_closePopupAction != null) await _closePopupAction(); // Fecha o popup
             await _configViewModel.PerguntaLogOff();
         }
     }

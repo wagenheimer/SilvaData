@@ -1,4 +1,4 @@
-using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -17,7 +17,7 @@ using System.Reflection;
 namespace SilvaData.ViewModels
 {
     /// <summary>
-    /// ViewModel para uma categoria de permissões no popup.
+    /// ViewModel para uma categoria de permissÃµes no popup.
     /// </summary>
     public partial class PermissaoCategoriaViewModel : ObservableObject
     {
@@ -36,11 +36,12 @@ namespace SilvaData.ViewModels
     }
 
     /// <summary>
-    /// ViewModel para o popup de permissões do usuário (DEBUG only).
+    /// ViewModel para o popup de permissÃµes do usuÃ¡rio (DEBUG only).
     /// </summary>
     public partial class PermissoesPopupViewModel : ObservableObject
     {
         private readonly Popup _popup;
+        private bool _isClosing;
 
         [ObservableProperty]
         private ObservableCollection<PermissaoCategoriaViewModel> categorias = new();
@@ -52,7 +53,7 @@ namespace SilvaData.ViewModels
         }
 
         /// <summary>
-        /// Carrega todas as permissões do usuário via reflexão.
+        /// Carrega todas as permissÃµes do usuÃ¡rio via reflexÃ£o.
         /// </summary>
         private void CarregarPermissoes()
         {
@@ -61,11 +62,11 @@ namespace SilvaData.ViewModels
             var permissoes = Permissoes.UsuarioPermissoes;
             if (permissoes == null) return;
 
-            // Permissões principais
+            // PermissÃµes principais
             ExtrairPermissoes("Regionais", permissoes.regionais);
             ExtrairPermissoes("Propriedades", permissoes.propriedades);
-            ExtrairPermissoes("Proprietários", permissoes.proprietarios);
-            ExtrairPermissoes("Unidades Epidemiológicas", permissoes.unidadesEpidemiologicas);
+            ExtrairPermissoes("ProprietÃ¡rios", permissoes.proprietarios);
+            ExtrairPermissoes("Unidades EpidemiolÃ³gicas", permissoes.unidadesEpidemiologicas);
             ExtrairPermissoes("Atividades", permissoes.atividades);
 
             // Lotes
@@ -75,9 +76,9 @@ namespace SilvaData.ViewModels
             if (permissoes.lotes?.monitoramento != null)
             {
                 ExtrairPermissoes("Lotes - Sanidade", permissoes.lotes.monitoramento.sanidade);
-                ExtrairPermissoes("Lotes - Zootécnico", permissoes.lotes.monitoramento.zootecnico);
+                ExtrairPermissoes("Lotes - ZootÃ©cnico", permissoes.lotes.monitoramento.zootecnico);
                 ExtrairPermissoes("Lotes - ISI Macro", permissoes.lotes.monitoramento.isiMacro);
-                ExtrairPermissoes("Lotes - Nutrição", permissoes.lotes.monitoramento.nutricao);
+                ExtrairPermissoes("Lotes - NutriÃ§Ã£o", permissoes.lotes.monitoramento.nutricao);
                 ExtrairPermissoes("Lotes - ISI Micro", permissoes.lotes.monitoramento.isiMicro);
                 ExtrairPermissoes("Lotes - Manejo", permissoes.lotes.monitoramento.manejo);
             }
@@ -102,7 +103,7 @@ namespace SilvaData.ViewModels
         }
 
         /// <summary>
-        /// Extrai todas as propriedades booleanas de um objeto de permissões.
+        /// Extrai todas as propriedades booleanas de um objeto de permissÃµes.
         /// </summary>
         private void ExtrairPermissoes(string categoriaNome, object? permissaoObj)
         {
@@ -136,7 +137,7 @@ namespace SilvaData.ViewModels
         }
 
         /// <summary>
-        /// Formata o nome da propriedade para exibição amigável.
+        /// Formata o nome da propriedade para exibiÃ§Ã£o amigÃ¡vel.
         /// </summary>
         private string FormatPermissionName(string propName)
         {
@@ -149,7 +150,7 @@ namespace SilvaData.ViewModels
                 "editar" => "Editar",
                 "abrir" => "Abrir",
                 "fechar" => "Fechar",
-                "excluirForm" => "Excluir Formulário",
+                "excluirForm" => "Excluir FormulÃ¡rio",
                 _ => char.ToUpper(propName[0]) + propName.Substring(1)
             };
         }
@@ -158,20 +159,20 @@ namespace SilvaData.ViewModels
         /// Fecha o popup sem salvar.
         /// </summary>
         [RelayCommand]
-        private void Fechar()
+        private async Task Fechar()
         {
-            _ = _popup?.CloseAsync();
+            if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(); } catch { }
         }
 
         /// <summary>
-        /// Salva as permissões alteradas no Preferences e notifica a UI.
+        /// Salva as permissÃµes alteradas no Preferences e notifica a UI.
         /// </summary>
         [RelayCommand]
-        private void Salvar()
+        private async Task Salvar()
         {
             try
             {
-                // Aplica as alterações via reflexão
+                // Aplica as alteraÃ§Ãµes via reflexÃ£o
                 foreach (var categoria in Categorias)
                 {
                     foreach (var permissao in categoria.Permissoes)
@@ -187,17 +188,18 @@ namespace SilvaData.ViewModels
                 var json = JsonConvert.SerializeObject(Permissoes.UsuarioPermissoes);
                 Preferences.Set("Permissoes", json);
 
-                // Notifica todas as propriedades estáticas via método público
+                // Notifica todas as propriedades estÃ¡ticas via mÃ©todo pÃºblico
                 Permissoes.NotifyAllStaticPropertiesChanged();
 
-                Debug.WriteLine("[PermissoesPopup] Permissões salvas com sucesso.");
+                Debug.WriteLine("[PermissoesPopup] PermissÃµes salvas com sucesso.");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[PermissoesPopup] Erro ao salvar permissões: {ex.Message}");
+                Debug.WriteLine($"[PermissoesPopup] Erro ao salvar permissÃµes: {ex.Message}");
             }
 
-            _ = _popup?.CloseAsync();
+            if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(); } catch { }
         }
     }
 }
+

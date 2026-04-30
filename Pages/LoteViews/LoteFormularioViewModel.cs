@@ -641,7 +641,7 @@ public partial class LoteFormularioViewModel : ViewModelBase
         await CarregaParametrosAsync(novoLoteForm, modeloIsiMacroSelecionado);
         Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ✓ CarregaParametrosAsync concluído");
 
-        if (LoteFormulario.LoteForm == null)
+        if (LoteFormulario?.LoteForm == null)
         {
             Debug.WriteLine($"[LoteFormularioViewModel.CarregaFormularioAsync] ▶ Novo formulário — inicializando LoteForm");
             InicializaNovoLoteForm(modeloIsiMacroSelecionado);

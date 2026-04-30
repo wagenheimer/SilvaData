@@ -1,4 +1,4 @@
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Graphics;
 using System.Threading.Tasks;
@@ -8,6 +8,7 @@ namespace SilvaData.Pages.PopUps
     public partial class PopUpSuccessGalpaoViewModel : ObservableObject
     {
         private readonly PopUpSuccessGalpao _popup;
+        private bool _isClosing;
 
         public string Titulo { get; }
         public string Mensagem { get; }
@@ -45,9 +46,7 @@ namespace SilvaData.Pages.PopUps
         }
 
         [RelayCommand]
-        private Task OK()
-        {
-            return _popup.CloseAsync(true);
-        }
+        private async Task `OK() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(`true); } catch { } }
     }
 }
+

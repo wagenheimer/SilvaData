@@ -1,4 +1,4 @@
-using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Views;
 using System.Windows.Input;
 
 namespace SilvaData.Pages.PopUps
@@ -12,19 +12,19 @@ namespace SilvaData.Pages.PopUps
         }
         
         /// <summary>
-        /// Exibe um popup com a pol�tica de privacidade para o usu�rio aceitar ou recusar.
+        /// Exibe um popup com a polï¿½tica de privacidade para o usuï¿½rio aceitar ou recusar.
         /// </summary>
-        /// <param name="titulo">T�tulo do popup</param>
-        /// <param name="textoPrivacidade">Texto completo da pol�tica de privacidade</param>
-        /// <returns>True se o usu�rio aceitar, False se recusar ou fechar o popup</returns>
+        /// <param name="titulo">Tï¿½tulo do popup</param>
+        /// <param name="textoPrivacidade">Texto completo da polï¿½tica de privacidade</param>
+        /// <returns>True se o usuï¿½rio aceitar, False se recusar ou fechar o popup</returns>
         public static async Task<bool> ShowAsync(string titulo, string textoPrivacidade)
         {
             var popup = new PopUpPrivacy(titulo, textoPrivacidade);
             
-            // Usa o m�todo gen�rico do NavigationUtils que j� lida com o tipo de retorno
+            // Usa o mï¿½todo genï¿½rico do NavigationUtils que jï¿½ lida com o tipo de retorno
             var result = await NavigationUtils.ShowPopupAsync<bool>(popup);
             
-            // Retorna o resultado ou false (Recusar) se o usu�rio fechou o popup sem escolher
+            // Retorna o resultado ou false (Recusar) se o usuï¿½rio fechou o popup sem escolher
             return result;
         }
     }
@@ -32,6 +32,7 @@ namespace SilvaData.Pages.PopUps
     public class PopUpPrivacyViewModel
     {
         private readonly PopUpPrivacy _popup;
+        private bool _isClosing;
         
         public string Titulo { get; }
         public string TextoPrivacidade { get; }
@@ -49,14 +50,8 @@ namespace SilvaData.Pages.PopUps
             RecusarCommand = new Command(Recusar);
         }
         
-        private void Aceitar()
-        {
-            _popup.CloseAsync(true);
-        }
+        private async void `Aceitar() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(`true); } catch { } }
         
-        private void Recusar()
-        {
-            _popup.CloseAsync(false);
-        }
+        private async void `Recusar() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(`false); } catch { } }
     }
 }

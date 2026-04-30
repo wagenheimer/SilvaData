@@ -1,28 +1,28 @@
-using System;
+﻿using System;
 using System.Threading.Tasks;
 
 using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input; // MUDAN�A: Necess�rio para [RelayCommand]
+using CommunityToolkit.Mvvm.Input; // MUDANï¿½A: Necessï¿½rio para [RelayCommand]
 
 using SilvaData.Models;
 
-// Removido: using System.Windows.Input; (Substitu�do por CommunityToolkit.Mvvm.Input)
+// Removido: using System.Windows.Input; (Substituï¿½do por CommunityToolkit.Mvvm.Input)
 
 using SilvaData.Utilities;
 
 namespace SilvaData.Pages.PopUps
 {
     /// <summary>
-    /// Popup para fechamento de lote com campos para data e observa��es.
+    /// Popup para fechamento de lote com campos para data e observaï¿½ï¿½es.
     /// </summary>
-    // MUDAN�A: A classe aninhada n�o precisa do 'static using' na pr�pria classe
+    // MUDANï¿½A: A classe aninhada nï¿½o precisa do 'static using' na prï¿½pria classe
     public partial class PopUpFecharLote : Popup<LoteFechamentoInfo>
     {
         /// <summary>
-        /// Inicializa uma nova inst�ncia do popup de fechamento de lote.
+        /// Inicializa uma nova instï¿½ncia do popup de fechamento de lote.
         /// </summary>
-        /// <param name="titulo">T�tulo do popup</param>
+        /// <param name="titulo">Tï¿½tulo do popup</param>
         /// <param name="mensagem">Mensagem explicativa</param>
         public PopUpFecharLote(string titulo, string mensagem)
         {
@@ -31,11 +31,11 @@ namespace SilvaData.Pages.PopUps
         }
 
         /// <summary>
-        /// Exibe um popup para fechamento de lote com campos para data e observa��es.
+        /// Exibe um popup para fechamento de lote com campos para data e observaï¿½ï¿½es.
         /// </summary>
-        /// <param name="titulo">T�tulo do popup</param>
+        /// <param name="titulo">Tï¿½tulo do popup</param>
         /// <param name="mensagem">Mensagem explicativa</param>
-        /// <returns>Informa��es do fechamento do lote (data, observa��es, confirmado)</returns>
+        /// <returns>Informaï¿½ï¿½es do fechamento do lote (data, observaï¿½ï¿½es, confirmado)</returns>
         public static async Task<LoteFechamentoInfo> ShowAsync(string titulo, string mensagem)
         {
             if (string.IsNullOrEmpty(titulo))
@@ -43,10 +43,10 @@ namespace SilvaData.Pages.PopUps
 
             var popup = new PopUpFecharLote(titulo, mensagem);
 
-            // Usa o m�todo gen�rico do NavigationUtils (migrado)
+            // Usa o mï¿½todo genï¿½rico do NavigationUtils (migrado)
             var result = await NavigationUtils.ShowPopupAsync<LoteFechamentoInfo>(popup);
 
-            // Garante que nunca retorne nulo, fornecendo valores padr�o
+            // Garante que nunca retorne nulo, fornecendo valores padrï¿½o
             return result ?? LoteFechamentoInfo.Default();
         }
     }
@@ -54,14 +54,15 @@ namespace SilvaData.Pages.PopUps
     /// <summary>
     /// ViewModel para o popup de fechamento de lote.
     /// </summary>
-    // MUDAN�A: A classe precisa ser 'partial' para o MVVM Toolkit
+    // MUDANï¿½A: A classe precisa ser 'partial' para o MVVM Toolkit
     public partial class PopUpFecharLoteViewModel : ObservableObject
     {
-        // MUDAN�A: A refer�ncia ao PopUp usa a classe PopUpFecharLote
+        // MUDANï¿½A: A referï¿½ncia ao PopUp usa a classe PopUpFecharLote
         private readonly PopUpFecharLote _popup;
+        private bool _isClosing;
 
         /// <summary>
-        /// T�tulo do popup.
+        /// Tï¿½tulo do popup.
         /// </summary>
         public string Titulo { get; }
 
@@ -77,15 +78,15 @@ namespace SilvaData.Pages.PopUps
         private DateTime dataFechamento = DateTime.Now;
 
         /// <summary>
-        /// Observa��es sobre o fechamento.
+        /// Observaï¿½ï¿½es sobre o fechamento.
         /// </summary>
         [ObservableProperty]
         private string observacoes = string.Empty;
 
-        // MUDAN�A: Comandos manuais ICommand removidos.
+        // MUDANï¿½A: Comandos manuais ICommand removidos.
 
         /// <summary>
-        /// Inicializa uma nova inst�ncia do ViewModel.
+        /// Inicializa uma nova instï¿½ncia do ViewModel.
         /// </summary>
         public PopUpFecharLoteViewModel(PopUpFecharLote popup, string titulo, string mensagem)
         {
@@ -93,14 +94,14 @@ namespace SilvaData.Pages.PopUps
             Titulo = titulo ?? "Fechar Lote";
             Mensagem = mensagem ?? string.Empty;
 
-            // MUDAN�A: Comandos n�o s�o mais inicializados manualmente
+            // MUDANï¿½A: Comandos nï¿½o sï¿½o mais inicializados manualmente
         }
 
-        // MUDAN�A: Usando [RelayCommand] para o comando de Confirma��o
+        // MUDANï¿½A: Usando [RelayCommand] para o comando de Confirmaï¿½ï¿½o
         [RelayCommand]
-        private Task ConfirmarAsync() // MUDAN�A: M�todo ass�ncrono que retorna Task
+        private Task ConfirmarAsync() // MUDANï¿½A: Mï¿½todo assï¿½ncrono que retorna Task
         {
-            // Cria um objeto com as informa��es do fechamento
+            // Cria um objeto com as informaï¿½ï¿½es do fechamento
             var info = new LoteFechamentoInfo
             {
                 DataFechamento = DataFechamento,
@@ -108,24 +109,24 @@ namespace SilvaData.Pages.PopUps
                 Confirmado = true
             };
 
-            // MUDAN�A: Fecha o popup usando CloseAsync (sempre a forma preferida)
+            // MUDANï¿½A: Fecha o popup usando CloseAsync (sempre a forma preferida)
             return _popup.CloseAsync(info);
         }
 
-        // MUDAN�A: Usando [RelayCommand] para o comando de Cancelamento
+        // MUDANï¿½A: Usando [RelayCommand] para o comando de Cancelamento
         [RelayCommand]
-        private Task CancelarAsync() // MUDAN�A: M�todo ass�ncrono que retorna Task
+        private Task CancelarAsync() // MUDANï¿½A: Mï¿½todo assï¿½ncrono que retorna Task
         {
-            // Cria um objeto com as informa��es, mas com Confirmado = false
+            // Cria um objeto com as informaï¿½ï¿½es, mas com Confirmado = false
             var info = new LoteFechamentoInfo
             {
-                // Mantemos a data e observa��es para consist�ncia de dados
+                // Mantemos a data e observaï¿½ï¿½es para consistï¿½ncia de dados
                 DataFechamento = DataFechamento,
                 Observacoes = Observacoes ?? string.Empty,
                 Confirmado = false
             };
 
-            // MUDAN�A: Fecha o popup usando CloseAsync (sempre a forma preferida)
+            // MUDANï¿½A: Fecha o popup usando CloseAsync (sempre a forma preferida)
             return _popup.CloseAsync(info);
         }
     }

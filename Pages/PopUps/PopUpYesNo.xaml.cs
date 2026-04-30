@@ -1,4 +1,4 @@
-using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -18,7 +18,7 @@ namespace SilvaData.Pages.PopUps
         }
 
         /// <summary>
-        /// Exibe um popup de confirma��o com bot�es Sim e N�o customizados.
+        /// Exibe um popup de confirmaï¿½ï¿½o com botï¿½es Sim e Nï¿½o customizados.
         /// </summary>
         // 2. ShowAsync agora aceita 4 argumentos
         public static async Task<bool> ShowAsync(string titulo, string mensagem)
@@ -30,7 +30,7 @@ namespace SilvaData.Pages.PopUps
 
 
         /// <summary>
-        /// Exibe um popup de confirma��o com bot�es Sim e N�o customizados.
+        /// Exibe um popup de confirmaï¿½ï¿½o com botï¿½es Sim e Nï¿½o customizados.
         /// </summary>
         // 2. ShowAsync agora aceita 4 argumentos
         public static async Task<bool> ShowAsync(string titulo, string mensagem, string textoSim, string textoNao)
@@ -42,8 +42,8 @@ namespace SilvaData.Pages.PopUps
             return result;
         }
 
-        [Obsolete("O m�todo PopUpYesNo.Show � obsoleto. Use PopUpYesNo.ShowAsync.", false)]
-        // 3. M�todo obsoleto Show agora aceita 4 argumentos
+        [Obsolete("O mï¿½todo PopUpYesNo.Show ï¿½ obsoleto. Use PopUpYesNo.ShowAsync.", false)]
+        // 3. Mï¿½todo obsoleto Show agora aceita 4 argumentos
         public static Task<bool> Show(string titulo, string mensagem, string textoSim, string textoNao)
         {
             return ShowAsync(titulo, mensagem, textoSim, textoNao);
@@ -54,11 +54,12 @@ namespace SilvaData.Pages.PopUps
     public partial class PopUpYesNoViewModel : ObservableObject
     {
         private readonly PopUpYesNo _popup;
+        private bool _isClosing;
 
         public string Titulo { get; }
         public string Mensagem { get; }
 
-        // Mantenha estas propriedades. Elas ser�o usadas no XAML para os textos dos bot�es.
+        // Mantenha estas propriedades. Elas serï¿½o usadas no XAML para os textos dos botï¿½es.
         public string TextoSim { get; }
         public string TextoNao { get; }
 
@@ -69,21 +70,15 @@ namespace SilvaData.Pages.PopUps
             Titulo = titulo;
             Mensagem = mensagem;
 
-            // Inicializa as propriedades de texto dos bot�es
+            // Inicializa as propriedades de texto dos botï¿½es
             TextoSim = textoSim;
             TextoNao = textoNao;
         }
 
         [RelayCommand]
-        private Task SimAsync()
-        {
-            return _popup.CloseAsync(true);
-        }
+        private async Task SimAsync() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(true); } catch { } }
 
         [RelayCommand]
-        private Task NaoAsync()
-        {
-            return _popup.CloseAsync(false);
-        }
+        private async Task NaoAsync() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(false); } catch { } }
     }
 }

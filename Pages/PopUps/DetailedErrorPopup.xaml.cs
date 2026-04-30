@@ -1,4 +1,4 @@
-using SilvaData.Models;
+﻿using SilvaData.Models;
 using Microsoft.Maui.ApplicationModel.DataTransfer;
 using System.Diagnostics;
 using System.Text;
@@ -8,6 +8,7 @@ namespace SilvaData.Pages.PopUps
     public partial class DetailedErrorPopup : ContentPage
     {
         private readonly ErrorDetails _errorDetails;
+        private bool _isClosing;
 
         public DetailedErrorPopup(ErrorDetails errorDetails)
         {
@@ -40,8 +41,8 @@ namespace SilvaData.Pages.PopUps
 
             ErrorTypeFrame.BackgroundColor = frameColor;
 
-            // Configura informações básicas
-            MethodLabel.Text = $"Método: {_errorDetails.MethodName}";
+            // Configura informaÃ§Ãµes bÃ¡sicas
+            MethodLabel.Text = $"MÃ©todo: {_errorDetails.MethodName}";
             TimestampLabel.Text = $"Data/Hora: {_errorDetails.Timestamp:dd/MM/yyyy HH:mm:ss} UTC";
             UserMessageLabel.Text = _errorDetails.UserFriendlyMessage;
 
@@ -50,7 +51,7 @@ namespace SilvaData.Pages.PopUps
             {
                 RetryFrame.IsVisible = true;
                 RetryCountLabel.Text = $"Tentativas: {_errorDetails.RetryCount}";
-                RetryableLabel.Text = $"Pode retentar: {(_errorDetails.IsRetryable ? "Sim" : "Não")}";
+                RetryableLabel.Text = $"Pode retentar: {(_errorDetails.IsRetryable ? "Sim" : "NÃ£o")}";
             }
 
             // Configura contexto se houver
@@ -62,7 +63,7 @@ namespace SilvaData.Pages.PopUps
 
         private void PopulateErrorDetails()
         {
-            // Informações da requisição
+            // InformaÃ§Ãµes da requisiÃ§Ã£o
             RequestIdLabel.Text = $"Request ID: {_errorDetails.RequestId}";
             UrlLabel.Text = $"URL: {_errorDetails.RequestUrl}";
             StatusCodeLabel.Text = $"Status Code: {_errorDetails.StatusCode?.ToString() ?? "N/A"}";
@@ -98,8 +99,7 @@ namespace SilvaData.Pages.PopUps
             _ = OnCloseClickedAsync();
         }
 
-        private async Task OnCloseClickedAsync()
-        {
+        private async Task OnCloseClickedAsync() { if (_isClosing) return; _isClosing = true;
             try
             {
                 await Navigation.PopModalAsync();
@@ -117,8 +117,8 @@ namespace SilvaData.Pages.PopUps
                 var isVisible = DetailsStack.IsVisible;
                 DetailsStack.IsVisible = !isVisible;
                 
-                // Atualiza o texto do botão
-                ToggleDetailsButton.Text = isVisible ? "▶ Ver Detalhes Técnicos" : "▼ Ocultar Detalhes Técnicos";
+                // Atualiza o texto do botÃ£o
+                ToggleDetailsButton.Text = isVisible ? "â–¶ Ver Detalhes TÃ©cnicos" : "â–¼ Ocultar Detalhes TÃ©cnicos";
             }
             catch (Exception ex)
             {
@@ -146,14 +146,14 @@ namespace SilvaData.Pages.PopUps
 #endif
 
                 // Feedback visual
-                await DisplayAlertAsync("Copiado!", "Os detalhes do erro foram copiados para a área de transferência.", "OK");
+                await DisplayAlertAsync("Copiado!", "Os detalhes do erro foram copiados para a Ã¡rea de transferÃªncia.", "OK");
                 
                 Debug.WriteLine($"[DetailedErrorPopup] Detalhes copiados para clipboard ({contentToCopy.Length} caracteres)");
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[DetailedErrorPopup] Erro ao copiar: {ex.Message}");
-                await DisplayAlertAsync("Erro", $"Não foi possível copiar: {ex.Message}", "OK");
+                await DisplayAlertAsync("Erro", $"NÃ£o foi possÃ­vel copiar: {ex.Message}", "OK");
             }
         }
 
@@ -182,8 +182,9 @@ namespace SilvaData.Pages.PopUps
             catch (Exception ex)
             {
                 Debug.WriteLine($"[DetailedErrorPopup] Erro ao compartilhar: {ex.Message}");
-                await DisplayAlertAsync("Erro", $"Não foi possível compartilhar: {ex.Message}", "OK");
+                await DisplayAlertAsync("Erro", $"NÃ£o foi possÃ­vel compartilhar: {ex.Message}", "OK");
             }
         }
     }
 }
+

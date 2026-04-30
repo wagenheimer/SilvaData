@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.Messaging;
 
+using SilvaData.Controls;
 using SilvaData.Models;
 using SilvaData.Utils;
 using SilvaData.ViewModels;
@@ -35,7 +36,7 @@ public partial class AvaliacaoGalpaoFormView : ContentPage
     {
         base.OnAppearing();
 
-        if (!_isInitialized)
+        if (!_isInitialized && !LoteFormularioView.CarregandoFoto)
         {
             _isInitialized = true;
             RegisterMessages();
@@ -47,7 +48,7 @@ public partial class AvaliacaoGalpaoFormView : ContentPage
     {
         base.OnDisappearing();
 
-        if (!NavigationUtils.TemModalAberta(this))
+        if (!NavigationUtils.TemModalAberta(this) && !LoteFormularioView.CarregandoFoto)
         {
             if (_isBusyHandlerSubscribed)
             {
