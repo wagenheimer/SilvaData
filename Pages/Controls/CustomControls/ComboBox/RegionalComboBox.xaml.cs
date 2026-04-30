@@ -223,6 +223,8 @@ namespace SilvaData.Controls
             var control = (RegionalComboBox)bindable;
             var regional = newValue as Regional;
 
+            control.OnPropertyChanged(nameof(ShowRequiredStar));
+
             if (Equals(control.regionalcombobox?.SelectedItem, regional))
             {
                 control.NotifyChanged();
@@ -313,7 +315,18 @@ namespace SilvaData.Controls
 
         /// <summary>Define se o campo é obrigatório</summary>
         public static readonly BindableProperty IsObrigatorioProperty =
-            BindableProperty.Create(nameof(IsObrigatorio), typeof(bool), typeof(RegionalComboBox), false);
+            BindableProperty.Create(
+                nameof(IsObrigatorio), 
+                typeof(bool), 
+                typeof(RegionalComboBox), 
+                false,
+                propertyChanged: (bindable, oldValue, newValue) => 
+                {
+                    if (bindable is RegionalComboBox control)
+                    {
+                        control.OnPropertyChanged(nameof(ShowRequiredStar));
+                    }
+                });
 
         public bool IsObrigatorio
         {
@@ -321,8 +334,16 @@ namespace SilvaData.Controls
             set
             {
                 SetValue(IsObrigatorioProperty, value);
+                OnPropertyChanged(nameof(ShowRequiredStar));
                 ScheduleValidationRefresh();
             }
         }
+
+        /// <summary>
+        /// Define se o asterisco de campo obrigatório deve ser exibido.
+        /// Visível apenas se for obrigatório E ainda não estiver preenchido.
+        /// </summary>
+        public bool ShowRequiredStar => IsObrigatorio && SelectedItem == null;
+
     }
 }

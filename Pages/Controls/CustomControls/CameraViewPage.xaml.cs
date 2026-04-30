@@ -30,7 +30,7 @@ namespace SilvaData.Controls
         // ───────────────────────────────────────────────────────────────────────────
 
         private readonly ImagemSelecao _imagemSelecao;
-        private readonly LoteFormularioViewModel _loteFormViewModel;
+        private readonly ILoteFormImagemViewModel _loteFormViewModel;
         private bool _isProcessing = false; // Lock para evitar múltiplos cliques
         private bool _isDisappearing = false; // Lock para evitar comandos durante fechamento
 
@@ -61,7 +61,7 @@ namespace SilvaData.Controls
         // CONSTRUTOR
         // ───────────────────────────────────────────────────────────────────────────
 
-        public CameraViewPage(ImagemSelecao imagemSelecao, LoteFormularioViewModel loteFormViewModel)
+        public CameraViewPage(ImagemSelecao imagemSelecao, ILoteFormImagemViewModel loteFormViewModel)
         {
             InitializeComponent();
             BindingContext = this;

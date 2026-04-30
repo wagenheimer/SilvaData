@@ -23,7 +23,7 @@ namespace SilvaData.ViewModels;
 /// ✅ Cache, Paralelização, Debounce
 /// ✅ CORRIGIDO: Garante que campos de avaliação apareçam
 /// </summary>
-public partial class LoteFormularioViewModel : ViewModelBase
+public partial class LoteFormularioViewModel : ViewModelBase, ILoteFormImagemViewModel
 {
     /// <summary>
     /// Força atualização de todos os bindings (refresh total)

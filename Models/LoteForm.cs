@@ -468,11 +468,19 @@ namespace SilvaData.Models
                     alteracao.loteFormFaseId = alteracao.loteFormFase;
                     alteracao.loteVisita = 50000;
 
-                    if ((alteracao.idApp == 0 || alteracao.idApp == null) && alteracao.id >= 5000 || alteracao.idApp == alteracao.id)
+                    // IMPORTANTE: Diferenciação entre registro novo (Local) e atualização (Servidor)
+                    // localId (gerado pelo App) são >= 5000 (ver Alteracao.GetNextId que usa 50000).
+                    // Se o id for >= 5000, é um registro criado no App que ainda não existe no servidor.
+                    if (alteracao.id >= 5000)
                     {
+                        // Guardamos o ID local em idApp para que o servidor possa nos devolver a relação correta.
                         alteracao.idApp = alteracao.id;
+                        // Enviamos -1 para o servidor saber que deve realizar um INSERT.
                         alteracao.id = -1;
                     }
+                    // Se o id for < 5000, ele já é um ID do servidor (sincronizado).
+                    // NÃO resetar para -1, caso contrário o servidor criará um novo registro (duplicidade).
+                    // O idApp = id no download do sync é normal e não deve disparar o reset do id.
 
                     alteracao.idApp ??= alteracao.id;
 

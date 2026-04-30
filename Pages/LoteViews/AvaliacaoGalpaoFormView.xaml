@@ -13,6 +13,14 @@
     x:DataType="viewModels:AvaliacaoGalpaoFormViewModel"
     Background="{StaticResource PrimaryColor}">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="GalpaoFooterTemplate">
+                <controls:GalpaoFormFooter />
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Behaviors>
         <toolkit:StatusBarBehavior StatusBarColor="{StaticResource PrimaryColor}" StatusBarStyle="LightContent" />
     </ContentPage.Behaviors>
@@ -98,14 +106,10 @@
 
         <!--  Conteúdo principal: Quantitativo (lista) ou Qualitativo (alternativas)  -->
 
-        <!--
-            Header/Footer NÃO são injetados — LoteFormHeader/Footer têm x:DataType=LoteFormularioViewModel
-            e RelativeSource que falham com AvaliacaoGalpaoFormViewModel.
-            O SfListView usa AutoFitMode sem header/footer.
-        -->
         <listView:SfListView
             x:Name="camposaPreencherGalpao"
             Grid.Row="2"
+            IsStickyFooter="False"
             IsVisible="{Binding AvaliacaoGalpaoQuantitativo}"
             ItemTemplate="{StaticResource Quantitativo}"
             ItemsSource="{Binding LoteFormulario.ListaAvaliacoesGalpao}"
@@ -148,6 +152,32 @@
                     HeightRequest="150"
                     IsReadOnly="{Binding ReadOnly}"
                     Text="{Binding LoteFormulario.LoteForm.observacoes, Mode=TwoWay}" />
+
+                <!--  Fotos  -->
+                <Label
+                    Margin="10,10,10,4"
+                    Text="{localization:Translate Fotos}"
+                    TextColor="{StaticResource PrimaryColor}" />
+                <Grid
+                    Margin="10,0,10,10"
+                    ColumnDefinitions="1*,1*,1*"
+                    RowDefinitions="150">
+                    <controls:ImagemSelecao
+                        Grid.Column="0"
+                        IsReadOnly="{Binding ReadOnly, Mode=OneWay}"
+                        LoteFormImagem="{Binding LoteFormImagem1, Mode=TwoWay}"
+                        NumeroFoto="1" />
+                    <controls:ImagemSelecao
+                        Grid.Column="1"
+                        IsReadOnly="{Binding ReadOnly, Mode=OneWay}"
+                        LoteFormImagem="{Binding LoteFormImagem2, Mode=TwoWay}"
+                        NumeroFoto="2" />
+                    <controls:ImagemSelecao
+                        Grid.Column="2"
+                        IsReadOnly="{Binding ReadOnly, Mode=OneWay}"
+                        LoteFormImagem="{Binding LoteFormImagem3, Mode=TwoWay}"
+                        NumeroFoto="3" />
+                </Grid>
 
             </VerticalStackLayout>
         </ScrollView>

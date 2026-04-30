@@ -434,6 +434,26 @@ namespace SilvaData.Models
                     await Db.ExecuteAsync($"update LoteParametro set loteId={resultinfo.id} where loteId={resultinfo.idApp}");
                     await Db.ExecuteAsync($"update LoteForm set loteId={resultinfo.id} where loteId={resultinfo.idApp}");
                     await Db.ExecuteAsync($"update LoteVisita set lote={resultinfo.id} where lote={resultinfo.idApp}");
+
+                    // IMPORTANTE: o ID do lote mudou de local (idApp) para servidor (id).
+                    // Invalida o cache para que futuras navegações usem o ID correto do servidor.
+                    // Sem isso, o ViewModel mantém o objeto com id=5000 em memória e novos
+                    // LoteForm criados para este lote herdam o loteId antigo, falhando no upload.
+                    await _cacheLock.WaitAsync();
+                    try
+                    {
+                        _loteCache.Remove(resultinfo.idApp ?? 0);
+                        _loteCache.Remove(resultinfo.id ?? 0);
+                    }
+                    finally { _cacheLock.Release(); }
+
+                    // Notifica o LoteViewModel com o lote atualizado (novo ID do servidor).
+                    if (resultinfo.id.HasValue)
+                    {
+                        var loteAtualizado = await PegaLoteAsync(resultinfo.id.Value, forceRefresh: true).ConfigureAwait(false);
+                        if (loteAtualizado != null)
+                            WeakReferenceMessenger.Default.Send(new LoteAlteradoMessage(loteAtualizado));
+                    }
                 }
 
                 var loteIds = lotes.Select(l => l.idApp).ToList();

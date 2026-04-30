@@ -12,13 +12,30 @@ namespace SilvaData.Controls
 
         #region IsObrigatorio
         public static readonly BindableProperty IsObrigatorioProperty =
-            BindableProperty.Create(nameof(IsObrigatorio), typeof(bool), typeof(ISIDatePicker), false);
+            BindableProperty.Create(
+                nameof(IsObrigatorio), 
+                typeof(bool), 
+                typeof(ISIDatePicker), 
+                false,
+                propertyChanged: (bindable, oldValue, newValue) => 
+                {
+                    if (bindable is ISIDatePicker control)
+                    {
+                        control.OnPropertyChanged(nameof(ShowRequiredStar));
+                    }
+                });
 
         public bool IsObrigatorio
         {
             get => (bool)GetValue(IsObrigatorioProperty);
             set => SetValue(IsObrigatorioProperty, value);
         }
+
+        /// <summary>
+        /// Define se o asterisco de campo obrigatório deve ser exibido.
+        /// Visível apenas se for obrigatório E ainda não estiver preenchido.
+        /// </summary>
+        public bool ShowRequiredStar => IsObrigatorio && !Data.HasValue;
         #endregion
 
         #region BindableProperties
@@ -97,6 +114,7 @@ namespace SilvaData.Controls
 
             DateTime? newDate = (DateTime?)newValue;
 
+            control.OnPropertyChanged(nameof(ShowRequiredStar));
             control.SyncDatePickerState();
 
             if (!newDate.HasValue)

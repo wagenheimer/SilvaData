@@ -24,6 +24,7 @@ namespace SilvaData.Controls
                 {
                     if (bindable is ISITextField control)
                     {
+                        control.OnPropertyChanged(nameof(ShowRequiredStar));
                         control.PreenchidoCorretamente();
                     }
                 });
@@ -46,7 +47,18 @@ namespace SilvaData.Controls
                 propertyChanged: OnIsPasswordChanged);
 
         public static readonly BindableProperty IsRequiredProperty =
-            BindableProperty.Create(nameof(IsRequired), typeof(bool), typeof(ISITextField), false);
+            BindableProperty.Create(
+                nameof(IsRequired), 
+                typeof(bool), 
+                typeof(ISITextField), 
+                false,
+                propertyChanged: (bindable, oldValue, newValue) => 
+                {
+                    if (bindable is ISITextField control)
+                    {
+                        control.OnPropertyChanged(nameof(ShowRequiredStar));
+                    }
+                });
 
         public static readonly BindableProperty HasErrorProperty =
             BindableProperty.Create(
@@ -115,6 +127,12 @@ namespace SilvaData.Controls
             get => (bool)GetValue(HasErrorProperty);
             set => SetValue(HasErrorProperty, value);
         }
+
+        /// <summary>
+        /// Define se o asterisco de campo obrigatório deve ser exibido.
+        /// Visível apenas se for obrigatório E ainda não estiver preenchido.
+        /// </summary>
+        public bool ShowRequiredStar => IsRequired && string.IsNullOrWhiteSpace(Text);
 
         #endregion
 

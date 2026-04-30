@@ -265,15 +265,13 @@ namespace SilvaData.Controls
             }
         }
 
-        private LoteFormularioViewModel? ResolveViewModel()
+        private ILoteFormImagemViewModel? ResolveViewModel()
         {
-            // Tenta primeiro no próprio ContentView
-            if (BindingContext is LoteFormularioViewModel selfVm)
+            if (BindingContext is ILoteFormImagemViewModel selfVm)
                 return selfVm;
 
-            // Sobe na árvore visual para encontrar a Page e pegar seu BindingContext
             var page = FindParentPage();
-            if (page?.BindingContext is LoteFormularioViewModel pageVm)
+            if (page?.BindingContext is ILoteFormImagemViewModel pageVm)
                 return pageVm;
 
             return null;

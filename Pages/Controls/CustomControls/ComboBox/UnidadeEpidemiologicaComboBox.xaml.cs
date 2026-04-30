@@ -251,6 +251,7 @@ namespace SilvaData.Controls
                     control.unidadeEpidemiologicaCombobox.SelectedItem = newValue;
 
                 control.NotifyChanged();
+                control.OnPropertyChanged(nameof(ShowRequiredStar));
                 control.ScheduleValidationRefresh();
             }
         }
@@ -309,7 +310,14 @@ namespace SilvaData.Controls
                 nameof(IsObrigatorio),
                 typeof(bool),
                 typeof(UnidadeEpidemiologicaComboBox),
-                false);
+                false,
+                propertyChanged: (bindable, oldValue, newValue) => 
+                {
+                    if (bindable is UnidadeEpidemiologicaComboBox control)
+                    {
+                        control.OnPropertyChanged(nameof(ShowRequiredStar));
+                    }
+                });
 
         public bool IsObrigatorio
         {
@@ -317,9 +325,17 @@ namespace SilvaData.Controls
             set
             {
                 SetValue(IsObrigatorioProperty, value);
+                OnPropertyChanged(nameof(ShowRequiredStar));
                 ScheduleValidationRefresh();
             }
         }
+
+        /// <summary>
+        /// Define se o asterisco de campo obrigatório deve ser exibido.
+        /// Visível apenas se for obrigatório E ainda não estiver preenchido.
+        /// </summary>
+        public bool ShowRequiredStar => IsObrigatorio && SelectedItem == null;
+
         #endregion
     }
 }

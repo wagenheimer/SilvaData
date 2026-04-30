@@ -101,6 +101,7 @@ namespace SilvaData.Controls
             WeakReferenceMessenger.Default.Send(new PropriedadeMudouMessage("ValorInt", previousValue, val));
             WeakReferenceMessenger.Default.Send(new UpdateScoreMessage());
 
+            control.OnPropertyChanged(nameof(ShowRequiredStar));
             control.ScheduleValidationRefresh();
         }
 
@@ -299,5 +300,7 @@ namespace SilvaData.Controls
 
             ParametroComAlternativas.ValorInt = value;
         }
+
+        public bool ShowRequiredStar => (ParametroComAlternativas?.required == 1) && !Valor.HasValue;
     }
 }

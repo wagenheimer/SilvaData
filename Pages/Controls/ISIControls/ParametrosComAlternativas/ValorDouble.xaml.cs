@@ -60,6 +60,7 @@ namespace SilvaData.Controls
 
             Debug.WriteLine($"[ValorDouble] Valor: {valor} - Respondida: {control.ParametroComAlternativas?.EstaRespondida}");
 
+            control.OnPropertyChanged(nameof(ShowRequiredStar));
             control.ScheduleValidationRefresh();
         }
 
@@ -286,5 +287,7 @@ namespace SilvaData.Controls
                 Debug.WriteLine($"[ValorDouble] Valor inválido - Respondida: false");
             }
         }
+
+        public bool ShowRequiredStar => (ParametroComAlternativas?.required == 1) && !Valor.HasValue;
     }
 }

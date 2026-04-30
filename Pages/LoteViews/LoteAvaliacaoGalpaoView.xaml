@@ -123,7 +123,7 @@ xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=Loca
                                 <DataTemplate x:DataType="viewModels:AvaliacaoGalpaoResultado">
                                     <Grid
                                         Padding="8,2"
-                                        ColumnDefinitions="*,60,Auto"
+                                        ColumnDefinitions="*,Auto"
                                         ColumnSpacing="8">
 
                                         <!--  Parâmetro  -->
@@ -133,32 +133,41 @@ xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=Loca
                                             LineBreakMode="TailTruncation"
                                             MaxLines="1"
                                             Text="{Binding Parametro}"
+                                            ToolTipProperties.Text="{Binding Parametro}"
                                             TextColor="#2C3E50"
                                             VerticalTextAlignment="Center" />
 
-                                        <!--  Barra mini  -->
-                                        <Border
+                                        <!--  Bloco de Resultado (Barra + %)  -->
+                                        <HorizontalStackLayout
                                             Grid.Column="1"
-                                            Padding="0"
-                                            Background="#E3F2FD"
-                                            HeightRequest="20"
-                                            StrokeShape="RoundRectangle 10"
+                                            Spacing="8"
                                             VerticalOptions="Center">
+                                            <!--  Barra mini  -->
                                             <Border
-                                                Background="{StaticResource PrimaryColor}"
-                                                HorizontalOptions="Start"
+                                                Padding="0"
+                                                Background="#E3F2FD"
+                                                HeightRequest="20"
                                                 StrokeShape="RoundRectangle 10"
-                                                WidthRequest="{Binding Porcentagem, Converter={StaticResource PercentToWidthConverter}}" />
-                                        </Border>
+                                                VerticalOptions="Center"
+                                                WidthRequest="80">
+                                                <Border
+                                                    Background="{StaticResource PrimaryColor}"
+                                                    HorizontalOptions="Start"
+                                                    StrokeShape="RoundRectangle 10"
+                                                    WidthRequest="{Binding Porcentagem, Converter={StaticResource PercentToWidthConverter}, ConverterParameter=80}" />
+                                            </Border>
 
-                                        <!--  %  -->
-                                        <Label
-                                            Grid.Column="2"
-                                            FontAttributes="Bold"
-                                            FontSize="13"
-                                            Text="{Binding Porcentagem, StringFormat='{0:F0}%'}"
-                                            TextColor="{StaticResource PrimaryColor}"
-                                            VerticalTextAlignment="Center" />
+                                            <!--  %  -->
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="13"
+                                                HorizontalOptions="End"
+                                                HorizontalTextAlignment="End"
+                                                Text="{Binding Porcentagem, StringFormat='{0:F0}%'}"
+                                                TextColor="{StaticResource PrimaryColor}"
+                                                VerticalTextAlignment="Center"
+                                                WidthRequest="40" />
+                                        </HorizontalStackLayout>
                                     </Grid>
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>

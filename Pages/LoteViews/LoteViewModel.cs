@@ -205,7 +205,13 @@ namespace SilvaData.ViewModels
             if (_isDisposed || m.Lote == null) return;
             MainThread.BeginInvokeOnMainThread(() =>
             {
-                var existente = ListaLotes.FirstOrDefault(l => l?.id == m.Lote.id);
+                // Busca pelo novo id (caso normal: lote já existente sendo editado).
+                // Também busca pelo idApp para cobrir o caso em que o ID mudou de local → servidor:
+                // ex. lote criado localmente (id=5000), sincronizado, agora tem id=servidor (ex. 123).
+                // O objeto em ListaLotes ainda tem id=5000, então buscamos por idApp=5000 também.
+                var existente = ListaLotes.FirstOrDefault(l => l?.id == m.Lote.id)
+                             ?? ListaLotes.FirstOrDefault(l => l?.idApp == m.Lote.idApp && m.Lote.idApp > 0);
+
                 if (existente != null)
                 {
                     m.Lote.TransferMetadataFrom(existente);

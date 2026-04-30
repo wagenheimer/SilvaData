@@ -29,7 +29,7 @@
                     Padding="0"
                     FontAttributes="Bold"
                     FontSize="Small"
-                    IsVisible="{Binding IsObrigatorio, Source={x:Reference ueComboBox}}"
+                    IsVisible="{Binding ShowRequiredStar, Source={x:Reference ueComboBox}}"
                     Text="*"
                     TextColor="Red"
                     VerticalTextAlignment="Center" />

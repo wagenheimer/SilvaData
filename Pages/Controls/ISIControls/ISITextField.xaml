@@ -25,7 +25,7 @@
                 Padding="0"
                 FontAttributes="Bold"
                 FontSize="Small"
-                IsVisible="{Binding IsRequired}"
+                IsVisible="{Binding ShowRequiredStar}"
                 Text="*"
                 TextColor="Red"
                 VerticalTextAlignment="Center" />

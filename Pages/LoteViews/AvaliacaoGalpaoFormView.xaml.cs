@@ -91,12 +91,11 @@ public partial class AvaliacaoGalpaoFormView : ContentPage
 
     private void InjectHeavyTemplates()
     {
-        // Only the quantitative view needs SfListView configuration; skip entirely for qualitative
-        // to avoid any GCD activity on the list that isn't even visible.
         if (!_vm.AvaliacaoGalpaoQuantitativo) return;
 
         try
         {
+            camposaPreencherGalpao.FooterTemplate = (DataTemplate)Resources["GalpaoFooterTemplate"];
             camposaPreencherGalpao.AutoFitMode = Syncfusion.Maui.ListView.AutoFitMode.DynamicHeight;
             camposaPreencherGalpao.CachingStrategy = Syncfusion.Maui.ListView.CachingStrategy.RecycleTemplate;
             Debug.WriteLine("[AvaliacaoGalpaoFormView] Templates injetados");

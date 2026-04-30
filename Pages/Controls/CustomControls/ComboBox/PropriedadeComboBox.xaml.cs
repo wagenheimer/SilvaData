@@ -223,6 +223,8 @@ namespace SilvaData.Controls
             var control = (PropriedadeComboBox)bindable;
             var prop = newValue as Propriedade;
 
+            control.OnPropertyChanged(nameof(ShowRequiredStar));
+
             if (Equals(control.propriedadecombobox?.SelectedItem, prop))
             {
                 control.NotifyChanged();
@@ -308,7 +310,18 @@ namespace SilvaData.Controls
 
         /// <summary>Define se o campo é obrigatório</summary>
         public static readonly BindableProperty IsObrigatorioProperty =
-            BindableProperty.Create(nameof(IsObrigatorio), typeof(bool), typeof(PropriedadeComboBox), false);
+            BindableProperty.Create(
+                nameof(IsObrigatorio), 
+                typeof(bool), 
+                typeof(PropriedadeComboBox), 
+                false,
+                propertyChanged: (bindable, oldValue, newValue) => 
+                {
+                    if (bindable is PropriedadeComboBox control)
+                    {
+                        control.OnPropertyChanged(nameof(ShowRequiredStar));
+                    }
+                });
 
         public bool IsObrigatorio
         {
@@ -316,8 +329,16 @@ namespace SilvaData.Controls
             set
             {
                 SetValue(IsObrigatorioProperty, value);
+                OnPropertyChanged(nameof(ShowRequiredStar));
                 ScheduleValidationRefresh();
             }
         }
+
+        /// <summary>
+        /// Define se o asterisco de campo obrigatório deve ser exibido.
+        /// Visível apenas se for obrigatório E ainda não estiver preenchido.
+        /// </summary>
+        public bool ShowRequiredStar => IsObrigatorio && SelectedItem == null;
+
     }
 }

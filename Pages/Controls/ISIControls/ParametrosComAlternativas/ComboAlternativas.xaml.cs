@@ -152,6 +152,7 @@ namespace SilvaData.Controls
                     {
                         ScheduleValidationRefresh();
                     }
+                    OnPropertyChanged(nameof(ShowRequiredStar));
                 }
 
                 Debug.WriteLine($"[ComboAlternativas] → OnContextAttached concluído (validação={_isValidationActive})");
@@ -311,6 +312,7 @@ namespace SilvaData.Controls
                 Debug.WriteLine($"[ComboAlternativas]   ✓ Modelo atualizado");
             }
 
+            OnPropertyChanged(nameof(ShowRequiredStar));
             ScheduleValidationRefresh();
             await UpdateProdutoDependenteAsync().ConfigureAwait(false);
         }
@@ -429,6 +431,8 @@ namespace SilvaData.Controls
         {
             ValidationVisualHelper.ApplyTitleColor(labelTitle, hasError);
         }
+
+        public bool ShowRequiredStar => (ParametroComAlternativas?.required == 1) && (ParametroComAlternativas?.SelectedIndex < 0);
 
         private void OpenComboBox(object sender, EventArgs e)
         {

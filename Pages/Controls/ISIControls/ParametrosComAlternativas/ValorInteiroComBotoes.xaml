@@ -27,30 +27,10 @@
                     Padding="0"
                     FontAttributes="Bold"
                     FontSize="Small"
+                    IsVisible="{Binding ShowRequiredStar, Source={x:Reference valorInteiro}}"
                     Text="*"
                     TextColor="Red"
-                    VerticalTextAlignment="Center">
-                    <Label.Triggers>
-                        <DataTrigger
-                            Binding="{Binding required}"
-                            TargetType="Label"
-                            Value="1">
-                            <Setter Property="IsVisible" Value="True" />
-                        </DataTrigger>
-                        <DataTrigger
-                            Binding="{Binding required}"
-                            TargetType="Label"
-                            Value="0">
-                            <Setter Property="IsVisible" Value="False" />
-                        </DataTrigger>
-                        <DataTrigger
-                            Binding="{Binding required}"
-                            TargetType="Label"
-                            Value="{x:Null}">
-                            <Setter Property="IsVisible" Value="False" />
-                        </DataTrigger>
-                    </Label.Triggers>
-                </Label>
+                    VerticalTextAlignment="Center" />
             </Grid>
 
             <Border

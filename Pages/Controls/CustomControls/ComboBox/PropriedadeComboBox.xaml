@@ -30,7 +30,7 @@
                 Padding="0"
                 FontAttributes="Bold"
                 FontSize="Small"
-                IsVisible="{Binding IsObrigatorio, Source={x:Reference propriedadeComboBox}}"
+                IsVisible="{Binding ShowRequiredStar, Source={x:Reference propriedadeComboBox}}"
                 Text="*"
                 TextColor="Red"
                 VerticalTextAlignment="Center" />

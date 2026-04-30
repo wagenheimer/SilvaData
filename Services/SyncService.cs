@@ -932,16 +932,46 @@ namespace SilvaData.Services
 
         private async Task DeletarFormulariosAntigosEmBatch(List<(int loteId, LotesFormFromWebService loteForms)> lotesFormsParaProcessar)
         {
+#if DEBUG
+            // LOG DIAGNÓSTICO: rastreia o que o servidor retornou para cada lote.
+            // Remove este bloco em produção quando a causa do bug for confirmada.
+            foreach (var (loteId, loteForms) in lotesFormsParaProcessar)
+            {
+                var total = loteForms.loteForms?.Count ?? 0;
+                var excluidos = loteForms.loteForms?.Count(lf => lf.excluido == 1) ?? 0;
+                var isiMacro = loteForms.loteForms?.Count(lf => lf.parametroTipoId == 15) ?? 0;
+                var isiMacroExcluidos = loteForms.loteForms?.Count(lf => lf.parametroTipoId == 15 && lf.excluido == 1) ?? 0;
+                var idsNulos = loteForms.loteForms?.Count(lf => !lf.id.HasValue || lf.id.Value <= 0) ?? 0;
+                Debug.WriteLine($"[Sync][DELETE] Lote={loteId} | total={total} | excluido=1: {excluidos} | ISIMacro: {isiMacro} | ISIMacro excluido=1: {isiMacroExcluidos} | IDs nulos: {idsNulos}");
+                if (isiMacro > 0)
+                    foreach (var lf in loteForms.loteForms!.Where(x => x.parametroTipoId == 15))
+                        Debug.WriteLine($"[Sync][DELETE] ISIMacro form: id={lf.id} idApp={lf.idApp} excluido={lf.excluido} item={lf.item} data={lf.data:dd/MM/yy}");
+            }
+#endif
+
             await Db.RunInTransactionAsync(conn =>
             {
                 foreach (var (loteId, loteForms) in lotesFormsParaProcessar)
                 {
-                    var ids = string.Join(",", loteForms.loteForms.Select(lf => lf.id));
-                    if (!string.IsNullOrEmpty(ids))
+                    // IMPORTANTE: Filtra apenas IDs válidos (não nulos) do servidor.
+                    // IDs nulos ocorrem quando formulários locais ainda não confirmados chegam
+                    // no retorno — incluí-los geraria SQL malformado: IN (1,,3) causando erros.
+                    // IMPORTANTE: NÃO apagar registros com temmudanca=1 — são alterações locais
+                    // pendentes de envio. Apagá-los causaria perda de dados do usuário.
+                    var idsValidos = loteForms.loteForms
+                        .Where(lf => lf.id.HasValue && lf.id.Value > 0)
+                        .Select(lf => lf.id!.Value)
+                        .Distinct()
+                        .ToList();
+
+                    if (idsValidos.Count > 0)
                     {
+                        var ids = string.Join(",", idsValidos);
                         conn.Execute($"DELETE FROM LoteFormParametro WHERE LoteFormId IN ({ids})");
-                        conn.Execute($"DELETE FROM LoteFormImagem WHERE LoteFormId IN ({ids})");
-                        conn.Execute($"DELETE FROM LoteForm WHERE id IN ({ids})");
+                        conn.Execute($"DELETE FROM LoteFormImagem WHERE LoteFormId IN ({ids}) AND LoteFormId NOT IN (SELECT id FROM LoteForm WHERE temmudanca=1 AND id IN ({ids}))");
+                        // Protege formulários com mudanças locais pendentes de envio (temmudanca=1).
+                        // Esses registros serão re-sincronizados no próximo upload — não podem ser apagados.
+                        conn.Execute($"DELETE FROM LoteForm WHERE id IN ({ids}) AND temmudanca=0");
                     }
                 }
             }).ConfigureAwait(false);
@@ -977,7 +1007,10 @@ namespace SilvaData.Services
                             loteFormFase = loteform.loteFormFaseId,
                             loteVisita = loteform.loteVisita,
                             parametroTipoId = loteform.parametroTipoId,
-                            item = loteform.item
+                            item = loteform.item,
+                            // Preserva o modelo ISI Macro vinculado — sem esse campo os
+                            // formulários ISI Macro perdem a referência ao modelo após o sync.
+                            modeloisimacro = loteform.modeloisimacro
                         });
 
                         if (loteform.parametros?.Count > 0)

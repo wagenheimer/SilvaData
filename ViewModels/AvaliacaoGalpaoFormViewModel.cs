@@ -23,7 +23,7 @@ namespace SilvaData.ViewModels;
 /// ViewModel dedicado para Avaliação no Galpão (parametroTipoId == 20).
 /// Singleton — SetInitialState + Cleanup chamados a cada abertura pela NavigationUtils.
 /// </summary>
-public partial class AvaliacaoGalpaoFormViewModel : ViewModelBase
+public partial class AvaliacaoGalpaoFormViewModel : ViewModelBase, ILoteFormImagemViewModel
 {
     #region Observable Properties
 
@@ -55,6 +55,9 @@ public partial class AvaliacaoGalpaoFormViewModel : ViewModelBase
     [ObservableProperty] private bool podeEditar;
     [ObservableProperty] private new bool isReadOnly = true;
     [ObservableProperty] private Color realizadoColor = Colors.Blue;
+    [ObservableProperty] private LoteFormImagem? loteFormImagem1;
+    [ObservableProperty] private LoteFormImagem? loteFormImagem2;
+    [ObservableProperty] private LoteFormImagem? loteFormImagem3;
 
     #endregion
 
@@ -190,11 +193,20 @@ public partial class AvaliacaoGalpaoFormViewModel : ViewModelBase
                 ? null
                 : await LoteForm.PegaFormulariosLotePorLoteFormId(LoteFormId).ConfigureAwait(false);
 
+            List<LoteFormImagem>? imagensCarregadas = null;
+            if (!novoLoteForm)
+                imagensCarregadas = await LoteFormImagem.PegaImagens(LoteFormId).ConfigureAwait(false);
+
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 Lote = loteResult;
                 if (!novoLoteForm)
+                {
                     LoteFormulario.LoteForm = loteFormResult;
+                    LoteFormImagem1 = imagensCarregadas?.Count >= 1 ? imagensCarregadas[0] : null;
+                    LoteFormImagem2 = imagensCarregadas?.Count >= 2 ? imagensCarregadas[1] : null;
+                    LoteFormImagem3 = imagensCarregadas?.Count >= 3 ? imagensCarregadas[2] : null;
+                }
             });
 
             // Se ParametroSelecionado ainda não foi definido, carrega do banco
@@ -468,32 +480,27 @@ public partial class AvaliacaoGalpaoFormViewModel : ViewModelBase
             IsBusy = true;
             await LoteForm.SalvaLoteFormularioAsync(LoteFormulario?.LoteForm);
 
+            var loteFormIdSalvo = LoteFormulario!.LoteForm!.id ?? 0;
+
             var avaliacoes = LoteFormulario!.ListaAvaliacoesGalpao
                 .Where(a => a.TemAlternativaSelecionada)
                 .ToList();
 
-            if (avaliacoes.Any())
+            await Db.ExecuteAsync("DELETE FROM LoteFormAvaliacaoGalpao WHERE LoteFormId = ?", loteFormIdSalvo);
+
+            foreach (var avaliacao in avaliacoes)
             {
-                foreach (var avaliacao in avaliacoes)
-                    avaliacao.LoteFormId = LoteFormulario?.LoteForm.id ?? 0;
-
-                var tasks = avaliacoes.Select(async av =>
-                {
-                    var table = await Db.Table<LoteFormAvaliacaoGalpao>();
-                    var existente = await table
-                        .Where(a => a.LoteFormId == av.LoteFormId &&
-                                  a.parametroId == av.parametroId &&
-                                  a.NumeroResposta == av.NumeroResposta)
-                        .FirstOrDefaultAsync();
-
-                    if (existente != null)
-                        await Db.UpdateAsync(av);
-                    else
-                        await Db.InsertAsync(av);
-                });
-
-                await Task.WhenAll(tasks);
+                avaliacao.LoteFormId = loteFormIdSalvo;
+                avaliacao.id = 0;
+                await Db.InsertAsync(avaliacao);
             }
+
+            await LoteFormImagem.DeletaImagens(LoteFormulario?.LoteForm);
+            var imagensTasks = new List<Task>();
+            if (LoteFormImagem1 != null) { LoteFormImagem1.LoteFormId = LoteFormulario?.LoteForm.id ?? 0; imagensTasks.Add(LoteFormImagem.AdicionaImagem(LoteFormImagem1)); }
+            if (LoteFormImagem2 != null) { LoteFormImagem2.LoteFormId = LoteFormulario?.LoteForm.id ?? 0; imagensTasks.Add(LoteFormImagem.AdicionaImagem(LoteFormImagem2)); }
+            if (LoteFormImagem3 != null) { LoteFormImagem3.LoteFormId = LoteFormulario?.LoteForm.id ?? 0; imagensTasks.Add(LoteFormImagem.AdicionaImagem(LoteFormImagem3)); }
+            if (imagensTasks.Any()) await Task.WhenAll(imagensTasks);
 
             LoteFormulario.ApagaEmAndamento();
             Salvou = true;
@@ -655,6 +662,9 @@ public partial class AvaliacaoGalpaoFormViewModel : ViewModelBase
         LoteFormVinculado = -1;
         ParametroSelecionado = null;
         NovoFormulario = false;
+        LoteFormImagem1 = null;
+        LoteFormImagem2 = null;
+        LoteFormImagem3 = null;
     }
 
     #endregion

@@ -30,7 +30,7 @@
                 Padding="0"
                 FontAttributes="Bold"
                 FontSize="Small"
-                IsVisible="{Binding IsObrigatorio, Source={x:Reference reginalComboBox}}"
+                IsVisible="{Binding ShowRequiredStar, Source={x:Reference reginalComboBox}}"
                 Text="*"
                 TextColor="Red"
                 VerticalTextAlignment="Center" />

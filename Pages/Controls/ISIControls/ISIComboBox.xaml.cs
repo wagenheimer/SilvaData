@@ -48,7 +48,18 @@ namespace SilvaData.Controls
             BindableProperty.Create(nameof(DisplayMemberPath), typeof(string), typeof(ISIComboBox), "nome", propertyChanged: OnDisplayMemberPathChanged);
 
         public static readonly BindableProperty IsRequiredProperty =
-            BindableProperty.Create(nameof(IsRequired), typeof(bool), typeof(ISIComboBox), false);
+            BindableProperty.Create(
+                nameof(IsRequired), 
+                typeof(bool), 
+                typeof(ISIComboBox), 
+                false,
+                propertyChanged: (bindable, oldValue, newValue) => 
+                {
+                    if (bindable is ISIComboBox control)
+                    {
+                        control.OnPropertyChanged(nameof(ShowRequiredStar));
+                    }
+                });
 
         #endregion
 
@@ -99,6 +110,12 @@ namespace SilvaData.Controls
             set => SetValue(IsRequiredProperty, value);
         }
 
+        /// <summary>
+        /// Define se o asterisco de campo obrigatório deve ser exibido.
+        /// Visível apenas se for obrigatório E ainda não estiver preenchido.
+        /// </summary>
+        public bool ShowRequiredStar => IsRequired && SelectedItem == null;
+
         #endregion
 
         #region PropertyChanged Callbacks
@@ -121,6 +138,8 @@ namespace SilvaData.Controls
         private static void OnSelectedItemChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var control = (ISIComboBox)bindable;
+
+            control.OnPropertyChanged(nameof(ShowRequiredStar));
 
             if (Equals(control.isiComboBox.SelectedItem, newValue))
             {
