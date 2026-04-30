@@ -121,6 +121,7 @@ namespace SilvaData.Controls
             OnPropertyChanged(nameof(EstaSelecionado));
             OnPropertyChanged(nameof(BorderColor));
             OnPropertyChanged(nameof(BackgroundColor));
+            OnPropertyChanged(nameof(ShowRequiredStar));
             Debug.WriteLine($"[ISIMacroNota] Seleção: {AlternativaSelecionada?.descricao ?? "Nenhuma"}");
         }
 
@@ -147,5 +148,7 @@ namespace SilvaData.Controls
             Debug.WriteLine($"[ISIMacroNota] Validação: {ISIMacroParametro?.nome ?? "Desconhecido"} - Erro={temErro}");
             return !temErro;
         }
+
+        public bool ShowRequiredStar => (ISIMacroParametro?.required == 1) && !EstaSelecionado;
     }
 }

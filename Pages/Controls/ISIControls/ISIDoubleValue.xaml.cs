@@ -12,7 +12,12 @@ namespace SilvaData.Controls
                 typeof(ISIDoubleValue),
                 null,
                 BindingMode.TwoWay,
-                propertyChanged: (bindable, _, __) => ((ISIDoubleValue)bindable).ScheduleValidationRefresh());
+                propertyChanged: (bindable, _, __) => 
+                {
+                    var control = (ISIDoubleValue)bindable;
+                    control.OnPropertyChanged(nameof(ShowRequiredStar));
+                    control.ScheduleValidationRefresh();
+                }});
 
         public static readonly BindableProperty TitleProperty =
             BindableProperty.Create(nameof(Title), typeof(string), typeof(ISIDoubleValue), string.Empty);
@@ -24,7 +29,18 @@ namespace SilvaData.Controls
             BindableProperty.Create(nameof(IsReadOnly), typeof(bool), typeof(ISIDoubleValue), false);
 
         public static readonly BindableProperty IsObrigatorioProperty =
-            BindableProperty.Create(nameof(IsObrigatorio), typeof(bool), typeof(ISIDoubleValue), false);
+            BindableProperty.Create(
+                nameof(IsObrigatorio), 
+                typeof(bool), 
+                typeof(ISIDoubleValue), 
+                false,
+                propertyChanged: (bindable, oldValue, newValue) => 
+                {
+                    if (bindable is ISIDoubleValue control)
+                    {
+                        control.OnPropertyChanged(nameof(ShowRequiredStar));
+                    }
+                });
 
         // Property Wrappers
         public double? Value
@@ -56,6 +72,12 @@ namespace SilvaData.Controls
             get => (bool)GetValue(IsObrigatorioProperty);
             set => SetValue(IsObrigatorioProperty, value);
         }
+
+        /// <summary>
+        /// Define se o asterisco de campo obrigatório deve ser exibido.
+        /// Visível apenas se for obrigatório E ainda não estiver preenchido.
+        /// </summary>
+        public bool ShowRequiredStar => IsObrigatorio && !Value.HasValue;
 
         public ISIDoubleValue()
         {

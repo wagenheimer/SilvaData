@@ -23,7 +23,7 @@
                     Padding="0"
                     FontAttributes="Bold"
                     FontSize="Small"
-                    IsVisible="{Binding IsObrigatorio, Source={x:Reference isiDoubleValue}}"
+                    IsVisible="{Binding ShowRequiredStar, Source={x:Reference isiDoubleValue}}"
                     Text="*"
                     TextColor="Red"
                     VerticalTextAlignment="Center" />

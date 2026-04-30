@@ -28,16 +28,31 @@
         <Grid RowDefinitions="Auto,Auto,70,Auto,Auto,Auto" VerticalOptions="Fill">
 
             <!--  Título/Nome do Parâmetro  -->
-            <Label
+            <Grid
                 Grid.Row="0"
                 Margin="0,6"
                 Padding="4,0"
-                FontSize="Medium"
-                HorizontalTextAlignment="Center"
-                Text="{Binding nome}"
-                TextColor="{StaticResource SecondaryColor}"
-                VerticalOptions="Fill"
-                VerticalTextAlignment="Center" />
+                ColumnDefinitions="*,Auto"
+                HorizontalOptions="Center">
+                <Label
+                    Grid.Column="0"
+                    FontSize="Medium"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding nome}"
+                    TextColor="{StaticResource SecondaryColor}"
+                    VerticalOptions="Fill"
+                    VerticalTextAlignment="Center" />
+                <Label
+                    Grid.Column="1"
+                    Margin="2,0,0,0"
+                    Padding="0"
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                    IsVisible="{Binding ShowRequiredStar, Source={x:Reference isiMacroNota}}"
+                    Text="*"
+                    TextColor="Red"
+                    VerticalTextAlignment="Center" />
+            </Grid>
 
             <!--  Linha  -->
             <BoxView

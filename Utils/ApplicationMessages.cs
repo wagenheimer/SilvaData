@@ -712,18 +712,6 @@ namespace SilvaData.Utilities
 
     /// <summary>
     /// Notifica mudança no total de alterações pendentes de sincronização.
-    /// Enviada por: SincronizacaoPendentesViewModel (após buscar/alterar a lista).
-    /// Recebida por: MainPageModel (para exibir badge/contador na aba de Sync).
-    ///
-    /// Exemplo de envio:
-    /// WeakReferenceMessenger.Default.Send(new SyncPendentesTotalChangedMessage(total));
-    ///
-    /// Exemplo de registro:
-    /// WeakReferenceMessenger.Default.Register<SyncPendentesTotalChangedMessage>(this, (r, m) =>
-    /// {
-    ///     // Se for atualizar UI, use o dispatcher:
-    ///     _dispatcher.Dispatch(() => SyncPendingCount = m.Total);
-    /// });
     /// </summary>
     public class SyncPendentesTotalChangedMessage
     {

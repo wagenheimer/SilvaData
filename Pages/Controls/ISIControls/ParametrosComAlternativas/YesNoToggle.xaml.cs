@@ -330,6 +330,7 @@ namespace SilvaData.Controls
         }
 
         public string? YesNoText => (ParametroComAlternativas == null || ParametroComAlternativas.ValorSimNao == null)
+            ? null
             : (ParametroComAlternativas.ValorSimNao == true ? Traducao.Sim : Traducao.Nao);
 
         public bool ShowRequiredStar => (ParametroComAlternativas?.required == 1) && (ParametroComAlternativas?.ValorSimNao == null);

@@ -312,9 +312,6 @@
   <data name="NovaRegional" xml:space="preserve">
     <value>Nova Regional</value>
   </data>
-  <data name="GerencieSuaRegionais" xml:space="preserve">
-    <value>Gerencie sua regionais</value>
-  </data>
   <data name="GerencieSuasPropriedades" xml:space="preserve">
     <value>Gerencie suas propriedades</value>
   </data>
@@ -1098,14 +1095,12 @@
   <data name="Resposta" xml:space="preserve">
     <value>Resposta</value>
   </data>
-  <data name="Registro" xml:space="preserve">
-    <value>Registro</value>
+
+  <data name="ErroDetalhado" xml:space="preserve">
+    <value>Erro Detalhado</value>
   </data>
   <data name="Minimo" xml:space="preserve">
     <value>Mínimo</value>
-  </data>
-  <data name="Realizado" xml:space="preserve">
-    <value>Realizado</value>
   </data>
   <data name="Media" xml:space="preserve">
     <value>Média</value>
@@ -1305,18 +1300,6 @@
   <data name="SelecioneUmaFoto" xml:space="preserve">
     <value>Selecione uma foto</value>
   </data>
-  <data name="TempoDecorrido" xml:space="preserve">
-    <value>Tempo Decorrido</value>
-  </data>
-  <data name="Registro" xml:space="preserve">
-    <value>Registro</value>
-  </data>
-  <data name="ErroDetalhado" xml:space="preserve">
-    <value>Erro Detalhado</value>
-  </data>
-  <data name="StackTrace" xml:space="preserve">
-    <value>Stack Trace</value>
-  </data>
   <data name="ContextoAdicional" xml:space="preserve">
     <value>Contexto Adicional</value>
   </data>
@@ -1361,32 +1344,5 @@
   </data>
   <data name="Progresso" xml:space="preserve">
     <value>Progresso:</value>
-  </data>
-  <data name="SubTarefa" xml:space="preserve">
-    <value>Sub-tarefa:</value>
-  </data>
-  <data name="MensagemDeErro" xml:space="preserve">
-    <value>Mensagem de Erro</value>
-  </data>
-  <data name="VerDetalhesTecnicos" xml:space="preserve">
-    <value>▶ Ver Detalhes Técnicos</value>
-  </data>
-  <data name="InformacoesDaRequisicao" xml:space="preserve">
-    <value>Informações da Requisição</value>
-  </data>
-  <data name="PayloadDaRequisicao" xml:space="preserve">
-    <value>Payload da Requisição</value>
-  </data>
-  <data name="RespostaDoServidor" xml:space="preserve">
-    <value>Resposta do Servidor</value>
-  </data>
-  <data name="InformacoesDeRetry" xml:space="preserve">
-    <value>Informações de Retry</value>
-  </data>
-  <data name="CompartilheErroAnaliseTecnica" xml:space="preserve">
-    <value>Compartilhe este erro para análise técnica</value>
-  </data>
-  <data name="Fechar" xml:space="preserve">
-    <value>Fechar</value>
   </data>
 </root>

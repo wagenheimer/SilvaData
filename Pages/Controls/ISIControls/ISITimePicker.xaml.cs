@@ -16,13 +16,30 @@ namespace SilvaData.Controls
         /// Define se este campo é obrigatório (para fins de validação).
         /// </summary>
         public static readonly BindableProperty IsObrigatorioProperty =
-            BindableProperty.Create(nameof(IsObrigatorio), typeof(bool), typeof(ISITimePicker), false);
+            BindableProperty.Create(
+                nameof(IsObrigatorio), 
+                typeof(bool), 
+                typeof(ISITimePicker), 
+                false,
+                propertyChanged: (bindable, oldValue, newValue) => 
+                {
+                    if (bindable is ISITimePicker control)
+                    {
+                        control.OnPropertyChanged(nameof(ShowRequiredStar));
+                    }
+                });
 
         public bool IsObrigatorio
         {
             get => (bool)GetValue(IsObrigatorioProperty);
             set => SetValue(IsObrigatorioProperty, value);
         }
+
+        /// <summary>
+        /// Define se o asterisco de campo obrigatório deve ser exibido.
+        /// Visível apenas se for obrigatório E ainda não estiver preenchido.
+        /// </summary>
+        public bool ShowRequiredStar => IsObrigatorio && !Hora.HasValue;
 
         /// <summary>
         /// O TimeSpan (hora) selecionado.
@@ -119,6 +136,7 @@ namespace SilvaData.Controls
 
             control.SyncTimePickerState();
             control.OnPropertyChanged(nameof(PrecisaMostrarApagar));
+            control.OnPropertyChanged(nameof(ShowRequiredStar));
             control.ScheduleValidationRefresh();
         }
 
@@ -158,6 +176,7 @@ namespace SilvaData.Controls
             }
 
             OnPropertyChanged(nameof(PrecisaMostrarApagar));
+            OnPropertyChanged(nameof(ShowRequiredStar));
             ScheduleValidationRefresh();
         }
 

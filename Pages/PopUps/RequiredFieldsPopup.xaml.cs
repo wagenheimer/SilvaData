@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -25,7 +25,7 @@ namespace SilvaData.Pages.PopUps
 
             if (titles.Count == 0)
             {
-                await PopUpOK.ShowAsync(Traducao.Erro, Traducao.PorFavorPreencherCamposObrigatÃ³rios);
+                await PopUpOK.ShowAsync(Traducao.Erro, Traducao.PorFavorPreencherCamposObrigatórios);
                 return;
             }
 
@@ -52,7 +52,7 @@ namespace SilvaData.Pages.PopUps
             _popup = popup;
             int quantidadeCampos = fieldTitles.Count;
 
-            Titulo = Traducao.PorFavorPreencherCamposObrigatÃ³rios;
+            Titulo = Traducao.PorFavorPreencherCamposObrigatórios;
             SubTitulo = quantidadeCampos == 1
                 ? GetLocalizedString("UmCampoPendente", "1 campo pendente")
                 : string.Format(
@@ -76,6 +76,6 @@ namespace SilvaData.Pages.PopUps
         }
 
         [RelayCommand]
-        private async Task `OK() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(`true); } catch { } }
+        private async Task OK() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(true); } catch { } }
     }
 }

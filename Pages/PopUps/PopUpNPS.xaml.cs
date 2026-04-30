@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 using SilvaData.Utils;
@@ -109,7 +109,7 @@ namespace SilvaData.Pages.PopUps
             });
         }
 
-        private async void `Cancelar() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(`); } catch { } }
+        private async void Cancelar() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(null); } catch { } }
 
         public static bool JaDeuNotaNPS => (!string.IsNullOrEmpty(ISIWebService.Instance.LoggedUser.nps) && ISIWebService.Instance.LoggedUser.nps != "-1");
 

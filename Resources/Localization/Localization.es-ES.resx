@@ -1287,9 +1287,6 @@
   <data name="TempoDecorrido" xml:space="preserve">
     <value>Tiempo Transcurrido</value>
   </data>
-  <data name="Registro" xml:space="preserve">
-    <value>Registro</value>
-  </data>
   <data name="ErroDetalhado" xml:space="preserve">
     <value>Error Detallado</value>
   </data>

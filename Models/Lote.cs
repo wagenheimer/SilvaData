@@ -247,7 +247,7 @@ namespace SilvaData.Models
                          inner join UnidadeEpidemiologica ue on lote.unidadeEpidemiologicaId = ue.id
                          left outer join Propriedade p on ue.propriedadeId = p.id
                          left outer join Regional r on p.regionalId = r.id
-                         where coalesce(lote.excluido,0)!=1 and lote.id={loteId} 
+                         where coalesce(lote.excluido,0)!=1 and (lote.id={loteId} or lote.idApp={loteId}) 
                          order by Cast(numero as integer)";
 
             var lote = await Db.FindWithQueryAsync<Lote>(sql);

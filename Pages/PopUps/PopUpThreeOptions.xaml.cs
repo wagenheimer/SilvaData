@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SilvaData.Utilities;
@@ -43,13 +43,13 @@ namespace SilvaData.Pages.PopUps
         }
 
         [RelayCommand]
-        private async Task `SalvarAsync() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(`ExitAction.Save); } catch { } }
+        private async Task SalvarAsync() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(ExitAction.Save); } catch { } }
 
         [RelayCommand]
-        private async Task `DescartarAsync() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(`ExitAction.Discard); } catch { } }
+        private async Task DescartarAsync() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(ExitAction.Discard); } catch { } }
 
         [RelayCommand]
-        private async Task `CancelarAsync() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(`ExitAction.Cancel); } catch { } }
+        private async Task CancelarAsync() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(ExitAction.Cancel); } catch { } }
     }
 }
 

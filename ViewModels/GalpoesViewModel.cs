@@ -63,7 +63,7 @@ namespace SilvaData.ViewModels
             return Task.CompletedTask;
         }
 
-        partial void OnTextoPesquisaChanged(string _) => AplicaFiltro();
+        partial void OnTextoPesquisaChanged(string value) => AplicaFiltro();
 
         public void AplicaFiltro()
         {

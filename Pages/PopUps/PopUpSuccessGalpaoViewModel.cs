@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Graphics;
 using System.Threading.Tasks;
@@ -46,7 +46,7 @@ namespace SilvaData.Pages.PopUps
         }
 
         [RelayCommand]
-        private async Task `OK() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(`true); } catch { } }
+        private async Task OK() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(true); } catch { } }
     }
 }
 

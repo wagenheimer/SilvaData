@@ -1,9 +1,6 @@
-using System.Linq;
 using CommunityToolkit.Maui.Views;
-using Microsoft.Maui.Controls;
-
 using SilvaData.Models;
-using SilvaData.Pages.PopUps;
+using System.Collections.ObjectModel;
 
 namespace SilvaData.Pages.PopUps
 {
@@ -11,35 +8,31 @@ namespace SilvaData.Pages.PopUps
     {
         private ModeloIsiMacroComParametros? _selectedModelo;
         private bool _isClosing;
-        public List<ModeloIsiMacroComParametros> Modelos { get; private set; }
 
-        // Construtor sem argumentos: permite registro como Singleton DI e prÃ©-aquecimento no startup.
+        public ObservableCollection<ModeloIsiMacroComParametros> Modelos { get; } = new();
+
         public SelectModeloPopup()
         {
             InitializeComponent();
-            Modelos = new();
             BindingContext = this;
         }
 
-        public SelectModeloPopup(List<ModeloIsiMacroComParametros> modelos) : this()
+        public SelectModeloPopup(IEnumerable<ModeloIsiMacroComParametros> modelos) : this()
         {
-            UpdateModelos(modelos);
+            foreach (var m in modelos) Modelos.Add(m);
         }
 
         /// <summary>
-        /// Atualiza a lista de modelos em uma instÃ¢ncia jÃ¡ construÃ­da (reuso do Singleton).
-        /// Deve ser chamado antes de ShowPopupAsync quando a instÃ¢ncia Ã© reutilizada.
+        /// ✅ Atualiza a lista de modelos (chamado por LoteISIMacroViewModel)
         /// </summary>
-        public void UpdateModelos(List<ModeloIsiMacroComParametros> modelos)
+        public void UpdateModelos(IEnumerable<ModeloIsiMacroComParametros> modelos)
         {
-            Modelos = modelos ?? new();
-            ModelosCollectionView.ItemsSource = Modelos;
-            _selectedModelo = Modelos.Count > 0 ? Modelos[0] : null;
-            ModelosCollectionView.SelectedItem = _selectedModelo;
+            Modelos.Clear();
+            foreach (var m in modelos) Modelos.Add(m);
         }
 
         /// <summary>
-        /// âœ… Manipula a mudanÃ§a de seleÃ§Ã£o na CollectionView
+        /// ✅ Manipula a mudança de seleção na CollectionView
         /// </summary>
         private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -47,34 +40,53 @@ namespace SilvaData.Pages.PopUps
         }
 
         /// <summary>
-        /// âœ… Confirma seleÃ§Ã£o
+        /// ✅ Confirma seleção
         /// </summary>
         private void OnConfirmClicked(object sender, EventArgs e)
         {
             _ = OnConfirmClickedInternalAsync();
         }
 
-        private async Task OnConfirmClickedInternalAsync() { if (_isClosing) return;
+        private async Task OnConfirmClickedInternalAsync()
+        {
+            if (_isClosing) return;
             if (_selectedModelo == null)
             {
-                await PopUpOK.ShowAsync(Traducao.AtenÃ§Ã£o, Traducao.SelecioneUmModeloISIMacro);
+                await PopUpOK.ShowAsync(Traducao.Atenção, Traducao.SelecioneUmModeloISIMacro);
                 return;
             }
 
-            _isClosing = true; try { await CloseAsync(_selectedModelo); } catch { _isClosing = false; }
+            _isClosing = true;
+            try
+            {
+                await CloseAsync(_selectedModelo);
+            }
+            catch
+            {
+                _isClosing = false;
+            }
         }
 
         /// <summary>
-        /// âœ… Cancela popup
+        /// ✅ Cancela popup
         /// </summary>
         private void OnCancelClicked(object sender, EventArgs e)
         {
             _ = OnCancelClickedInternalAsync();
         }
 
-        private async Task OnCancelClickedInternalAsync() { if (_isClosing) return; _isClosing = true;
-            try { await CloseAsync(null!); } catch { }
+        private async Task OnCancelClickedInternalAsync()
+        {
+            if (_isClosing) return;
+            _isClosing = true;
+            try
+            {
+                await CloseAsync(null);
+            }
+            catch
+            {
+                _isClosing = false;
+            }
         }
     }
 }
-

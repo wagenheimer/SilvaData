@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Maui.Views;
 using System.Windows.Input;
 
 namespace SilvaData.Pages.PopUps
@@ -50,8 +50,8 @@ namespace SilvaData.Pages.PopUps
             RecusarCommand = new Command(Recusar);
         }
         
-        private async void `Aceitar() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(`true); } catch { } }
+        private async void Aceitar() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(true); } catch { } }
         
-        private async void `Recusar() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(`false); } catch { } }
+        private async void Recusar() { if (_isClosing) return; _isClosing = true; try { await _popup.CloseAsync(false); } catch { } }
     }
 }
