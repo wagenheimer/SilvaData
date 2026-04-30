@@ -442,18 +442,16 @@ namespace SilvaData.Models
                     await _cacheLock.WaitAsync();
                     try
                     {
-                        _loteCache.Remove(resultinfo.idApp ?? 0);
-                        _loteCache.Remove(resultinfo.id ?? 0);
+                        _loteCache.Remove(resultinfo.idApp);
+                        _loteCache.Remove(resultinfo.id);
                     }
                     finally { _cacheLock.Release(); }
 
                     // Notifica o LoteViewModel com o lote atualizado (novo ID do servidor).
-                    if (resultinfo.id.HasValue)
-                    {
-                        var loteAtualizado = await PegaLoteAsync(resultinfo.id.Value, forceRefresh: true).ConfigureAwait(false);
-                        if (loteAtualizado != null)
-                            WeakReferenceMessenger.Default.Send(new LoteAlteradoMessage(loteAtualizado));
-                    }
+                    // HandleLoteAlterado substituirá o objeto stale na ListaLotes pelo atualizado.
+                    var loteAtualizado = await PegaLoteAsync(resultinfo.id, forceRefresh: true).ConfigureAwait(false);
+                    if (loteAtualizado != null)
+                        WeakReferenceMessenger.Default.Send(new LoteAlteradoMessage(loteAtualizado));
                 }
 
                 var loteIds = lotes.Select(l => l.idApp).ToList();
