@@ -16,7 +16,7 @@
 		<ApplicationTitle>SilvaData</ApplicationTitle>
 		<ApplicationId>com.cwsoftware.silvadata</ApplicationId>
 		<ApplicationDisplayVersion>3.2.8</ApplicationDisplayVersion>
-		<ApplicationVersion>287</ApplicationVersion>
+		<ApplicationVersion>288</ApplicationVersion>
 
 		<WindowsPackageType>None</WindowsPackageType>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">12.2</SupportedOSPlatformVersion>
@@ -337,30 +337,28 @@
 		<MauiXaml Update="Resources\Styles\ISIStyles.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Templates\PopUpFecharLote.xaml">
+		<MauiXaml Update="Pages\PopUps\PopUpFecharLote.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Templates\PopUpNPS.xaml">
+		<MauiXaml Update="Pages\PopUps\PopUpNPS.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Templates\PopUpOK.xaml">
+		<MauiXaml Update="Pages\PopUps\PopUpPrivacy.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Templates\PopUpPrivacy.xaml">
+		<MauiXaml Update="Pages\PopUps\PopUpUsuario.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Templates\PopUpUsuario.xaml">
+		<MauiXaml Update="Pages\PopUps\PopUpYesNo.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Templates\PopUpYesNo.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Templates\SelectModeloPopup.xaml">
+		<MauiXaml Update="Pages\PopUps\SelectModeloPopup.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 	</ItemGroup>
 
 </Project>
+
 
 
 

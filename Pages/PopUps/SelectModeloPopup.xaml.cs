@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using CommunityToolkit.Maui.Views;
 using Microsoft.Maui.Controls;
 
@@ -10,6 +10,7 @@ namespace SilvaData.Pages.PopUps
     public partial class SelectModeloPopup : Popup<ModeloIsiMacroComParametros>
     {
         private ModeloIsiMacroComParametros? _selectedModelo;
+        private bool _isClosing;
         public List<ModeloIsiMacroComParametros> Modelos { get; private set; }
 
         // Construtor sem argumentos: permite registro como Singleton DI e prÃ©-aquecimento no startup.

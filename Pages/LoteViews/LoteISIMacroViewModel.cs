@@ -43,6 +43,7 @@ namespace SilvaData.ViewModels
         {
             WeakReferenceMessenger.Default.Register<FormularioSalvoMessage>(this, async (r, m) => await OnFormularioSalvoAsync(m.FormularioSalvo));
             WeakReferenceMessenger.Default.Register<ISIMacroScoreMedioAtualizadoMessage>(this, (r, m) => OnISIMacroScoreMedioAtualizado(m.LoteId, m.NovoISIMacroScoreMedio));
+            WeakReferenceMessenger.Default.Register<LoteAlteradoMessage>(this, (r, m) => HandleLoteAlterado(m.Lote));
             Title = Traducao.ISIMacro;
         }
 
@@ -71,6 +72,18 @@ namespace SilvaData.ViewModels
                     OnPropertyChanged(nameof(Lote));
                 }
             });
+        }
+
+        private void HandleLoteAlterado(Lote loteAtualizado)
+        {
+            // Se o ID do lote que mudou for o mesmo que estamos exibindo (ou o ID local anterior), atualiza a referência.
+            if (loteAtualizado.id == Lote?.id || (loteAtualizado.idApp == Lote?.idApp && loteAtualizado.idApp > 0))
+            {
+                MainThread.BeginInvokeOnMainThread(() => {
+                    Lote = loteAtualizado;
+                    _ = CarregaDados(loteAtualizado);
+                });
+            }
         }
 
         public async Task CarregaDados(Lote? lote)
@@ -238,6 +251,7 @@ namespace SilvaData.ViewModels
             base.Cleanup();
             WeakReferenceMessenger.Default.Unregister<FormularioSalvoMessage>(this);
             WeakReferenceMessenger.Default.Unregister<ISIMacroScoreMedioAtualizadoMessage>(this);
+            WeakReferenceMessenger.Default.Unregister<LoteAlteradoMessage>(this);
         }
     }
 }
