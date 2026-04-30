@@ -53,6 +53,16 @@ function Update-VersionFiles($newName, $newCode) {
     Write-Host "`nSucesso! Atualizado para Versão $newName (Build $newCode)" -ForegroundColor Green
 }
 
+function Git-CommitAndPush($message) {
+    Write-Host "`nExecutando Git Commit e Push..." -ForegroundColor Yellow
+    git add .
+    git commit -m "$message"
+    $branch = git branch --show-current
+    Write-Host "Enviando para branch: $branch" -ForegroundColor Gray
+    git push origin $branch
+    Write-Host "`nGit Push concluído!" -ForegroundColor Green
+}
+
 function Show-Menu {
     $v = Get-CurrentVersion
     
@@ -72,6 +82,8 @@ function Show-Menu {
     Write-Host "1 - Incrementar Versao e Build Number"
     Write-Host "2 - Incrementar Build Number"
     Write-Host "3 - Publish Archive for iOS"
+    Write-Host "4 - Incrementar Versao + Commit + Push"
+    Write-Host "5 - Incrementar Build + Commit + Push"
     Write-Host "q - Sair"
     Write-Host "----------------------------------------"
     
@@ -105,6 +117,23 @@ function Execute-Action($choice, $v) {
             
             Write-Host "Executando: $cmd" -ForegroundColor Gray
             Invoke-Expression $cmd
+            if ($Action -eq 0) { Read-Host "`nPressione Enter para continuar..." }
+        }
+        "4" {
+            $parts = $v.Name -split '\.'
+            if ($parts.Length -ge 1) {
+                $parts[-1] = [int]$parts[-1] + 1
+                $newName = $parts -join '.'
+                $newCode = [int]$v.Code + 1
+                Update-VersionFiles $newName $newCode
+                Git-CommitAndPush "Version $newName (Build $newCode)"
+            }
+            if ($Action -eq 0) { Read-Host "`nPressione Enter para continuar..." }
+        }
+        "5" {
+            $newCode = [int]$v.Code + 1
+            Update-VersionFiles $v.Name $newCode
+            Git-CommitAndPush "Build $newCode"
             if ($Action -eq 0) { Read-Host "`nPressione Enter para continuar..." }
         }
         default { 
