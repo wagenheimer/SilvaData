@@ -7,6 +7,14 @@ set -euo pipefail
 REPORTER="dotnet ${CW_REPORTER_PATH:?CW_REPORTER_PATH não definido}"
 APP_ID="silvadata"
 
+# ---------- workloads ----------
+if [ "$IS_MAC" = false ]; then
+    if ! dotnet workload list | grep -q "android"; then
+        echo "⏳ Instalando Workload Android..."
+        dotnet workload install android --source https://api.nuget.org/v3/index.json
+    fi
+fi
+
 # ---------- log ----------
 LOG_DIR="${CW_OUT_DIR:?CW_OUT_DIR não definido}/logs"
 mkdir -p "$LOG_DIR"
@@ -55,6 +63,8 @@ else
     $REPORTER update --out-dir "$CW_OUT_DIR" --stage "Compilando" --progress 40 --detail "dotnet publish android..."
     timeout 1800 dotnet publish "$CSPROJ" -f net10.0-android -c Release \
         -v:normal \
+        -p:TargetFrameworks=net10.0-android \
+        -p:AndroidPackageFormat=aab \
         -p:AndroidKeyStore=True \
         -p:AndroidSigningKeyStore="$KEYSTORE_PATH" \
         -p:AndroidSigningKeyAlias="$KEYSTORE_ALIAS" \
