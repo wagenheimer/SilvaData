@@ -4,6 +4,10 @@
 
 set -euo pipefail
 
+# ---------- detecção de plataforma ----------
+IS_MAC=false
+if [[ "$OSTYPE" == "darwin"* ]]; then IS_MAC=true; fi
+
 REPORTER="dotnet ${CW_REPORTER_PATH:?CW_REPORTER_PATH não definido}"
 APP_ID="silvadata"
 
@@ -23,9 +27,6 @@ exec > >(tee -a "$MAIN_LOG") 2>&1
 log() { echo "[$(date '+%H:%M:%S')] $*"; }
 sep() { echo; echo "════════════════════════════════════════"; echo "[$(date '+%H:%M:%S')] $*"; echo "════════════════════════════════════════"; }
 
-# ---------- detecção de plataforma ----------
-IS_MAC=false
-if [[ "$OSTYPE" == "darwin"* ]]; then IS_MAC=true; fi
 if [ "$IS_MAC" = true ]; then log "💻 Rodando no macOS (iOS Mode)"; else log "🐧 Rodando no Linux (Android Mode)"; fi
 
 # ---------- versão ----------
