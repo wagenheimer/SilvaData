@@ -106,7 +106,7 @@ namespace SilvaData.Models
             await connection.CreateTableAsync<ModeloIsiMacro>().ConfigureAwait(false);
             await connection.CreateTableAsync<ModeloIsiMacroParametro>().ConfigureAwait(false);
             await connection.CreateTableAsync<LoteFormParametro>().ConfigureAwait(false);
-            await connection.CreateTableAsync<LoteFormAvaliacaoGalpao>().ConfigureAwait(false);
+            await CreateOrRecreateTableAsync<LoteFormAvaliacaoGalpao>(connection).ConfigureAwait(false);
             await connection.CreateTableAsync<LoteFormImagem>().ConfigureAwait(false);
 
             // Atividades e Notificações

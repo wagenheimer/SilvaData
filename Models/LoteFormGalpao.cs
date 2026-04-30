@@ -130,6 +130,9 @@ namespace SilvaData.Models
 
         #region Propriedades do Banco de Dados (SQLite)
 
+        [PrimaryKey, AutoIncrement]
+        public int id { get; set; }
+
         /// <summary>
         /// ID do parâmetro associado (FK para Parametro)
         /// Ex: 123 = Peso, 124 = Altura
@@ -362,15 +365,15 @@ namespace SilvaData.Models
         {
             try
             {
-                if (LoteFormId.HasValue && LoteFormId.Value > 0)
+                if (id > 0)
                 {
                     await Db.UpdateAsync(this);
-                    Debug.WriteLine($"[LoteFormAvaliacaoGalpao] ✅ Atualizado: NumeroResposta={NumeroResposta}");
+                    Debug.WriteLine($"[LoteFormAvaliacaoGalpao] ✅ Atualizado: id={id} NumeroResposta={NumeroResposta}");
                 }
                 else
                 {
                     await Db.InsertAsync(this);
-                    Debug.WriteLine($"[LoteFormAvaliacaoGalpao] ✅ Inserido: NumeroResposta={NumeroResposta}");
+                    Debug.WriteLine($"[LoteFormAvaliacaoGalpao] ✅ Inserido: id={id} NumeroResposta={NumeroResposta}");
                 }
 
                 return true;
