@@ -30,6 +30,7 @@ namespace SilvaData.Controls
     // ★★★ NOVO: Previne inicialização dupla ★★★
     private bool _isInitialized = false;
     private bool _isBusyHandlerSubscribed = false;
+    private bool _returningFromFotoModal = false;
 
     #endregion
 
@@ -118,7 +119,16 @@ namespace SilvaData.Controls
         if (!_heavyTemplatesInjected)
             _ = InjectHeavyTemplatesAsync();
         else if (!NavigationUtils.TemModalAberta(this) && !CarregandoFoto)
+        {
+            if (_returningFromFotoModal)
+            {
+                // Retornando da tela "Ver fotos" — dados do formulário já estão em memória,
+                // não recarregar ou o preenchimento em andamento será perdido.
+                _returningFromFotoModal = false;
+                return;
+            }
             _ = CarregarAposAppearingAsync();
+        }
     }
 
     private async Task InjectHeavyTemplatesAsync()
@@ -179,6 +189,7 @@ namespace SilvaData.Controls
                 }
 
                 _isInitialized = false; // ★ Reset flag
+                _returningFromFotoModal = false;
                 _loteFormViewModel.Cleanup();
                 UnregisterMessages();
 
@@ -428,11 +439,16 @@ namespace SilvaData.Controls
         try
         {
             Debug.WriteLine($"[LoteFormularioView] 📸 Abrindo fotos: {nome}");
+            // Marca que o próximo OnAppearing é retorno da tela de fotos — não deve recarregar.
+            // ShowViewAsModalAsync retorna após a animação de push (modal ainda aberta), então
+            // o flag permanece true até OnAppearing disparar após o fechamento da modal.
+            _returningFromFotoModal = true;
             await NavigationUtils.ShowViewAsModalAsync<ISIMacroNotaSelecionaImagem>(nome, parametro);
-            Debug.WriteLine($"[LoteFormularioView] ✅ Modal de fotos fechada");
+            Debug.WriteLine($"[LoteFormularioView] 📸 Push de fotos concluído (modal ainda aberta)");
         }
         catch (Exception ex)
         {
+            _returningFromFotoModal = false;
             Debug.WriteLine($"[LoteFormularioView] ❌ Erro ao abrir fotos: {ex.Message}");
             await PopUpOK.ShowAsync(Traducao.Erro, $"Erro ao abrir fotos: {ex.Message}");
         }
