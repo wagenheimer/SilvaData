@@ -120,7 +120,10 @@ namespace SilvaData.ViewModels
         private bool CanExecuteNext()
         {
             if (ISIMacroParametro == null) return false;
-            return ISIMacroParametro.SelectedIndex < (ISIMacroParametro.ListaAlternativas.Count - 1);
+            // SelectedIndex == -1 means Alternativa already displays [0] as fallback,
+            // so treat it as 0 when deciding whether there is a "next" item.
+            var effectiveIndex = Math.Max(0, ISIMacroParametro.SelectedIndex);
+            return effectiveIndex < (ISIMacroParametro.ListaAlternativas.Count - 1);
         }
 
         [RelayCommand(CanExecute = nameof(CanExecuteNext))]
@@ -128,7 +131,10 @@ namespace SilvaData.ViewModels
         {
             if (ISIMacroParametro == null) return;
 
-            ISIMacroParametro.SelectedIndex++;
+            // When SelectedIndex == -1, Alternativa already shows [0] via fallback.
+            // Jumping to 0 would leave the display unchanged; jump directly to 1.
+            var effectiveIndex = Math.Max(0, ISIMacroParametro.SelectedIndex);
+            ISIMacroParametro.SelectedIndex = effectiveIndex + 1;
             NotifyChanges();
 
             Debug.WriteLine($"[ISIMacroNotaSelecionaImagemViewModel] Next: Index={ISIMacroParametro.SelectedIndex}");
