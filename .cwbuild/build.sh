@@ -28,6 +28,14 @@ log() { echo "[$(date '+%H:%M:%S')] $*"; }
 sep() { echo; echo "════════════════════════════════════════"; echo "[$(date '+%H:%M:%S')] $*"; echo "════════════════════════════════════════"; }
 
 if [ "$IS_MAC" = true ]; then log "💻 Rodando no macOS (iOS Mode)"; else log "🐧 Rodando no Linux (Android Mode)"; fi
+ 
+# ---------- workloads ----------
+if [ "$IS_MAC" = false ]; then
+    if ! dotnet workload list | grep -q "android"; then
+        sep "Instalando Workload Android"
+        dotnet workload install android --source https://api.nuget.org/v3/index.json
+    fi
+fi
 
 # ---------- versão ----------
 VERSION=""

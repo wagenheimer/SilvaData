@@ -17,7 +17,7 @@ namespace SilvaData.Controls
                     var control = (ISIDoubleValue)bindable;
                     control.OnPropertyChanged(nameof(ShowRequiredStar));
                     control.ScheduleValidationRefresh();
-                }});
+                });
 
         public static readonly BindableProperty TitleProperty =
             BindableProperty.Create(nameof(Title), typeof(string), typeof(ISIDoubleValue), string.Empty);
