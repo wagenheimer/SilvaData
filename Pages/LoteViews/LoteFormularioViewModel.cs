@@ -597,13 +597,17 @@ public partial class LoteFormularioViewModel : ViewModelBase, ILoteFormImagemVie
 
         bool novoLoteForm = LoteFormId == -1;
 
-        // Se já temos um LoteFormulario (vindo de recovery ou navegação interna), 
-        // e ele já tem dados (parâmetros ou avaliações), consideramos que estamos continuando.
-        bool jaTemDados = LoteFormulario != null &&
+        // continuandoPreenchimento: só aplica a formulários NOVOS (id=-1) com dados já em memória
+        // (ex: recovery após o app fechar no meio do preenchimento).
+        // Para formulários existentes (id > 0), o LoteForm deve ser sempre recarregado do banco
+        // para garantir que o id correto está presente — caso contrário, ao salvar, o formulário
+        // seria tratado como novo e criaria um registro duplicado no servidor.
+        bool jaTemDados = novoLoteForm &&
+                         LoteFormulario != null &&
                          (LoteFormulario.Formulario_ParametrosComAlternativas.Any() ||
                           LoteFormulario.ListaAvaliacoesGalpao.Any());
 
-        var continuandoPreenchimento = LoteFormulario != null && jaTemDados;
+        var continuandoPreenchimento = jaTemDados;
 
         LoteFormulario ??= new LoteFormulario();
         await MainThread.InvokeOnMainThreadAsync(() => SetTitle()).ConfigureAwait(false);
