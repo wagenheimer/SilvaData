@@ -61,8 +61,27 @@ namespace SilvaData.Utils
                 if (currentIndex >= 0 && currentIndex < camposaPreencher.DataSource.DisplayItems.Count - 1)
                 {
                     var nextItem = camposaPreencher.DataSource.DisplayItems[currentIndex + 1];
-                    await MainThread.InvokeOnMainThreadAsync(() =>
-                        camposaPreencher.ScrollTo(nextItem, ScrollToPosition.Start, true));
+
+                    var scrollView = camposaPreencher.GetVisualTreeDescendants()
+                        .OfType<ScrollView>()
+                        .FirstOrDefault();
+
+                    if (scrollView != null)
+                    {
+                        // Anima até a posição aproximada usando a altura real do item atual
+                        var itemHeight = isiMacroNota.Height > 0 ? isiMacroNota.Height : 300;
+                        await MainThread.InvokeOnMainThreadAsync(() =>
+                            scrollView.ScrollToAsync(0, scrollView.ScrollY + itemHeight, true));
+
+                        // Snap exato sem animação (correção mínima, imperceptível)
+                        await MainThread.InvokeOnMainThreadAsync(() =>
+                            camposaPreencher.ScrollTo(nextItem, ScrollToPosition.Start, false));
+                    }
+                    else
+                    {
+                        await MainThread.InvokeOnMainThreadAsync(() =>
+                            camposaPreencher.ScrollTo(nextItem, ScrollToPosition.Start, true));
+                    }
                 }
             }
         }
