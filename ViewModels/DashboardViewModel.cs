@@ -305,7 +305,39 @@ namespace SilvaData.ViewModels
 
         [RelayCommand]
         private async Task ShowUsuario(View button)
-        { if (button == null) return; var popup = new PopUpUsuario(); await Task.Yield(); popup.AnchorX = button.X; popup.AnchorY = button.Y; await NavigationUtils.ShowPopupAsync(popup); }
+        {
+            if (button == null) return;
+            var popup = new PopUpUsuario();
+            await Task.Yield();
+            popup.AnchorX = button.X;
+            popup.AnchorY = button.Y;
+
+            var result = await NavigationUtils.ShowPopupAsync<string>(popup);
+            if (string.IsNullOrEmpty(result)) return;
+
+            // Aguarda o fechamento completo do popup antes de novas navegações
+            await Task.Delay(150);
+
+            if (result == "MinhaConta")
+            {
+                await NavigationUtils.ShowViewAsModalAsync<MinhaConta>();
+            }
+            else if (result == "Privacidade")
+            {
+                var configVm = ServiceHelper.GetRequiredService<ConfigViewModel>();
+                await configVm.MostraPrivacidade();
+            }
+            else if (result == "LogOff")
+            {
+                var configVm = ServiceHelper.GetRequiredService<ConfigViewModel>();
+                await configVm.PerguntaLogOff();
+            }
+            else if (result == "Permissoes")
+            {
+                var pPopup = new PermissoesPopup();
+                await NavigationUtils.ShowPopupAsync(pPopup);
+            }
+        }
         [RelayCommand] private void MeusResultados() => TabIndexSelecionado = 0;
         [RelayCommand] private void Empresa() => TabIndexSelecionado = 1;
         [RelayCommand] private void Global() => TabIndexSelecionado = 2;

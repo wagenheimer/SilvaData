@@ -70,6 +70,7 @@ namespace SilvaData.Models
         }
 
         private double _latitude;
+        [JsonProperty("lat")]
         public double latitude
         {
             get => _latitude;
@@ -77,6 +78,7 @@ namespace SilvaData.Models
         }
 
         private double _longitude;
+        [JsonProperty("lng")]
         public double longitude
         {
             get => _longitude;

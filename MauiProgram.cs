@@ -1,5 +1,7 @@
 using CommunityToolkit.Maui;
 
+using Newtonsoft.Json;
+
 using ISIInstitute.Views;
 using ISIInstitute.Views.LoteViews;
 
@@ -24,6 +26,11 @@ namespace SilvaData
     {
         public static MauiApp CreateMauiApp()
         {
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+            {
+                Converters = { new SilvaData.Utils.EmptyStringToNullableIntConverter() }
+            };
+
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()

@@ -22,7 +22,7 @@ namespace SilvaData.ViewModels
     {
         private readonly ConfigViewModel _configViewModel;
         private readonly ISIWebService _webService;
-        private Func<Task>? _closePopupAction;
+        private Func<object?, Task>? _closePopupAction;
         private bool _isClosing;
 
         [ObservableProperty]
@@ -44,15 +44,6 @@ namespace SilvaData.ViewModels
             _configViewModel = configViewModel;
             _webService = webService;
 
-            // Escuta mudanças no LoggedUser para atualizar a UI automaticamente
-            _webService.PropertyChanged += (s, e) =>
-            {
-                if (e.PropertyName == nameof(ISIWebService.LoggedUser))
-                {
-                    AtualizarDadosUsuario();
-                }
-            };
-
             AtualizarDadosUsuario();
         }
 
@@ -62,7 +53,7 @@ namespace SilvaData.ViewModels
             LoggedUserEmail = _webService.LoggedUser?.email ?? string.Empty;
         }
 
-        public void SetCloseAction(Func<Task> closeAction)
+        public void SetCloseAction(Func<object?, Task> closeAction)
         {
             _closePopupAction = closeAction;
         }
@@ -70,25 +61,24 @@ namespace SilvaData.ViewModels
         [RelayCommand]
         private async Task MinhaContaAsync()
         {
-            if (_isClosing) return; _isClosing = true; if (_closePopupAction != null) await _closePopupAction();
-            await NavigationUtils.ShowViewAsModalAsync<MinhaConta>();
+            if (_isClosing) return; _isClosing = true;
+            if (_closePopupAction != null) await _closePopupAction("MinhaConta");
         }
 
 #if DEBUG
         [RelayCommand]
         private async Task PermissoesAsync()
         {
-            if (_isClosing) return; _isClosing = true; if (_closePopupAction != null) await _closePopupAction();
-            var popup = new PermissoesPopup();
-            await NavigationUtils.ShowPopupAsync(popup);
+            if (_isClosing) return; _isClosing = true;
+            if (_closePopupAction != null) await _closePopupAction("Permissoes");
         }
 #endif
 
         [RelayCommand]
         private async Task PrivacidadeAsync()
         {
-            if (_isClosing) return; _isClosing = true; if (_closePopupAction != null) await _closePopupAction(); // Fecha o popup
-            await _configViewModel.MostraPrivacidade();
+            if (_isClosing) return; _isClosing = true;
+            if (_closePopupAction != null) await _closePopupAction("Privacidade");
         }
 
         /// <summary>
@@ -97,8 +87,8 @@ namespace SilvaData.ViewModels
         [RelayCommand]
         private async Task LogOffAsync()
         {
-            if (_isClosing) return; _isClosing = true; if (_closePopupAction != null) await _closePopupAction(); // Fecha o popup
-            await _configViewModel.PerguntaLogOff();
+            if (_isClosing) return; _isClosing = true;
+            if (_closePopupAction != null) await _closePopupAction("LogOff");
         }
     }
 }

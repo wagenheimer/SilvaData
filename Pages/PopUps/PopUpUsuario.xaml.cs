@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Maui.Views;
 
 using SilvaData.Infrastructure; // Para ServiceHelper
 using SilvaData.ViewModels;
@@ -8,7 +8,7 @@ namespace SilvaData.Pages.PopUps
     /// <summary>
     /// PopUp que exibe o menu do usuï¿½rio (Minha Conta, Privacidade, Sair).
     /// </summary>
-    public partial class PopUpUsuario : Popup
+    public partial class PopUpUsuario : Popup<string>
     {
         private readonly PopUpUsuarioViewModel ViewModel;
 
@@ -16,11 +16,11 @@ namespace SilvaData.Pages.PopUps
         {
             InitializeComponent();
 
-            // Resolve o ViewModel e suas dependï¿½ncias (ConfigViewModel, ISIWebService)
+            // Resolve o ViewModel e suas dependências (ConfigViewModel, ISIWebService)
             ViewModel = ServiceHelper.GetRequiredService<PopUpUsuarioViewModel>();
 
-            // Injeta a Aï¿½ï¿½o de Fechar no ViewModel
-            ViewModel.SetCloseAction(async () => { try { await CloseAsync(); } catch { } });
+            // Injeta a Ação de Fechar no ViewModel
+            ViewModel.SetCloseAction(async (result) => { try { await CloseAsync(result?.ToString()); } catch { } });
 
             BindingContext = ViewModel;
         }
