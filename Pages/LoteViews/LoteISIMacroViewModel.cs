@@ -44,6 +44,11 @@ namespace SilvaData.ViewModels
             WeakReferenceMessenger.Default.Register<FormularioSalvoMessage>(this, async (r, m) => await OnFormularioSalvoAsync(m.FormularioSalvo));
             WeakReferenceMessenger.Default.Register<ISIMacroScoreMedioAtualizadoMessage>(this, (r, m) => OnISIMacroScoreMedioAtualizado(m.LoteId, m.NovoISIMacroScoreMedio));
             WeakReferenceMessenger.Default.Register<LoteAlteradoMessage>(this, (r, m) => HandleLoteAlterado(m.Lote));
+            WeakReferenceMessenger.Default.Register<UpdateDadosIniciaisMessage>(this, async (r, m) =>
+            {
+                if (Lote != null)
+                    await CarregaDados(Lote);
+            });
             Title = Traducao.ISIMacro;
         }
 
