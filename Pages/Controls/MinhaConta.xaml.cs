@@ -13,6 +13,8 @@ namespace SilvaData.Controls
 
             ViewModel = ServiceHelper.GetRequiredService<MinhaContaViewModel>();
             BindingContext = ViewModel;
+
+            Loaded += (s, e) => ViewModel?.CarregarDadosUsuario();
         }
     }
 }

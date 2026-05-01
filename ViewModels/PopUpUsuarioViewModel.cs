@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace SilvaData.ViewModels
 {
     /// <summary>
-    /// ViewModel para o PopUp do Menu do UsuÃ¡rio (Minha Conta, Privacidade, Sair).
+    /// ViewModel para o PopUp do Menu do Usuário (Minha Conta, Privacidade, Sair).
     /// </summary>
     public partial class PopUpUsuarioViewModel : ObservableObject
     {
@@ -44,6 +44,20 @@ namespace SilvaData.ViewModels
             _configViewModel = configViewModel;
             _webService = webService;
 
+            // Escuta mudanças no LoggedUser para atualizar a UI automaticamente
+            _webService.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == nameof(ISIWebService.LoggedUser))
+                {
+                    AtualizarDadosUsuario();
+                }
+            };
+
+            AtualizarDadosUsuario();
+        }
+
+        private void AtualizarDadosUsuario()
+        {
             LoggedUserName = _webService.LoggedUser?.nome ?? string.Empty;
             LoggedUserEmail = _webService.LoggedUser?.email ?? string.Empty;
         }
@@ -78,7 +92,7 @@ namespace SilvaData.ViewModels
         }
 
         /// <summary>
-        /// Fecha o popup e pergunta se o usuÃ¡rio quer deslogar.
+        /// Fecha o popup e pergunta se o usuário quer deslogar.
         /// </summary>
         [RelayCommand]
         private async Task LogOffAsync()

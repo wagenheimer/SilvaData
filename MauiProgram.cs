@@ -150,8 +150,8 @@ namespace SilvaData
             builder.Services.AddSingleton<SincronizacaoPendentesViewModel>();
 
             //PopUp Usuário
-            builder.Services.AddSingleton<PopUpUsuario>();
-            builder.Services.AddSingleton<PopUpUsuarioViewModel>();
+            builder.Services.AddTransient<PopUpUsuario>();
+            builder.Services.AddTransient<PopUpUsuarioViewModel>();
 
             //Lote
             builder.Services.AddTransient<LoteEditView>();

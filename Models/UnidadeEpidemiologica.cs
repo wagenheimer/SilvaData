@@ -91,7 +91,7 @@ namespace SilvaData.Models
         }
 
         private int? _propriedadeId;
-        [JsonProperty("propriedade")]
+        [JsonProperty("propriedadeId")]
         public int? propriedadeId
         {
             get => _propriedadeId;
