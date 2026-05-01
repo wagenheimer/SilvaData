@@ -72,7 +72,8 @@ namespace SilvaData.Controls
             {
                 InitializeComponent();
                 // Listener para atualizar UI quando score muda em outro componente.
-                WeakReferenceMessenger.Default.Register<UpdateScoreMessage>(this, (r, m) => NotificaScore());
+                WeakReferenceMessenger.Default.Register<UpdateScoreMessage>(this, (r, m) =>
+                    MainThread.BeginInvokeOnMainThread(NotificaScore));
             }
             catch (Exception ex)
             {

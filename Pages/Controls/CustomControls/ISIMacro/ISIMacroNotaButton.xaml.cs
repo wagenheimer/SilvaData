@@ -121,9 +121,12 @@ namespace SilvaData.Controls
                 // ✅ Inscreve-se em UpdateScoreMessage para atualizar cores
                 WeakReferenceMessenger.Default.Register<UpdateScoreMessage>(this, (recipient, message) =>
                 {
-                    OnPropertyChanged(nameof(SelecionadoColor));
-                    OnPropertyChanged(nameof(SelecionadoColorFonte));
-                    OnPropertyChanged(nameof(EstaSelecionado));
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        OnPropertyChanged(nameof(EstaSelecionado));
+                        OnPropertyChanged(nameof(SelecionadoColor));
+                        OnPropertyChanged(nameof(SelecionadoColorFonte));
+                    });
                 });
             }
             catch (Exception ex)
