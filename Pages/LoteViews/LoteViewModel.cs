@@ -209,8 +209,12 @@ namespace SilvaData.ViewModels
                 // Também busca pelo idApp para cobrir o caso em que o ID mudou de local → servidor:
                 // ex. lote criado localmente (id=5000), sincronizado, agora tem id=servidor (ex. 123).
                 // O objeto em ListaLotes ainda tem id=5000, então buscamos por idApp=5000 também.
+                // Também busca por l.id == m.Lote.idApp para cobrir o caso em que o lote
+                // foi criado localmente (id=50000, idApp=null) e o upload retornou id=servidor,
+                // idApp=50000 — nesse momento o objeto na lista ainda tem id=50000, idApp=null.
                 var existente = ListaLotes.FirstOrDefault(l => l?.id == m.Lote.id)
-                             ?? ListaLotes.FirstOrDefault(l => l?.idApp == m.Lote.idApp && m.Lote.idApp > 0);
+                             ?? ListaLotes.FirstOrDefault(l => l?.idApp == m.Lote.idApp && m.Lote.idApp > 0)
+                             ?? ListaLotes.FirstOrDefault(l => l?.id == m.Lote.idApp && m.Lote.idApp > 0);
 
                 if (existente != null)
                 {
