@@ -81,8 +81,16 @@ namespace SilvaData.ViewModels
 
         private void HandleLoteAlterado(Lote loteAtualizado)
         {
-            // Se o ID do lote que mudou for o mesmo que estamos exibindo (ou o ID local anterior), atualiza a referência.
-            if (loteAtualizado.id == Lote?.id || (loteAtualizado.idApp == Lote?.idApp && loteAtualizado.idApp > 0))
+            // Cobre 3 casos:
+            // 1. id coincide (edição normal de lote já sincronizado)
+            // 2. idApp coincide (lote local que ganhou id do servidor, idApp já estava setado)
+            // 3. Lote.id == loteAtualizado.idApp: lote criado localmente (id=50000, idApp=null),
+            //    após upload o servidor devolve id=72, idApp=50000 — o objeto local ainda tem id=50000.
+            var eOMesmoLote = loteAtualizado.id == Lote?.id
+                           || (loteAtualizado.idApp == Lote?.idApp && loteAtualizado.idApp > 0)
+                           || (loteAtualizado.idApp == Lote?.id && loteAtualizado.idApp > 0);
+
+            if (eOMesmoLote)
             {
                 MainThread.BeginInvokeOnMainThread(() => {
                     Lote = loteAtualizado;

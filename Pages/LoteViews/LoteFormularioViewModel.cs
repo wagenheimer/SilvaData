@@ -1077,6 +1077,21 @@ public partial class LoteFormularioViewModel : ViewModelBase, ILoteFormImagemVie
             }
 
             IsBusy = true;
+
+            // Garante que o loteId do formulário usa o id atual do banco.
+            // PegaLoteAsync busca por (id OR idApp), então se o lote foi criado localmente
+            // (id=50000) e sincronizado (id=72, idApp=50000), retorna o lote com id=72.
+            if (LoteFormulario?.LoteForm != null && LoteId >= 5000)
+            {
+                var loteAtual = await Lote.PegaLoteAsync(LoteId, forceRefresh: true).ConfigureAwait(false);
+                if (loteAtual?.id != null && loteAtual.id < 5000)
+                {
+                    Debug.WriteLine($"[LoteFormularioViewModel.Salvar] loteId corrigido: {LoteId} → {loteAtual.id}");
+                    LoteId = (int)loteAtual.id;
+                    LoteFormulario.LoteForm.loteId = loteAtual.id;
+                }
+            }
+
             await LoteForm.SalvaLoteFormularioAsync(LoteFormulario?.LoteForm);
 
             await Parametros.SalvaParametros(
