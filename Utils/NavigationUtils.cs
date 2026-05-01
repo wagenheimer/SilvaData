@@ -624,17 +624,23 @@ namespace SilvaData.Utils
             TView? view;
             try
             {
-                // ✅ Tenta resolver do DI (Singleton/Transient/Scoped)
-                view = services.GetService<TView>();
-                
-                // Se não está registrado, tenta criar com ActivatorUtilities (injeta dependências automaticamente)
-                if (view is null)
+                // Views MAUI (ContentPage/ContentView) devem ser instanciadas na main thread.
+                // ConfigureAwait(false) em chamadores pode ter desviado a execução para um thread pool.
+                view = await MainThread.InvokeOnMainThreadAsync(() =>
                 {
-                    LogNavigation($"View nao registrada no DI | tipo={typeof(TView).Name} | usando ActivatorUtilities");
-                    view = ActivatorUtilities.CreateInstance<TView>(services);
-                }
+                    // ✅ Tenta resolver do DI (Singleton/Transient/Scoped)
+                    var resolved = services.GetService<TView>();
 
-                LogNavigation($"View resolvida para modal | solicitada={typeof(TView).Name} | resolvida={view?.GetType().Name}");
+                    // Se não está registrado, tenta criar com ActivatorUtilities (injeta dependências automaticamente)
+                    if (resolved is null)
+                    {
+                        LogNavigation($"View nao registrada no DI | tipo={typeof(TView).Name} | usando ActivatorUtilities");
+                        resolved = ActivatorUtilities.CreateInstance<TView>(services);
+                    }
+
+                    LogNavigation($"View resolvida para modal | solicitada={typeof(TView).Name} | resolvida={resolved?.GetType().Name}");
+                    return resolved;
+                });
             }
             catch (Exception ex)
             {
@@ -668,24 +674,28 @@ namespace SilvaData.Utils
             TView? view;
             try
             {
-                // ✅ ESTRATÉGIA HÍBRIDA:
-                // 1. Se está registrado como Singleton/Scoped, usa a instância existente
-                // 2. Se é Transient ou não registrado, cria nova instância injetando DI + args
-                
-                var descriptor = FindServiceDescriptor<TView>(services);
-                
-                if (descriptor?.Lifetime == ServiceLifetime.Singleton)
+                view = await MainThread.InvokeOnMainThreadAsync(() =>
                 {
-                    // Para Singleton, SEMPRE usa a instância existente (ignora args)
-                    view = services.GetRequiredService<TView>();
-                    LogNavigation($"Usando Singleton existente para modal | tipo={typeof(TView).Name} | args={args.Length}");
-                }
-                else
-                {
-                    // Para Transient/Scoped ou não-registrado: cria nova instância com DI + args
-                    view = ActivatorUtilities.CreateInstance<TView>(services, args);
-                    LogNavigation($"Criada nova instancia com args para modal | tipo={typeof(TView).Name} | args={args.Length}");
-                }
+                    // ✅ ESTRATÉGIA HÍBRIDA:
+                    // 1. Se está registrado como Singleton/Scoped, usa a instância existente
+                    // 2. Se é Transient ou não registrado, cria nova instância injetando DI + args
+                    var descriptor = FindServiceDescriptor<TView>(services);
+
+                    if (descriptor?.Lifetime == ServiceLifetime.Singleton)
+                    {
+                        // Para Singleton, SEMPRE usa a instância existente (ignora args)
+                        var singleton = services.GetRequiredService<TView>();
+                        LogNavigation($"Usando Singleton existente para modal | tipo={typeof(TView).Name} | args={args.Length}");
+                        return singleton;
+                    }
+                    else
+                    {
+                        // Para Transient/Scoped ou não-registrado: cria nova instância com DI + args
+                        var instance = ActivatorUtilities.CreateInstance<TView>(services, args);
+                        LogNavigation($"Criada nova instancia com args para modal | tipo={typeof(TView).Name} | args={args.Length}");
+                        return instance;
+                    }
+                });
             }
             catch (Exception ex)
             {
