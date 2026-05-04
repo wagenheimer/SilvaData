@@ -113,7 +113,8 @@ function Execute-Action($choice, $v) {
         }
         "3" {
             Write-Host "`nIniciando Publish para iOS (Release)..." -ForegroundColor Yellow
-            $cmd = "dotnet publish -f net10.0-ios -c Release /p:ArchiveOnBuild=true"
+            # Usa assinatura/provisionamento automaticos com argumentos corretamente escapados.
+            $cmd = "dotnet publish SilvaData.csproj -f net10.0-ios -c Release -p:RuntimeIdentifier=ios-arm64 -p:ArchiveOnBuild=true -p:ProvisioningType=Automatic -p:CodesignKey='Apple Development' -p:CodesignProvision=''"
             
             Write-Host "Executando: $cmd" -ForegroundColor Gray
             Invoke-Expression $cmd
