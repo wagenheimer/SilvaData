@@ -31,11 +31,11 @@
 	<key>CFBundleDisplayName</key>
 	<string>Silvadata</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.2.10</string>
+	<string>3.2.11</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>pt_BR</string>
 	<key>CFBundleVersion</key>
-	<string>291</string>
+	<string>292</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Tirar Fotos</string>
 	<key>NSPhotoLibraryUsageDescription</key>
