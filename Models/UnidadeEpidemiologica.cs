@@ -69,17 +69,17 @@ namespace SilvaData.Models
             set => SetProperty(ref _nome, value);
         }
 
-        private double _latitude;
+        private double? _latitude;
         [JsonProperty("lat")]
-        public double latitude
+        public double? latitude
         {
             get => _latitude;
             set => SetProperty(ref _latitude, value);
         }
 
-        private double _longitude;
+        private double? _longitude;
         [JsonProperty("lng")]
-        public double longitude
+        public double? longitude
         {
             get => _longitude;
             set => SetProperty(ref _longitude, value);
