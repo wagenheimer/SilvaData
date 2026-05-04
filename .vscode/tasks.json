@@ -60,6 +60,19 @@
             "type": "maui",
             "command": "build",
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "maui: Build",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "${workspaceFolder}/SilvaData.csproj",
+                "-f", "net10.0-ios",
+                "-r", "iossimulator-arm64"
+            ],
+            "group": "build",
+            "problemMatcher": "$msCompile"
         }
     ]
 }
