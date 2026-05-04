@@ -28,9 +28,8 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='net10.0-ios'">
-		<CodesignKey>Apple Development: Created via API (A4F2T94FN8)</CodesignKey>
-	<!-- Provisionamento automático ativado: CodesignProvision removido -->
-	<ProvisioningType>automatic</ProvisioningType>
+		<CodesignKey>Apple Development</CodesignKey>
+		<ProvisioningType>Automatic</ProvisioningType>
 	</PropertyGroup>
 
 	<!-- Configurações específicas para DEBUG (Rápido para desenvolvimento) -->
