@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<toolkit:Popup
+    x:Class="SilvaData.Pages.PopUps.PopUpDetalhesLote"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:local="clr-namespace:SilvaData.Pages.PopUps"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:DataType="local:PopUpDetalhesLoteViewModel"
+    x:TypeArguments="x:Boolean"
+    BackgroundColor="Transparent"
+    CanBeDismissedByTappingOutsideOfPopup="True"
+    HorizontalOptions="Center"
+    VerticalOptions="Center">
+
+    <Border
+        BackgroundColor="White"
+        Stroke="{StaticResource Gray200}"
+        StrokeShape="RoundRectangle 20"
+        StrokeThickness="1"
+        WidthRequest="310">
+
+        <VerticalStackLayout Spacing="0">
+
+            <!--  Header azul  -->
+            <Border
+                Padding="20,16"
+                StrokeShape="RoundRectangle 20,20,0,0"
+                StrokeThickness="0">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Offset="0" Color="#0888CD" />
+                        <GradientStop Offset="1" Color="#26558D" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <VerticalStackLayout Spacing="2">
+                    <Label
+                        FontAttributes="Bold"
+                        FontFamily="Nunito"
+                        FontSize="18"
+                        Text="{Binding NomeTela}"
+                        TextColor="White" />
+                    <Label
+                        FontSize="12"
+                        Opacity="0.8"
+                        Text="{Binding Lote.numero, StringFormat='Lote {0}'}"
+                        TextColor="White" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!--  Linhas de detalhe  -->
+            <VerticalStackLayout Padding="20,16" Spacing="12">
+
+                <VerticalStackLayout Spacing="1">
+                    <Label
+                        FontSize="10"
+                        Opacity="0.6"
+                        Text="{localization:Translate Regional}"
+                        TextColor="#333" />
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="13"
+                        Text="{Binding Lote.RegionalNome}"
+                        TextColor="#222" />
+                </VerticalStackLayout>
+
+                <BoxView HeightRequest="1" Color="{StaticResource Gray200}" />
+
+                <VerticalStackLayout Spacing="1">
+                    <Label
+                        FontSize="10"
+                        Opacity="0.6"
+                        Text="{localization:Translate Propriedade}"
+                        TextColor="#333" />
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="13"
+                        Text="{Binding Lote.PropriedadeNome}"
+                        TextColor="#222" />
+                </VerticalStackLayout>
+
+                <BoxView HeightRequest="1" Color="{StaticResource Gray200}" />
+
+                <VerticalStackLayout Spacing="1">
+                    <Label
+                        FontSize="10"
+                        Opacity="0.6"
+                        Text="{localization:Translate UnidadeEp}"
+                        TextColor="#333" />
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="13"
+                        Text="{Binding Lote.UnidadeEpidemiologicaNome}"
+                        TextColor="#222" />
+                </VerticalStackLayout>
+
+                <BoxView HeightRequest="1" Color="{StaticResource Gray200}" />
+
+                <VerticalStackLayout Spacing="1">
+                    <Label
+                        FontSize="10"
+                        Opacity="0.6"
+                        Text="{localization:Translate DataInicio}"
+                        TextColor="#333" />
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="13"
+                        Text="{Binding Lote.dataInicio, StringFormat='{0:d}'}"
+                        TextColor="#222" />
+                </VerticalStackLayout>
+
+                <BoxView HeightRequest="1" Color="{StaticResource Gray200}" />
+
+                <VerticalStackLayout Spacing="1">
+                    <Label
+                        FontSize="10"
+                        Opacity="0.6"
+                        Text="Status"
+                        TextColor="#333" />
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="13"
+                        Text="{Binding Lote.Status}"
+                        TextColor="#222" />
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+
+            <!--  Botão fechar  -->
+            <buttons:SfButton
+                Margin="20,0,20,16"
+                Command="{Binding FecharCommand}"
+                CornerRadius="12"
+                Style="{StaticResource PrimaryButton}"
+                Text="Ok" />
+
+        </VerticalStackLayout>
+    </Border>
+</toolkit:Popup>

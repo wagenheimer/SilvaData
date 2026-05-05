@@ -34,12 +34,10 @@
             </Grid.Background>
 
             <StackLayout Grid.Row="0" Spacing="0">
-                <Label
+                <controls:LoteDescricaoLabel
                     Padding="5,0,0,5"
-                    FontSize="Micro"
-                    HorizontalTextAlignment="Start"
-                    Text="{Binding Lote.DescricaoCompleta}"
-                    TextColor="White" />
+                    Lote="{Binding Lote}"
+                    NomeTela="{localization:Translate Vacinas}" />
                 <Label
                     Padding="5,0"
                     FontFamily="Nunito"

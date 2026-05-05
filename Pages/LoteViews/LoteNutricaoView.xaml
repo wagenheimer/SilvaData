@@ -36,30 +36,18 @@
 
             <!--  Dados do Lote  -->
             <VerticalStackLayout Grid.Row="0" Spacing="0">
-                <Label Margin="0" Padding="5,0,0,0">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span
-                                FontSize="Medium"
-                                Text="{localization:Translate Lote}"
-                                TextColor="White" />
-                            <Span Text=" " TextColor="White" />
-                            <Span
-                                FontAttributes="Bold"
-                                FontSize="Medium"
-                                Text="{Binding Lote.numero}"
-                                TextColor="White" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                <controls:LoteDescricaoLabel
+                    Padding="5,0,0,5"
+                    Lote="{Binding Lote}"
+                    NomeTela="{Binding Title}" />
                 <Label
-                    Padding="5,0,0,0"
+                    Padding="5,0"
                     FontFamily="Nunito"
-                    HorizontalOptions="Fill"
-                    HorizontalTextAlignment="Start"
-                    Text="{Binding Lote.Status}"
+                    FontSize="Large"
+                    HorizontalOptions="Start"
+                    Text="{Binding Title}"
                     TextColor="White"
-                    VerticalOptions="Start" />
+                    VerticalOptions="Center" />
             </VerticalStackLayout>
 
             <HorizontalStackLayout
@@ -71,112 +59,6 @@
                     Style="{StaticResource CircleButton}"
                     Text="{x:Static fontawesome:FontAwesomeIcons.ArrowTurnDownLeft}" />
             </HorizontalStackLayout>
-
-            <toolkit:Expander
-                Grid.Row="1"
-                Grid.ColumnSpan="2"
-                Margin="5,0,0,5"
-                IsExpanded="False">
-                <toolkit:Expander.Header>
-                    <HorizontalStackLayout>
-                        <Label
-                            Margin="1,0,5,0"
-                            FontFamily="FontAwesomeLight"
-                            FontSize="Micro"
-                            HorizontalOptions="Center"
-                            Text="{x:Static fontawesome:FontAwesomeIcons.AngleRight}"
-                            TextColor="White"
-                            VerticalOptions="Center"
-                            VerticalTextAlignment="Center">
-                            <Label.Triggers>
-                                <DataTrigger
-                                    Binding="{Binding Source={RelativeSource AncestorType={x:Type toolkit:Expander}}, Path=IsExpanded}"
-                                    TargetType="Label"
-                                    Value="True">
-                                    <Setter Property="Text" Value="{x:Static fontawesome:FontAwesomeIcons.AngleDown}" />
-                                </DataTrigger>
-                            </Label.Triggers>
-                        </Label>
-                        <Label
-                            FontSize="Micro"
-                            Text="{localization:Translate Nutrição}"
-                            TextColor="White"
-                            VerticalOptions="Center"
-                            VerticalTextAlignment="Center" />
-                    </HorizontalStackLayout>
-                </toolkit:Expander.Header>
-                <toolkit:Expander.Content>
-                    <VerticalStackLayout Margin="0,5">
-                        <Label FontSize="Micro">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span
-                                        FontAttributes="Bold"
-                                        FontSize="Micro"
-                                        Text="{localization:Translate DataInicio}"
-                                        TextColor="White" />
-                                    <Span Text=": " TextColor="White" />
-                                    <Span
-                                        FontSize="Micro"
-                                        Text="{Binding Lote.dataInicio, StringFormat='{0:d}'}"
-                                        TextColor="White" />
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-
-                        <Label FontSize="Micro">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span
-                                        FontAttributes="Bold"
-                                        FontSize="Micro"
-                                        Text="{localization:Translate Propriedade}"
-                                        TextColor="White" />
-                                    <Span Text=": " TextColor="White" />
-                                    <Span
-                                        FontSize="Micro"
-                                        Text="{Binding Lote.PropriedadeNome}"
-                                        TextColor="White" />
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-
-                        <Label FontSize="Micro">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span
-                                        FontAttributes="Bold"
-                                        FontSize="Micro"
-                                        Text="{localization:Translate Regional}"
-                                        TextColor="White" />
-                                    <Span Text=": " TextColor="White" />
-                                    <Span
-                                        FontSize="Micro"
-                                        Text="{Binding Lote.RegionalNome}"
-                                        TextColor="White" />
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-
-                        <Label FontSize="Micro">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span
-                                        FontAttributes="Bold"
-                                        FontSize="Micro"
-                                        Text="{localization:Translate UnidadeEp}"
-                                        TextColor="White" />
-                                    <Span Text=": " TextColor="White" />
-                                    <Span
-                                        FontSize="Micro"
-                                        Text="{Binding Lote.UnidadeEpidemiologicaNome}"
-                                        TextColor="White" />
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                    </VerticalStackLayout>
-                </toolkit:Expander.Content>
-            </toolkit:Expander>
         </Grid>
 
         <listView:SfListView
@@ -252,9 +134,12 @@
             VerticalOptions="Fill" />
 
         <buttons:SfButton
-            Grid.Row="2"
+            Grid.Row="1"
+            Margin="0,0,20,20"
             Command="{Binding NovaNutricaoCommand}"
-            Style="{StaticResource CircleButtonPlus}" />
+            HorizontalOptions="End"
+            Style="{StaticResource CircleButtonPlus}"
+            VerticalOptions="End" />
 
     </Grid>
 </ContentPage>

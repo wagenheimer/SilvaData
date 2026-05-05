@@ -106,6 +106,7 @@ public partial class ManejoZootecnicoBox : ObservableObject
 /// </summary>
 public partial class LoteManejoViewModel : ViewModelBase
 {
+    [ObservableProperty] private string title = string.Empty;
     [ObservableProperty] private Lote? lote;
     [ObservableProperty] private ObservableCollection<ManejoZootecnicoBox> manejoList = new();
     [ObservableProperty] private ObservableCollection<LoteForm> manejoGeralList = new(); // ★ NOVO: Lista geral
@@ -212,6 +213,7 @@ public partial class LoteManejoViewModel : ViewModelBase
         try
         {
             IsBusy = true;
+            Title = Traducao.Manejo;
             Lote = lote;
             Lote.EnsureNames();
             ManejoList.Clear();

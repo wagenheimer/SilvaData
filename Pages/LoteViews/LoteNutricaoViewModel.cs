@@ -21,6 +21,7 @@ namespace SilvaData.ViewModels
 
     public partial class LoteNutricaoViewModel : ViewModelBase
     {
+        [ObservableProperty] private string title = string.Empty;
         [ObservableProperty] private Lote? lote;
         [ObservableProperty] private ObservableCollection<NutricaoButton> nutricaoList = new();
         [ObservableProperty] private List<LoteForm> nutricaoListForm = new();
@@ -51,6 +52,7 @@ namespace SilvaData.ViewModels
             {
                 Debug.WriteLine($"[LoteNutricaoViewModel] 📥 Carregando nutrição do lote {lote.id}");
                 IsBusy = true;
+                Title = Traducao.Nutrição;
                 Lote = lote;
                 Lote.EnsureNames();
                 NutricaoList.Clear();

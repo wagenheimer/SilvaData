@@ -37,13 +37,10 @@
 
             <!--  Título e descrição  -->
             <VerticalStackLayout Grid.Row="0" Spacing="2">
-                <Label
+                <controls:LoteDescricaoLabel
                     Padding="0,0,0,2"
-                    FontSize="12"
-                    HorizontalTextAlignment="Start"
-                    Opacity="0.9"
-                    Text="{Binding Lote.DescricaoCompleta}"
-                    TextColor="White" />
+                    Lote="{Binding Lote}"
+                    NomeTela="{localization:Translate DiagnósticoDeEnfermidades}" />
                 <Label
                     FontAttributes="Bold"
                     FontFamily="Nunito"

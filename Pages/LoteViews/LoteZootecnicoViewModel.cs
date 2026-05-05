@@ -22,6 +22,7 @@ namespace SilvaData.ViewModels
     /// </summary>
     public partial class LoteZootecnicoViewModel : ViewModelBase
     {
+        [ObservableProperty] private string title = string.Empty;
         [ObservableProperty] private Lote? lote;
         [ObservableProperty] private ObservableCollection<ManejoZootecnicoBox> zootecnicoList = new();
         [ObservableProperty] private ObservableCollection<LoteForm> zootecnicoGeralList = new();
@@ -140,6 +141,7 @@ namespace SilvaData.ViewModels
             try
             {
                 IsBusy = true;
+                Title = Traducao.Zootécnico;
                 Lote = lote;
                 Lote.EnsureNames();
                 ZootecnicoList.Clear();
