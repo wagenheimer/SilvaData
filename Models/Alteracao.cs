@@ -96,11 +96,17 @@ namespace SilvaData.Models
             var tabela = table.GetType().ToString();
             tabela = tabela.Replace("SilvaData.Models.", "");
 
-            var id = await Db.FindWithQueryAsync<MaxId>($"select max(id)+1 as maxid from {tabela}");
+            // Para Lote: usa MAX(id, idApp) para evitar reutilizar um id local que já existe
+            // como idApp de um lote sincronizado (ex: local id=50000 → sync → id=51, idApp=50000;
+            // próximo GetNextId retornaria 50000 de novo, causando ambiguidade em PegaLoteAsync).
+            string sql = tabela == "Lote"
+                ? $"select max(max(id), coalesce(max(idApp),0))+1 as maxid from {tabela}"
+                : $"select max(id)+1 as maxid from {tabela}";
+
+            var id = await Db.FindWithQueryAsync<MaxId>(sql);
+
             if (id.maxid < 50000)
                 id.maxid = 50000;
-            else
-                id.maxid += 1;
 
             return id.maxid;
         }

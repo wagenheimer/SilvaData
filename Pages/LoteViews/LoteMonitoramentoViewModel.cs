@@ -101,6 +101,16 @@ namespace SilvaData.ViewModels
 
             WeakReferenceMessenger.Default.Register<LoteAlteradoMessage>(this, (sender, message) =>
             {
+                // Só atualiza se a mensagem se refere ao lote que está sendo exibido.
+                // Sem essa guarda, qualquer sincronização de qualquer lote sobrescreve
+                // LoteAtual — causando, por exemplo, criar ISI Macro do lote 51 no lote 50.
+                var eOMesmoLote = LoteAtual != null && (
+                    message.Lote.id == LoteAtual.id
+                    || (message.Lote.idApp == LoteAtual.idApp && message.Lote.idApp > 0)
+                    || (message.Lote.idApp == LoteAtual.id && message.Lote.idApp > 0));
+
+                if (!eOMesmoLote) return;
+
                 message.Lote.EnsureNames(_cacheService);
                 LoteAtual = message.Lote;
                 AtualizaPodeFecharLote();

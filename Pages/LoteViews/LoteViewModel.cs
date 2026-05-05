@@ -50,6 +50,9 @@ namespace SilvaData.ViewModels
 
         public SfListView? SfListView;
 
+        // Disparado após CarregaLotes quando há um lote novo para destacar
+        public event Action<Lote>? NovoLoteAdicionado;
+
         public string OrdemLotesIcone => LotesMaisNovosPrimeiro
             ? FontAwesomeIcons.ArrowDownWideShort
             : FontAwesomeIcons.ArrowUpWideShort;
@@ -74,6 +77,9 @@ namespace SilvaData.ViewModels
 
         // Dicionários para lookup O(1)
         private Dictionary<int, UnidadeEpidemiologicaComDetalhes> _ueDict = new();
+
+        // id do lote novo pendente de scroll/highlight (0 = nenhum)
+        private int _novoLoteIdPendente = 0;
 
         // ═══════════════════════════════════════════════════════════
         // ★★★ CONSTRUTOR ★★★
@@ -193,11 +199,10 @@ namespace SilvaData.ViewModels
         private void HandleNovoLote(NovoLoteMessage m)
         {
             if (_isDisposed || m.Lote == null) return;
-            MainThread.BeginInvokeOnMainThread(() =>
-            {
-                if (ListaLotes.FirstOrDefault(l => l?.id == m.Lote.id) == null)
-                    ListaLotes.Insert(0, m.Lote);
-            });
+            _novoLoteIdPendente = m.Lote.id ?? 0;
+            // Recarrega do banco em vez de Insert direto: garante que a lista reflita
+            // exatamente o que está no banco, sem race condition com ReplaceRange em curso.
+            _ = ForceRefreshInternalAsync();
         }
 
         private void HandleLoteAlterado(LoteAlteradoMessage m)
@@ -296,6 +301,14 @@ namespace SilvaData.ViewModels
                 {
                     Debug.WriteLine($"[LoteViewModel] ReplaceRange com {listaFiltrada.Count} lotes");
                     ListaLotes.ReplaceRange(listaFiltrada);
+
+                    if (_novoLoteIdPendente != 0)
+                    {
+                        var novoLote = listaFiltrada.FirstOrDefault(l => l.id == _novoLoteIdPendente);
+                        _novoLoteIdPendente = 0;
+                        if (novoLote != null)
+                            NovoLoteAdicionado?.Invoke(novoLote);
+                    }
                 });
 
                 sw.Stop();

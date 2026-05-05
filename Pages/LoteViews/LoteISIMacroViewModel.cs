@@ -182,7 +182,7 @@ namespace SilvaData.ViewModels
                 isReadOnly: true,
                 podeEditar: PodeEditarISIMacro,
                 item: isiMacro.LoteForm.item,
-                modeloIsiMacroSelecionado: null,
+                modeloIsiMacroSelecionado: isiMacro.LoteForm.modeloisimacro,
                 limpaFormularioAtual: false);
 
             Debug.WriteLine($"[LoteISIMacroViewModel] ✅ Navegação concluída");

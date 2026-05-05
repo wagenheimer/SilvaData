@@ -20,11 +20,33 @@ namespace SilvaData.Controls
             InitializeComponent();
 
             ViewModel = ServiceHelper.GetRequiredService<LoteViewModel>();
-            ViewModel.SfListView = sfListView; // Passa a referência da ListView
+            ViewModel.SfListView = sfListView;
+            ViewModel.NovoLoteAdicionado += OnNovoLoteAdicionado;
             BindingContext = ViewModel;
 
-            // MELHORIA: Adiciona o manipulador de evento 'Loaded'
             this.Loaded += LoteView_Loaded;
+        }
+
+        private void OnNovoLoteAdicionado(Lote lote)
+        {
+            _ = ScrollAndHighlightAsync(lote);
+        }
+
+        private async Task ScrollAndHighlightAsync(Lote lote)
+        {
+            try
+            {
+                await Task.Delay(150);
+                sfListView.ScrollTo(lote, ScrollToPosition.Start, true);
+                await Task.Delay(350);
+                sfListView.SelectedItem = lote;
+                await Task.Delay(800);
+                sfListView.SelectedItem = null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[LoteView] ScrollAndHighlight erro: {ex.Message}");
+            }
         }
 
         /// <summary>
