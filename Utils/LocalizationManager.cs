@@ -76,9 +76,12 @@ namespace SilvaData.Utils
                 localizationResourceManager.CurrentCulture = new CultureInfo(linguagem);
             }
 
-            // MUDANÇA MAUI: Usando Thread.CurrentThread.CurrentCulture, que é o padrão .NET Core/MAUI
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(linguagem);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(linguagem);
+            // Aplica na thread atual e em todas as novas threads criadas pelo runtime
+            var culture = new CultureInfo(linguagem);
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
 
             // Notificar mudanças nas propriedades
             OnPropertyChanged(nameof(CurrentLanguage));
