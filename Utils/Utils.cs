@@ -50,7 +50,7 @@ namespace SilvaData.Utils
         }
 
         /// <summary>
-        /// Rola o SfListView para o próximo item após o item atual.
+        /// Rola suavemente usando o ScrollView nativo e depois corrige a posição exata com a Syncfusion.
         /// </summary>
         public async static Task VaiParaProximo(View isi, SfListView camposaPreencher)
         {
@@ -63,25 +63,34 @@ namespace SilvaData.Utils
                     var nextItem = camposaPreencher.DataSource.DisplayItems[currentIndex + 1];
 
                     var scrollView = camposaPreencher.GetVisualTreeDescendants()
-                        .OfType<ScrollView>()
-                        .FirstOrDefault();
+                                                     .OfType<ScrollView>()
+                                                     .FirstOrDefault();
 
-                    if (scrollView != null)
+                    await MainThread.InvokeOnMainThreadAsync(async () =>
                     {
-                        // Anima até a posição aproximada usando a altura real do item atual
-                        var itemHeight = isiMacroNota.Height > 0 ? isiMacroNota.Height : 300;
-                        await MainThread.InvokeOnMainThreadAsync(() =>
-                            scrollView.ScrollToAsync(0, scrollView.ScrollY + itemHeight, true));
+                        if (scrollView != null)
+                        {
+                            // 1. Aproximação Suave: Pega a altura (com fallback) e inicia a animação nativa
+                            var itemHeight = isi.Height > 0 ? isi.Height : 300;
 
-                        // Snap exato sem animação (correção mínima, imperceptível)
-                        await MainThread.InvokeOnMainThreadAsync(() =>
-                            camposaPreencher.ScrollTo(nextItem, ScrollToPosition.Start, false));
-                    }
-                    else
-                    {
-                        await MainThread.InvokeOnMainThreadAsync(() =>
-                            camposaPreencher.ScrollTo(nextItem, ScrollToPosition.Start, true));
-                    }
+                            // O await aqui garante o disparo, mas a animação visual leva um tempo para rodar
+                            await scrollView.ScrollToAsync(0, scrollView.ScrollY + itemHeight, animated: true);
+
+                            // 2. O Segredo: Esperar o tempo exato da animação nativa terminar.
+                            // 250ms a 300ms é o tempo médio que o Android/iOS leva para deslizar a tela.
+                            await Task.Delay(300);
+
+                            // 3. O "Snap" Exato: Corrige a posição milimetricamente pelo componente.
+                            // disableAnimation: true (ou false no seu código antigo se estivesse invertido)
+                            // garante que ele só faça o ajuste fino instantâneo sem tentar animar de novo.
+                            camposaPreencher.ScrollTo(nextItem, ScrollToPosition.Start, disableAnimation: true);
+                        }
+                        else
+                        {
+                            // Fallback caso não ache o ScrollView
+                            camposaPreencher.ScrollTo(nextItem, ScrollToPosition.Start, disableAnimation: false);
+                        }
+                    });
                 }
             }
         }
