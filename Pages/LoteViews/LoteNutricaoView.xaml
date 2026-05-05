@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="ISIInstitute.Views.LoteViews.LoteNutricaoView"
-    x:Name="Root"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
@@ -11,6 +10,7 @@
     xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
+    x:Name="Root"
     x:DataType="viewModels:LoteNutricaoViewModel"
     Background="{StaticResource PrimaryColor}">
 
@@ -69,7 +69,7 @@
                 <buttons:SfButton
                     Command="{Binding VoltarCommand}"
                     Style="{StaticResource CircleButton}"
-                    Text="{x:Static fontawesome:FontAwesomeIcons.TurnDownLeft}" />
+                    Text="{x:Static fontawesome:FontAwesomeIcons.ArrowTurnDownLeft}" />
             </HorizontalStackLayout>
 
             <toolkit:Expander

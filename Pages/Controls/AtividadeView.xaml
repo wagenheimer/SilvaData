@@ -167,7 +167,7 @@
                         Grid.Column="1"
                         Command="{Binding VoltarCommand}"
                         Style="{StaticResource CircleButton}"
-                        Text="{x:Static fontawesome:FontAwesomeIcons.TurnDownLeft}" />
+                        Text="{x:Static fontawesome:FontAwesomeIcons.ArrowTurnDownLeft}" />
                 </StackLayout>
 
                 <StackLayout

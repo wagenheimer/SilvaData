@@ -51,7 +51,7 @@
                     Grid.Column="1"
                     Command="{Binding BackNowCommand}"
                     Style="{StaticResource CircleButton}"
-                    Text="{x:Static fontawesome:FontAwesomeIcons.TurnDownLeft}" />
+                    Text="{x:Static fontawesome:FontAwesomeIcons.ArrowTurnDownLeft}" />
             </StackLayout>
 
             <Label
@@ -75,8 +75,8 @@
                     <controls:ISITextField
                         x:Name="nome"
                         Title="{localization:Translate Nome}"
-                        IsRequired="True"
                         IsReadOnly="{Binding ReadOnly, Mode=OneWay}"
+                        IsRequired="True"
                         Text="{Binding Regional.nome, Mode=TwoWay}" />
 
                 </StackLayout>

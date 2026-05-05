@@ -54,7 +54,7 @@
                     Grid.Column="1"
                     Command="{Binding BackNowCommand}"
                     Style="{StaticResource CircleButton}"
-                    Text="{x:Static fontawesome:FontAwesomeIcons.TurnDownLeft}" />
+                    Text="{x:Static fontawesome:FontAwesomeIcons.ArrowTurnDownLeft}" />
             </StackLayout>
 
             <Label

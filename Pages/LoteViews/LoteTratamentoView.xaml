@@ -59,7 +59,7 @@
                 <buttons:SfButton
                     Command="{Binding VoltarCommand}"
                     Style="{StaticResource CircleButton}"
-                    Text="{x:Static fontawesome:FontAwesomeIcons.TurnDownLeft}" />
+                    Text="{x:Static fontawesome:FontAwesomeIcons.ArrowTurnDownLeft}" />
             </HorizontalStackLayout>
 
             <StackLayout

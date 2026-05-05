@@ -8,8 +8,8 @@
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
     xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
     xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:models="clr-namespace:SilvaData.Models"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:utils="clr-namespace:SilvaData.Utils"
     x:DataType="controls:UnidadeEpidemiologicaView"
     Shell.TabBarIsVisible="false">
@@ -60,7 +60,7 @@
                         Grid.Column="1"
                         Command="{Binding VoltarCommand}"
                         Style="{StaticResource CircleButton}"
-                        Text="{x:Static fontawesome:FontAwesomeIcons.TurnDownLeft}" />
+                        Text="{x:Static fontawesome:FontAwesomeIcons.ArrowTurnDownLeft}" />
                 </StackLayout>
 
                 <Label
@@ -94,8 +94,8 @@
                 <listView:SfListView.ItemTemplate>
                     <DataTemplate x:DataType="models:UnidadeEpidemiologica">
                         <Border
-                            Background="White"
                             Padding="2"
+                            Background="White"
                             StrokeShape="RoundRectangle 20"
                             StrokeThickness="0">
                             <Grid

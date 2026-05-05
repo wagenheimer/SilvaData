@@ -52,7 +52,7 @@
                     Grid.Column="1"
                     Command="{Binding BackNowCommand}"
                     Style="{StaticResource CircleButton}"
-                    Text="{x:Static fontawesome:FontAwesomeIcons.TurnDownLeft}" />
+                    Text="{x:Static fontawesome:FontAwesomeIcons.ArrowTurnDownLeft}" />
             </StackLayout>
 
             <StackLayout
@@ -81,9 +81,7 @@
                 </Grid.RowDefinitions>
 
                 <ScrollView x:Name="scrollView" Grid.Row="0">
-                    <StackLayout
-                        Margin="4"
-                        Spacing="10">
+                    <StackLayout Margin="4" Spacing="10">
 
                         <Grid Padding="5" IsVisible="{Binding MostraBotoesExtrasAtividate}">
                             <buttons:SfButton

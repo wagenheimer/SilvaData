@@ -8,7 +8,6 @@
     xmlns:imageEditor="clr-namespace:Syncfusion.Maui.ImageEditor;assembly=Syncfusion.Maui.ImageEditor"
     xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
-
     x:DataType="viewModels:ISIMacroNotaSelecionaImagemViewModel"
     Background="{StaticResource PrimaryColor}"
     Shell.TabBarIsVisible="False">
@@ -40,7 +39,7 @@
                 Grid.Column="1"
                 Command="{Binding VoltarCommand}"
                 Style="{StaticResource CircleButton}"
-                Text="{x:Static fontawesome:FontAwesomeIcons.TurnDownLeft}" />
+                Text="{x:Static fontawesome:FontAwesomeIcons.ArrowTurnDownLeft}" />
         </Grid>
 
         <!--  Content  -->

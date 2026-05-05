@@ -27,15 +27,15 @@
             Text="{Binding Title}"
             TextColor="White"
             VerticalOptions="Center" />
-            <Label
-                Padding="5,0,0,0"
-                FontFamily="Nunito"
-                FontSize="Small"
-                HorizontalOptions="Start"
-                Text="{Binding ParametroSelecionado.nome, FallbackValue=''}"
-                TextColor="White"
-                VerticalOptions="Center"
-                LineBreakMode="TailTruncation" />
+        <Label
+            Padding="5,0,0,0"
+            FontFamily="Nunito"
+            FontSize="Small"
+            HorizontalOptions="Start"
+            LineBreakMode="TailTruncation"
+            Text="{Binding ParametroSelecionado.nome, FallbackValue=''}"
+            TextColor="White"
+            VerticalOptions="Center" />
     </VerticalStackLayout>
 
     <!--  Botão Voltar  -->
@@ -46,7 +46,7 @@
         <buttons:SfButton
             Command="{Binding VoltarCommand}"
             Style="{StaticResource CircleButton}"
-            Text="{x:Static fontawesome:FontAwesomeIcons.TurnDownLeft}" />
+            Text="{x:Static fontawesome:FontAwesomeIcons.ArrowTurnDownLeft}" />
     </HorizontalStackLayout>
 
     <!--  SubTitle  -->

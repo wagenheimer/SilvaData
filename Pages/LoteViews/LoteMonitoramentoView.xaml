@@ -21,197 +21,200 @@
         RowDefinitions="Auto,*"
         RowSpacing="0">
 
-            <Grid
-                x:Name="HeaderGrid"
-                Grid.Row="0"
-                Margin="0"
-                Padding="10,0"
-                ColumnDefinitions="*,Auto"
-                RowDefinitions="Auto,Auto"
-                Style="{StaticResource HeaderGradient}">
+        <Grid
+            x:Name="HeaderGrid"
+            Grid.Row="0"
+            Margin="0"
+            Padding="10,0"
+            ColumnDefinitions="*,Auto"
+            RowDefinitions="Auto,Auto"
+            Style="{StaticResource HeaderGradient}">
 
-                <!--  Dados do Lote  -->
-                <VerticalStackLayout Spacing="0">
-                    <Label Margin="0" Padding="15,0,0,0">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span
-                                    FontSize="Medium"
-                                    Text="{localization:Translate Lote}"
-                                    TextColor="White" />
-                                <Span Text=" " TextColor="White" />
-                                <Span
-                                    FontAttributes="Bold"
-                                    FontSize="Medium"
-                                    Text="{Binding LoteAtual.numero}"
-                                    TextColor="White" />
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                    <Label
-                        Padding="15,0,0,0"
-                        FontFamily="Nunito"
-                        HorizontalOptions="Fill"
-                        HorizontalTextAlignment="Start"
-                        Text="{Binding LoteAtual.Status}"
-                        TextColor="White"
-                        VerticalOptions="Start" />
-                </VerticalStackLayout>
+            <!--  Dados do Lote  -->
+            <VerticalStackLayout Spacing="0">
+                <Label Margin="0" Padding="15,0,0,0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span
+                                FontSize="Medium"
+                                Text="{localization:Translate Lote}"
+                                TextColor="White" />
+                            <Span Text=" " TextColor="White" />
+                            <Span
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                Text="{Binding LoteAtual.numero}"
+                                TextColor="White" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label
+                    Padding="15,0,0,0"
+                    FontFamily="Nunito"
+                    HorizontalOptions="Fill"
+                    HorizontalTextAlignment="Start"
+                    Text="{Binding LoteAtual.Status}"
+                    TextColor="White"
+                    VerticalOptions="Start" />
+            </VerticalStackLayout>
 
 
-                <!--  Botões de Ação  -->
-                <HorizontalStackLayout Grid.Column="1" Padding="5">
-                    <buttons:SfButton
-                        Command="{Binding FecharLoteCommand}"
-                        IsVisible="{Binding PodeFecharLote}"
-                        Style="{StaticResource CircleButtonGreen}"
-                        Text="{x:Static fontawesome:FontAwesomeIcons.Truck}" />
+            <!--  Botões de Ação  -->
+            <HorizontalStackLayout Grid.Column="1" Padding="5">
+                <buttons:SfButton
+                    Command="{Binding FecharLoteCommand}"
+                    IsVisible="{Binding PodeFecharLote}"
+                    Style="{StaticResource CircleButtonGreen}"
+                    Text="{x:Static fontawesome:FontAwesomeIcons.Truck}" />
 
-                    <buttons:SfButton
-                        Command="{Binding EditarLoteCommand}"
-                        FontFamily="FontAwesomeLight"
-                        IsVisible="{Binding IsEditarLoteVisible}"
-                        Style="{StaticResource CircleButton}"
-                        Text="{x:Static fontawesome:FontAwesomeIcons.Pen}" />
+                <buttons:SfButton
+                    Command="{Binding EditarLoteCommand}"
+                    FontFamily="FontAwesomeLight"
+                    IsVisible="{Binding IsEditarLoteVisible}"
+                    Style="{StaticResource CircleButton}"
+                    Text="{x:Static fontawesome:FontAwesomeIcons.Pen}" />
 
-                    <buttons:SfButton
-                        Command="{Binding VoltarCommand}"
-                        Style="{StaticResource CircleButton}"
-                        Text="{x:Static fontawesome:FontAwesomeIcons.TurnDownLeft}" />
-                </HorizontalStackLayout>
+                <buttons:SfButton
+                    Command="{Binding VoltarCommand}"
+                    Style="{StaticResource CircleButton}"
+                    Text="{x:Static fontawesome:FontAwesomeIcons.ArrowTurnDownLeft}" />
+            </HorizontalStackLayout>
 
-                <toolkit:Expander
-                    x:Name="LoteInfoExpander"
-                    Grid.Row="1"
-                    Grid.ColumnSpan="2"
-                    Margin="15,0,0,20"
-                    IsExpanded="False">
-                    <toolkit:Expander.Header>
-                        <HorizontalStackLayout>
-                            <Label
-                                Margin="1,0,5,0"
-                                FontFamily="FontAwesomeLight"
-                                FontSize="Micro"
-                                HorizontalOptions="Center"
-                                Text="{x:Static fontawesome:FontAwesomeIcons.AngleRight}"
-                                TextColor="White"
-                                VerticalOptions="Center"
-                                VerticalTextAlignment="Center">
-                                <Label.Triggers>
-                                    <DataTrigger
-                                                                                 Binding="{Binding IsExpanded, Source={x:Reference LoteInfoExpander}}"
-                                        TargetType="Label"
-                                        Value="True">
-                                        <Setter Property="Text" Value="{x:Static fontawesome:FontAwesomeIcons.AngleDown}" />
-                                    </DataTrigger>
-                                </Label.Triggers>
-                            </Label>
-                            <Label
-                                FontSize="Micro"
-                                Text="{Binding Title}"
-                                TextColor="White"
-                                VerticalOptions="Center"
-                                VerticalTextAlignment="Center" />
-                        </HorizontalStackLayout>
-                    </toolkit:Expander.Header>
-                    <toolkit:Expander.Content>
-                        <VerticalStackLayout Margin="0,5">
-                            <Label FontSize="Micro">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span
-                                            FontAttributes="Bold"
-                                            FontSize="Micro"
-                                            Text="{localization:Translate DataInicio}"
-                                            TextColor="White" />
-                                        <Span Text=": " TextColor="White" />
-                                        <Span
-                                            FontSize="Micro"
-                                            Text="{Binding LoteAtual.dataInicio, StringFormat='{0:d}'}"
-                                            TextColor="White" />
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
+            <toolkit:Expander
+                x:Name="LoteInfoExpander"
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Margin="15,0,0,20"
+                IsExpanded="False">
+                <toolkit:Expander.Header>
+                    <HorizontalStackLayout>
+                        <Label
+                            Margin="1,0,5,0"
+                            FontFamily="FontAwesomeLight"
+                            FontSize="Micro"
+                            HorizontalOptions="Center"
+                            Text="{x:Static fontawesome:FontAwesomeIcons.AngleRight}"
+                            TextColor="White"
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center">
+                            <Label.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding IsExpanded, Source={x:Reference LoteInfoExpander}}"
+                                    TargetType="Label"
+                                    Value="True">
+                                    <Setter Property="Text" Value="{x:Static fontawesome:FontAwesomeIcons.AngleDown}" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <Label
+                            FontSize="Micro"
+                            Text="{Binding Title}"
+                            TextColor="White"
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center" />
+                    </HorizontalStackLayout>
+                </toolkit:Expander.Header>
+                <toolkit:Expander.Content>
+                    <VerticalStackLayout Margin="0,5">
+                        <Label FontSize="Micro">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span
+                                        FontAttributes="Bold"
+                                        FontSize="Micro"
+                                        Text="{localization:Translate DataInicio}"
+                                        TextColor="White" />
+                                    <Span Text=": " TextColor="White" />
+                                    <Span
+                                        FontSize="Micro"
+                                        Text="{Binding LoteAtual.dataInicio, StringFormat='{0:d}'}"
+                                        TextColor="White" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
 
-                            <Label FontSize="Micro">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span
-                                            FontAttributes="Bold"
-                                            FontSize="Micro"
-                                            Text="{localization:Translate Propriedade}"
-                                            TextColor="White" />
-                                        <Span Text=": " TextColor="White" />
-                                        <Span
-                                            FontSize="Micro"
-                                            Text="{Binding LoteAtual.PropriedadeNome}"
-                                            TextColor="White" />
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
+                        <Label FontSize="Micro">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span
+                                        FontAttributes="Bold"
+                                        FontSize="Micro"
+                                        Text="{localization:Translate Propriedade}"
+                                        TextColor="White" />
+                                    <Span Text=": " TextColor="White" />
+                                    <Span
+                                        FontSize="Micro"
+                                        Text="{Binding LoteAtual.PropriedadeNome}"
+                                        TextColor="White" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
 
-                            <Label FontSize="Micro">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span
-                                            FontAttributes="Bold"
-                                            FontSize="Micro"
-                                            Text="{localization:Translate Regional}"
-                                            TextColor="White" />
-                                        <Span Text=": " TextColor="White" />
-                                        <Span
-                                            FontSize="Micro"
-                                            Text="{Binding LoteAtual.RegionalNome}"
-                                            TextColor="White" />
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
+                        <Label FontSize="Micro">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span
+                                        FontAttributes="Bold"
+                                        FontSize="Micro"
+                                        Text="{localization:Translate Regional}"
+                                        TextColor="White" />
+                                    <Span Text=": " TextColor="White" />
+                                    <Span
+                                        FontSize="Micro"
+                                        Text="{Binding LoteAtual.RegionalNome}"
+                                        TextColor="White" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
 
-                            <Label FontSize="Micro">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span
-                                            FontAttributes="Bold"
-                                            FontSize="Micro"
-                                            Text="{localization:Translate UnidadeEp}"
-                                            TextColor="White" />
-                                        <Span Text=": " TextColor="White" />
-                                        <Span
-                                            FontSize="Micro"
-                                            Text="{Binding LoteAtual.UnidadeEpidemiologicaNome}"
-                                            TextColor="White" />
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                        </VerticalStackLayout>
-                    </toolkit:Expander.Content>
-                </toolkit:Expander>
-            </Grid>
+                        <Label FontSize="Micro">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span
+                                        FontAttributes="Bold"
+                                        FontSize="Micro"
+                                        Text="{localization:Translate UnidadeEp}"
+                                        TextColor="White" />
+                                    <Span Text=": " TextColor="White" />
+                                    <Span
+                                        FontSize="Micro"
+                                        Text="{Binding LoteAtual.UnidadeEpidemiologicaNome}"
+                                        TextColor="White" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </VerticalStackLayout>
+                </toolkit:Expander.Content>
+            </toolkit:Expander>
+        </Grid>
 
-            <Grid Grid.Row="1" RowDefinitions="*" RowSpacing="0">
-                <ScrollView x:Name="MainScrollView" Grid.Row="0">
-                    <VerticalStackLayout
+        <Grid
+            Grid.Row="1"
+            RowDefinitions="*"
+            RowSpacing="0">
+            <ScrollView x:Name="MainScrollView" Grid.Row="0">
+                <VerticalStackLayout
                     x:Name="ContentStack"
                     Padding="10,15,10,20"
                     Spacing="15">
 
-                    <!--  Loading de Avaliações Diversas -->
+                    <!--  Loading de Avaliações Diversas  -->
                     <ActivityIndicator
+                        Margin="0,10"
+                        HorizontalOptions="Center"
                         IsRunning="{Binding IsLoadingGalpaoResumo}"
                         IsVisible="{Binding IsLoadingGalpaoResumo}"
-                        Color="{StaticResource PrimaryColor}"
-                        HorizontalOptions="Center"
-                        Margin="0,10" />
+                        Color="{StaticResource PrimaryColor}" />
 
-                    <!--  Seção: Avaliações Diversas (Galpão) -->
+                    <!--  Seção: Avaliações Diversas (Galpão)  -->
                     <VerticalStackLayout IsVisible="{Binding IsAvaliacaoGalpaoSectionVisible}" Spacing="5">
                         <Label
+                            Margin="10,0,0,0"
                             FontAttributes="Bold"
                             FontSize="Medium"
                             HorizontalTextAlignment="Start"
                             Text="Avaliações diversas"
-                            TextColor="{StaticResource PrimaryColor}"
-                            Margin="10,0,0,0" />
+                            TextColor="{StaticResource PrimaryColor}" />
 
                         <CollectionView ItemsSource="{Binding ParametrosGalpaoResumo}" SelectionMode="Single">
                             <CollectionView.ItemTemplate>
@@ -225,8 +228,11 @@
                                             <TapGestureRecognizer Tapped="OnParametroGalpaoTapped" />
                                         </Border.GestureRecognizers>
 
-                                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10" HorizontalOptions="Fill">
-                                            <!-- Icon -->
+                                        <Grid
+                                            ColumnDefinitions="Auto,*,Auto"
+                                            ColumnSpacing="10"
+                                            HorizontalOptions="Fill">
+                                            <!--  Icon  -->
                                             <Label
                                                 Grid.Column="0"
                                                 FontFamily="FontAwesomeLight"
@@ -235,39 +241,42 @@
                                                 TextColor="{StaticResource PrimaryColor}"
                                                 VerticalOptions="Center" />
 
-                                            <!-- Name + Type -->
-                                            <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                                            <!--  Name + Type  -->
+                                            <VerticalStackLayout
+                                                Grid.Column="1"
+                                                Spacing="1"
+                                                VerticalOptions="Center">
                                                 <Label
                                                     FontAttributes="Bold"
                                                     FontSize="Small"
+                                                    LineBreakMode="TailTruncation"
                                                     Text="{Binding Nome}"
-                                                    TextColor="#333"
-                                                    LineBreakMode="TailTruncation" />
+                                                    TextColor="#333" />
                                                 <Label
                                                     FontSize="Micro"
+                                                    LineBreakMode="TailTruncation"
                                                     Text="{Binding TipoLabel}"
-                                                    TextColor="#999"
-                                                    LineBreakMode="TailTruncation" />
+                                                    TextColor="#999" />
                                             </VerticalStackLayout>
 
-                                            <!-- Badge Count -->
+                                            <!--  Badge Count  -->
                                             <Border
                                                 Grid.Column="2"
                                                 Padding="0"
                                                 Background="{Binding BadgeColor}"
-                                                StrokeShape="Ellipse"
-                                                WidthRequest="32"
                                                 HeightRequest="32"
                                                 HorizontalOptions="End"
-                                                VerticalOptions="Center">
+                                                StrokeShape="Ellipse"
+                                                VerticalOptions="Center"
+                                                WidthRequest="32">
                                                 <Label
-                                                    Text="{Binding Count}"
-                                                    TextColor="White"
                                                     FontAttributes="Bold"
                                                     FontSize="Micro"
                                                     HorizontalOptions="Center"
-                                                    VerticalOptions="Center"
                                                     HorizontalTextAlignment="Center"
+                                                    Text="{Binding Count}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center"
                                                     VerticalTextAlignment="Center" />
                                             </Border>
                                         </Grid>
@@ -277,15 +286,15 @@
                         </CollectionView>
                     </VerticalStackLayout>
 
-                    <!--  Seção: Outros Monitoramentos -->
+                    <!--  Seção: Outros Monitoramentos  -->
                     <VerticalStackLayout Spacing="10">
                         <Label
+                            Margin="10,0,0,0"
                             FontAttributes="Bold"
                             FontSize="Medium"
                             HorizontalTextAlignment="Start"
                             Text="Outros monitoramentos"
-                            TextColor="{StaticResource PrimaryColor}"
-                            Margin="10,0,0,0" />
+                            TextColor="{StaticResource PrimaryColor}" />
 
                         <buttons:SfButton
                             Command="{Binding ManejoCommand}"
@@ -315,7 +324,10 @@
                             Style="{StaticResource SubMonitoramentoButton}"
                             Text="{localization:Translate Sanidade}" />
 
-                        <VerticalStackLayout IsVisible="{Binding SanidadeVisible}" Spacing="10" Margin="20,5,10,0">
+                        <VerticalStackLayout
+                            Margin="20,5,10,0"
+                            IsVisible="{Binding SanidadeVisible}"
+                            Spacing="10">
                             <buttons:SfButton
                                 Command="{Binding DiagnosticoCommand}"
                                 ImageSource="diagnosticoenfermidade.png"
@@ -361,7 +373,7 @@
                     </VerticalStackLayout>
 
                 </VerticalStackLayout>
-                </ScrollView>
-            </Grid>
+            </ScrollView>
         </Grid>
+    </Grid>
 </ContentPage>
