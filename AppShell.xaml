@@ -6,7 +6,7 @@
     xmlns:pages="clr-namespace:SilvaData.Pages"
     xmlns:sf="clr-namespace:Syncfusion.Maui.Toolkit.SegmentedControl;assembly=Syncfusion.Maui.Toolkit"
     Shell.BackgroundColor="{StaticResource PrimaryColor}"
-    Shell.FlyoutBehavior="Flyout">
+    Shell.FlyoutBehavior="Disabled">
 
     <ShellContent
         Title="Home"
