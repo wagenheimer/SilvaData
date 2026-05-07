@@ -291,7 +291,7 @@ namespace SilvaData.ViewModels
         [RelayCommand]
         private async Task DownloadNow()
         {
-            await NavigationUtils.ShowPageAsModalAsync(new SincronizacaoPageModal());
+            await NavigationUtils.ShowViewAsModalAsync<SincronizacaoPageModal>();
         }
     }
 }
