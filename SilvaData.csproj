@@ -42,8 +42,8 @@
 
 	<!-- Configurações específicas para RELEASE (Otimizado para produção) -->
 	<PropertyGroup Condition="'$(TargetFramework)'=='net10.0-ios' and '$(Configuration)'=='Release'">
-		<!-- Removido interpreter para produção. Adicionado num-jobs para paralelizar o stripping/AOT -->
-		<MtouchExtraArgs>$(MtouchExtraArgs) --num-jobs=4 --linkskip=System.Security.Permissions --linkskip=CommunityToolkit.Maui --linkskip=Syncfusion.Maui.Core --linkskip=Syncfusion.Maui.Toolkit --linkskip=Syncfusion.Maui.Gauges --linkskip=Syncfusion.Maui.Buttons --linkskip=Syncfusion.Maui.DataGrid --linkskip=Syncfusion.Maui.ImageEditor --linkskip=Syncfusion.Maui.Inputs --linkskip=Syncfusion.Maui.ListView --linkskip=Syncfusion.Maui.Scheduler --linkskip=Syncfusion.Maui.TabView</MtouchExtraArgs>
+		<!-- Necessário no iOS Release: sem interpreter o app sofre SIGABRT no boot com AOT puro -->
+		<MtouchExtraArgs>$(MtouchExtraArgs) --interpreter --num-jobs=4 --linkskip=System.Security.Permissions --linkskip=CommunityToolkit.Maui --linkskip=Syncfusion.Maui.Core --linkskip=Syncfusion.Maui.Toolkit --linkskip=Syncfusion.Maui.Gauges --linkskip=Syncfusion.Maui.Buttons --linkskip=Syncfusion.Maui.DataGrid --linkskip=Syncfusion.Maui.ImageEditor --linkskip=Syncfusion.Maui.Inputs --linkskip=Syncfusion.Maui.ListView --linkskip=Syncfusion.Maui.Scheduler --linkskip=Syncfusion.Maui.TabView</MtouchExtraArgs>
 		<MtouchLink>SdkOnly</MtouchLink>
 		<MtouchUseLlvm>false</MtouchUseLlvm>
 		<Optimize>true</Optimize>
