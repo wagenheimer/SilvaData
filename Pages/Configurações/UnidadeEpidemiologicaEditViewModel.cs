@@ -164,7 +164,7 @@ namespace SilvaData.ViewModels
                 UnidadeEpidemiologica.excluido = 0;
                 UnidadeEpidemiologica.propriedadeId = SelectedPropriedade.id;
 
-                await UnidadeEpidemiologica.SalvaUEAsync(UnidadeEpidemiologica);
+                await UnidadeEpidemiologica.SaveAsync(UnidadeEpidemiologica);
 
                 await Parametros.SalvaParametros(
                     UnidadeEpidemiologica_ParametrosComAlternativas,
@@ -182,7 +182,7 @@ namespace SilvaData.ViewModels
                     WeakReferenceMessenger.Default.Send(new UEAdicionadaMessage(UnidadeEpidemiologica));
 
                     // REMOVIDO: await DadosStatic.instance.UpdateUnidadesEpidemiologicas();
-                    // Isso já é feito automaticamente via RefreshCacheMessage em UnidadeEpidemiologica.SalvaUEAsync
+                    // Isso já é feito automaticamente via RefreshCacheMessage em UnidadeEpidemiologica.SaveAsync
 
                     // REMOVIDO: EventoAoAdicionar?.Invoke(UnidadeEpidemiologica.id);
                 }

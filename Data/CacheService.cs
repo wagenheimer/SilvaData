@@ -155,7 +155,7 @@ namespace SilvaData.Infrastructure
         /// </summary>
         public async Task UpdateUnidadesEpidemiologicas()
         {
-            var items = await UnidadeEpidemiologicaComDetalhes.PegaListaUnidadesComDetalhesAsync().ConfigureAwait(false);
+            var items = await UnidadeEpidemiologicaComDetalhes.GetListWithDetailsAsync().ConfigureAwait(false);
             SyncCollection(UEList, items);
         }
 

@@ -11,7 +11,54 @@ namespace SilvaData.Models
 {
     public class UpdateDataParametrosUnidadeEpidemiologica : UpdateDataParametros
     {
-        public new List<UnidadeEpidemiologicaFromWebService>? array { get; set; }
+        [JsonProperty("array")]
+        public new List<UnidadeEpidemiologicaUploadDto>? Array { get; set; }
+    }
+
+    /// <summary>
+    /// DTO para envio de Unidade Epidemiológica para o servidor.
+    /// Garante compatibilidade com o contrato do backend sem usar substituição de strings.
+    /// </summary>
+    public class UnidadeEpidemiologicaUploadDto
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        [JsonProperty("idApp")]
+        public int? IdApp { get; set; }
+
+        [JsonProperty("nome")]
+        public string? Nome { get; set; }
+
+        [JsonProperty("latitude")]
+        public double? Latitude { get; set; }
+
+        [JsonProperty("longitude")]
+        public double? Longitude { get; set; }
+
+        [JsonProperty("status")]
+        public int Status { get; set; }
+
+        [JsonProperty("propriedade")]
+        public int? PropriedadeId { get; set; }
+
+        [JsonProperty("excluido")]
+        public int? Excluido { get; set; }
+
+        [JsonProperty("parametros")]
+        public List<ParametroUploadDto>? Parametros { get; set; }
+    }
+
+    /// <summary>
+    /// DTO para envio de parâmetros da Unidade Epidemiológica.
+    /// </summary>
+    public class ParametroUploadDto
+    {
+        [JsonProperty("id")]
+        public int? Id { get; set; }
+
+        [JsonProperty("valor")]
+        public string? Valor { get; set; }
     }
 
     public partial class UnidadeEpidemiologicaParametro : ParametrosValores
@@ -29,15 +76,18 @@ namespace SilvaData.Models
             return Db.InsertOrReplaceAsync(uep);
         }
 
-        internal static async Task<List<ParametrosValores>> GetItemsForUploadAsync(int? id)
+        /// <summary>
+        /// Obtém os parâmetros formatados para upload.
+        /// </summary>
+        internal static async Task<List<ParametroUploadDto>> GetItemsForUploadAsync(int? id)
         {
             var table = await Db.Table<UnidadeEpidemiologicaParametro>();
             var parlist = await table.Where(p => p.unidadeEpidemiologicaId == id).ToListAsync();
 
-            var result = new List<ParametrosValores>();
+            var result = new List<ParametroUploadDto>();
             foreach (var par in parlist)
             {
-                result.Add(new ParametrosValores { parametroId = par.parametroId, valor = par.valor });
+                result.Add(new ParametroUploadDto { Id = par.parametroId, Valor = par.valor });
             }
             return result;
         }
@@ -125,9 +175,9 @@ namespace SilvaData.Models
         // Agora serão resolvidas no ViewModel ou CacheService
 
         /// <summary>
-        /// MIGRADO: Retorna a lista ao invés de modificar estático
+        /// Retorna a lista de Unidades Epidemiológicas ativas.
         /// </summary>
-        public static async Task<List<UnidadeEpidemiologica>> PegaListaUE()
+        public static async Task<List<UnidadeEpidemiologica>> GetActiveListAsync()
         {
             var table = await Db.Table<UnidadeEpidemiologica>().ConfigureAwait(false);
 
@@ -144,9 +194,9 @@ namespace SilvaData.Models
         }
 
         /// <summary>
-        /// MIGRADO: Envia mensagem para CacheService atualizar
+        /// Salva ou atualiza uma Unidade Epidemiológica e notifica o CacheService.
         /// </summary>
-        public static async Task SalvaUEAsync(UnidadeEpidemiologica item)
+        public static async Task SaveAsync(UnidadeEpidemiologica item)
         {
             item.dataUltimaAtualizacao = DateTime.Now;
             item.temmudanca = true;
@@ -162,7 +212,7 @@ namespace SilvaData.Models
                 await Db.InsertAsync(item).ConfigureAwait(false);
             }
 
-            // MUDANÇA: Notifica o CacheService para atualizar
+            // Notifica o CacheService para atualizar
             WeakReferenceMessenger.Default.Send(new RefreshCacheMessage(CacheType.UnidadesEpidemiologicas));
         }
 
@@ -171,30 +221,41 @@ namespace SilvaData.Models
             return Db.DeleteAsync(item);
         }
 
-        internal static async Task UploadUpdates()
+        /// <summary>
+        /// Sincroniza as alterações pendentes das Unidades Epidemiológicas com o servidor.
+        /// Realiza o upload e atualiza os IDs locais com base na resposta do backend.
+        /// </summary>
+        internal static async Task SyncPendingChangesToServerAsync()
         {
-            string updateJson = string.Empty;
-
             try
             {
                 var sql = Alteracao.SqlNovosDados("unidadeepidemiologica");
-                var alteracoes = await Db.QueryAsync<UnidadeEpidemiologicaFromWebService>(sql).ConfigureAwait(false);
+                var alteracoes = await Db.QueryAsync<UnidadeEpidemiologica>(sql).ConfigureAwait(false);
 
-                foreach (var alteracao in alteracoes)
+                if (alteracoes.Count == 0) return;
+
+                var listToUpload = new List<UnidadeEpidemiologicaUploadDto>();
+
+                foreach (var item in alteracoes)
                 {
-                    alteracao.parametros = await UnidadeEpidemiologicaParametro.GetItemsForUploadAsync(alteracao.id).ConfigureAwait(false);
-
-                    if (alteracao.idApp == 0 || alteracao.idApp == null)
+                    var dto = new UnidadeEpidemiologicaUploadDto
                     {
-                        alteracao.idApp = alteracao.id;
-                        alteracao.id = -1;
-                    }
+                        Id = (item.idApp == 0 || item.idApp == null) ? -1 : item.id,
+                        IdApp = (item.idApp == 0 || item.idApp == null) ? item.id : item.idApp,
+                        Nome = item.nome,
+                        Latitude = item.latitude,
+                        Longitude = item.longitude,
+                        Status = item.status,
+                        PropriedadeId = item.propriedadeId,
+                        Excluido = item.excluido,
+                        Parametros = await UnidadeEpidemiologicaParametro.GetItemsForUploadAsync(item.id).ConfigureAwait(false)
+                    };
+                    listToUpload.Add(dto);
                 }
 
-                var updateData = new UpdateDataParametrosUnidadeEpidemiologica { array = alteracoes };
-                updateJson = JsonConvert.SerializeObject(updateData);
+                var updateData = new UpdateDataParametrosUnidadeEpidemiologica { Array = listToUpload };
+                var updateJson = JsonConvert.SerializeObject(updateData);
                 updateJson = Alteracao.AjustaArray(updateJson);
-                updateJson = updateJson.Replace("parametroId", "id");
 
                 var result = await ISIWebService.Instance.SendData(updateJson, "postUnidadesEpidemiologicas").ConfigureAwait(false);
 
@@ -206,19 +267,27 @@ namespace SilvaData.Models
 
                     if (resultIds?.dados == null) return;
 
-                    foreach (var resultinfo in resultIds.dados)
+                    await Db.RunInTransactionAsync(conn =>
                     {
-                        await Db.ExecuteAsync($"update UnidadeEpidemiologica set idApp={resultinfo.idApp} where id={resultinfo.idApp}").ConfigureAwait(false);
-
-                        if (resultinfo.id != resultinfo.idApp)
+                        foreach (var resultinfo in resultIds.dados)
                         {
-                            await Db.ExecuteAsync($"update UnidadeEpidemiologica set id={resultinfo.id} where id={resultinfo.idApp}").ConfigureAwait(false);
-                            await Db.ExecuteAsync($"update UnidadeEpidemiologicaParametro set unidadeEpidemiologicaId={resultinfo.id} where unidadeEpidemiologicaId={resultinfo.idApp}").ConfigureAwait(false);
-                            await Db.ExecuteAsync($"update Lote set unidadeEpidemiologicaId={resultinfo.id} where unidadeEpidemiologicaId={resultinfo.idApp}").ConfigureAwait(false);
-                        }
-                    }
+                            // Garante que o idApp esteja correto no banco local (seja novo ou existente)
+                            conn.Execute("update UnidadeEpidemiologica set idApp=? where id=?", resultinfo.idApp, resultinfo.idApp);
 
-                    await Db.ExecuteAsync($"update UnidadeEpidemiologica set temmudanca=0 where temmudanca=1").ConfigureAwait(false);
+                            if (resultinfo.id != resultinfo.idApp)
+                            {
+                                // Sincroniza o ID definitivo do servidor e limpa flags de mudança
+                                conn.Execute("update UnidadeEpidemiologica set id=?, idApp=NULL, temmudanca=0 where id=?", resultinfo.id, resultinfo.idApp);
+                                conn.Execute("update UnidadeEpidemiologicaParametro set unidadeEpidemiologicaId=? where unidadeEpidemiologicaId=?", resultinfo.id, resultinfo.idApp);
+                                conn.Execute("update Lote set unidadeEpidemiologicaId=? where unidadeEpidemiologicaId=?", resultinfo.id, resultinfo.idApp);
+                            }
+                            else
+                            {
+                                // Apenas limpa a flag de mudança se o ID já for o definitivo
+                                conn.Execute("update UnidadeEpidemiologica set temmudanca=0 where id=?", resultinfo.id);
+                            }
+                        }
+                    }).ConfigureAwait(false);
                 }
                 else
                 {
@@ -228,7 +297,7 @@ namespace SilvaData.Models
             }
             catch (Exception ex)
             {
-                await SentryHelper.LogErrorAsync("UploadUpdates UnidadeEpidemiologica", "UnidadeEpidemiologica", ex.ToString()).ConfigureAwait(false);
+                await SentryHelper.LogErrorAsync("SyncPendingChangesToServerAsync UnidadeEpidemiologica", "UnidadeEpidemiologica", ex.ToString()).ConfigureAwait(false);
                 throw;
             }
         }
@@ -240,7 +309,10 @@ namespace SilvaData.Models
         public string? PropriedadeNome { get; set; }
         public int QuantidadeLotes { get; set; }
 
-        public static async Task<List<UnidadeEpidemiologicaComDetalhes>> PegaListaUnidadesComDetalhesAsync()
+        /// <summary>
+        /// Retorna a lista de Unidades Epidemiológicas com detalhes de Regional e Propriedade.
+        /// </summary>
+        public static async Task<List<UnidadeEpidemiologicaComDetalhes>> GetListWithDetailsAsync()
         {
             const string sql = @"
                 SELECT ue.*,

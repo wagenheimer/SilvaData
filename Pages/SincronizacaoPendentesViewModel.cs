@@ -197,7 +197,7 @@ namespace SilvaData.ViewModels
                 await UploadDados(Traducao.Proprietários, Proprietario.UploadUpdates(), erros);
                 await UploadDados(Traducao.Regionais, Regional.UploadUpdates(), erros);
                 await UploadDados(Traducao.Propriedades, Propriedade.UploadUpdates(), erros);
-                await UploadDados(Traducao.UnidadesEpidemiológicas, UnidadeEpidemiologica.UploadUpdates(), erros);
+                await UploadDados(Traducao.UnidadesEpidemiológicas, UnidadeEpidemiologica.SyncPendingChangesToServerAsync(), erros);
                 await UploadDados(Traducao.Lotes, Lote.UploadUpdates(), erros);
                 await UploadDados(Traducao.Atividades, Atividade.UploadUpdates(), erros);
                 await UploadDados(Traducao.Notificações, Notificacao.UploadUpdates(), erros);

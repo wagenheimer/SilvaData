@@ -557,7 +557,7 @@ public partial class LoteFormularioViewModel : ViewModelBase, ILoteFormImagemVie
             Debug.WriteLine($"[LoteFormularioViewModel] ✓ Após InvokeOnMainThreadAsync inicial | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
 
             // ★★★ OTIMIZAÇÃO: ConfigParametros.UpdateConfig() só atualiza se necessário (tem cache interno) ★★★
-            // UnidadeEpidemiologica.PegaListaUE() também é cacheable, não precisa aguardar
+            // UnidadeEpidemiologica.GetActiveListAsync() também é cacheable, não precisa aguardar
             Debug.WriteLine($"[LoteFormularioViewModel] ▶ ConfigParametros.UpdateConfig iniciando... | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
             await ConfigParametros.UpdateConfig().ConfigureAwait(false);
             Debug.WriteLine($"[LoteFormularioViewModel] ✓ ConfigParametros.UpdateConfig concluído | thread={Environment.CurrentManagedThreadId} | main={MainThread.IsMainThread}");
