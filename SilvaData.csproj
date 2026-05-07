@@ -27,7 +27,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(TargetFramework)'=='net10.0-ios'">
+	<PropertyGroup Condition="'$(TargetFramework)'=='net10.0-ios' and '$(Configuration)'=='Debug'">
 		<CodesignKey>Apple Development</CodesignKey>
 		<ProvisioningType>Automatic</ProvisioningType>
 	</PropertyGroup>
@@ -47,6 +47,7 @@
 		<MtouchLink>SdkOnly</MtouchLink>
 		<MtouchUseLlvm>false</MtouchUseLlvm>
 		<Optimize>true</Optimize>
+		<RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
 	</PropertyGroup>
 
 	<PropertyGroup>
