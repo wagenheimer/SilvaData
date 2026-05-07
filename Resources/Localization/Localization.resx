@@ -1348,4 +1348,7 @@
   <data name="SubTarefa" xml:space="preserve">
     <value>Sub-tarefa:</value>
   </data>
+  <data name="TempoDecorrido" xml:space="preserve">
+    <value>Tempo Decorrido</value>
+  </data>
 </root>
