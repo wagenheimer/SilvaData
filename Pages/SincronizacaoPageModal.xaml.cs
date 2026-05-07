@@ -11,10 +11,11 @@ namespace SilvaData.Pages
         // chamado mais de uma vez no iOS (ex: ao fechar um popup sobre esta página).
         private bool _hasStarted = false;
 
-        public SincronizacaoPageModal()
+        public SincronizacaoPageModal(SincronizacaoViewModel viewModel)
         {
             InitializeComponent();
-            BindingContext = SincronizacaoViewControl.BindingContext;
+            BindingContext = viewModel;
+            SincronizacaoViewControl.BindingContext = viewModel;
         }
 
         protected override void OnAppearing()
