@@ -1,6 +1,6 @@
-using SilvaData.ViewModels;
-
 using Microsoft.Maui.Controls;
+
+using SilvaData.ViewModels;
 
 namespace SilvaData.Pages
 {
@@ -11,11 +11,10 @@ namespace SilvaData.Pages
         // chamado mais de uma vez no iOS (ex: ao fechar um popup sobre esta página).
         private bool _hasStarted = false;
 
-        public SincronizacaoPageModal(SincronizacaoViewModel viewModel)
+        public SincronizacaoPageModal()
         {
             InitializeComponent();
-            BindingContext = viewModel;
-            SincronizacaoViewControl.BindingContext = viewModel;
+            BindingContext = SincronizacaoViewControl.BindingContext;
         }
 
         protected override void OnAppearing()
