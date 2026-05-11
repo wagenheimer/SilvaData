@@ -57,6 +57,9 @@ namespace SilvaData.ViewModels
         [ObservableProperty]
         private bool mostrarLogs;
 
+        [ObservableProperty]
+        private bool sincronizacaoComSucesso;
+
         // Timer próprio para o cronômetro de tempo decorrido — independente do CancellationToken
         // da sincronização para que continue visível mesmo durante popups de erro/retry.
         private CancellationTokenSource? _timerCts;
@@ -223,13 +226,18 @@ namespace SilvaData.ViewModels
                 IndicadorVisivel = false;
                 SubTexto = string.Empty;
 
-                await PopUpOK.ShowAsync(Traducao.Sucesso, Traducao.DadosRecebidosComSucesso);
-
-                EtapaAtual = "Abrindo tela principal...";
-                SubTexto = string.Empty;
-                IndicadorVisivel = true;
+                SincronizacaoComSucesso = true;
             }
+            else
+            {
+                if (NavigationUtils.IsModalDisplayed(typeof(SincronizacaoPageModal)))
+                    await NavigationUtils.PopModalAsync();
+            }
+        }
 
+        [RelayCommand]
+        public async Task FinalizarSincronizacao()
+        {
             if (NavigationUtils.IsModalDisplayed(typeof(SincronizacaoPageModal)))
                 await NavigationUtils.PopModalAsync();
         }

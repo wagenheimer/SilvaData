@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:conv="clr-namespace:SilvaData.Converters"
     xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
-    xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
+    xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+    xmlns:fontawesome="clr-namespace:SilvaData.Utils"
     x:DataType="viewmodels:SincronizacaoViewModel"
     BackgroundColor="#F5F5F5">
     <ContentView.Resources>
@@ -47,7 +48,8 @@
             Grid.Row="1"
             Margin="10"
             Spacing="16"
-            VerticalOptions="Center">
+            VerticalOptions="Center"
+            IsVisible="{Binding SincronizacaoComSucesso, Converter={StaticResource InvertBoolean}}">
             <Label
                 FontSize="24"
                 FontAttributes="Bold"
@@ -154,6 +156,65 @@
                 </VerticalStackLayout>
             </Border>
 
+        </VerticalStackLayout>
+
+        <!--  Success View UI  -->
+        <VerticalStackLayout
+            x:Name="SuccessView"
+            Grid.Row="1"
+            Padding="30"
+            IsVisible="{Binding SincronizacaoComSucesso}"
+            Spacing="24"
+            VerticalOptions="Center">
+
+            <Border
+                Padding="30"
+                BackgroundColor="White"
+                HorizontalOptions="Center"
+                StrokeShape="RoundRectangle 24"
+                StrokeThickness="0">
+                <Border.Shadow>
+                    <Shadow
+                        Brush="Black"
+                        Opacity="0.1"
+                        Offset="0,10"
+                        Radius="20" />
+                </Border.Shadow>
+                <VerticalStackLayout Spacing="20">
+                    <Label
+                        FontFamily="FASolid"
+                        FontSize="80"
+                        HorizontalOptions="Center"
+                        Text="&#xf058;"
+                        TextColor="{StaticResource Success}" />
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="24"
+                            HorizontalOptions="Center"
+                            HorizontalTextAlignment="Center"
+                            Text="{localization:Translate Sucesso}"
+                            TextColor="{StaticResource PrimaryColor}" />
+                        <Label
+                            FontSize="16"
+                            HorizontalOptions="Center"
+                            HorizontalTextAlignment="Center"
+                            Opacity="0.7"
+                            Text="{localization:Translate DadosRecebidosComSucesso}"
+                            TextColor="{StaticResource SecondaryColor}" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <buttons:SfButton
+                Command="{Binding FinalizarSincronizacaoCommand}"
+                CornerRadius="25"
+                FontSize="18"
+                HeightRequest="50"
+                HorizontalOptions="Center"
+                Text="OK"
+                WidthRequest="200" />
         </VerticalStackLayout>
 
     </Grid>
