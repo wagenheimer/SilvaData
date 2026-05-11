@@ -1,6 +1,7 @@
 ﻿using SilvaData.Infrastructure;
 using SilvaData.ViewModels;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Microsoft.Maui.Controls;
 
 namespace SilvaData.Controls

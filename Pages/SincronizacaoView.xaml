@@ -12,6 +12,7 @@
     <ContentView.Resources>
         <conv:PercentToFractionConverter x:Key="PercentToFractionConverter" />
         <conv:IsNotZeroConverter x:Key="IsNotZeroConverter" />
+        <conv:InvertBoolConverter x:Key="InvertBoolConverter" />
     </ContentView.Resources>
 
     <Grid RowDefinitions="Auto,*" BackgroundColor="{StaticResource QuaseBranco}">
@@ -49,7 +50,7 @@
             Margin="10"
             Spacing="16"
             VerticalOptions="Center"
-            IsVisible="{Binding SincronizacaoComSucesso, Converter={StaticResource InvertBoolean}}">
+            IsVisible="{Binding SincronizacaoComSucesso, Converter={StaticResource InvertBoolConverter}}">
             <Label
                 FontSize="24"
                 FontAttributes="Bold"
@@ -186,7 +187,7 @@
                         FontSize="80"
                         HorizontalOptions="Center"
                         Text="&#xf058;"
-                        TextColor="{StaticResource Success}" />
+                        TextColor="#07AD53" />
 
                     <VerticalStackLayout Spacing="8">
                         <Label
