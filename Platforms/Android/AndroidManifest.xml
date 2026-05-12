@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" package="com.cwsoftware.silvadata" android:versionCode="307" android:versionName="3.2.18">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" package="com.cwsoftware.silvadata" android:versionCode="309" android:versionName="3.2.18">
 	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:supportsRtl="true" android:label="Silvadata" android:usesCleartextTraffic="true">
 		<!--
 		    Desabilita a inicialização automática do EmojiCompat (androidx.emoji2).
