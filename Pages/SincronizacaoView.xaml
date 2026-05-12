@@ -56,7 +56,7 @@
                 FontSize="24"
                 FontAttributes="Bold"
                 HorizontalTextAlignment="Center"
-                Text="{localization:Translate SincronizacaoDeDados}"
+                Text="{localization:Translate SincronizarDados}"
                 TextColor="{StaticResource PrimaryColor}" />
 
             <Border
