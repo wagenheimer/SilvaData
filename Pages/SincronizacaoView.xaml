@@ -3,11 +3,12 @@
     x:Class="SilvaData.Controls.SincronizacaoView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:SilvaData.ViewModels"
     xmlns:conv="clr-namespace:SilvaData.Converters"
     xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:fontawesome="clr-namespace:SilvaData.Utils"
-    x:DataType="viewmodels:SincronizacaoViewModel"
+    x:DataType="vm:SincronizacaoViewModel"
     BackgroundColor="#F5F5F5">
     <ContentView.Resources>
         <conv:PercentToFractionConverter x:Key="PercentToFractionConverter" />
@@ -119,7 +120,7 @@
                         MinimumHeightRequest="36"
                         Opacity="{Binding SubPercent, Converter={StaticResource IsNotZeroConverter}}"
                         Spacing="4">
-                        <HorizontalStackLayout HorizontalOptions="FillAndExpand">
+                        <HorizontalStackLayout HorizontalOptions="Fill">
                             <Label
                                 Padding="0,0,4,0"
                                 FontSize="12"
@@ -128,7 +129,7 @@
                                 TextColor="#757575" />
                             <Label
                                 FontSize="12"
-                                HorizontalOptions="FillAndExpand"
+                                HorizontalOptions="Fill"
                                 IsVisible="{Binding Texto2, Converter={StaticResource IsNotNullOrEmptyConverter}}"
                                 LineBreakMode="TailTruncation"
                                 Text="{Binding Texto2}"
@@ -183,7 +184,8 @@
                 </Border.Shadow>
                 <VerticalStackLayout Spacing="20">
                     <Label
-                        FontFamily="FASolid"
+                        x:Name="SuccessIcon"
+                        FontFamily="FontAwesomeSolid"
                         FontSize="80"
                         HorizontalOptions="Center"
                         Text="&#xf058;"

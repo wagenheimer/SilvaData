@@ -6,31 +6,25 @@ using Microsoft.Maui.Controls;
 
 namespace SilvaData.Controls
 {
-    /// <summary>
-    /// View (ContentView) para exibir o progresso do Download.
-    /// </summary>
     public partial class SincronizacaoView : ContentView
     {
-        /// <summary>
-        /// Inicializa uma nova instância da classe <see cref="SincronizacaoView"/>.
-        /// </summary>
         public SincronizacaoView()
         {
             InitializeComponent();
-            
+
             var viewModel = ServiceHelper.GetRequiredService<SincronizacaoViewModel>();
             BindingContext = viewModel;
 
             viewModel.PropertyChanged += ViewModel_PropertyChanged;
         }
 
-        private async void ViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        private void ViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(SincronizacaoViewModel.SincronizacaoComSucesso))
             {
                 if (BindingContext is SincronizacaoViewModel vm && vm.SincronizacaoComSucesso)
                 {
-                    await AnimateSuccessView();
+                    MainThread.BeginInvokeOnMainThread(async () => await AnimateSuccessView());
                 }
             }
         }
@@ -39,17 +33,34 @@ namespace SilvaData.Controls
         {
             if (SuccessView == null) return;
 
-            // Prepara o estado inicial
+            // Estado inicial do card
             SuccessView.Opacity = 0;
-            SuccessView.Scale = 0.8;
-            SuccessView.TranslationY = 50;
+            SuccessView.Scale = 0.9;
+            SuccessView.TranslationY = 60;
 
-            // Animação de entrada
+            // Estado inicial do ícone
+            if (SuccessIcon != null)
+            {
+                SuccessIcon.Scale = 0;
+                SuccessIcon.Opacity = 0;
+            }
+
+            // 1. Card entra suavemente por baixo
             await Task.WhenAll(
-                SuccessView.FadeTo(1, 600, Easing.CubicOut),
-                SuccessView.ScaleTo(1, 600, Easing.CubicOut),
-                SuccessView.TranslateTo(0, 0, 600, Easing.CubicOut)
+                SuccessView.FadeToAsync(1, 380, Easing.CubicOut),
+                SuccessView.ScaleToAsync(1, 380, Easing.CubicOut),
+                SuccessView.TranslateToAsync(0, 0, 380, Easing.CubicOut)
             );
+
+            // 2. Ícone aparece com bounce pop
+            if (SuccessIcon != null)
+            {
+                await SuccessIcon.FadeToAsync(1, 80);
+                await SuccessIcon.ScaleToAsync(1.35, 180, Easing.CubicOut);
+                await SuccessIcon.ScaleToAsync(0.85, 110, Easing.CubicIn);
+                await SuccessIcon.ScaleToAsync(1.1, 90, Easing.CubicOut);
+                await SuccessIcon.ScaleToAsync(1.0, 70, Easing.CubicIn);
+            }
         }
     }
 }

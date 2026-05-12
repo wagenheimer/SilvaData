@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "iOS Device — Release",
+      "type": "maui",
+      "request": "launch",
+      "preLaunchTask": "iOS: Build Release (Device)",
+      "project": "${workspaceFolder}/SilvaData.csproj",
+      "configuration": "Release",
+      "targetFramework": "net10.0-ios",
+      "device": "149adb0791157b04687efca608cb62a446b69856"
+    }
+  ]
+}
