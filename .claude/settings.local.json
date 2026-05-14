@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git fetch *)",
+      "Bash(git stash *)",
+      "Bash(Select-String -Pattern \"error|warning CS\")",
+      "Bash(Select-Object -First 30)",
+      "Bash(Select-String -Path \"K:\\\\Programas\\\\CWSoftware\\\\ISI Sys\\\\ISISys\\\\SilvaData\\\\Services\\\\SyncService.cs\" -Pattern \"MaxDegreeOfParallelism = 8\" -AllMatches)",
+      "Bash(Select-Object LineNumber, Line)"
+    ]
+  }
+}

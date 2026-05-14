@@ -39,8 +39,10 @@ namespace SilvaData.Services
         // Permite exibir um contador real e garantir que "Concluído" só apareça quando tudo terminou.
         private int _pendingDownloads = 0;
 
-        // Limita conexões HTTP simultâneas para não saturar a rede nem o servidor.
-        private readonly SemaphoreSlim _imagesSemaphore = new(8, 8);
+        // Limita conexões HTTP simultâneas. Mantido em 4 para evitar crash SIGABRT/DeleteGlobalRef
+        // no ART Android sob pressão de memória: 8 downloads paralelos geram refs JNI demais
+        // para o GC lidar com segurança quando o nível de memória livre já está baixo.
+        private readonly SemaphoreSlim _imagesSemaphore = new(4, 4);
 
         // Throttle para atualizações de UI principais
         private readonly TimeSpan _uiThrottle = TimeSpan.FromMilliseconds(300);
@@ -407,7 +409,7 @@ namespace SilvaData.Services
                 subAtual: 0,
                 subTotal: totalImages);
 
-            await Parallel.ForEachAsync(imagens, new ParallelOptions { MaxDegreeOfParallelism = 8, CancellationToken = token }, async (item, ct) =>
+            await Parallel.ForEachAsync(imagens, new ParallelOptions { MaxDegreeOfParallelism = 4, CancellationToken = token }, async (item, ct) =>
             {
                 await _imagesSemaphore.WaitAsync(ct).ConfigureAwait(false);
                 try
@@ -1218,7 +1220,7 @@ namespace SilvaData.Services
                 .SelectMany(lf => lf.imagens.Select(img => new { Form = lf, Img = img }))
                 .ToList();
 
-            await Parallel.ForEachAsync(imagens, new ParallelOptions { MaxDegreeOfParallelism = 8, CancellationToken = token }, async (item, ct) =>
+            await Parallel.ForEachAsync(imagens, new ParallelOptions { MaxDegreeOfParallelism = 4, CancellationToken = token }, async (item, ct) =>
             {
                 await _imagesSemaphore.WaitAsync(ct).ConfigureAwait(false);
                 try
@@ -1268,7 +1270,7 @@ namespace SilvaData.Services
                 .SelectMany(lf => lf.imagens.Select(img => new { Form = lf, Img = img }))
                 .ToList();
 
-            await Parallel.ForEachAsync(imagens, new ParallelOptions { MaxDegreeOfParallelism = 8, CancellationToken = token }, async (item, ct) =>
+            await Parallel.ForEachAsync(imagens, new ParallelOptions { MaxDegreeOfParallelism = 4, CancellationToken = token }, async (item, ct) =>
             {
                 await _imagesSemaphore.WaitAsync(ct).ConfigureAwait(false);
                 try

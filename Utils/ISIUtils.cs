@@ -39,6 +39,8 @@ namespace SilvaData.Utilities
         /// </remarks>
         public static async Task<string> CreateFullBackupAsync()
         {
+            await FlushWalToDatabaseAsync();
+
             // O uso de 'finally' garante que o banco de dados seja reaberto, mesmo que ocorra um erro.
             await Database.CloseDatabaseAsync();
 
@@ -66,6 +68,12 @@ namespace SilvaData.Utilities
 
                 // --- Lista todos os arquivos a serem incluídos no backup ---
                 var filesToBackup = new List<string> { Database.PathDB, loginInfoPath, deviceIdPath };
+
+                string walPath = $"{Database.PathDB}-wal";
+                string shmPath = $"{Database.PathDB}-shm";
+                if (File.Exists(walPath)) filesToBackup.Add(walPath);
+                if (File.Exists(shmPath)) filesToBackup.Add(shmPath);
+
                 filesToBackup.AddRange(await LoteFormImagem.ListaImagensParaBackup());
 
                 // --- Cria o arquivo .zip ---
@@ -88,6 +96,19 @@ namespace SilvaData.Utilities
                 // Remove os arquivos temporários criados para o backup.
                 if (File.Exists(loginInfoPath)) File.Delete(loginInfoPath);
                 if (File.Exists(deviceIdPath)) File.Delete(deviceIdPath);
+            }
+        }
+
+        private static async Task FlushWalToDatabaseAsync()
+        {
+            try
+            {
+                var connection = await Database.GetConnectionAsync().ConfigureAwait(false);
+                await connection.ExecuteAsync("PRAGMA wal_checkpoint(FULL);").ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[CreateFullBackupAsync] Falha no checkpoint WAL: {ex.Message}");
             }
         }
 
