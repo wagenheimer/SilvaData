@@ -606,6 +606,9 @@
   <data name="DiagnósticosRealizadosNoLote" xml:space="preserve">
     <value>Diagnósticos realizados no lote:</value>
   </data>
+  <data name="Realizado" xml:space="preserve">
+    <value>Realizado</value>
+  </data>
   <data name="TratamentosViaÁguaNoLote" xml:space="preserve">
     <value>Tratamentos via água no lote:</value>
   </data>
@@ -659,6 +662,9 @@
   </data>
   <data name="Empresa" xml:space="preserve">
     <value>Empresa</value>
+  </data>
+  <data name="EsteLote" xml:space="preserve">
+    <value>Este Lote</value>
   </data>
   <data name="MeusResultados" xml:space="preserve">
     <value>Meus Resultados</value>
@@ -1095,7 +1101,6 @@
   <data name="Resposta" xml:space="preserve">
     <value>Resposta</value>
   </data>
-
   <data name="ErroDetalhado" xml:space="preserve">
     <value>Erro Detalhado</value>
   </data>
@@ -1350,5 +1355,11 @@
   </data>
   <data name="TempoDecorrido" xml:space="preserve">
     <value>Tempo Decorrido</value>
+  </data>
+  <data name="Registro" xml:space="preserve">
+    <value>Registro</value>
+  </data>
+  <data name="GerencieSuaRegionais" xml:space="preserve">
+    <value>Gerencie suas Regionais</value>
   </data>
 </root>

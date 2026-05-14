@@ -83,22 +83,26 @@
                     </DatePicker.Triggers>
                 </DatePicker>
 
-                <!--  Botão do Calendário  -->
-                <Button
+                <!--  Alvo de toque do Calendário (sem Button para evitar crash de layout no iOS)  -->
+                <Grid
                     Grid.Column="1"
-                    Padding="0"
-                    BackgroundColor="Transparent"
-                    BorderWidth="0"
-                    Clicked="OnCalendarButtonClicked"
-                    FontFamily="FontAwesomeLight"
-                    FontSize="20"
                     HeightRequest="52"
-                    HorizontalOptions="Center"
-                    IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertBoolean}}"
-                    Text="{x:Static fontawesome:FontAwesomeIcons.Calendar}"
-                    TextColor="{StaticResource PrimaryColor}"
+                    HorizontalOptions="Fill"
+                    InputTransparent="{Binding IsReadOnly}"
                     VerticalOptions="Center"
-                    WidthRequest="44" />
+                    WidthRequest="44">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnCalendarButtonClicked" />
+                    </Grid.GestureRecognizers>
+
+                    <Label
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        FontFamily="FontAwesomeLight"
+                        FontSize="20"
+                        Text="{x:Static fontawesome:FontAwesomeIcons.Calendar}"
+                        TextColor="{StaticResource PrimaryColor}" />
+                </Grid>
             </Grid>
         </Border>
 

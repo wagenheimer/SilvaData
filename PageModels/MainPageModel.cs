@@ -232,10 +232,12 @@ namespace SilvaData.PageModels
                     if (homeVm != null) await homeVm.InitializeAsync();
                     if (loteVm != null) await loteVm.InitializeAsync();
                     if (galpoesVm != null) await galpoesVm.InitializeAsync();
-                    // Pré-aquece Singletons de UI: roda InitializeComponent() durante o startup
-                    // (spinner visível) para que a primeira abertura seja instantânea.
+                    // Em Android, manter a inicialização de telas singleton sob demanda evita
+                    // acionar construtores XAML/handlers durante o startup, o que pode derrubar o processo.
+#if !ANDROID
                     _ = ServiceHelper.GetRequiredService<ISIInstitute.Views.LoteViews.LoteMonitoramentoView>();
                     _ = ServiceHelper.GetRequiredService<SilvaData.Controls.LoteFormularioView>();
+#endif
                     await AtualizaTotalSincronizacaoPendente();
                 }
                 catch (Exception ex)

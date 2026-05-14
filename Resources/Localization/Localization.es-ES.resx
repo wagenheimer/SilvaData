@@ -663,6 +663,9 @@
   <data name="Empresa" xml:space="preserve">
     <value>Empresa</value>
   </data>
+  <data name="EsteLote" xml:space="preserve">
+    <value>Este Lote</value>
+  </data>
   <data name="MeusResultados" xml:space="preserve">
     <value>Mis resultados</value>
   </data>

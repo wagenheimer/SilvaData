@@ -690,6 +690,9 @@
   <data name="Empresa" xml:space="preserve">
     <value>Company</value>
   </data>
+  <data name="EsteLote" xml:space="preserve">
+    <value>This Batch</value>
+  </data>
   <data name="MeusResultados" xml:space="preserve">
     <value>My Results</value>
   </data>
@@ -1311,5 +1314,8 @@
   </data>
   <data name="TempoDecorrido" xml:space="preserve">
     <value>Elapsed Time</value>
+  </data>
+  <data name="CarregarDados" xml:space="preserve">
+    <value>Load Data</value>
   </data>
 </root>

@@ -66,6 +66,9 @@ namespace SilvaData.Controls
         // Prevents re-entrancy/infinite loops when syncing selection both ways
         private bool _isSyncingSelection;
 
+        private Label? _labelTitle;
+        private Border? _border;
+
         #region Property Wrappers
 
         public IList? ItemsSource
@@ -174,6 +177,8 @@ namespace SilvaData.Controls
         public ISIComboBox()
         {
             InitializeComponent();
+            _labelTitle = this.FindByName<Label>("labelTitle");
+            _border = this.FindByName<Border>("isiComboBoxBorder");
         }
 
         protected override void OnContextAttached()
@@ -216,15 +221,12 @@ namespace SilvaData.Controls
 
         protected override void ApplyValidationVisualState(bool hasError)
         {
-            var titleLabel = this.FindByName<Label>("labelTitle");
-            var border = this.FindByName<Border>("isiComboBoxBorder");
+            ValidationVisualHelper.ApplyTitleColor(_labelTitle, hasError);
 
-            ValidationVisualHelper.ApplyTitleColor(titleLabel, hasError);
-
-            if (border != null)
+            if (_border != null)
             {
-                border.Stroke = hasError ? Colors.Red : ValidationVisualHelper.GetPrimaryColor();
-                border.StrokeThickness = hasError ? 2 : 1;
+                _border.Stroke = hasError ? Colors.Red : ValidationVisualHelper.GetPrimaryColor();
+                _border.StrokeThickness = hasError ? 2 : 1;
             }
         }
 

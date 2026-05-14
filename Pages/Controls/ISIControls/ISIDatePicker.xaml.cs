@@ -160,9 +160,24 @@ namespace SilvaData.Controls
 
         private void OnCalendarButtonClicked(object sender, EventArgs e)
         {
-            if (!IsReadOnly)
+            if (IsReadOnly || _isDisposed || dataPicker == null || Handler == null)
             {
-                dataPicker.Focus();
+                return;
+            }
+
+            try
+            {
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    if (!_isDisposed && dataPicker?.Handler != null)
+                    {
+                        dataPicker.Focus();
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[ISIDatePicker] Erro ao abrir DatePicker: {ex.Message}");
             }
         }
 
