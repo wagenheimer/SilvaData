@@ -852,14 +852,6 @@ namespace SilvaData.Resources.Localization {
             }
         }
 
-        /// <summary>
-        ///   Looks up a localized string similar to Avaliações diversas.
-        /// </summary>
-        public static string AvaliacoesDiversas {
-            get {
-                return ResourceManager.GetString("AvaliacoesDiversas", resourceCulture);
-            }
-        }
 
         /// <summary>
         ///   Looks up a localized string similar to Outros monitoramentos.
@@ -1275,23 +1267,7 @@ namespace SilvaData.Resources.Localization {
             }
         }
 
-        /// <summary>
-        ///   Looks up a localized string similar to Diagnóstico.
-        /// </summary>
-        public static string Diagnóstico {
-            get {
-                return ResourceManager.GetString("Diagnóstico", resourceCulture);
-            }
-        }
 
-        /// <summary>
-        ///   Looks up a localized string similar to Data do diagnóstico.
-        /// </summary>
-        public static string DataDoDiagnostico {
-            get {
-                return ResourceManager.GetString("DataDoDiagnostico", resourceCulture);
-            }
-        }
 
         /// <summary>
         ///   Looks up a localized string similar to Diagnósticos realizados no lote:.
@@ -2715,14 +2691,6 @@ namespace SilvaData.Resources.Localization {
             }
         }
         
-        /// <summary>
-        ///   Looks up a localized string similar to Outros monitoramentos.
-        /// </summary>
-        public static string OutrosMonitoramentos {
-            get {
-                return ResourceManager.GetString("OutrosMonitoramentos", resourceCulture);
-            }
-        }
         
         /// <summary>
         ///   Looks up a localized string similar to Você tem que dar Override do GetViewDefaultComponentsOnAppearing para inicializar os componentes.
