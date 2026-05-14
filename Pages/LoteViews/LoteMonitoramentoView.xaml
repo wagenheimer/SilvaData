@@ -323,24 +323,29 @@
                             ShowIcon="False"
                             Style="{StaticResource SubMonitoramentoButton}">
                             <buttons:SfButton.Content>
-                                <HorizontalStackLayout Padding="12,0" Spacing="12" VerticalOptions="Center">
-                                    <Image
-                                        HeightRequest="40"
-                                        Source="icongalpao.png"
-                                        VerticalOptions="Center"
-                                        WidthRequest="40">
-                                        <Image.Behaviors>
-                                            <toolkit:IconTintColorBehavior TintColor="{StaticResource PrimaryColor}" />
-                                        </Image.Behaviors>
-                                    </Image>
-                                    <Label
-                                        FontAttributes="Bold"
-                                        FontFamily="Nunito"
-                                        FontSize="Small"
-                                        Text="{localization:Translate AvaliacoesNoGalpao}"
-                                        TextColor="{StaticResource SecondaryColor}"
-                                        VerticalOptions="Center" />
-                                </HorizontalStackLayout>
+                                <DataTemplate>
+                                    <HorizontalStackLayout
+                                        Padding="12,0"
+                                        Spacing="12"
+                                        VerticalOptions="Center">
+                                        <Image
+                                            HeightRequest="40"
+                                            Source="icongalpao.png"
+                                            VerticalOptions="Center"
+                                            WidthRequest="40">
+                                            <Image.Behaviors>
+                                                <toolkit:IconTintColorBehavior TintColor="{StaticResource PrimaryColor}" />
+                                            </Image.Behaviors>
+                                        </Image>
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontFamily="Nunito"
+                                            FontSize="Small"
+                                            Text="{localization:Translate AvaliacoesNoGalpao}"
+                                            TextColor="{StaticResource SecondaryColor}"
+                                            VerticalOptions="Center" />
+                                    </HorizontalStackLayout>
+                                </DataTemplate>
                             </buttons:SfButton.Content>
                         </buttons:SfButton>
 
