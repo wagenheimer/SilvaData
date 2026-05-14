@@ -40,6 +40,18 @@ namespace SilvaData
                     options.Debug = false;
                     options.AutoSessionTracking = true;
                     options.CaptureFailedRequests = true;
+#if ANDROID
+                    options.Native.AnrEnabled = true;
+                    options.Native.AttachThreads = true;
+#elif IOS || MACCATALYST
+                    options.Native.EnableAppHangTracking = true;
+#endif
+#if DEBUG
+                    options.Debug = true;
+#if ANDROID
+                    options.Native.AnrReportInDebug = true;
+#endif
+#endif
                 })
                 .UseMauiCommunityToolkitCamera()
                 .UseMauiCommunityToolkit()
