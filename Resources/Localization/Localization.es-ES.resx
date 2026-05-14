@@ -213,6 +213,12 @@
   <data name="DiagnósticoDeEnfermidades" xml:space="preserve">
     <value>Diagnóstico de Enfermedades</value>
   </data>
+  <data name="Diagnóstico" xml:space="preserve">
+    <value>Diagnóstico</value>
+  </data>
+  <data name="DataDoDiagnostico" xml:space="preserve">
+    <value>Fecha del diagnóstico</value>
+  </data>
   <data name="TratamentoViaÁgua" xml:space="preserve">
     <value>Tratamiento en agua</value>
   </data>
@@ -1304,6 +1310,12 @@
   </data>
   <data name="Compartilhar" xml:space="preserve">
     <value>Compartir</value>
+  </data>
+  <data name="AvaliacoesDiversas" xml:space="preserve">
+    <value>Evaluaciones diversas</value>
+  </data>
+  <data name="OutrosMonitoramentos" xml:space="preserve">
+    <value>Otros monitoreos</value>
   </data>
   <data name="CarregarDados" xml:space="preserve">
     <value>Cargar Datos</value>

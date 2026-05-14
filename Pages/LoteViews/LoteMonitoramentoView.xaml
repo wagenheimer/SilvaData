@@ -213,7 +213,7 @@
                             FontAttributes="Bold"
                             FontSize="Medium"
                             HorizontalTextAlignment="Start"
-                            Text="Avaliações diversas"
+                            Text="{localization:Translate AvaliacoesDiversas}"
                             TextColor="{StaticResource PrimaryColor}" />
 
                         <CollectionView ItemsSource="{Binding ParametrosGalpaoResumo}" SelectionMode="Single">
@@ -293,7 +293,7 @@
                             FontAttributes="Bold"
                             FontSize="Medium"
                             HorizontalTextAlignment="Start"
-                            Text="Outros monitoramentos"
+                            Text="{localization:Translate OutrosMonitoramentos}"
                             TextColor="{StaticResource PrimaryColor}" />
 
                         <buttons:SfButton

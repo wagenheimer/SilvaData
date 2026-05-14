@@ -181,7 +181,7 @@
                 FontSize="Medium"
                 HorizontalOptions="Center"
                 Style="{StaticResource PrimaryButton}"
-                Text="Carregar Dados" />
+                Text="{localization:Translate CarregarDados}" />
         </VerticalStackLayout>
 
     </Grid>

@@ -159,7 +159,7 @@
                                     <Label
                                         FontSize="11"
                                         Opacity="0.6"
-                                        Text="Data do diagnóstico"
+                                        Text="{localization:Translate DataDoDiagnostico}"
                                         TextColor="{StaticResource SecondaryColor}" />
                                     <Label
                                         FontAttributes="Bold"
@@ -197,7 +197,7 @@
                                 <Label
                                     FontSize="12"
                                     Opacity="0.7"
-                                    Text="Diagnóstico"
+                                    Text="{localization:Translate Diagnóstico}"
                                     TextColor="{StaticResource SecondaryColor}" />
                                 <Label
                                     FontSize="15"

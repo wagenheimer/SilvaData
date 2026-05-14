@@ -240,6 +240,12 @@
   <data name="DiagnósticoDeEnfermidades" xml:space="preserve">
     <value>Disease Diagnosis</value>
   </data>
+  <data name="Diagnóstico" xml:space="preserve">
+    <value>Diagnosis</value>
+  </data>
+  <data name="DataDoDiagnostico" xml:space="preserve">
+    <value>Diagnosis date</value>
+  </data>
   <data name="TratamentoViaÁgua" xml:space="preserve">
     <value>Water Treatment</value>
   </data>
@@ -1314,6 +1320,12 @@
   </data>
   <data name="TempoDecorrido" xml:space="preserve">
     <value>Elapsed Time</value>
+  </data>
+  <data name="AvaliacoesDiversas" xml:space="preserve">
+    <value>Various assessments</value>
+  </data>
+  <data name="OutrosMonitoramentos" xml:space="preserve">
+    <value>Other monitoring</value>
   </data>
   <data name="CarregarDados" xml:space="preserve">
     <value>Load Data</value>

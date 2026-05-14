@@ -484,6 +484,15 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Avaliações diversas.
+        /// </summary>
+        public static string AvaliacoesDiversas {
+            get {
+                return ResourceManager.GetString("AvaliacoesDiversas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Avaliações no Galpão.
         /// </summary>
         public static string AvaliacoesNoGalpao {
@@ -842,6 +851,24 @@ namespace SilvaData.Resources.Localization {
                 return ResourceManager.GetString("CarregarDados", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Avaliações diversas.
+        /// </summary>
+        public static string AvaliacoesDiversas {
+            get {
+                return ResourceManager.GetString("AvaliacoesDiversas", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Outros monitoramentos.
+        /// </summary>
+        public static string OutrosMonitoramentos {
+            get {
+                return ResourceManager.GetString("OutrosMonitoramentos", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Checando dados....
@@ -1105,6 +1132,15 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data do diagnóstico.
+        /// </summary>
+        public static string DataDoDiagnostico {
+            get {
+                return ResourceManager.GetString("DataDoDiagnostico", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data:.
         /// </summary>
         public static string DataDoisPontos {
@@ -1213,6 +1249,15 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Diagnóstico.
+        /// </summary>
+        public static string Diagnóstico {
+            get {
+                return ResourceManager.GetString("Diagnóstico", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Diagnóstico de Enfermidade.
         /// </summary>
         public static string DiagnósticoDeEnfermidade {
@@ -1229,7 +1274,25 @@ namespace SilvaData.Resources.Localization {
                 return ResourceManager.GetString("DiagnósticoDeEnfermidades", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Diagnóstico.
+        /// </summary>
+        public static string Diagnóstico {
+            get {
+                return ResourceManager.GetString("Diagnóstico", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Data do diagnóstico.
+        /// </summary>
+        public static string DataDoDiagnostico {
+            get {
+                return ResourceManager.GetString("DataDoDiagnostico", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Diagnósticos realizados no lote:.
         /// </summary>
@@ -2086,15 +2149,6 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Este Lote.
-        /// </summary>
-        public static string EsteLote {
-            get {
-                return ResourceManager.GetString("EsteLote", resourceCulture);
-            }
-        }
-
-        /// <summary>
         ///   Looks up a localized string similar to Meus Resultados.
         /// </summary>
         public static string MeusResultados {
@@ -2658,6 +2712,15 @@ namespace SilvaData.Resources.Localization {
         public static string OrdemDosLotes {
             get {
                 return ResourceManager.GetString("OrdemDosLotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Outros monitoramentos.
+        /// </summary>
+        public static string OutrosMonitoramentos {
+            get {
+                return ResourceManager.GetString("OutrosMonitoramentos", resourceCulture);
             }
         }
         
