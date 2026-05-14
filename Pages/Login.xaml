@@ -9,33 +9,27 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
     x:DataType="viewmodels:LoginViewModel"
-    BackgroundColor="{StaticResource QuaseBranco}"
-    Shell.NavBarIsVisible="false"
-    Style="{StaticResource HeaderGradient}">
+    BackgroundColor="{StaticResource PrimaryColor}"
+    Shell.NavBarIsVisible="false">
 
     <ContentPage.Behaviors>
         <toolkit:StatusBarBehavior StatusBarColor="{StaticResource PrimaryColor}" StatusBarStyle="LightContent" />
     </ContentPage.Behaviors>
 
     <!--  Grid raiz para sobrepor o overlay de loading  -->
-    <Grid>
-        <!--  Conteúdo rolável (centralizado)  -->
-        <Grid
-            Padding="10"
-            ColumnDefinitions="*,Auto,*"
-            RowDefinitions="Auto"
+    <Grid Style="{StaticResource HeaderGradient}">
+        <!--  Card central  -->
+        <Border
+            Margin="20"
+            Background="#DDFFFFFF"
+            HorizontalOptions="Center"
+            MaximumWidthRequest="480"
+            SemanticProperties.Description="Painel de login"
+            Stroke="{StaticResource PrimaryColor}"
+            StrokeShape="RoundRectangle 16"
+            StrokeThickness="2"
             VerticalOptions="Center">
-
-            <!--  Card central  -->
-            <Border
-                Grid.Column="1"
-                Margin="20"
-                Background="#DDFFFFFF"
-                SemanticProperties.Description="Painel de login"
-                Stroke="{StaticResource PrimaryColor}"
-                StrokeShape="RoundRectangle 16"
-                StrokeThickness="2">
-                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" RowSpacing="16">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" RowSpacing="16">
 
                     <!--  Header / Logo  -->
                     <Grid RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="2">
@@ -159,9 +153,8 @@
                             Text="{localization:Translate PolíticaDePrivacidade}"
                             TextColor="{StaticResource PrimaryColor}" />
                     </Grid>
-                </Grid>
-            </Border>
-        </Grid>
+            </Grid>
+        </Border>
 
         <!--  Overlay de carregamento (scrim + cartão central sem borda)  -->
 

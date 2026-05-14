@@ -22,6 +22,12 @@ namespace SilvaData.ViewModels
         [ObservableProperty]
         private string aguardeTexto = string.Empty;
 
+        [ObservableProperty]
+        private bool uploadComSucesso;
+
+        [ObservableProperty]
+        private string uploadMensagemSucesso = string.Empty;
+
         public static SincronizacaoPendentesViewModel? Instance { get; private set; }
 
         /// <summary>
@@ -227,7 +233,10 @@ namespace SilvaData.ViewModels
                         Debug.WriteLine($"[Sync] Aviso: falha ao atualizar cache pós-upload (não crítico): {ex.Message}");
                     }
 
-                    await PopUpOK.ShowAsync(Traducao.Sucesso, Traducao.DadosEnviadosComSucesso);
+                    UploadMensagemSucesso = Traducao.DadosEnviadosComSucesso;
+                    Debug.WriteLine("[Sync] Definindo UploadComSucesso = true");
+                    UploadComSucesso = true;
+                    Debug.WriteLine($"[Sync] UploadComSucesso agora = {UploadComSucesso}");
                 }
                 else if (totalPendenteReal == 0 && erros.Any())
                 {
@@ -263,6 +272,15 @@ namespace SilvaData.ViewModels
                 IsBusy = false;
                 AguardeTexto = string.Empty;
             }
+        }
+
+        [RelayCommand]
+        private void FinalizarUpload()
+        {
+            Debug.WriteLine("[Sync] FinalizarUpload chamado");
+            UploadComSucesso = false;
+            UploadMensagemSucesso = string.Empty;
+            Debug.WriteLine($"[Sync] FinalizarUpload concluído, UploadComSucesso = {UploadComSucesso}");
         }
 
         /// <summary>

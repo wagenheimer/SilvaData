@@ -29,6 +29,7 @@ namespace SilvaData.PageModels
 
         private readonly CacheService _cacheService; // ADICIONADO
         private bool _jaInicializou = false;
+        public bool JaInicializou => _jaInicializou;
 
         [ObservableProperty]
         private string loadingText = "Loading...";
@@ -157,9 +158,8 @@ namespace SilvaData.PageModels
                     SetLoadingText(Traducao.IndoParaTelaDeLogin);
                     Preferences.Set("PrimeiraExecucao", false);
                     await _ISIWebService.LogOut();
-                    await Task.Delay(100); // ✅ Delay para iOS Shell estabilizar
+                    await Task.Delay(100);
                     await NavigationUtils.ShowViewAsModalAsync<Login>();
-                    // retorna para que OnAppearing ou mensagem dispare nova chamada
                     return;
                 }
 
@@ -174,7 +174,7 @@ namespace SilvaData.PageModels
 #if !DEBUG
                         await ISIWebService.Instance.LogOut();
 #endif
-                        await Task.Delay(100); // ✅ Delay para iOS Shell estabilizar
+                        await Task.Delay(100);
                         await NavigationUtils.ShowViewAsModalAsync<Login>();
                         return;
                     }

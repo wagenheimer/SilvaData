@@ -13,10 +13,65 @@
     x:DataType="viewModels:SincronizacaoPendentesViewModel"
     Background="{StaticResource QuaseBranco}">
 
-    <RefreshView
-        Command="{Binding AtualizaListaAlteracoesCommand}"
-        IsRefreshing="{Binding IsRefreshing}"
-        RefreshColor="{StaticResource PrimaryColor}">
+    <Grid>
+
+        <!--  Success View — aparece no lugar do conteúdo principal ao concluir upload  -->
+        <VerticalStackLayout
+            BackgroundColor="{StaticResource QuaseBranco}"
+            IsVisible="{Binding UploadComSucesso}"
+            Padding="30"
+            Spacing="24"
+            VerticalOptions="Center">
+            <Border
+                Padding="30"
+                BackgroundColor="White"
+                HorizontalOptions="Center"
+                StrokeShape="RoundRectangle 24"
+                StrokeThickness="0">
+                <Border.Shadow>
+                    <Shadow Brush="Black" Opacity="0.1" Offset="0,10" Radius="20" />
+                </Border.Shadow>
+                <VerticalStackLayout Spacing="20">
+                    <Label
+                        FontFamily="FontAwesomeSolid"
+                        FontSize="80"
+                        HorizontalOptions="Center"
+                        Text="&#xf058;"
+                        TextColor="#07AD53" />
+                    <VerticalStackLayout Spacing="8">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="24"
+                            HorizontalOptions="Center"
+                            HorizontalTextAlignment="Center"
+                            Text="{localization:Translate Sucesso}"
+                            TextColor="{StaticResource PrimaryColor}" />
+                        <Label
+                            FontSize="16"
+                            HorizontalOptions="Center"
+                            HorizontalTextAlignment="Center"
+                            Opacity="0.7"
+                            Text="{Binding UploadMensagemSucesso}"
+                            TextColor="{StaticResource SecondaryColor}" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+            <buttons:SfButton
+                Command="{Binding FinalizarUploadCommand}"
+                CornerRadius="25"
+                FontSize="18"
+                HeightRequest="50"
+                HorizontalOptions="Center"
+                Text="OK"
+                WidthRequest="200" />
+        </VerticalStackLayout>
+
+        <!--  Conteúdo principal (Grid intermediário resolve bug de IsVisible no RefreshView)  -->
+        <Grid IsVisible="{Binding UploadComSucesso, Converter={StaticResource InvertBoolean}}">
+        <RefreshView
+            Command="{Binding AtualizaListaAlteracoesCommand}"
+            IsRefreshing="{Binding IsRefreshing}"
+            RefreshColor="{StaticResource PrimaryColor}">
 
         <Grid RowDefinitions="Auto,*">
 
@@ -379,5 +434,8 @@
                 </VerticalStackLayout>
             </Grid>
         </Grid>
-    </RefreshView>
+        </RefreshView>
+        </Grid>
+
+    </Grid>
 </ContentView>

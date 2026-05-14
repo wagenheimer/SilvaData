@@ -164,8 +164,9 @@
         <VerticalStackLayout
             x:Name="SuccessView"
             Grid.Row="1"
-            Padding="30"
+            BackgroundColor="{StaticResource QuaseBranco}"
             IsVisible="{Binding SincronizacaoComSucesso}"
+            Padding="30"
             Spacing="24"
             VerticalOptions="Center">
 
