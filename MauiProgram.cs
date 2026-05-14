@@ -39,6 +39,7 @@ namespace SilvaData
                     options.Dsn = "https://c90d809b75da1f7771108dedcb78e9be@o4508410137411584.ingest.us.sentry.io/4511259248492544";
                     options.Debug = false;
                     options.AutoSessionTracking = true;
+                    options.TracesSampleRate = 1.0;
                     options.CaptureFailedRequests = true;
 #if ANDROID
                     options.Native.AnrEnabled = true;
