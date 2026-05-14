@@ -207,7 +207,7 @@
                         Color="{StaticResource PrimaryColor}" />
 
                     <!--  Seção: Avaliações Diversas (Galpão)  -->
-                    <VerticalStackLayout IsVisible="{Binding IsAvaliacaoGalpaoSectionVisible}" Spacing="5">
+                    <VerticalStackLayout IsVisible="true" Spacing="5">
                         <Label
                             Margin="10,0,0,0"
                             FontAttributes="Bold"
@@ -316,6 +316,13 @@
                             IsVisible="{Binding IsIsiMacroVisible}"
                             Style="{StaticResource SubMonitoramentoButton}"
                             Text="{localization:Translate ISIMacro}" />
+
+                        <buttons:SfButton
+                            Command="{Binding AvaliacoesGalpaoCommand}"
+                            ImageSource="icongalpao.png"
+                            IsVisible="{Binding IsAvaliacaoGalpaoVisible}"
+                            Style="{StaticResource SubMonitoramentoButton}"
+                            Text="{localization:Translate AvaliacoesNoGalpao}" />
 
                         <buttons:SfButton
                             Command="{Binding ShowHideSanidadeCommand}"
