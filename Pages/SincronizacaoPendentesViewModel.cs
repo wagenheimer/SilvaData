@@ -5,6 +5,7 @@ using SilvaData.Pages.PopUps;
 using SilvaData.Utils;
 using SilvaData.Pages;
 using SilvaData.Infrastructure;
+using SilvaData.Utilities;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -30,6 +31,9 @@ namespace SilvaData.ViewModels
 
         public static SincronizacaoPendentesViewModel? Instance { get; private set; }
 
+        // Debounce para não disparar múltiplos refreshes em sequência rápida
+        private CancellationTokenSource? _refreshDebounceCts;
+
         /// <summary>
         /// Número total de alterações pendentes na UI.
         /// </summary>
@@ -46,8 +50,49 @@ namespace SilvaData.ViewModels
             ListaAlteracoes.CollectionChanged += (s, e) =>
             {
                 OnPropertyChanged(nameof(TotalAlteracoes));
-                WeakReferenceMessenger.Default.Send(new Utilities.SyncPendentesTotalChangedMessage(TotalAlteracoes));
+                WeakReferenceMessenger.Default.Send(new SyncPendentesTotalChangedMessage(TotalAlteracoes));
             };
+
+            // Atualiza badge automaticamente sempre que qualquer dado sincronizável é salvo
+            var messenger = WeakReferenceMessenger.Default;
+            messenger.Register<NovoLoteMessage>(this, (_, _) => AgendarRefreshDebounced());
+            messenger.Register<LoteAlteradoMessage>(this, (_, _) => AgendarRefreshDebounced());
+            messenger.Register<UEAdicionadaMessage>(this, (_, _) => AgendarRefreshDebounced());
+            messenger.Register<UESalvaMessage>(this, (_, _) => AgendarRefreshDebounced());
+            messenger.Register<PropriedadeAdicionadaMessage>(this, (_, _) => AgendarRefreshDebounced());
+            messenger.Register<PropriedadeSalvaMessage>(this, (_, _) => AgendarRefreshDebounced());
+            messenger.Register<ProprietarioAdicionadoMessage>(this, (_, _) => AgendarRefreshDebounced());
+            messenger.Register<ProprietarioSalvoMessage>(this, (_, _) => AgendarRefreshDebounced());
+            messenger.Register<RegionalAdicionadaMessage>(this, (_, _) => AgendarRefreshDebounced());
+            messenger.Register<RegionalSalvaMessage>(this, (_, _) => AgendarRefreshDebounced());
+            messenger.Register<AtividadeAdicionadaMessage>(this, (_, _) => AgendarRefreshDebounced());
+            messenger.Register<AtividadeSalvaMessage>(this, (_, _) => AgendarRefreshDebounced());
+            messenger.Register<FormularioSalvoMessage>(this, (_, _) => AgendarRefreshDebounced());
+            messenger.Register<ISIMacroSalvoMessage>(this, (_, _) => AgendarRefreshDebounced());
+        }
+
+        private void AgendarRefreshDebounced()
+        {
+            _refreshDebounceCts?.Cancel();
+            _refreshDebounceCts = new CancellationTokenSource();
+            var token = _refreshDebounceCts.Token;
+
+            _ = Task.Run(async () =>
+            {
+                try
+                {
+                    await Task.Delay(800, token);
+                    if (token.IsCancellationRequested) return;
+                    Debug.WriteLine("[Sync] Atualizando badge por mudança de dados");
+                    await MainThread.InvokeOnMainThreadAsync(async () =>
+                    {
+                        if (AtualizaListaAlteracoesCommand.CanExecute(null))
+                            await AtualizaListaAlteracoesCommand.ExecuteAsync(null);
+                    });
+                }
+                catch (OperationCanceledException) { }
+                catch (Exception ex) { Debug.WriteLine($"[Sync] Erro no refresh debounced: {ex.Message}"); }
+            });
         }
 
         // Callback para sincronização thread-safe — necessário para evitar exceções em acesso concorrente
