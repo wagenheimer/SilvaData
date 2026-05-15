@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <utils:ContentPageWithLocalization
     x:Class="SilvaData.Controls.RegionalView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -7,7 +7,7 @@
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
     xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
     xmlns:models="clr-namespace:SilvaData.Models"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:utils="clr-namespace:SilvaData.Utils"
@@ -48,7 +48,7 @@
                         FontFamily="Nunito"
                         FontSize="Large"
                         HorizontalOptions="Start"
-                        Text="{localization:Translate Regionais}"
+                        Text="{safe:Translate Regionais}"
                         TextColor="White" />
                 </StackLayout>
 
@@ -67,7 +67,7 @@
                     Grid.Row="1"
                     Padding="15,0"
                     FontSize="Small"
-                    Text="{localization:Translate GerencieSuasRegionais}"
+                    Text="{safe:Translate GerencieSuasRegionais}"
                     TextColor="White" />
             </Grid>
 

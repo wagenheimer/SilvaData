@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <controls:ContentPageEdit
     x:Class="SilvaData.Controls.PropriedadeView_Edit"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -6,7 +6,7 @@
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
     xmlns:utils="clr-namespace:SilvaData.Utils"
     xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
     x:DataType="viewmodels:PropriedadeEditViewModel"
@@ -77,7 +77,7 @@
 
                     <controls:ISITextField
                         x:Name="nome"
-                        Title="{localization:Translate Nome}"
+                        Title="{safe:Translate Nome}"
                         IsReadOnly="{Binding ReadOnly, Mode=OneWay}"
                         Text="{Binding Propriedade.nome, Mode=TwoWay}" />
 
@@ -89,7 +89,7 @@
 
                     <controls:ISIComboBox
                         x:Name="proprietariocombobox"
-                        Title="{localization:Translate Proprietário}"
+                        Title="{safe:Translate Proprietário}"
                         IsReadOnly="{Binding ReadOnly, Mode=OneWay}"
                         ItemsSource="{Binding Proprietarios}"
                         SelectedItem="{Binding SelectedProprietario, Mode=TwoWay}" />
@@ -109,6 +109,6 @@
         <controls:LoadingView
             Grid.Row="1"
             IsVisible="{Binding IsBusy}"
-            Text="{localization:Translate Aguarde}" />
+            Text="{safe:Translate Aguarde}" />
     </Grid>
 </controls:ContentPageEdit>

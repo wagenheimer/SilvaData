@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <controls:ValidatableFieldBase
     x:Class="SilvaData.Controls.RegionalComboBox"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -7,7 +7,7 @@
     xmlns:comboBox="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
     xmlns:models="clr-namespace:SilvaData.Models"
     x:Name="reginalComboBox"
     Padding="0">
@@ -22,7 +22,7 @@
                 Margin="0"
                 Padding="5,0"
                 FontSize="Small"
-                Text="{localization:Translate Regional}"
+                Text="{safe:Translate Regional}"
                 TextColor="{StaticResource PrimaryColor}" />
             <Label
                 Grid.Column="1"

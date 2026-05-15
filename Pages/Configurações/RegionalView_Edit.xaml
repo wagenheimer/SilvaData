@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <controls:ContentPageEdit
     x:Class="SilvaData.Controls.RegionalView_Edit"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -6,7 +6,7 @@
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
     xmlns:utils="clr-namespace:SilvaData.Utils"
     xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
     x:DataType="viewmodels:RegionalEditViewModel"
@@ -74,7 +74,7 @@
 
                     <controls:ISITextField
                         x:Name="nome"
-                        Title="{localization:Translate Nome}"
+                        Title="{safe:Translate Nome}"
                         IsReadOnly="{Binding ReadOnly, Mode=OneWay}"
                         IsRequired="True"
                         Text="{Binding Regional.nome, Mode=TwoWay}" />

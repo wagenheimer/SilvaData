@@ -87,6 +87,7 @@ namespace SilvaData.Utils
             OnPropertyChanged(nameof(CurrentLanguage));
             OnPropertyChanged(nameof(IdiomaParaWebService));
             OnPropertyChanged(nameof(IdiomaParaCalendario));
+            SilvaData.Extensions.SafeLocalizationSource.Instance.NotifyAllChanged();
         }
     }
 }

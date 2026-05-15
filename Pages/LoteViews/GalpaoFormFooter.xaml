@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentView
     x:Class="SilvaData.Controls.GalpaoFormFooter"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:SilvaData.Controls"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
     xmlns:viewModels="clr-namespace:SilvaData.ViewModels">
 
     <StackLayout
@@ -14,7 +14,7 @@
 
         <Label
             Margin="0,10,0,10"
-            Text="{localization:Translate Observações}"
+            Text="{safe:Translate Observações}"
             TextColor="{StaticResource PrimaryColor}" />
 
         <Editor
@@ -25,7 +25,7 @@
 
         <Label
             Margin="0,10,0,10"
-            Text="{localization:Translate Fotos}"
+            Text="{safe:Translate Fotos}"
             TextColor="{StaticResource PrimaryColor}" />
 
         <Grid ColumnDefinitions="1*,1*,1*" RowDefinitions="150">

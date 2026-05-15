@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <toolkit:Popup
     x:Class="SilvaData.Pages.PopUps.PopUpPrivacy"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:TypeArguments="x:Boolean">
 
@@ -39,12 +39,12 @@
                 <buttons:SfButton
                     Command="{Binding AceitarCommand}"
                     Style="{StaticResource ButtonPrimary}"
-                    Text="{localization:Translate Aceitar}" />
+                    Text="{safe:Translate Aceitar}" />
                 <buttons:SfButton
                     Grid.Column="1"
                     Command="{Binding RecusarCommand}"
                     Style="{StaticResource ButtonSecondary}"
-                    Text="{localization:Translate Recusar}" />
+                    Text="{safe:Translate Recusar}" />
             </Grid>
         </Grid>
     </Border>

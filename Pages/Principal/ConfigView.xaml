@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentView
     x:Class="SilvaData.Controls.ConfigView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:controls="clr-namespace:SilvaData.Controls"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
     xmlns:local="clr-namespace:SilvaData"
     xmlns:syncfusion="http://schemas.syncfusion.com/maui"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
@@ -30,7 +30,7 @@
                         FontFamily="Nunito"
                         FontSize="Large"
                         HorizontalOptions="Start"
-                        Text="{localization:Translate Configuracoes}"
+                        Text="{safe:Translate Configuracoes}"
                         TextColor="{StaticResource PrimaryColor}" />
 
                 </StackLayout>
@@ -40,7 +40,7 @@
                     <Label
                         Padding="5,0,5,5"
                         FontSize="Small"
-                        Text="{localization:Translate OQueDesejaConfigurar}"
+                        Text="{safe:Translate OQueDesejaConfigurar}"
                         TextColor="Gray" />
 
 
@@ -55,7 +55,7 @@
                             Command="{Binding AtividadesCommand}"
                             ImageSource="iconatividades.png"
                             Style="{StaticResource ConfiguracoesButton}"
-                            Text="{localization:Translate Atividades}" />
+                            Text="{safe:Translate Atividades}" />
 
                         <buttons:SfButton
                             Grid.Row="0"
@@ -63,7 +63,7 @@
                             Command="{Binding NotificacoesCommand}"
                             ImageSource="iconnotificacoes.png"
                             Style="{StaticResource ConfiguracoesButton}"
-                            Text="{localization:Translate Notificacoes}" />
+                            Text="{safe:Translate Notificacoes}" />
 
                         <buttons:SfButton
                             Grid.Row="1"
@@ -71,7 +71,7 @@
                             Command="{Binding ProprietariosCommand}"
                             ImageSource="iconproprietarios.png"
                             Style="{StaticResource ConfiguracoesButton}"
-                            Text="{localization:Translate Proprietarios}" />
+                            Text="{safe:Translate Proprietarios}" />
 
                         <buttons:SfButton
                             Grid.Row="1"
@@ -79,7 +79,7 @@
                             Command="{Binding RegionaisCommand}"
                             ImageSource="iconregionais.png"
                             Style="{StaticResource ConfiguracoesButton}"
-                            Text="{localization:Translate Regionais}" />
+                            Text="{safe:Translate Regionais}" />
 
                         <buttons:SfButton
                             Grid.Row="2"
@@ -87,7 +87,7 @@
                             Command="{Binding PropriedadesCommand}"
                             ImageSource="iconpropriedades.png"
                             Style="{StaticResource ConfiguracoesButton}"
-                            Text="{localization:Translate Propriedades}" />
+                            Text="{safe:Translate Propriedades}" />
 
                         <buttons:SfButton
                             Grid.Row="2"
@@ -95,7 +95,7 @@
                             Command="{Binding UnidadesEpidemiologicasCommand}"
                             ImageSource="iconue.png"
                             Style="{StaticResource ConfiguracoesButton}"
-                            Text="{localization:Translate UnidadesEpidemiológicas}" />
+                            Text="{safe:Translate UnidadesEpidemiológicas}" />
 
                         <buttons:SfButton
                             Grid.Row="3"
@@ -103,7 +103,7 @@
                             Command="{Binding MinhaContaCommand}"
                             ImageSource="iconminhaconta.png"
                             Style="{StaticResource ConfiguracoesButton}"
-                            Text="{localization:Translate MinhaConta}" />
+                            Text="{safe:Translate MinhaConta}" />
 
                         <buttons:SfButton
                             Grid.Row="3"
@@ -111,7 +111,7 @@
                             Command="{Binding PrivacyCommand}"
                             ImageSource="iconprivacy.png"
                             Style="{StaticResource ConfiguracoesButton}"
-                            Text="{localization:Translate PoliticaPrivacidade}" />
+                            Text="{safe:Translate PoliticaPrivacidade}" />
 
                         <buttons:SfButton
                             Grid.Row="4"
@@ -119,7 +119,7 @@
                             Command="{Binding LogOffCommand}"
                             ImageSource="iconlogoff.png"
                             Style="{StaticResource ConfiguracoesButton}"
-                            Text="{localization:Translate Deslogar}" />
+                            Text="{safe:Translate Deslogar}" />
                     </Grid>
                 </StackLayout>
             </Grid>

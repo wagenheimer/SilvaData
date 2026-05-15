@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <controls:ContentPageEdit
     x:Class="SilvaData.Controls.AtividadeEdit"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -7,10 +7,10 @@
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
     xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
     xmlns:models="clr-namespace:SilvaData.Models"
     xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
-    Title="{localization:Translate NovoLote}"
+    Title="{safe:Translate NovoLote}"
     x:DataType="viewmodels:AtividadeEditViewModel"
     Background="{StaticResource PrimaryColor}"
     Shell.PresentationMode="ModalAnimated"
@@ -38,7 +38,7 @@
                     FontFamily="Nunito"
                     FontSize="Large"
                     HorizontalOptions="Start"
-                    Text="{localization:Translate Atividades}"
+                    Text="{safe:Translate Atividades}"
                     TextColor="White"
                     VerticalOptions="Center" />
             </StackLayout>
@@ -62,7 +62,7 @@
                 <Label
                     FontAttributes="Bold"
                     FontSize="Micro"
-                    Text="{localization:Translate DetalhesDaAtividade}"
+                    Text="{safe:Translate DetalhesDaAtividade}"
                     TextColor="White" />
             </StackLayout>
         </Grid>
@@ -105,7 +105,7 @@
                                                 VerticalTextAlignment="Center" />
                                             <Label
                                                 FontSize="Small"
-                                                Text="{localization:Translate FinalizarAtividade}"
+                                                Text="{safe:Translate FinalizarAtividade}"
                                                 TextColor="White" />
                                         </StackLayout>
                                     </DataTemplate>
@@ -132,7 +132,7 @@
                                                 VerticalTextAlignment="Center" />
                                             <Label
                                                 FontSize="Small"
-                                                Text="{localization:Translate CancelarAtividade}"
+                                                Text="{safe:Translate CancelarAtividade}"
                                                 TextColor="White" />
                                         </StackLayout>
                                     </DataTemplate>
@@ -140,17 +140,17 @@
                             </buttons:SfButton>
                         </Grid>
 
-                        <Label Text="{localization:Translate SobreAAtividade}" TextColor="{StaticResource PrimaryColor}" />
+                        <Label Text="{safe:Translate SobreAAtividade}" TextColor="{StaticResource PrimaryColor}" />
 
                         <controls:ISITextField
                             x:Name="titulo"
-                            Title="{localization:Translate Título}"
+                            Title="{safe:Translate Título}"
                             IsReadOnly="{Binding ReadOnly, Mode=OneWay}"
                             Text="{Binding Atividade.titulo, Mode=TwoWay}" />
 
                         <controls:ISITextField
                             x:Name="descricao"
-                            Title="{localization:Translate Descrição}"
+                            Title="{safe:Translate Descrição}"
                             IsReadOnly="{Binding ReadOnly, Mode=OneWay}"
                             Text="{Binding Atividade.descricao, Mode=TwoWay}" />
 
@@ -161,14 +161,14 @@
                             IsReadOnly="{Binding ReadOnly, Mode=OneWay}"
                             SelectedItem="{Binding SelectedUE, Mode=TwoWay}" />
 
-                        <Label Text="{localization:Translate AtividadeEdit_Datas}" TextColor="{StaticResource PrimaryColor}" />
+                        <Label Text="{safe:Translate AtividadeEdit_Datas}" TextColor="{StaticResource PrimaryColor}" />
 
                         <StackLayout Grid.Column="0" Spacing="0">
                             <Label
                                 FontAttributes="Bold"
                                 FontSize="Small"
                                 HorizontalTextAlignment="Start"
-                                Text="{localization:Translate AtividadeEdit_Início}"
+                                Text="{safe:Translate AtividadeEdit_Início}"
                                 TextColor="Gray" />
                             <Grid>
                                 <controls:ISIDatePicker
@@ -189,7 +189,7 @@
                                 FontAttributes="Bold"
                                 FontSize="Small"
                                 HorizontalTextAlignment="Start"
-                                Text="{localization:Translate Prazo}"
+                                Text="{safe:Translate Prazo}"
                                 TextColor="Gray" />
                             <Grid>
                                 <controls:ISIDatePicker
@@ -214,7 +214,7 @@
                                 <Label
                                     Grid.Column="0"
                                     Padding="5"
-                                    Text="{localization:Translate Notificações}"
+                                    Text="{safe:Translate Notificações}"
                                     TextColor="{StaticResource PrimaryColor}"
                                     VerticalOptions="Center" />
                                 <buttons:SfButton
@@ -290,7 +290,7 @@
                 Grid.RowSpan="2"
                 HorizontalOptions="Fill"
                 IsVisible="{Binding IsBusy}"
-                Text="{localization:Translate Aguarde}"
+                Text="{safe:Translate Aguarde}"
                 VerticalOptions="Fill" />
         </Grid>
     </Grid>

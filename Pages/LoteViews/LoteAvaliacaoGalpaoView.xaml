@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="ISIInstitute.Views.LoteViews.LoteAvaliacaoGalpaoView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -7,7 +7,7 @@
     xmlns:comboBox="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
-xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
     xmlns:templates="clr-namespace:ISIInstitute.Views.Templates"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
@@ -78,7 +78,7 @@ xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=Loca
                                 <HorizontalStackLayout Spacing="4">
                                     <Label
                                         FontSize="11"
-                                        Text="{localization:Translate IdadeDoLote}"
+                                        Text="{safe:Translate IdadeDoLote}"
                                         TextColor="{StaticResource PrimaryColor}"
                                         VerticalTextAlignment="Center" />
                                     <Label
@@ -232,7 +232,7 @@ xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=Loca
                                 <HorizontalStackLayout Spacing="4">
                                     <Label
                                         FontSize="11"
-                                        Text="{localization:Translate IdadeDoLote}"
+                                        Text="{safe:Translate IdadeDoLote}"
                                         TextColor="{StaticResource PrimaryColor}"
                                         VerticalTextAlignment="Center" />
                                     <Label
@@ -279,7 +279,7 @@ xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=Loca
                                 Grid.Column="0"
                                 FontAttributes="Bold"
                                 FontSize="14"
-                                Text="{localization:Translate Media}"
+                                Text="{safe:Translate Media}"
                                 TextColor="{StaticResource SecondaryColor}"
                                 VerticalTextAlignment="Center" />
 
@@ -327,7 +327,7 @@ xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=Loca
                     FontSize="20"
                     LineBreakMode="TailTruncation"
                     MaxLines="1"
-                    Text="{localization:Translate AvaliacoesNoGalpao}"
+                    Text="{safe:Translate AvaliacoesNoGalpao}"
                     TextColor="White" />
             </VerticalStackLayout>
 
@@ -365,7 +365,7 @@ xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=Loca
                     Background="Transparent"
                     DisplayMemberPath="nome"
                     ItemsSource="{Binding ParametrosAvaliacaoGalpaoList}"
-                    Placeholder="{localization:Translate Selecione}"
+                    Placeholder="{safe:Translate Selecione}"
                     SelectedItem="{Binding ParametroSelecionado, Mode=TwoWay}"
                     ShowBorder="False"
                     TextColor="{StaticResource PrimaryColor}" />
@@ -405,13 +405,13 @@ xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=Loca
                             FontAttributes="Bold"
                             FontSize="18"
                             HorizontalTextAlignment="Center"
-                            Text="{localization:Translate NenhumaAvaliacaoParametro}"
+                            Text="{safe:Translate NenhumaAvaliacaoParametro}"
                             TextColor="{StaticResource PrimaryColor}" />
                         <Label
                             FontSize="13"
                             HorizontalTextAlignment="Center"
                             Opacity="0.7"
-                            Text="{localization:Translate SelecioneParametroAvaliacao}"
+                            Text="{safe:Translate SelecioneParametroAvaliacao}"
                             TextColor="{StaticResource SecondaryColor}" />
                     </VerticalStackLayout>
                 </VerticalStackLayout>
@@ -431,7 +431,7 @@ xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=Loca
             Grid.Row="1"
             Grid.RowSpan="2"
             IsVisible="{Binding IsBusy}"
-            Text="{localization:Translate Aguarde}" />
+            Text="{safe:Translate Aguarde}" />
 
         <!--  FAB  -->
         <buttons:SfButton

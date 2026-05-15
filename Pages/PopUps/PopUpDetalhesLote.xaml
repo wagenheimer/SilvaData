@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <toolkit:Popup
     x:Class="SilvaData.Pages.PopUps.PopUpDetalhesLote"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
     xmlns:local="clr-namespace:SilvaData.Pages.PopUps"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:DataType="local:PopUpDetalhesLoteViewModel"
@@ -56,7 +56,7 @@
                     <Label
                         FontSize="10"
                         Opacity="0.6"
-                        Text="{localization:Translate Regional}"
+                        Text="{safe:Translate Regional}"
                         TextColor="#333" />
                     <Label
                         FontAttributes="Bold"
@@ -71,7 +71,7 @@
                     <Label
                         FontSize="10"
                         Opacity="0.6"
-                        Text="{localization:Translate Propriedade}"
+                        Text="{safe:Translate Propriedade}"
                         TextColor="#333" />
                     <Label
                         FontAttributes="Bold"
@@ -86,7 +86,7 @@
                     <Label
                         FontSize="10"
                         Opacity="0.6"
-                        Text="{localization:Translate UnidadeEp}"
+                        Text="{safe:Translate UnidadeEp}"
                         TextColor="#333" />
                     <Label
                         FontAttributes="Bold"
@@ -101,7 +101,7 @@
                     <Label
                         FontSize="10"
                         Opacity="0.6"
-                        Text="{localization:Translate DataInicio}"
+                        Text="{safe:Translate DataInicio}"
                         TextColor="#333" />
                     <Label
                         FontAttributes="Bold"

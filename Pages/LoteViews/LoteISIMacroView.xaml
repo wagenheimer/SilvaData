@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="SilvaData.Controls.LoteISIMacroView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -7,7 +7,7 @@
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
     xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
     x:DataType="viewModels:LoteISIMacroViewModel"
@@ -79,7 +79,7 @@
                         Padding="20,0,0,0"
                         FontSize="Small"
                         HorizontalTextAlignment="Start"
-                        Text="{localization:Translate ISIScoreMédioDoLote}"
+                        Text="{safe:Translate ISIScoreMédioDoLote}"
                         TextColor="{StaticResource ScoreTextColor}"
                         VerticalOptions="Center" />
 
@@ -120,7 +120,7 @@
                             Margin="5,0"
                             FontAttributes="Bold"
                             FontSize="Small"
-                            Text="{localization:Translate Saúde}"
+                            Text="{safe:Translate Saúde}"
                             VerticalOptions="Center" />
                         <Grid
                             Padding="5,0,10,0"
@@ -138,7 +138,7 @@
                                 <Label
                                     Padding="5,0,0,0"
                                     FontSize="Small"
-                                    Text="{localization:Translate BoaSaúde}"
+                                    Text="{safe:Translate BoaSaúde}"
                                     VerticalOptions="Center" />
                             </HorizontalStackLayout>
                             <HorizontalStackLayout Grid.Column="1" Margin="0,0,10,0">
@@ -151,7 +151,7 @@
                                 <Label
                                     Padding="5,0,0,0"
                                     FontSize="Small"
-                                    Text="{localization:Translate SaudeMédia}"
+                                    Text="{safe:Translate SaudeMédia}"
                                     VerticalOptions="Center" />
                             </HorizontalStackLayout>
                             <HorizontalStackLayout Grid.Column="2" HorizontalOptions="End">
@@ -164,7 +164,7 @@
                                 <Label
                                     Padding="5,0,0,0"
                                     FontSize="Small"
-                                    Text="{localization:Translate SaúdeBaixa}"
+                                    Text="{safe:Translate SaúdeBaixa}"
                                     VerticalOptions="Center"
                                     VerticalTextAlignment="Center" />
                             </HorizontalStackLayout>
@@ -205,7 +205,7 @@
                                 <Label
                                     FontAttributes="Bold"
                                     FontSize="15"
-                                    Text="{localization:Translate Ave}"
+                                    Text="{safe:Translate Ave}"
                                     TextColor="{Binding SaudeColor}" />
                                 <Label
                                     Padding="4,0,0,0"
@@ -218,7 +218,7 @@
                             <HorizontalStackLayout Grid.Row="1">
                                 <Label
                                     FontSize="12"
-                                    Text="{localization:Translate Score}"
+                                    Text="{safe:Translate Score}"
                                     TextColor="{StaticResource SecondaryColor}" />
                                 <Label
                                     Padding="4,0,0,0"
@@ -253,7 +253,7 @@
                 <Label
                     FontSize="Small"
                     HorizontalTextAlignment="Center"
-                    Text="{localization:Translate NenhumISIMacroCadastrado}"
+                    Text="{safe:Translate NenhumISIMacroCadastrado}"
                     TextColor="{StaticResource PrimaryColor}"
                     VerticalOptions="Fill"
                     VerticalTextAlignment="Center" />
@@ -263,7 +263,7 @@
         <controls:LoadingView
             Grid.Row="2"
             IsVisible="{Binding IsBusy}"
-            Text="{localization:Translate Aguarde}"
+            Text="{safe:Translate Aguarde}"
             VerticalOptions="Fill" />
 
         <buttons:SfButton

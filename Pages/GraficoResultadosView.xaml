@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentView
     x:Class="SilvaData.Controls.GraficoResultadosView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -7,7 +7,7 @@
     xmlns:chart="clr-namespace:Syncfusion.Maui.Toolkit.Charts;assembly=Syncfusion.Maui.Toolkit"
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
     xmlns:models="clr-namespace:SilvaData.Models"
     xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
     x:DataType="viewmodels:GraficoResultadosViewModel"
@@ -331,7 +331,7 @@
                         Margin="0"
                         Padding="0"
                         FontSize="Micro"
-                        Text="{localization:Translate Regional}" />
+                        Text="{safe:Translate Regional}" />
                     <Border
                         Margin="0"
                         Padding="5,0"
@@ -354,7 +354,7 @@
                         Margin="0"
                         Padding="0"
                         FontSize="Micro"
-                        Text="{localization:Translate UnidadeEpidemiológica}" />
+                        Text="{safe:Translate UnidadeEpidemiológica}" />
                     <Border
                         Margin="0"
                         Padding="5,0"
@@ -386,7 +386,7 @@
                 Command="{Binding AtualizaAgoraCommand}"
                 CornerRadius="10"
                 ShowIcon="False"
-                Text="{localization:Translate AtualizarDados}"
+                Text="{safe:Translate AtualizarDados}"
                 TextColor="{StaticResource PrimaryColor}" />
 
             <StackLayout Grid.Column="1" VerticalOptions="Center">
@@ -396,7 +396,7 @@
                     FontAttributes="Bold"
                     FontSize="Micro"
                     HorizontalTextAlignment="Center"
-                    Text="{localization:Translate ÚltimaSincronização}"
+                    Text="{safe:Translate ÚltimaSincronização}"
                     TextColor="LightGray"
                     VerticalTextAlignment="Center" />
                 <Label
@@ -417,7 +417,7 @@
                 Command="{Binding ShowHideFiltroCommand}"
                 CornerRadius="10"
                 ShowIcon="False"
-                Text="{localization:Translate Filtros}"
+                Text="{safe:Translate Filtros}"
                 TextColor="{StaticResource PrimaryColor}" />
         </Grid>
 
@@ -427,7 +427,7 @@
             Grid.RowSpan="2"
             HorizontalOptions="Fill"
             IsVisible="{Binding IsBusy}"
-            Text="{localization:Translate AguardeAtualizandoDados}"
+            Text="{safe:Translate AguardeAtualizandoDados}"
             VerticalOptions="Fill" />
     </Grid>
 </ContentView>

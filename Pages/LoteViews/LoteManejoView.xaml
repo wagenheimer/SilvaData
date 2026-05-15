@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="ISIInstitute.Views.LoteViews.LoteManejoView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -7,7 +7,7 @@
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
     xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
     xmlns:models="clr-namespace:SilvaData.Models"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
@@ -68,7 +68,7 @@
                             CornerRadius="24"
                             FontAttributes="Bold"
                             FontSize="14"
-                            Text="{localization:Translate AbaGeral}"
+                            Text="{safe:Translate AbaGeral}"
                             TextColor="{StaticResource PrimaryColor}">
                             <buttons:SfButton.Triggers>
                                 <DataTrigger
@@ -83,7 +83,7 @@
                         <Label
                             FontSize="10"
                             HorizontalTextAlignment="Center"
-                            Text="{localization:Translate Manejo_AbaGeral_Dica}"
+                            Text="{safe:Translate Manejo_AbaGeral_Dica}"
                             TextColor="Gray" />
                     </VerticalStackLayout>
 
@@ -97,7 +97,7 @@
                             CornerRadius="24"
                             FontAttributes="Bold"
                             FontSize="14"
-                            Text="{localization:Translate AbaPorFase}"
+                            Text="{safe:Translate AbaPorFase}"
                             TextColor="{StaticResource PrimaryColor}">
                             <buttons:SfButton.Triggers>
                                 <DataTrigger
@@ -112,7 +112,7 @@
                         <Label
                             FontSize="10"
                             HorizontalTextAlignment="Center"
-                            Text="{localization:Translate Manejo_AbaPorFase_Dica}"
+                            Text="{safe:Translate Manejo_AbaPorFase_Dica}"
                             TextColor="Gray" />
                     </VerticalStackLayout>
                 </HorizontalStackLayout>
@@ -141,7 +141,7 @@
                                 <Label
                                     FontSize="Medium"
                                     HorizontalTextAlignment="Center"
-                                    Text="{localization:Translate NenhumRegistroManejo}"
+                                    Text="{safe:Translate NenhumRegistroManejo}"
                                     TextColor="Gray" />
                             </VerticalStackLayout>
                         </listView:SfListView.EmptyView>
@@ -185,7 +185,7 @@
                                             <Label
                                                 FontSize="Micro"
                                                 HorizontalTextAlignment="Center"
-                                                Text="{localization:Translate IdadeDoLote}" />
+                                                Text="{safe:Translate IdadeDoLote}" />
                                             <Label
                                                 FontSize="Micro"
                                                 HorizontalTextAlignment="Center"
@@ -291,7 +291,7 @@
         <controls:LoadingView
             Grid.Row="1"
             IsVisible="{Binding IsBusy}"
-            Text="{localization:Translate Aguarde}"
+            Text="{safe:Translate Aguarde}"
             VerticalOptions="Fill" />
     </Grid>
 </ContentPage>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="ISIInstitute.Views.LoteViews.LoteSalmonellaView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -7,7 +7,7 @@
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
     xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
     x:Name="LoteSalmonellaPage"
@@ -38,13 +38,13 @@
                 <controls:LoteDescricaoLabel
                     Padding="5,0,0,5"
                     Lote="{Binding Lote}"
-                    NomeTela="{localization:Translate AnáliseDeSalmonella}" />
+                    NomeTela="{safe:Translate AnáliseDeSalmonella}" />
                 <Label
                     Padding="5,0"
                     FontFamily="Nunito"
                     FontSize="Large"
                     HorizontalOptions="Start"
-                    Text="{localization:Translate AnáliseDeSalmonella}"
+                    Text="{safe:Translate AnáliseDeSalmonella}"
                     TextColor="White"
                     VerticalOptions="Center" />
             </VerticalStackLayout>
@@ -63,7 +63,7 @@
                 <Label
                     FontSize="Micro"
                     HorizontalTextAlignment="Start"
-                    Text="{localization:Translate ResumoDasAnálisesDoLote}"
+                    Text="{safe:Translate ResumoDasAnálisesDoLote}"
                     TextColor="White" />
             </HorizontalStackLayout>
         </Grid>
@@ -85,7 +85,7 @@
                     <Label
                         FontSize="Small"
                         HorizontalTextAlignment="Center"
-                        Text="{localization:Translate NenhumaAnáliseDeSalmonellaCadastrada}"
+                        Text="{safe:Translate NenhumaAnáliseDeSalmonellaCadastrada}"
                         TextColor="{StaticResource PrimaryColor}"
                         VerticalOptions="Fill"
                         VerticalTextAlignment="Center" />
@@ -147,7 +147,7 @@
         <controls:LoadingView
             Grid.Row="1"
             IsVisible="{Binding IsBusy}"
-            Text="{localization:Translate Aguarde}"
+            Text="{safe:Translate Aguarde}"
             VerticalOptions="Fill" />
 
 

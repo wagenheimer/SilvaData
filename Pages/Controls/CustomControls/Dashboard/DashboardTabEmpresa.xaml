@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentView
     x:Class="SilvaData.Controls.DashboardTabEmpresa"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:controls="clr-namespace:SilvaData.Controls"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
     xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
     x:DataType="viewmodels:DashboardViewModel">
 
@@ -66,7 +66,7 @@
                                 ImageSize="25"
                                 ImageSource="iconscore.png"
                                 ShowIcon="True"
-                                Text="{localization:Translate ScoreSemDoisPontos}"
+                                Text="{safe:Translate ScoreSemDoisPontos}"
                                 TextColor="{StaticResource ScoreTextColor}" />
                     </Grid>
 
@@ -80,7 +80,7 @@
                                 ImageSize="25"
                                 ImageSource="iconacometimento.png"
                                 ShowIcon="True"
-                                Text="{localization:Translate Acomet}"
+                                Text="{safe:Translate Acomet}"
                                 TextColor="{StaticResource AcometimentoTextColor}" />
                     </Grid>
 
@@ -94,7 +94,7 @@
                                 ImageSize="25"
                                 ImageSource="icondispersao.png"
                                 ShowIcon="True"
-                                Text="{localization:Translate Dispersão}"
+                                Text="{safe:Translate Dispersão}"
                                 TextColor="{StaticResource DispersaoTextColor}" />
                     </Grid>
                 </Grid>

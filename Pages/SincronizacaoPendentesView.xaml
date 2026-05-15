@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentView
     x:Class="SilvaData.Controls.SincronizacaoPendentesView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -6,7 +6,7 @@
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
     xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
     xmlns:models="clr-namespace:SilvaData.Models"
     xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
     x:Name="DadosSyncViewRoot"
@@ -44,7 +44,7 @@
                             FontSize="24"
                             HorizontalOptions="Center"
                             HorizontalTextAlignment="Center"
-                            Text="{localization:Translate Sucesso}"
+                            Text="{safe:Translate Sucesso}"
                             TextColor="{StaticResource PrimaryColor}" />
                         <Label
                             FontSize="16"
@@ -106,7 +106,7 @@
                         FontAttributes="Bold"
                         FontSize="15"
                         HorizontalTextAlignment="End"
-                        Text="{localization:Translate SincronizarDados}"
+                        Text="{safe:Translate SincronizarDados}"
                         TextColor="{StaticResource PrimaryColor}"
                         VerticalOptions="Center" />
                 </Grid>
@@ -147,7 +147,7 @@
                         <Label
                             FontAttributes="Bold"
                             FontSize="16"
-                            Text="{localization:Translate ListaDeMudançasIdentificadas}"
+                            Text="{safe:Translate ListaDeMudançasIdentificadas}"
                             TextColor="{StaticResource PrimaryColor}"
                             VerticalTextAlignment="Center" />
 
@@ -282,7 +282,7 @@
                                             FontAttributes="Bold"
                                             FontSize="16"
                                             HorizontalTextAlignment="Center"
-                                            Text="{localization:Translate NenhumaMudançaPendenteDeSincronização}"
+                                            Text="{safe:Translate NenhumaMudançaPendenteDeSincronização}"
                                             TextColor="#212121" />
 
                                         <Label
@@ -341,7 +341,7 @@
                             HeightRequest="56"
                             IsEnabled="{Binding TemAlteracoes}"
                             Style="{StaticResource PrimaryButton}"
-                            Text="{localization:Translate SincronizarAgora}"
+                            Text="{safe:Translate SincronizarAgora}"
                             TextColor="White"
                             VerticalOptions="Center">
                             <buttons:SfButton.Shadow>
@@ -361,7 +361,7 @@
                             CornerRadius="14"
                             HeightRequest="56"
                             Style="{StaticResource PrimaryButton}"
-                            Text="{localization:Translate BuscarAtualizações}"
+                            Text="{safe:Translate BuscarAtualizações}"
                             TextColor="White"
                             VerticalOptions="Center">
                             <buttons:SfButton.Shadow>
@@ -401,7 +401,7 @@
 
                                 <Label
                                     FontSize="13"
-                                    Text="{localization:Translate ÚltimaSincronização}"
+                                    Text="{safe:Translate ÚltimaSincronização}"
                                     TextColor="{StaticResource SecondaryColor}"
                                     VerticalTextAlignment="Center" />
 
@@ -419,7 +419,7 @@
                                 HeightRequest="52"
                                 IsVisible="{Binding IsBusy, Converter={StaticResource InvertBoolean}}"
                                 Style="{StaticResource PrimaryButton}"
-                                Text="{localization:Translate BuscarNovosDadosNaNuvem}"
+                                Text="{safe:Translate BuscarNovosDadosNaNuvem}"
                                 TextColor="White">
                                 <buttons:SfButton.Shadow>
                                     <Shadow

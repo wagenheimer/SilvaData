@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="SilvaData.Controls.ISIMacroNotaSelecionaImagem"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -6,7 +6,7 @@
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
     xmlns:imageEditor="clr-namespace:Syncfusion.Maui.ImageEditor;assembly=Syncfusion.Maui.ImageEditor"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
     xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
     x:DataType="viewModels:ISIMacroNotaSelecionaImagemViewModel"
     Background="{StaticResource PrimaryColor}"
@@ -161,7 +161,7 @@
                 CornerRadius="10"
                 FontSize="Medium"
                 Style="{StaticResource PrimaryButton}"
-                Text="{localization:Translate Selecionar}" />
+                Text="{safe:Translate Selecionar}" />
         </Grid>
     </Grid>
 </ContentPage>

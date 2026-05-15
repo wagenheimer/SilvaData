@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="ISIInstitute.Views.LoteViews.LoteDiagnosticoView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -7,7 +7,7 @@
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
     xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
     x:Name="thisPage"
@@ -40,13 +40,13 @@
                 <controls:LoteDescricaoLabel
                     Padding="0,0,0,2"
                     Lote="{Binding Lote}"
-                    NomeTela="{localization:Translate DiagnósticoDeEnfermidades}" />
+                    NomeTela="{safe:Translate DiagnósticoDeEnfermidades}" />
                 <Label
                     FontAttributes="Bold"
                     FontFamily="Nunito"
                     FontSize="24"
                     HorizontalOptions="Start"
-                    Text="{localization:Translate DiagnósticoDeEnfermidades}"
+                    Text="{safe:Translate DiagnósticoDeEnfermidades}"
                     TextColor="White"
                     VerticalOptions="Center" />
             </VerticalStackLayout>
@@ -68,7 +68,7 @@
                     FontSize="13"
                     HorizontalTextAlignment="Start"
                     Opacity="0.85"
-                    Text="{localization:Translate DiagnósticosRealizadosNoLote}"
+                    Text="{safe:Translate DiagnósticosRealizadosNoLote}"
                     TextColor="White" />
             </HorizontalStackLayout>
         </Grid>
@@ -100,7 +100,7 @@
                     <Label
                         FontSize="16"
                         HorizontalTextAlignment="Center"
-                        Text="{localization:Translate NenhumDiagnósticoCadastrado}"
+                        Text="{safe:Translate NenhumDiagnósticoCadastrado}"
                         TextColor="{StaticResource SecondaryColor}"
                         VerticalOptions="Center" />
                 </VerticalStackLayout>
@@ -159,7 +159,7 @@
                                     <Label
                                         FontSize="11"
                                         Opacity="0.6"
-                                        Text="{localization:Translate DataDoDiagnostico}"
+                                        Text="{safe:Translate DataDoDiagnostico}"
                                         TextColor="{StaticResource SecondaryColor}" />
                                     <Label
                                         FontAttributes="Bold"
@@ -179,7 +179,7 @@
                                     VerticalOptions="Center">
                                     <Label
                                         FontSize="13"
-                                        Text="{localization:Translate VerDetalhes}"
+                                        Text="{safe:Translate VerDetalhes}"
                                         TextColor="{StaticResource PrimaryColor}"
                                         VerticalTextAlignment="Center" />
 
@@ -197,7 +197,7 @@
                                 <Label
                                     FontSize="12"
                                     Opacity="0.7"
-                                    Text="{localization:Translate Diagnóstico}"
+                                    Text="{safe:Translate Diagnóstico}"
                                     TextColor="{StaticResource SecondaryColor}" />
                                 <Label
                                     FontSize="15"
@@ -227,7 +227,7 @@
                                             VerticalTextAlignment="Center" />
                                         <Label
                                             FontSize="13"
-                                            Text="{localization:Translate Tratamentos}"
+                                            Text="{safe:Translate Tratamentos}"
                                             TextColor="{StaticResource SecondaryColor}"
                                             VerticalTextAlignment="Center" />
                                         <Label
@@ -275,7 +275,7 @@
                                                 <Label
                                                     FontAttributes="Bold"
                                                     FontSize="14"
-                                                    Text="{localization:Translate AdicionarTratamento}"
+                                                    Text="{safe:Translate AdicionarTratamento}"
                                                     TextColor="{StaticResource PrimaryColor}"
                                                     VerticalTextAlignment="Center" />
                                             </HorizontalStackLayout>
@@ -307,7 +307,7 @@
         <controls:LoadingView
             Grid.Row="1"
             IsVisible="{Binding IsBusy}"
-            Text="{localization:Translate Aguarde}"
+            Text="{safe:Translate Aguarde}"
             VerticalOptions="Fill" />
 
         <!--  FAB - Novo diagnóstico  -->

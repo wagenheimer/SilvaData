@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="SilvaData.Controls.LoteFormularioView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -7,7 +7,7 @@
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
     xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:models="clr-namespace:SilvaData.Models"
     xmlns:shimmer="clr-namespace:Syncfusion.Maui.Shimmer;assembly=Syncfusion.Maui.Core"
@@ -68,7 +68,7 @@
                         VerticalOptions="Center">
                         <Label
                             Grid.Column="0"
-                            Text="{localization:Translate ScoreTotalDaAve}"
+                            Text="{safe:Translate ScoreTotalDaAve}"
                             TextColor="{Binding ScoreTotalDaAveCor}"
                             VerticalTextAlignment="Center" />
                         <Label
@@ -116,7 +116,7 @@
                     CornerRadius="10"
                     IsVisible="{Binding ReadOnly, Converter={StaticResource InvertBoolean}}"
                     Style="{StaticResource PrimaryButton}"
-                    Text="{localization:Translate Salvar}" />
+                    Text="{safe:Translate Salvar}" />
 
                 <buttons:SfButton
                     Grid.Row="0"
@@ -125,7 +125,7 @@
                     CornerRadius="10"
                     IsVisible="{Binding ReadOnly}"
                     Style="{StaticResource PrimaryButton}"
-                    Text="{localization:Translate Editar}" />
+                    Text="{safe:Translate Editar}" />
 
                 <buttons:SfButton
                     Grid.Row="0"
@@ -167,7 +167,7 @@
             Grid.Row="0"
             Grid.RowSpan="4"
             IsVisible="{Binding IsBusy}"
-            Text="{localization:Translate Aguarde}"
+            Text="{safe:Translate Aguarde}"
             VerticalOptions="Fill" />
 
         <VerticalStackLayout
@@ -181,7 +181,7 @@
                 FontSize="Medium"
                 HorizontalOptions="Center"
                 Style="{StaticResource PrimaryButton}"
-                Text="{localization:Translate CarregarDados}" />
+                Text="{safe:Translate CarregarDados}" />
         </VerticalStackLayout>
 
     </Grid>

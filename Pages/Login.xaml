@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="SilvaData.Controls.Login"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:button="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:controls="clr-namespace:SilvaData.Controls"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
     x:DataType="viewmodels:LoginViewModel"
@@ -69,12 +69,12 @@
                         Spacing="12">
                         <controls:ISITextField
                             x:Name="email"
-                            Title="{localization:Translate EMail}"
+                            Title="{safe:Translate EMail}"
                             Text="{Binding Email, Mode=TwoWay}" />
 
                         <controls:ISITextField
                             x:Name="password"
-                            Title="{localization:Translate Senha}"
+                            Title="{safe:Translate Senha}"
                             IsPassword="True"
                             Text="{Binding Password, Mode=TwoWay}" />
                     </StackLayout>
@@ -87,7 +87,7 @@
                         Command="{Binding LoginNowCommand}"
                         HeightRequest="52"
                         Style="{StaticResource sfButtonBar}"
-                        Text="{localization:Translate Login}" />
+                        Text="{safe:Translate Login}" />
 
                     <!--  Idiomas  -->
                     <Grid
@@ -143,14 +143,14 @@
                             BackgroundColor="White"
                             Command="{Binding ForgotPasswordCommand}"
                             Style="{StaticResource ButtonSecondary}"
-                            Text="{localization:Translate EsqueceuASenha}"
+                            Text="{safe:Translate EsqueceuASenha}"
                             TextColor="{StaticResource PrimaryColor}" />
                         <button:SfButton
                             Grid.Column="1"
                             BackgroundColor="White"
                             Command="{Binding PolicyPrivacyCommand}"
                             Style="{StaticResource ButtonSecondary}"
-                            Text="{localization:Translate PolíticaDePrivacidade}"
+                            Text="{safe:Translate PolíticaDePrivacidade}"
                             TextColor="{StaticResource PrimaryColor}" />
                     </Grid>
             </Grid>
