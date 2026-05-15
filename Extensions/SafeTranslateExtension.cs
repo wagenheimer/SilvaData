@@ -14,8 +14,9 @@ namespace SilvaData.Extensions
             return new Binding
             {
                 Mode = BindingMode.OneWay,
-                Path = $"[{Key}]",
                 Source = SafeLocalizationSource.Instance,
+                Path = nameof(SafeLocalizationSource.Dummy),
+                Converter = new SafeKeyConverter(Key),
                 FallbackValue = $"[MISSING:{Key}]",
                 TargetNullValue = $"[MISSING:{Key}]",
             };
@@ -31,30 +32,33 @@ namespace SilvaData.Extensions
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string this[string key]
-        {
-            get
-            {
-                try
-                {
-                    var value = Traducao.ResourceManager.GetString(key, Traducao.Culture);
-                    if (value is null)
-                    {
-                        ReportMissingKey(key);
-                        return $"[MISSING:{key}]";
-                    }
-                    return value;
-                }
-                catch (Exception ex)
-                {
-                    ReportTranslationError(key, ex);
-                    return $"[ERR:{key}]";
-                }
-            }
-        }
+        // Propriedade dummy para o binding ter um path válido
+        public int Dummy { get; private set; }
 
         public void NotifyAllChanged()
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));
+        {
+            Dummy++;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Dummy)));
+        }
+
+        public static string GetString(string key)
+        {
+            try
+            {
+                var value = Traducao.ResourceManager.GetString(key, Traducao.Culture);
+                if (value is null)
+                {
+                    ReportMissingKey(key);
+                    return $"[MISSING:{key}]";
+                }
+                return value;
+            }
+            catch (Exception ex)
+            {
+                ReportTranslationError(key, ex);
+                return $"[ERR:{key}]";
+            }
+        }
 
         private static void ReportMissingKey(string key)
         {
@@ -78,5 +82,17 @@ namespace SilvaData.Extensions
                 scope.SetTag("localization.culture", Traducao.Culture?.Name ?? "default");
             });
         }
+    }
+
+    public class SafeKeyConverter : IValueConverter
+    {
+        private readonly string _key;
+        public SafeKeyConverter(string key) => _key = key;
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+            => SafeLocalizationSource.GetString(_key);
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+            => throw new NotSupportedException();
     }
 }
