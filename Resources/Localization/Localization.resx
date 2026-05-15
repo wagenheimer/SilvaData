@@ -1374,4 +1374,46 @@
   <data name="GerencieSuaRegionais" xml:space="preserve">
     <value>Gerencie suas Regionais</value>
   </data>
+  <data name="Fechar" xml:space="preserve">
+    <value>Fechar</value>
+  </data>
+  <data name="Enviar" xml:space="preserve">
+    <value>Enviar</value>
+  </data>
+  <data name="Aceitar" xml:space="preserve">
+    <value>Aceitar</value>
+  </data>
+  <data name="Recusar" xml:space="preserve">
+    <value>Recusar</value>
+  </data>
+  <data name="DataFechamento" xml:space="preserve">
+    <value>Data de Fechamento</value>
+  </data>
+  <data name="Observacoes" xml:space="preserve">
+    <value>Observações</value>
+  </data>
+  <data name="MensagemDeErro" xml:space="preserve">
+    <value>Mensagem de Erro</value>
+  </data>
+  <data name="VerDetalhesTecnicos" xml:space="preserve">
+    <value>Ver Detalhes Técnicos</value>
+  </data>
+  <data name="InformacoesDaRequisicao" xml:space="preserve">
+    <value>Informações da Requisição</value>
+  </data>
+  <data name="PayloadDaRequisicao" xml:space="preserve">
+    <value>Payload da Requisição</value>
+  </data>
+  <data name="RespostaDoServidor" xml:space="preserve">
+    <value>Resposta do Servidor</value>
+  </data>
+  <data name="InformacoesDeRetry" xml:space="preserve">
+    <value>Informações de Retry</value>
+  </data>
+  <data name="CompartilheErroAnaliseTecnica" xml:space="preserve">
+    <value>Compartilhe o erro para análise técnica</value>
+  </data>
+  <data name="StackTrace" xml:space="preserve">
+    <value>Stack Trace</value>
+  </data>
 </root>

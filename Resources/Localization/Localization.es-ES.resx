@@ -1356,4 +1356,22 @@
   <data name="Fechar" xml:space="preserve">
     <value>Cerrar</value>
   </data>
+  <data name="Enviar" xml:space="preserve">
+    <value>Enviar</value>
+  </data>
+  <data name="Aceitar" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
+  <data name="Recusar" xml:space="preserve">
+    <value>Rechazar</value>
+  </data>
+  <data name="DataFechamento" xml:space="preserve">
+    <value>Fecha de Cierre</value>
+  </data>
+  <data name="Observacoes" xml:space="preserve">
+    <value>Observaciones</value>
+  </data>
+  <data name="StackTrace" xml:space="preserve">
+    <value>Stack Trace</value>
+  </data>
 </root>

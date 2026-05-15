@@ -358,6 +358,13 @@
 		</MauiXaml>
 	</ItemGroup>
 
+	<Target Name="ValidateTranslationKeys" BeforeTargets="BeforeBuild">
+		<Exec
+			Command="pwsh -NonInteractive -File &quot;$(MSBuildProjectDirectory)\Build\ValidateTranslationKeys.ps1&quot; -ProjectDir &quot;$(MSBuildProjectDirectory)&quot; -ResxFile &quot;$(MSBuildProjectDirectory)\Resources\Localization\Localization.resx&quot;"
+			ConsoleToMSBuild="true"
+			IgnoreExitCode="false" />
+	</Target>
+
 </Project>
 
 
