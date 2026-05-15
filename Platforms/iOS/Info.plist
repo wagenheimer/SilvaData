@@ -35,7 +35,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>pt_BR</string>
 	<key>CFBundleVersion</key>
-	<string>312</string>
+	<string>313</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Tirar Fotos</string>
 	<key>NSPhotoLibraryUsageDescription</key>
