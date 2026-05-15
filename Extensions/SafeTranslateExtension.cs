@@ -1,14 +1,10 @@
-using System.ComponentModel;
 using System.Globalization;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Controls.Xaml;
 using LocalizationResourceManager.Maui;
 using Sentry;
 
 namespace SilvaData.Extensions
 {
-    // Replica o comportamento da lib LocalizationResourceManager.Maui mas com try/catch
-    // para não crashar quando a chave não existe (iOS Release/AOT).
     [ContentProperty(nameof(Key))]
     public class SafeTranslateExtension : IMarkupExtension<BindingBase>
     {
@@ -16,23 +12,10 @@ namespace SilvaData.Extensions
 
         public BindingBase ProvideValue(IServiceProvider serviceProvider)
         {
-            // Obtém o ILocalizationResourceManager do DI — mesmo source que a lib original usa
-            var locManager = serviceProvider
-                .GetRequiredService<IServiceProvider>()
-                .GetService<ILocalizationResourceManager>()
-                ?? Application.Current?.Handler?.MauiContext?.Services
-                    .GetService<ILocalizationResourceManager>();
-
-            if (locManager is null)
-            {
-                // Fallback: retorna string direta se DI ainda não estiver pronto
-                return new Binding { Source = GetStringSafe(Key), Mode = BindingMode.OneTime };
-            }
-
             return new Binding
             {
                 Mode = BindingMode.OneWay,
-                Source = locManager,
+                Source = LocalizationResourceManager.Current,
                 Path = $"[{Key}]",
                 Converter = new SafeTranslateConverter(Key),
                 FallbackValue = $"[MISSING:{Key}]",
@@ -87,7 +70,6 @@ namespace SilvaData.Extensions
         }
     }
 
-    // Converter que intercepta o valor do ILocalizationResourceManager e adiciona proteção
     internal class SafeTranslateConverter : IValueConverter
     {
         private readonly string _key;
