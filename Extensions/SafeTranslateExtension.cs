@@ -54,7 +54,7 @@ namespace SilvaData.Extensions
         }
 
         public void NotifyAllChanged()
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Binding.IndexerName));
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));
 
         private static void ReportMissingKey(string key)
         {
