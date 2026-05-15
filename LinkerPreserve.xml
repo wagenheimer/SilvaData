@@ -1,8 +1,14 @@
 <linker>
+  <!-- App - preserva tudo referenciado apenas via XAML (converters, viewmodels, models, extensions) -->
+  <assembly fullname="SilvaData" preserve="all" />
+
+  <!-- Localização -->
+  <assembly fullname="LocalizationResourceManager.Maui" preserve="all" />
+
   <!-- Microsoft.Maui - essencial para evitar UnsatisfiedLinkError -->
   <assembly fullname="Microsoft.Maui.Controls" preserve="all" />
   <assembly fullname="Microsoft.Maui.Core" preserve="all" />
-  
+
   <!-- CommunityToolkit -->
   <assembly fullname="CommunityToolkit.Maui" preserve="all" />
   <assembly fullname="CommunityToolkit.Maui.Camera" preserve="all" />
