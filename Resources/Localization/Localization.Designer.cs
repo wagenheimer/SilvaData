@@ -851,16 +851,6 @@ namespace SilvaData.Resources.Localization {
                 return ResourceManager.GetString("CarregarDados", resourceCulture);
             }
         }
-
-
-        /// <summary>
-        ///   Looks up a localized string similar to Outros monitoramentos.
-        /// </summary>
-        public static string OutrosMonitoramentos {
-            get {
-                return ResourceManager.GetString("OutrosMonitoramentos", resourceCulture);
-            }
-        }
         
         /// <summary>
         ///   Looks up a localized string similar to Checando dados....
@@ -1106,7 +1096,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data de Início.
+        ///   Looks up a localized string similar to Data de Alojamento.
         /// </summary>
         public static string DataDeInício {
             get {
@@ -1142,7 +1132,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data de Início.
+        ///   Looks up a localized string similar to Data de Alojamento.
         /// </summary>
         public static string DataInicio {
             get {
@@ -1266,9 +1256,7 @@ namespace SilvaData.Resources.Localization {
                 return ResourceManager.GetString("DiagnósticoDeEnfermidades", resourceCulture);
             }
         }
-
-
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Diagnósticos realizados no lote:.
         /// </summary>
@@ -1819,7 +1807,7 @@ namespace SilvaData.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to INÍCIO.
+        ///   Looks up a localized string similar to ALOJAMENTO.
         /// </summary>
         public static string INÍCIO {
             get {
@@ -2691,6 +2679,14 @@ namespace SilvaData.Resources.Localization {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to Outros monitoramentos.
+        /// </summary>
+        public static string OutrosMonitoramentos {
+            get {
+                return ResourceManager.GetString("OutrosMonitoramentos", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Você tem que dar Override do GetViewDefaultComponentsOnAppearing para inicializar os componentes.

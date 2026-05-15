@@ -127,7 +127,7 @@
     <value>Data do Abate</value>
   </data>
   <data name="DataInicio" xml:space="preserve">
-    <value>Data de Início</value>
+    <value>Data de Alojamento</value>
   </data>
   <data name="FecharLote" xml:space="preserve">
     <value>Fechar Lote</value>
@@ -700,7 +700,7 @@
     <value>LOTE</value>
   </data>
   <data name="INÍCIO" xml:space="preserve">
-    <value>INÍCIO</value>
+    <value>ALOJAMENTO</value>
   </data>
   <data name="UNIDADEEPID" xml:space="preserve">
     <value>GALPÃO</value>
@@ -901,7 +901,7 @@
     <value>Hora</value>
   </data>
   <data name="DataDeInício" xml:space="preserve">
-    <value>Data de Início</value>
+    <value>Data de Alojamento</value>
   </data>
   <data name="Título" xml:space="preserve">
     <value>Título</value>

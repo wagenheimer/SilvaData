@@ -127,7 +127,7 @@
     <value>Slaughter Date</value>
   </data>
   <data name="DataInicio" xml:space="preserve">
-    <value>Starting Date</value>
+    <value>Housing Date</value>
   </data>
   <data name="FecharLote" xml:space="preserve">
     <value>Close Flock</value>
@@ -727,7 +727,7 @@
     <value>Flock</value>
   </data>
   <data name="INÍCIO" xml:space="preserve">
-    <value>START</value>
+    <value>HOUSING</value>
   </data>
   <data name="UNIDADEEPID" xml:space="preserve">
     <value>BARN</value>

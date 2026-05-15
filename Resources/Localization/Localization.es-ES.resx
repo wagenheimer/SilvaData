@@ -127,7 +127,7 @@
     <value>Fecha de matanza</value>
   </data>
   <data name="DataInicio" xml:space="preserve">
-    <value>Fecha de inicio</value>
+    <value>Fecha de Alojamiento</value>
   </data>
   <data name="FecharLote" xml:space="preserve">
     <value>Cerrar Lote</value>
@@ -700,7 +700,7 @@
     <value>LOTE</value>
   </data>
   <data name="INÍCIO" xml:space="preserve">
-    <value>COMIENZO</value>
+    <value>ALOJAMIENTO</value>
   </data>
   <data name="UNIDADEEPID" xml:space="preserve">
     <value>GALPÓN</value>
