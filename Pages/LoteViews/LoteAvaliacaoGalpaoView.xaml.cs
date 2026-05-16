@@ -13,17 +13,20 @@ namespace ISIInstitute.Views.LoteViews;
 public partial class LoteAvaliacaoGalpaoView : ContentPage, IDisposable
 {
     private readonly LoteAvaliacaoGalpaoViewModel _viewModel;
+    private Lote? _lote;
+    private bool _hasAppeared;
+
     /// <summary>
     /// Construtor com DI e recebendo o Lote.
+    /// O carregamento dos dados é iniciado em OnAppearing para garantir
+    /// que a página já esteja na tela (evita tela branca no iOS).
     /// </summary>
     public LoteAvaliacaoGalpaoView(Lote lote)
     {
         InitializeComponent();
         _viewModel = ServiceHelper.GetRequiredService<LoteAvaliacaoGalpaoViewModel>();
         BindingContext = _viewModel;
-
-        // Armazena lote para reload posterior
-        _ = _viewModel.CarregaDados(lote);
+        _lote = lote;
 
         // Register for messages in Constructor to keep listening in background
         WeakReferenceMessenger.Default.Register<FormularioSalvoMessage>(this, (recipient, message) =>
@@ -34,10 +37,18 @@ public partial class LoteAvaliacaoGalpaoView : ContentPage, IDisposable
             if (message.FormularioSalvo?.loteId == _viewModel.Lote?.id && message.FormularioSalvo?.parametroTipoId == 20)
             {
                 Debug.WriteLine($"  ✓ Recarregando dados após salvar formulário");
-                _ = Task.Run(async () =>
+                // Garante execução na main thread para evitar UIKit Consistency no iOS
+                MainThread.BeginInvokeOnMainThread(async () =>
                 {
-                    await _viewModel.CarregaFormulariosPreenchidos();
-                    await _viewModel.CarregaAvaliacoes();
+                    try
+                    {
+                        await _viewModel.CarregaFormulariosPreenchidos();
+                        await _viewModel.CarregaAvaliacoes();
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"[LoteAvaliacaoGalpaoView] Erro ao recarregar após FormularioSalvo: {ex.Message}");
+                    }
                 });
             }
         });
@@ -46,7 +57,29 @@ public partial class LoteAvaliacaoGalpaoView : ContentPage, IDisposable
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        Debug.WriteLine($"[LoteAvaliacaoGalpaoView] OnAppearing");
+        Debug.WriteLine($"[LoteAvaliacaoGalpaoView] OnAppearing | _hasAppeared={_hasAppeared}");
+
+        if (!_hasAppeared)
+        {
+            _hasAppeared = true;
+            var loteToLoad = _lote;
+            if (loteToLoad != null)
+            {
+                // Inicia carregamento na main thread após a página estar visível
+                // evita tela branca no iOS ao usar fire-and-forget no construtor
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    try
+                    {
+                        await _viewModel.CarregaDados(loteToLoad);
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"[LoteAvaliacaoGalpaoView] Erro em OnAppearing CarregaDados: {ex.Message}");
+                    }
+                });
+            }
+        }
     }
 
     protected override void OnDisappearing()

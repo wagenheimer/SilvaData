@@ -93,14 +93,20 @@ public partial class LoteMonitoramentoView : ContentPage
     {
         if (sender is not Border border || border.BindingContext is not ParametroGalpaoResumo resumo) return;
 
-        _ = Task.Run(async () =>
+        // iOS: ALL UI operations and navigation MUST happen on the main thread.
+        // Task.Run was causing UIKit Consistency violations — replaced with InvokeOnMainThreadAsync.
+        _ = MainThread.InvokeOnMainThreadAsync(async () =>
         {
-            await MainThread.InvokeOnMainThreadAsync(async () =>
+            try
             {
                 await border.FadeTo(0.4, 80);
                 await border.FadeTo(1.0, 80);
-            });
-            await _viewModel.VaiParaAvaliacaoGalpaoCommand.ExecuteAsync(resumo);
+                await _viewModel.VaiParaAvaliacaoGalpaoCommand.ExecuteAsync(resumo);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[LoteMonitoramentoView] Erro no tap de parâmetro: {ex.Message}");
+            }
         });
     }
 

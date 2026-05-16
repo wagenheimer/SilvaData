@@ -133,7 +133,13 @@ namespace SilvaData.ViewModels
             {
                 if (LoteAtual != null && message.FormularioSalvo?.loteId == LoteAtual.id && message.FormularioSalvo?.parametroTipoId == 20)
                 {
-                    _ = Task.Run(async () => await LoadParametrosGalpaoResumoAsync());
+                    // Main thread required: LoadParametrosGalpaoResumoAsync updates ObservableCollection
+                    // and bool properties bound to UI. Task.Run causes UIKit violations on iOS.
+                    MainThread.BeginInvokeOnMainThread(async () =>
+                    {
+                        try { await LoadParametrosGalpaoResumoAsync(); }
+                        catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"[LoteMonitoramento] Erro reload resumo: {ex.Message}"); }
+                    });
                 }
             });
 
@@ -476,9 +482,12 @@ namespace SilvaData.ViewModels
                 return;
             }
 
-            // Só mostra spinner se ainda não tem dados carregados
-            if (ParametrosGalpaoResumo.Count == 0)
-                IsLoadingGalpaoResumo = true;
+            // Spinner somente se ainda não há dados; update de UI sempre na main thread
+            await MainThread.InvokeOnMainThreadAsync(() =>
+            {
+                if (ParametrosGalpaoResumo.Count == 0)
+                    IsLoadingGalpaoResumo = true;
+            });
 
             try
             {
@@ -488,7 +497,7 @@ namespace SilvaData.ViewModels
                 Debug.WriteLine($"[Resumo] Parâmetros carregados: {parametros?.Count ?? 0}");
                 if (parametros == null || parametros.Count == 0)
                 {
-                    IsAvaliacaoGalpaoSectionVisible = false;
+                    await MainThread.InvokeOnMainThreadAsync(() => IsAvaliacaoGalpaoSectionVisible = false);
                     return;
                 }
 
@@ -505,7 +514,7 @@ namespace SilvaData.ViewModels
 
                 if (formIds.Count == 0)
                 {
-                    IsAvaliacaoGalpaoSectionVisible = false;
+                    await MainThread.InvokeOnMainThreadAsync(() => IsAvaliacaoGalpaoSectionVisible = false);
                     return;
                 }
 
@@ -558,7 +567,7 @@ namespace SilvaData.ViewModels
             }
             finally
             {
-                IsLoadingGalpaoResumo = false;
+                await MainThread.InvokeOnMainThreadAsync(() => IsLoadingGalpaoResumo = false);
             }
         }
 
