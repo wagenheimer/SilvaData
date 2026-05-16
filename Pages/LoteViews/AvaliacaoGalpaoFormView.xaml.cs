@@ -158,7 +158,13 @@ public partial class AvaliacaoGalpaoFormView : ContentPage
                 {
                     avaliacaoVM.AtualizaTotalLiberado();
                     avaliacaoVM.AtualizaComboBoxLista();
+                    // Marca as alternativas da resposta selecionada como IsSelected na carga inicial
+                    avaliacaoVM.AtualizaRespostas();
                 }
+
+                // Edição de formulário já existente: começa em modo leitura
+                if (!_vm.NovoFormulario)
+                    avaliacaoVM.PodeEditar = false;
 
                 avaliacaoVM.PodeSelecionarMaisQueUm = _vm.ParametroSelecionado?.campoTipo == "2";
                 var qtdMax = _vm.ParametroSelecionado?.qtdCampos ?? _vm.ParametroSelecionado?.qtdMinima ?? 1;
