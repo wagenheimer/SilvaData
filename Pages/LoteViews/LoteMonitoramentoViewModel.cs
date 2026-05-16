@@ -462,9 +462,9 @@ namespace SilvaData.ViewModels
             {
                 HapticFeedback.Default.Perform(HapticFeedbackType.Click);
                 await Task.Delay(250);
-                var vm = ServiceHelper.GetRequiredService<LoteAvaliacaoGalpaoViewModel>();
-                vm.ParametroInicial = resumo.Parametro;
-                await NavigationUtils.ShowViewAsModalAsync<LoteAvaliacaoGalpaoView>(LoteAtual);
+                // Passa o Parametro diretamente no construtor — elimina race condition
+                // com o estado do Singleton LoteAvaliacaoGalpaoViewModel.ParametroInicial.
+                await NavigationUtils.ShowViewAsModalAsync<LoteAvaliacaoGalpaoView>(LoteAtual, resumo.Parametro);
                 await LoadParametrosGalpaoResumoAsync();
             }
             catch (Exception ex)
@@ -518,24 +518,26 @@ namespace SilvaData.ViewModels
                     return;
                 }
 
-                // Carrega respostas somente para os formIds do lote
-                var respostasTable = await Db.Table<LoteFormParametro>();
-                var todasRespostas = await respostasTable
-                    .ToListAsync(); // Carrega tudo e filtra em memória
+                // Conta avaliações por parâmetro usando LoteFormAvaliacaoGalpao.
+                // IMPORTANTE: respostas do galpão são salvas em LoteFormAvaliacaoGalpao,
+                // NÃO em LoteFormParametro — usar a tabela errada resulta em counts = 0.
+                var avaliacoesTable = await Db.Table<LoteFormAvaliacaoGalpao>();
+                var todasAvaliacoes = await avaliacoesTable
+                    .ToListAsync(); // Carrega tudo e filtra em memória por formIds
 
-                var respostasFiltradasPorForm = todasRespostas
-                    .Where(lfp => lfp.LoteFormId.HasValue && formIds.Contains((int)lfp.LoteFormId))
+                var avaliacoesFiltradas = todasAvaliacoes
+                    .Where(a => a.LoteFormId.HasValue && formIds.Contains(a.LoteFormId.Value))
                     .ToList();
 
-                Debug.WriteLine($"[Resumo] Total de respostas: {todasRespostas.Count}, Filtradas: {respostasFiltradasPorForm.Count}");
+                Debug.WriteLine($"[Resumo] Total de avaliações galpão: {todasAvaliacoes.Count}, Filtradas por lote: {avaliacoesFiltradas.Count}");
 
                 var resumos = new List<ParametroGalpaoResumo>();
                 foreach (var param in parametros)
                 {
-                    // Conta quantos formulários DIFERENTES têm respostas para este parâmetro
-                    var count = respostasFiltradasPorForm
-                        .Where(r => r.parametroId == param.id)
-                        .Select(r => r.LoteFormId)
+                    // Conta quantos FORMULÁRIOS DISTINTOS têm pelo menos 1 avaliação para este parâmetro
+                    var count = avaliacoesFiltradas
+                        .Where(a => a.parametroId == param.id)
+                        .Select(a => a.LoteFormId)
                         .Distinct()
                         .Count();
 

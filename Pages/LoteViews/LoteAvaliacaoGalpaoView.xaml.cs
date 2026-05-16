@@ -14,19 +14,26 @@ public partial class LoteAvaliacaoGalpaoView : ContentPage, IDisposable
 {
     private readonly LoteAvaliacaoGalpaoViewModel _viewModel;
     private Lote? _lote;
+    private Parametro? _parametroInicial;
     private bool _hasAppeared;
 
     /// <summary>
-    /// Construtor com DI e recebendo o Lote.
+    /// Construtor com DI e recebendo o Lote e opcionalmente o Parâmetro inicial a filtrar.
     /// O carregamento dos dados é iniciado em OnAppearing para garantir
     /// que a página já esteja na tela (evita tela branca no iOS).
     /// </summary>
-    public LoteAvaliacaoGalpaoView(Lote lote)
+    public LoteAvaliacaoGalpaoView(Lote lote, Parametro? parametro = null)
     {
         InitializeComponent();
         _viewModel = ServiceHelper.GetRequiredService<LoteAvaliacaoGalpaoViewModel>();
         BindingContext = _viewModel;
         _lote = lote;
+        _parametroInicial = parametro;
+
+        // Sincroniza ParametroInicial no VM imediatamente para garantir consistência,
+        // independente de quando CarregaDados é chamado (OnAppearing).
+        if (parametro != null)
+            _viewModel.ParametroInicial = parametro;
 
         // Register for messages in Constructor to keep listening in background
         WeakReferenceMessenger.Default.Register<FormularioSalvoMessage>(this, (recipient, message) =>
@@ -57,20 +64,26 @@ public partial class LoteAvaliacaoGalpaoView : ContentPage, IDisposable
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        Debug.WriteLine($"[LoteAvaliacaoGalpaoView] OnAppearing | _hasAppeared={_hasAppeared}");
+        Debug.WriteLine($"[LoteAvaliacaoGalpaoView] OnAppearing | _hasAppeared={_hasAppeared} | parametroInicial={_parametroInicial?.nome ?? "null"}");
 
         if (!_hasAppeared)
         {
             _hasAppeared = true;
             var loteToLoad = _lote;
+            var parametroToLoad = _parametroInicial; // captura local — thread-safe
             if (loteToLoad != null)
             {
-                // Inicia carregamento na main thread após a página estar visível
-                // evita tela branca no iOS ao usar fire-and-forget no construtor
+                // Inicia carregamento na main thread após a página estar visível.
+                // Passa o parametroInicial diretamente para CarregaDados evitando
+                // qualquer race condition com o estado do Singleton VM.
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
                     try
                     {
+                        // Garante que o ParametroInicial está no VM antes de carregar
+                        if (parametroToLoad != null)
+                            _viewModel.ParametroInicial = parametroToLoad;
+
                         await _viewModel.CarregaDados(loteToLoad);
                     }
                     catch (Exception ex)

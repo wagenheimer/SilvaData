@@ -197,7 +197,7 @@ public partial class AvaliacaoGalpaoFormViewModel : ViewModelBase, ILoteFormImag
             if (!novoLoteForm)
                 imagensCarregadas = await LoteFormImagem.PegaImagens(LoteFormId).ConfigureAwait(false);
 
-            MainThread.BeginInvokeOnMainThread(() =>
+            await MainThread.InvokeOnMainThreadAsync(() =>
             {
                 Lote = loteResult;
                 if (!novoLoteForm)
@@ -207,7 +207,7 @@ public partial class AvaliacaoGalpaoFormViewModel : ViewModelBase, ILoteFormImag
                     LoteFormImagem2 = imagensCarregadas?.Count >= 2 ? imagensCarregadas[1] : null;
                     LoteFormImagem3 = imagensCarregadas?.Count >= 3 ? imagensCarregadas[2] : null;
                 }
-            });
+            }).ConfigureAwait(false);
 
             // Se ParametroSelecionado ainda não foi definido, carrega do banco
             if (ParametroSelecionado == null)
@@ -295,11 +295,11 @@ public partial class AvaliacaoGalpaoFormViewModel : ViewModelBase, ILoteFormImag
             if (ParametroSelecionado == null)
             {
                 Debug.WriteLine($"[AvaliacaoGalpaoFormViewModel.CarregaAvaliacaoGalpaoAsync] ✖ ParametroSelecionado é NULL!");
-                MainThread.BeginInvokeOnMainThread(() =>
+                await MainThread.InvokeOnMainThreadAsync(() =>
                 {
                     AlternativasParametroSelecionado.Clear();
                     LoteFormulario.ListaAvaliacoesGalpao.Clear();
-                });
+                }).ConfigureAwait(false);
                 return;
             }
 
@@ -310,7 +310,7 @@ public partial class AvaliacaoGalpaoFormViewModel : ViewModelBase, ILoteFormImag
 
             Debug.WriteLine($"[AvaliacaoGalpaoFormViewModel] Alternativas={alternativas?.Count ?? 0}, Avaliações={avaliacoes?.Count ?? 0}");
 
-            MainThread.BeginInvokeOnMainThread(() =>
+            await MainThread.InvokeOnMainThreadAsync(() =>
             {
                 AlternativasParametroSelecionado.Clear();
                 if (alternativas != null)
@@ -336,11 +336,29 @@ public partial class AvaliacaoGalpaoFormViewModel : ViewModelBase, ILoteFormImag
                 }
                 else
                 {
+                    // Adiciona as já existentes
                     foreach (var av in avaliacoes)
                     {
                         av.ParametroAlternativas = AlternativasParametroSelecionado;
                         av.Parametro = ParametroSelecionado;
                         novaLista.Add(av);
+                    }
+
+                    // Se for quantitativo, garante que tem o número correto de campos (padding)
+                    if (AvaliacaoGalpaoQuantitativo)
+                    {
+                        var qtdMaxima = ParametroSelecionado?.qtdCampos ?? ParametroSelecionado?.qtdMinima ?? 1;
+                        for (int i = novaLista.Count + 1; i <= (int)qtdMaxima; i++)
+                        {
+                            novaLista.Add(new LoteFormAvaliacaoGalpao
+                            {
+                                NumeroResposta = i,
+                                parametroId = ParametroSelecionado!.id,
+                                Parametro = ParametroSelecionado,
+                                ParametroAlternativas = AlternativasParametroSelecionado,
+                                LoteFormId = LoteFormId
+                            });
+                        }
                     }
                 }
 
@@ -348,7 +366,7 @@ public partial class AvaliacaoGalpaoFormViewModel : ViewModelBase, ILoteFormImag
                 AttachAvaliacoesGalpaoSubscription(novaLista);
 
                 Debug.WriteLine($"[AvaliacaoGalpaoFormViewModel] ListaAvaliacoesGalpao.Count={novaLista.Count}");
-            });
+            }).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -486,7 +504,7 @@ public partial class AvaliacaoGalpaoFormViewModel : ViewModelBase, ILoteFormImag
                 .Where(a => a.TemAlternativaSelecionada)
                 .ToList();
 
-            await Db.ExecuteAsync("DELETE FROM LoteFormAvaliacaoGalpao WHERE LoteFormId = ?", loteFormIdSalvo);
+            await Db.ExecuteAsync("DELETE FROM LoteFormAvaliacaoGalpao WHERE LoteFormId = ? AND parametroId = ?", loteFormIdSalvo, ParametroSelecionado!.id);
 
             foreach (var avaliacao in avaliacoes)
             {

@@ -74,19 +74,20 @@ public partial class AvaliacaoGalpaoFormView : ContentPage
     {
         await Task.Yield();
 
-        // iOS needs extra settling time even with animated:false — SfListView native view
-        // creation during the GCD flush can still deadlock on second open.
+        // iOS needs a tiny bit of time for native control initialization
         if (DeviceInfo.Platform == DevicePlatform.iOS)
-            await Task.Delay(200);
+            await Task.Delay(50);
 
         InjectHeavyTemplates();
-        await _vm.Carregar();
 
-        // Sincroniza o AvaliacaoAlternativasViewModel após Carregar().
-        // O InvokeOnMainThreadAsync serve como ponto de sincronização: garante que
-        // os BeginInvokeOnMainThread de CarregaAvaliacaoGalpaoAsync já executaram.
+        // Awaits full data loading including UI thread synchronization in VM
+        await _vm.Carregar().ConfigureAwait(false);
+
+        // Syncs alternatives UI only if it is a qualitative assessment
         if (_vm.AvaliacaoGalpaoQualitativo)
-            await SyncAvaliacaoAlternativasAsync();
+        {
+            await SyncAvaliacaoAlternativasAsync().ConfigureAwait(false);
+        }
     }
 
     private void InjectHeavyTemplates()
@@ -116,18 +117,20 @@ public partial class AvaliacaoGalpaoFormView : ContentPage
     {
         try
         {
-            var avaliacaoVM = await MainThread.InvokeOnMainThreadAsync(() => avaliacaoAlternativas?.ViewModel);
-
-            if (avaliacaoVM == null)
+            // Retries a few times if the control is not yet ready (common on iOS)
+            AvaliacaoAlternativasViewModel? avaliacaoVM = null;
+            for (int i = 0; i < 5; i++)
             {
-                Debug.WriteLine("[AvaliacaoGalpaoFormView] ⚠️ AvaliacaoAlternativas.ViewModel ainda null — retry em 200ms");
-                await Task.Delay(200);
                 avaliacaoVM = await MainThread.InvokeOnMainThreadAsync(() => avaliacaoAlternativas?.ViewModel);
+                if (avaliacaoVM != null) break;
+                
+                Debug.WriteLine($"[AvaliacaoGalpaoFormView] ⚠️ AvaliacaoAlternativas.ViewModel ainda null — retry {i+1}/5");
+                await Task.Delay(100);
             }
 
             if (avaliacaoVM == null)
             {
-                Debug.WriteLine("[AvaliacaoGalpaoFormView] ❌ AvaliacaoAlternativas.ViewModel não disponível");
+                Debug.WriteLine("[AvaliacaoGalpaoFormView] ❌ AvaliacaoAlternativas.ViewModel não disponível após retries");
                 return;
             }
 
