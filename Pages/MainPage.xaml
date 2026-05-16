@@ -87,9 +87,9 @@
                             </Image.Behaviors>
                             <Image.Triggers>
                                 <DataTrigger
-                                    Binding="{Binding SelectedIndex, Source={x:Reference mainTabView}}"
+                                    Binding="{Binding BindingContext.MercadosSelected, Source={x:Reference mainPage}}"
                                     TargetType="Image"
-                                    Value="0">
+                                    Value="True">
                                     <Setter Property="IsVisible" Value="False" />
                                 </DataTrigger>
                             </Image.Triggers>
@@ -106,9 +106,9 @@
                             </Image.Behaviors>
                             <Image.Triggers>
                                 <DataTrigger
-                                    Binding="{Binding SelectedIndex, Source={x:Reference mainTabView}}"
+                                    Binding="{Binding BindingContext.MercadosSelected, Source={x:Reference mainPage}}"
                                     TargetType="Image"
-                                    Value="0">
+                                    Value="True">
                                     <Setter Property="IsVisible" Value="True" />
                                 </DataTrigger>
                             </Image.Triggers>
@@ -136,9 +136,9 @@
                             </Image.Behaviors>
                             <Image.Triggers>
                                 <DataTrigger
-                                    Binding="{Binding SelectedIndex, Source={x:Reference mainTabView}}"
+                                    Binding="{Binding BindingContext.GalpoesSelected, Source={x:Reference mainPage}}"
                                     TargetType="Image"
-                                    Value="1">
+                                    Value="True">
                                     <Setter Property="IsVisible" Value="False" />
                                 </DataTrigger>
                             </Image.Triggers>
@@ -155,9 +155,9 @@
                             </Image.Behaviors>
                             <Image.Triggers>
                                 <DataTrigger
-                                    Binding="{Binding SelectedIndex, Source={x:Reference mainTabView}}"
+                                    Binding="{Binding BindingContext.GalpoesSelected, Source={x:Reference mainPage}}"
                                     TargetType="Image"
-                                    Value="1">
+                                    Value="True">
                                     <Setter Property="IsVisible" Value="True" />
                                 </DataTrigger>
                             </Image.Triggers>
@@ -184,9 +184,9 @@
                             </Image.Behaviors>
                             <Image.Triggers>
                                 <DataTrigger
-                                    Binding="{Binding SelectedIndex, Source={x:Reference mainTabView}}"
+                                    Binding="{Binding BindingContext.LotesSelected, Source={x:Reference mainPage}}"
                                     TargetType="Image"
-                                    Value="2">
+                                    Value="True">
                                     <Setter Property="IsVisible" Value="False" />
                                 </DataTrigger>
                             </Image.Triggers>
@@ -202,9 +202,9 @@
                             </Image.Behaviors>
                             <Image.Triggers>
                                 <DataTrigger
-                                    Binding="{Binding SelectedIndex, Source={x:Reference mainTabView}}"
+                                    Binding="{Binding BindingContext.LotesSelected, Source={x:Reference mainPage}}"
                                     TargetType="Image"
-                                    Value="2">
+                                    Value="True">
                                     <Setter Property="IsVisible" Value="True" />
                                 </DataTrigger>
                             </Image.Triggers>
@@ -226,9 +226,9 @@
                             VerticalOptions="Center">
                             <Label.Triggers>
                                 <DataTrigger
-                                    Binding="{Binding SelectedIndex, Source={x:Reference mainTabView}}"
+                                    Binding="{Binding BindingContext.SyncSelected, Source={x:Reference mainPage}}"
                                     TargetType="Label"
-                                    Value="3">
+                                    Value="True">
                                     <Setter Property="TextColor" Value="{StaticResource Primary}" />
                                 </DataTrigger>
                             </Label.Triggers>
@@ -272,9 +272,9 @@
                             VerticalOptions="Center">
                             <Label.Triggers>
                                 <DataTrigger
-                                    Binding="{Binding SelectedIndex, Source={x:Reference mainTabView}}"
+                                    Binding="{Binding BindingContext.ContaSelected, Source={x:Reference mainPage}}"
                                     TargetType="Label"
-                                    Value="4">
+                                    Value="True">
                                     <Setter Property="TextColor" Value="{StaticResource Primary}" />
                                 </DataTrigger>
                             </Label.Triggers>
