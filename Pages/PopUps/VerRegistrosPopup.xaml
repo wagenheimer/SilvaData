@@ -11,6 +11,7 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModels="clr-namespace:SilvaData.Pages.PopUps"
     x:DataType="viewModels:VerRegistrosPopupViewModel"
+    x:Name="thisPopup"
     Margin="16"
     Padding="0"
     x:TypeArguments="models:LoteFormAvaliacaoGalpao"
@@ -99,6 +100,15 @@
                                     Stroke="{StaticResource PrimaryColor}"
                                     StrokeShape="RoundRectangle 8"
                                     StrokeThickness="1">
+                                    <Border.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding BindingContext.RegistroAtualNumero, Source={x:Reference thisPopup}}"
+                                            TargetType="Border"
+                                            Value="{Binding NumeroResposta}">
+                                            <Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
+                                            <Setter Property="StrokeThickness" Value="0" />
+                                        </DataTrigger>
+                                    </Border.Triggers>
                                     <Grid Padding="0" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
                                         <Border
                                             Grid.Column="0"
@@ -106,6 +116,14 @@
                                             Background="{StaticResource PrimaryColor}"
                                             StrokeShape="RoundRectangle 6"
                                             StrokeThickness="0">
+                                            <Border.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding BindingContext.RegistroAtualNumero, Source={x:Reference thisPopup}}"
+                                                    TargetType="Border"
+                                                    Value="{Binding NumeroResposta}">
+                                                    <Setter Property="Background" Value="#40FFFFFF" />
+                                                </DataTrigger>
+                                            </Border.Triggers>
                                             <Label
                                                 FontAttributes="Bold"
                                                 FontSize="13"
@@ -120,14 +138,33 @@
                                             MaxLines="2"
                                             Text="{Binding ResumoSelecionadas}"
                                             TextColor="{StaticResource SecondaryColor}"
-                                            VerticalOptions="Center" />
+                                            VerticalOptions="Center">
+                                            <Label.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding BindingContext.RegistroAtualNumero, Source={x:Reference thisPopup}}"
+                                                    TargetType="Label"
+                                                    Value="{Binding NumeroResposta}">
+                                                    <Setter Property="TextColor" Value="White" />
+                                                    <Setter Property="FontAttributes" Value="Bold" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
                                         <Label
                                             Grid.Column="2"
                                             FontFamily="FontAwesomeSolid"
                                             FontSize="13"
                                             Text="{x:Static fontawesome:FontAwesomeIcons.ChevronRight}"
                                             TextColor="{StaticResource PrimaryColor}"
-                                            VerticalOptions="Center" />
+                                            VerticalOptions="Center">
+                                            <Label.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding BindingContext.RegistroAtualNumero, Source={x:Reference thisPopup}}"
+                                                    TargetType="Label"
+                                                    Value="{Binding NumeroResposta}">
+                                                    <Setter Property="TextColor" Value="White" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
                                     </Grid>
                                 </Border>
                             </DataTemplate>
@@ -151,6 +188,15 @@
                                     Stroke="{StaticResource PrimaryColor}"
                                     StrokeShape="RoundRectangle 8"
                                     StrokeThickness="1">
+                                    <Border.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding BindingContext.RegistroAtualNumero, Source={x:Reference thisPopup}}"
+                                            TargetType="Border"
+                                            Value="{Binding NumeroResposta}">
+                                            <Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
+                                            <Setter Property="StrokeThickness" Value="0" />
+                                        </DataTrigger>
+                                    </Border.Triggers>
                                     <Grid Padding="0" ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="8">
                                         <Border
                                             Grid.Column="0"
@@ -158,6 +204,14 @@
                                             Background="{StaticResource PrimaryColor}"
                                             StrokeShape="RoundRectangle 6"
                                             StrokeThickness="0">
+                                            <Border.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding BindingContext.RegistroAtualNumero, Source={x:Reference thisPopup}}"
+                                                    TargetType="Border"
+                                                    Value="{Binding NumeroResposta}">
+                                                    <Setter Property="Background" Value="#40FFFFFF" />
+                                                </DataTrigger>
+                                            </Border.Triggers>
                                             <Label
                                                 FontAttributes="Bold"
                                                 FontSize="13"
@@ -170,21 +224,49 @@
                                             FontSize="13"
                                             Text="Registro"
                                             TextColor="{StaticResource SecondaryColor}"
-                                            VerticalOptions="Center" />
+                                            VerticalOptions="Center">
+                                            <Label.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding BindingContext.RegistroAtualNumero, Source={x:Reference thisPopup}}"
+                                                    TargetType="Label"
+                                                    Value="{Binding NumeroResposta}">
+                                                    <Setter Property="TextColor" Value="White" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
                                         <Label
                                             Grid.Column="2"
                                             FontAttributes="Bold"
                                             FontSize="15"
                                             Text="{Binding RespostaQtde, StringFormat='{0:F0}'}"
                                             TextColor="{StaticResource PrimaryColor}"
-                                            VerticalOptions="Center" />
+                                            VerticalOptions="Center">
+                                            <Label.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding BindingContext.RegistroAtualNumero, Source={x:Reference thisPopup}}"
+                                                    TargetType="Label"
+                                                    Value="{Binding NumeroResposta}">
+                                                    <Setter Property="TextColor" Value="White" />
+                                                    <Setter Property="FontAttributes" Value="Bold" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
                                         <Label
                                             Grid.Column="3"
                                             FontFamily="FontAwesomeSolid"
                                             FontSize="13"
                                             Text="{x:Static fontawesome:FontAwesomeIcons.ChevronRight}"
                                             TextColor="{StaticResource PrimaryColor}"
-                                            VerticalOptions="Center" />
+                                            VerticalOptions="Center">
+                                            <Label.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding BindingContext.RegistroAtualNumero, Source={x:Reference thisPopup}}"
+                                                    TargetType="Label"
+                                                    Value="{Binding NumeroResposta}">
+                                                    <Setter Property="TextColor" Value="White" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
                                     </Grid>
                                 </Border>
                             </DataTemplate>

@@ -29,6 +29,8 @@ namespace SilvaData.Pages.PopUps
         [ObservableProperty]
         private string registrosRespondidosFormatado = "";
 
+        public int? RegistroAtualNumero { get; private set; }
+
         private ObservableCollection<LoteFormAvaliacaoGalpao> _todosRegistros = new();
         private ObservableCollection<LoteFormAvaliacaoGalpao> _registrosQualitativos = new();
         private ObservableCollection<LoteFormAvaliacaoGalpao> _registrosQuantitativos = new();
@@ -36,13 +38,14 @@ namespace SilvaData.Pages.PopUps
         /// <summary>
         /// Inicializa o ViewModel com os registros da avaliação
         /// </summary>
-        public VerRegistrosPopupViewModel(ObservableCollection<LoteFormAvaliacaoGalpao> registros, bool isQualitativo)
+        public VerRegistrosPopupViewModel(ObservableCollection<LoteFormAvaliacaoGalpao> registros, bool isQualitativo, int? registroAtualNumero = null)
         {
             Debug.WriteLine($"[VerRegistrosPopupViewModel] Inicializando com {registros?.Count ?? 0} registros");
             
             // Copia os registros para evitar modificações externas
             _todosRegistros = new ObservableCollection<LoteFormAvaliacaoGalpao>(registros ?? new());
-            
+            RegistroAtualNumero = registroAtualNumero;
+
             IsQualitativo = isQualitativo;
             IsQuantitativo = !isQualitativo;
             

@@ -14,12 +14,11 @@ namespace SilvaData.Pages.PopUps
         private readonly VerRegistrosPopupViewModel _viewModel;
         private bool _isClosing;
 
-        public VerRegistrosPopup(ObservableCollection<LoteFormAvaliacaoGalpao> registros, bool isQualitativo)
+        public VerRegistrosPopup(ObservableCollection<LoteFormAvaliacaoGalpao> registros, bool isQualitativo, int? registroAtualNumero = null)
         {
             InitializeComponent();
-            
-            // Cria e configura o ViewModel
-            _viewModel = new VerRegistrosPopupViewModel(registros, isQualitativo);
+
+            _viewModel = new VerRegistrosPopupViewModel(registros, isQualitativo, registroAtualNumero);
             BindingContext = _viewModel;
 
             Debug.WriteLine($"[VerRegistrosPopup] Popup inicializado - Qualitativo: {isQualitativo}");
@@ -102,14 +101,15 @@ namespace SilvaData.Pages.PopUps
         /// <param name="isQualitativo">Indica se é avaliação qualitativa</param>
         /// <returns>Registro selecionado ou null se cancelado</returns>
         public static async Task<LoteFormAvaliacaoGalpao?> ShowAsync(
-            ObservableCollection<LoteFormAvaliacaoGalpao> registros, 
-            bool isQualitativo)
+            ObservableCollection<LoteFormAvaliacaoGalpao> registros,
+            bool isQualitativo,
+            int? registroAtualNumero = null)
         {
             try
             {
                 Debug.WriteLine($"[VerRegistrosPopup] Abrindo popup - Registros: {registros?.Count ?? 0}, Qualitativo: {isQualitativo}");
 
-                var popup = new VerRegistrosPopup(registros, isQualitativo);
+                var popup = new VerRegistrosPopup(registros, isQualitativo, registroAtualNumero);
                 var result = await NavigationUtils.ShowPopupAsync<LoteFormAvaliacaoGalpao>(popup);
                 
                 Debug.WriteLine($"[VerRegistrosPopup] Popup fechado - Resultado: {result?.NumeroResposta.ToString() ?? "NULL"}");

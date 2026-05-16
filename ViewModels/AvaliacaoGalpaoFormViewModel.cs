@@ -611,9 +611,17 @@ public partial class AvaliacaoGalpaoFormViewModel : ViewModelBase, ILoteFormImag
                 return;
             }
 
+            int? registroAtualNumero = null;
+            if (AvaliacaoGalpaoQualitativo)
+            {
+                var avaliacaoVM = ServiceHelper.Services.GetService(typeof(AvaliacaoAlternativasViewModel)) as AvaliacaoAlternativasViewModel;
+                registroAtualNumero = avaliacaoVM?.RespostaSelecionada?.NumeroResposta;
+            }
+
             var registroSelecionado = await VerRegistrosPopup.ShowAsync(
                 new ObservableCollection<LoteFormAvaliacaoGalpao>(LoteFormulario.ListaAvaliacoesGalpao),
-                AvaliacaoGalpaoQualitativo);
+                AvaliacaoGalpaoQualitativo,
+                registroAtualNumero);
 
             if (registroSelecionado == null)
                 return;
