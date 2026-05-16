@@ -30,11 +30,6 @@ public partial class LoteAvaliacaoGalpaoView : ContentPage, IDisposable
         _lote = lote;
         _parametroInicial = parametro;
 
-        // Sincroniza ParametroInicial no VM imediatamente para garantir consistência,
-        // independente de quando CarregaDados é chamado (OnAppearing).
-        if (parametro != null)
-            _viewModel.ParametroInicial = parametro;
-
         // Register for messages in Constructor to keep listening in background
         WeakReferenceMessenger.Default.Register<FormularioSalvoMessage>(this, (recipient, message) =>
         {
@@ -80,11 +75,7 @@ public partial class LoteAvaliacaoGalpaoView : ContentPage, IDisposable
                 {
                     try
                     {
-                        // Garante que o ParametroInicial está no VM antes de carregar
-                        if (parametroToLoad != null)
-                            _viewModel.ParametroInicial = parametroToLoad;
-
-                        await _viewModel.CarregaDados(loteToLoad);
+                        await _viewModel.CarregaDados(loteToLoad, parametroToLoad);
                     }
                     catch (Exception ex)
                     {

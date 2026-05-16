@@ -99,7 +99,7 @@ public partial class LoteAvaliacaoGalpaoViewModel : ViewModelBase
         }
     }
 
-    public async Task CarregaDados(Lote lote)
+    public async Task CarregaDados(Lote lote, Parametro? parametroInicial = null)
     {
         if (lote == null) return;
 
@@ -112,24 +112,38 @@ public partial class LoteAvaliacaoGalpaoViewModel : ViewModelBase
             Lote.EnsureNames();
             AvaliacaoGalpaoList.Clear();
 
+            // Limpa seleções anteriores para evitar contaminação (VM é Singleton)
+            ParametroSelecionado = null;
+
             // Carrega formulários preenchidos
             await CarregaFormulariosPreenchidos();
 
             // Carrega lista de parâmetros
             ParametrosAvaliacaoGalpaoList = await LoteFormAvaliacaoGalpao.ListaParametrosAvalicaoGalpao();
 
-            // ★ SELECIONA PARÂMETRO (ParametroInicial se fornecido, senão o primeiro da lista)
-            if (ParametroInicial != null && ParametrosAvaliacaoGalpaoList?.Any(p => p.id == ParametroInicial.id) == true)
+            // ★ SELECIONA PARÂMETRO (parametroInicial se fornecido, senão o primeiro da lista)
+            // Recebido como argumento direto para evitar race condition com Dispose() de instâncias anteriores.
+            var alvo = parametroInicial ?? ParametroInicial;
+            if (alvo != null && ParametrosAvaliacaoGalpaoList != null)
             {
-                Debug.WriteLine($"[LoteAvaliacaoGalpaoViewModel] Selecionando parâmetro inicial: {ParametroInicial.nome}");
-                ParametroSelecionado = ParametroInicial;
+                var match = ParametrosAvaliacaoGalpaoList.FirstOrDefault(p => p.id == alvo.id);
+                if (match != null)
+                {
+                    Debug.WriteLine($"[LoteAvaliacaoGalpaoViewModel] Selecionando parâmetro inicial: {match.nome}");
+                    // Pequeno delay para garantir que o SfComboBox processou a ItemsSource
+                    // antes de aplicarmos a seleção, especialmente no iOS.
+                    await Task.Delay(100);
+                    ParametroSelecionado = match;
+                }
             }
-            else if (ParametrosAvaliacaoGalpaoList?.Count > 0)
+
+            // Se não selecionou via inicial, tenta o primeiro
+            if (ParametroSelecionado == null && ParametrosAvaliacaoGalpaoList?.Count > 0)
             {
                 Debug.WriteLine($"[LoteAvaliacaoGalpaoViewModel] Selecionando parâmetro padrão: {ParametrosAvaliacaoGalpaoList[0].nome}");
                 ParametroSelecionado = ParametrosAvaliacaoGalpaoList[0];
             }
-            else
+            else if (ParametroSelecionado == null)
             {
                 Debug.WriteLine($"[LoteAvaliacaoGalpaoViewModel] AVISO: Nenhum parâmetro disponível!");
             }
@@ -366,6 +380,8 @@ public partial class LoteAvaliacaoGalpaoViewModel : ViewModelBase
     public override void Cleanup()
     {
         base.Cleanup();
+        ParametroInicial = null;
+        ParametroSelecionado = null;
         _carregamentoTokenSource?.Cancel();
         _carregamentoTokenSource?.Dispose();
         _carregamentoTokenSource = null;
