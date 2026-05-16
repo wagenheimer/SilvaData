@@ -7,7 +7,7 @@
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
     xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
     x:DataType="viewmodels:LoteISIMicroViewModel"
@@ -38,13 +38,13 @@
                 <controls:LoteDescricaoLabel
                     Padding="5,0,0,5"
                     Lote="{Binding Lote}"
-                    NomeTela="{safe:Translate ISIMicro}" />
+                    NomeTela="{localization:Translate ISIMicro}" />
                 <Label
                     Padding="5,0"
                     FontFamily="Nunito"
                     FontSize="Large"
                     HorizontalOptions="Start"
-                    Text="{safe:Translate ISIMicro}"
+                    Text="{localization:Translate ISIMicro}"
                     TextColor="White"
                     VerticalOptions="Center" />
             </StackLayout>
@@ -66,7 +66,7 @@
                 <Label
                     FontSize="Micro"
                     HorizontalTextAlignment="Start"
-                    Text="{safe:Translate ResumoDasAnálisesDoLote}"
+                    Text="{localization:Translate ResumoDasAnálisesDoLote}"
                     TextColor="White" />
             </StackLayout>
         </Grid>
@@ -91,7 +91,7 @@
                     <Label
                         FontSize="Small"
                         HorizontalTextAlignment="Center"
-                        Text="{safe:Translate NunhumISIMicroCadastrado}"
+                        Text="{localization:Translate NunhumISIMicroCadastrado}"
                         TextColor="{StaticResource PrimaryColor}"
                         VerticalOptions="Fill"
                         VerticalTextAlignment="Center" />
@@ -147,7 +147,7 @@
         <controls:LoadingView
             Grid.Row="1"
             IsVisible="{Binding IsBusy}"
-            Text="{safe:Translate Aguarde}"
+            Text="{localization:Translate Aguarde}"
             VerticalOptions="Fill" />
 
 

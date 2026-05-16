@@ -6,7 +6,7 @@
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:shimmer="clr-namespace:Syncfusion.Maui.Shimmer;assembly=Syncfusion.Maui.Core"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
@@ -57,10 +57,10 @@
                         RowDefinitions="Auto,Auto"
                         RowSpacing="0"
                         VerticalOptions="Center">
-                        <Label Grid.Column="0" FontSize="11" HorizontalTextAlignment="Center" Text="{safe:Translate Minimo}" VerticalTextAlignment="Center" />
-                        <Label Grid.Column="1" FontSize="11" HorizontalTextAlignment="Center" Text="{safe:Translate Realizado}" VerticalTextAlignment="Center" />
-                        <Label Grid.Column="2" FontSize="11" HorizontalTextAlignment="Center" Text="{safe:Translate Maximo}" VerticalTextAlignment="Center" />
-                        <Label Grid.Column="3" FontSize="11" HorizontalTextAlignment="Center" Text="{safe:Translate Media}" VerticalTextAlignment="Center" />
+                        <Label Grid.Column="0" FontSize="11" HorizontalTextAlignment="Center" Text="{localization:Translate Minimo}" VerticalTextAlignment="Center" />
+                        <Label Grid.Column="1" FontSize="11" HorizontalTextAlignment="Center" Text="{localization:Translate Realizado}" VerticalTextAlignment="Center" />
+                        <Label Grid.Column="2" FontSize="11" HorizontalTextAlignment="Center" Text="{localization:Translate Maximo}" VerticalTextAlignment="Center" />
+                        <Label Grid.Column="3" FontSize="11" HorizontalTextAlignment="Center" Text="{localization:Translate Media}" VerticalTextAlignment="Center" />
 
                         <Label Grid.Row="1" Grid.Column="0" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="{Binding ParametroSelecionado.qtdMinima}" TextColor="{StaticResource PrimaryColor}" VerticalTextAlignment="Center" />
                         <Label Grid.Row="1" Grid.Column="1" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="{Binding LoteFormulario.AvaliacoesRealizadasQuantitativa}" TextColor="{Binding RealizadoColor}" VerticalTextAlignment="Center" />
@@ -91,9 +91,9 @@
                         RowDefinitions="Auto,Auto"
                         RowSpacing="0"
                         VerticalOptions="Center">
-                        <Label Grid.Column="0" FontSize="11" HorizontalTextAlignment="Center" Text="{safe:Translate Minimo}" VerticalTextAlignment="Center" />
-                        <Label Grid.Column="1" FontSize="11" HorizontalTextAlignment="Center" Text="{safe:Translate Realizado}" VerticalTextAlignment="Center" />
-                        <Label Grid.Column="2" FontSize="11" HorizontalTextAlignment="Center" Text="{safe:Translate Maximo}" VerticalTextAlignment="Center" />
+                        <Label Grid.Column="0" FontSize="11" HorizontalTextAlignment="Center" Text="{localization:Translate Minimo}" VerticalTextAlignment="Center" />
+                        <Label Grid.Column="1" FontSize="11" HorizontalTextAlignment="Center" Text="{localization:Translate Realizado}" VerticalTextAlignment="Center" />
+                        <Label Grid.Column="2" FontSize="11" HorizontalTextAlignment="Center" Text="{localization:Translate Maximo}" VerticalTextAlignment="Center" />
 
                         <Label Grid.Row="1" Grid.Column="0" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="{Binding ParametroSelecionado.qtdMinima}" TextColor="{StaticResource PrimaryColor}" VerticalTextAlignment="Center" />
                         <Label Grid.Row="1" Grid.Column="1" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="{Binding LoteFormulario.AvaliacoesRealizadasQualitativa}" TextColor="{Binding RealizadoColor}" VerticalTextAlignment="Center" />
@@ -136,7 +136,7 @@
                     Margin="4,1,10,4"
                     Padding="0"
                     Data="{Binding LoteFormulario.LoteForm.data, Mode=TwoWay}"
-                    Hint="{safe:Translate Data}"
+                    Hint="{localization:Translate Data}"
                     IsReadOnly="{Binding ReadOnly, Mode=OneWay}"
                     MinimumHeightRequest="55" />
 
@@ -145,7 +145,7 @@
                 <!--  Observações  -->
                 <Label
                     Margin="10,10,10,4"
-                    Text="{safe:Translate Observações}"
+                    Text="{localization:Translate Observações}"
                     TextColor="{StaticResource PrimaryColor}" />
                 <Editor
                     Margin="10,0,10,10"
@@ -156,7 +156,7 @@
                 <!--  Fotos  -->
                 <Label
                     Margin="10,10,10,4"
-                    Text="{safe:Translate Fotos}"
+                    Text="{localization:Translate Fotos}"
                     TextColor="{StaticResource PrimaryColor}" />
                 <Grid
                     Margin="10,0,10,10"
@@ -193,7 +193,7 @@
                 CornerRadius="10"
                 IsVisible="{Binding ReadOnly, Converter={StaticResource InvertBoolean}}"
                 Style="{StaticResource PrimaryButton}"
-                Text="{safe:Translate Salvar}" />
+                Text="{localization:Translate Salvar}" />
 
             <buttons:SfButton
                 Grid.Row="0"
@@ -202,7 +202,7 @@
                 CornerRadius="10"
                 IsVisible="{Binding ReadOnly}"
                 Style="{StaticResource PrimaryButton}"
-                Text="{safe:Translate Editar}" />
+                Text="{localization:Translate Editar}" />
 
             <buttons:SfButton
                 Grid.Row="0"
@@ -212,7 +212,7 @@
                 Command="{Binding ProcurarAvaliacoesCommand}"
                 CornerRadius="10"
                 Style="{StaticResource PrimaryButton}"
-                Text="{safe:Translate VerRegistros}" />
+                Text="{localization:Translate VerRegistros}" />
 
         </Grid>
 
@@ -229,7 +229,7 @@
             Grid.Row="0"
             Grid.RowSpan="4"
             IsVisible="{Binding IsBusy}"
-            Text="{safe:Translate Aguarde}"
+            Text="{localization:Translate Aguarde}"
             VerticalOptions="Fill" />
 
     </Grid>

@@ -6,7 +6,7 @@
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
     xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:models="clr-namespace:SilvaData.Models"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
@@ -45,7 +45,7 @@
                     CornerRadius="10"
                     HeightRequest="50"
                     IsVisible="{Binding PodeEditar, Converter={StaticResource InvertBoolean}}"
-                    Text="{safe:Translate Editar}"
+                    Text="{localization:Translate Editar}"
                     TextColor="White" />
 
                 <Button
@@ -56,7 +56,7 @@
                     CornerRadius="10"
                     HeightRequest="50"
                     IsVisible="{Binding RespostaSelecionada.TemAlternativaSelecionadaAindaNaoConfirmada}"
-                    Text="{safe:Translate Confirmar}"
+                    Text="{localization:Translate Confirmar}"
                     TextColor="White" />
 
                 <Button
@@ -67,7 +67,7 @@
                     CornerRadius="10"
                     HeightRequest="50"
                     IsVisible="{Binding RespostaSelecionada.TemAlternativaSelecionada}"
-                    Text="{safe:Translate NovoRegistro}"
+                    Text="{localization:Translate NovoRegistro}"
                     TextColor="White" />
             </Grid>
 

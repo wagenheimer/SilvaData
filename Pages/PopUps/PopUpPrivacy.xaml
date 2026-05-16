@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:TypeArguments="x:Boolean">
 
@@ -39,12 +39,12 @@
                 <buttons:SfButton
                     Command="{Binding AceitarCommand}"
                     Style="{StaticResource ButtonPrimary}"
-                    Text="{safe:Translate Aceitar}" />
+                    Text="{localization:Translate Aceitar}" />
                 <buttons:SfButton
                     Grid.Column="1"
                     Command="{Binding RecusarCommand}"
                     Style="{StaticResource ButtonSecondary}"
-                    Text="{safe:Translate Recusar}" />
+                    Text="{localization:Translate Recusar}" />
             </Grid>
         </Grid>
     </Border>

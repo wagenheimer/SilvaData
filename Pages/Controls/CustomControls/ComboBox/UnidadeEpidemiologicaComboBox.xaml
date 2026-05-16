@@ -7,7 +7,7 @@
     xmlns:comboBox="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     x:Name="ueComboBox">
 
     <ContentView.Content>
@@ -21,7 +21,7 @@
                     Margin="0"
                     Padding="5,0"
                     FontSize="Small"
-                    Text="{safe:Translate UnidadeEpidemiológica}"
+                    Text="{localization:Translate UnidadeEpidemiológica}"
                     TextColor="{StaticResource PrimaryColor}" />
                 <Label
                     Grid.Column="1"

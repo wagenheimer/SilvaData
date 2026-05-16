@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
     x:DataType="viewmodels:PopUpUsuarioViewModel"
@@ -47,7 +47,7 @@
                 <buttons:SfButton
                     Command="{Binding MinhaContaCommand}"
                     Style="{StaticResource PrimaryButton}"
-                    Text="{safe:Translate MinhaConta}">
+                    Text="{localization:Translate MinhaConta}">
                     <buttons:SfButton.ImageSource>
                         <FontImageSource
                             FontFamily="FontAwesomeRegular"
@@ -59,7 +59,7 @@
                 <buttons:SfButton
                     Command="{Binding PrivacidadeCommand}"
                     Style="{StaticResource PrimaryButton}"
-                    Text="{safe:Translate PolíticaDePrivacidade}">
+                    Text="{localization:Translate PolíticaDePrivacidade}">
                     <buttons:SfButton.ImageSource>
                         <FontImageSource
                             FontFamily="FontAwesomeRegular"
@@ -85,7 +85,7 @@
                 <buttons:SfButton
                     Command="{Binding LogOffCommand}"
                     Style="{StaticResource PrimaryButton}"
-                    Text="{safe:Translate DeslogarConta}">
+                    Text="{localization:Translate DeslogarConta}">
                     <buttons:SfButton.ImageSource>
                         <FontImageSource
                             FontFamily="FontAwesomeRegular"

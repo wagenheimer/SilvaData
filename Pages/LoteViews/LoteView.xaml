@@ -7,7 +7,7 @@
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
     xmlns:listview="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:models="clr-namespace:SilvaData.Models"
     xmlns:sfComboBox="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
@@ -97,7 +97,7 @@
                         Margin="0"
                         Padding="0"
                         FontSize="Micro"
-                        Text="{safe:Translate PesquisarLotes}"
+                        Text="{localization:Translate PesquisarLotes}"
                         TextColor="White" />
                     <Border
                         Margin="0"
@@ -120,7 +120,7 @@
                         Margin="0"
                         Padding="5,0"
                         FontSize="Micro"
-                        Text="{safe:Translate UNIDADEEPID}"
+                        Text="{localization:Translate UNIDADEEPID}"
                         TextColor="White" />
                     <Border
                         Margin="0"
@@ -169,7 +169,7 @@
                                     <Label
                                         Grid.Column="1"
                                         FontSize="Small"
-                                        Text="{safe:Translate OrdemDosLotes}"
+                                        Text="{localization:Translate OrdemDosLotes}"
                                         TextColor="White"
                                         VerticalOptions="Center" />
                                 </HorizontalStackLayout>
@@ -199,7 +199,7 @@
                                     <Label
                                         FontSize="Small"
                                         HorizontalTextAlignment="Center"
-                                        Text="{safe:Translate LimparFiltros}"
+                                        Text="{localization:Translate LimparFiltros}"
                                         TextColor="White"
                                         VerticalOptions="Center" />
                                 </HorizontalStackLayout>
@@ -232,7 +232,7 @@
                         Grid.Column="0"
                         FontSize="14"
                         FontAttributes="Bold"
-                        Text="{safe:Translate UnidadeEpidemiológica}"
+                        Text="{localization:Translate UnidadeEpidemiológica}"
                         TextColor="{StaticResource PrimaryColor}"
                         VerticalOptions="Center" />
                     <Label
@@ -240,7 +240,7 @@
                         FontSize="14"
                         FontAttributes="Bold"
                         HorizontalTextAlignment="Center"
-                        Text="{safe:Translate Lote}"
+                        Text="{localization:Translate Lote}"
                         TextColor="{StaticResource PrimaryColor}"
                         VerticalOptions="Center" />
                     <Label
@@ -248,7 +248,7 @@
                         FontSize="14"
                         FontAttributes="Bold"
                         HorizontalTextAlignment="End"
-                        Text="{safe:Translate Alojamento}"
+                        Text="{localization:Translate Alojamento}"
                         TextColor="{StaticResource PrimaryColor}"
                         VerticalOptions="Center" />
                     <BoxView Grid.Row="0" Grid.ColumnSpan="3" HeightRequest="1" Color="{StaticResource PrimaryColor}" VerticalOptions="End" Margin="0,5,0,-5" />
@@ -302,13 +302,13 @@
                                 FontAttributes="Bold"
                                 FontSize="18"
                                 HorizontalTextAlignment="Center"
-                                Text="{safe:Translate NenhumLoteTratamento}"
+                                Text="{localization:Translate NenhumLoteTratamento}"
                                 TextColor="{StaticResource PrimaryColor}" />
                             <Label
                                 FontSize="13"
                                 HorizontalTextAlignment="Center"
                                 Opacity="0.7"
-                                Text="{safe:Translate AltereCriteriosOuAdicioneNovoLote}"
+                                Text="{localization:Translate AltereCriteriosOuAdicioneNovoLote}"
                                 TextColor="{StaticResource SecondaryColor}" />
                         </VerticalStackLayout>
                     </VerticalStackLayout>
@@ -360,7 +360,7 @@
                 Background="#220888CD"
                 HorizontalOptions="Fill"
                 IsVisible="{Binding IsBusy}"
-                Text="{safe:Translate Aguarde}"
+                Text="{localization:Translate Aguarde}"
                 VerticalOptions="Fill" />
         </Grid>
 

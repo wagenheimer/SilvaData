@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:controls="clr-namespace:SilvaData.Controls"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
     x:DataType="viewmodels:DashboardViewModel">
 
@@ -66,7 +66,7 @@
                                 ImageSize="25"
                                 ImageSource="iconscore.png"
                                 ShowIcon="True"
-                                Text="{safe:Translate ScoreSemDoisPontos}"
+                                Text="{localization:Translate ScoreSemDoisPontos}"
                                 TextColor="{StaticResource ScoreTextColor}" />
                     </Grid>
 
@@ -80,7 +80,7 @@
                                 ImageSize="25"
                                 ImageSource="iconacometimento.png"
                                 ShowIcon="True"
-                                Text="{safe:Translate Acomet}"
+                                Text="{localization:Translate Acomet}"
                                 TextColor="{StaticResource AcometimentoTextColor}" />
                     </Grid>
 
@@ -94,7 +94,7 @@
                                 ImageSize="25"
                                 ImageSource="icondispersao.png"
                                 ShowIcon="True"
-                                Text="{safe:Translate Dispersão}"
+                                Text="{localization:Translate Dispersão}"
                                 TextColor="{StaticResource DispersaoTextColor}" />
                     </Grid>
                 </Grid>

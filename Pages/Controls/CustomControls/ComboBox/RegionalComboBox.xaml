@@ -7,7 +7,7 @@
     xmlns:comboBox="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:models="clr-namespace:SilvaData.Models"
     x:Name="reginalComboBox"
     Padding="0">
@@ -22,7 +22,7 @@
                 Margin="0"
                 Padding="5,0"
                 FontSize="Small"
-                Text="{safe:Translate Regional}"
+                Text="{localization:Translate Regional}"
                 TextColor="{StaticResource PrimaryColor}" />
             <Label
                 Grid.Column="1"

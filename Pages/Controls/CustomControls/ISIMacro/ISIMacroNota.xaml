@@ -7,7 +7,7 @@
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:models="clr-namespace:SilvaData.Models"
     x:Name="isiMacroNota"
     Margin="6,0"
@@ -105,7 +105,7 @@
                     IsEnabled="{Binding IsReadOnly, Source={x:Reference isiMacroNota}, Converter={StaticResource InvertBoolean}}"
                     IsVisible="{Binding IsReadOnly, Source={x:Reference isiMacroNota}, Converter={StaticResource InvertBoolean}}"
                     ShowIcon="true"
-                    Text="{safe:Translate VerFotos}"
+                    Text="{localization:Translate VerFotos}"
                     TextColor="White"
                     WidthRequest="150">
 

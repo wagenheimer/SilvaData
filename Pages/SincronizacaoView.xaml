@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:SilvaData.ViewModels"
     xmlns:conv="clr-namespace:SilvaData.Converters"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:fontawesome="clr-namespace:SilvaData.Utils"
     x:DataType="vm:SincronizacaoViewModel"
@@ -56,7 +56,7 @@
                 FontSize="24"
                 FontAttributes="Bold"
                 HorizontalTextAlignment="Center"
-                Text="{safe:Translate SincronizarDados}"
+                Text="{localization:Translate SincronizarDados}"
                 TextColor="{StaticResource PrimaryColor}" />
 
             <Border
@@ -103,7 +103,7 @@
                         <HorizontalStackLayout HorizontalOptions="Fill">
                             <Label
                                 FontSize="13"
-                                Text="{safe:Translate Progresso}"
+                                Text="{localization:Translate Progresso}"
                                 TextColor="#757575" />
                             <Label
                                 Padding="5,0"
@@ -125,7 +125,7 @@
                                 Padding="0,0,4,0"
                                 FontSize="12"
                                 Opacity="0.7"
-                                Text="{safe:Translate SubTarefa}"
+                                Text="{localization:Translate SubTarefa}"
                                 TextColor="#757575" />
                             <Label
                                 FontSize="12"
@@ -145,7 +145,7 @@
                         <VerticalStackLayout Spacing="4">
                             <Label
                                 FontSize="11"
-                                Text="{safe:Translate TempoDecorrido}"
+                                Text="{localization:Translate TempoDecorrido}"
                                 TextColor="{StaticResource SecondaryColor}" />
                             <Label
                                 FontAttributes="Bold"
@@ -198,14 +198,14 @@
                             FontSize="24"
                             HorizontalOptions="Center"
                             HorizontalTextAlignment="Center"
-                            Text="{safe:Translate Sucesso}"
+                            Text="{localization:Translate Sucesso}"
                             TextColor="{StaticResource PrimaryColor}" />
                         <Label
                             FontSize="16"
                             HorizontalOptions="Center"
                             HorizontalTextAlignment="Center"
                             Opacity="0.7"
-                            Text="{safe:Translate DadosRecebidosComSucesso}"
+                            Text="{localization:Translate DadosRecebidosComSucesso}"
                             TextColor="{StaticResource SecondaryColor}" />
                     </VerticalStackLayout>
                 </VerticalStackLayout>

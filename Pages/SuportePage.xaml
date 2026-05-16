@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:viewmodels="clr-namespace:SilvaData.PageModels"
     x:DataType="viewmodels:SuportePageViewModel">
 
@@ -18,7 +18,7 @@
                     FontFamily="Nunito"
                     FontSize="Large"
                     HorizontalOptions="Start"
-                    Text="{safe:Translate Suporte}"
+                    Text="{localization:Translate Suporte}"
                     TextColor="{StaticResource PrimaryColor}" />
 
                 <Image
@@ -67,7 +67,7 @@
                                 <Label
                                     FontSize="Small"
                                     HorizontalTextAlignment="Start"
-                                    Text="{safe:Translate AcesseNossoSite}"
+                                    Text="{localization:Translate AcesseNossoSite}"
                                     TextColor="{StaticResource PrimaryColor}"
                                     VerticalOptions="Center" />
                                 <Label
@@ -106,7 +106,7 @@
                                 <Label
                                     FontSize="Small"
                                     HorizontalTextAlignment="Start"
-                                    Text="{safe:Translate NosEnvieUmEmail}"
+                                    Text="{localization:Translate NosEnvieUmEmail}"
                                     TextColor="{StaticResource PrimaryColor}"
                                     VerticalOptions="Center" />
                                 <Label
@@ -145,7 +145,7 @@
                                 Grid.Column="1"
                                 FontSize="Small"
                                 HorizontalTextAlignment="Start"
-                                Text="{safe:Translate FaleConoscoNoWhatsApp}"
+                                Text="{localization:Translate FaleConoscoNoWhatsApp}"
                                 TextColor="{StaticResource PrimaryColor}"
                                 VerticalOptions="Center" />
                         </Grid>
@@ -164,7 +164,7 @@
                         FontSize="Small"
                         HeightRequest="85"
                         Style="{StaticResource sfButtonBar}"
-                        Text="{safe:Translate EnviarBancoDeDadosParaSuporte}">
+                        Text="{localization:Translate EnviarBancoDeDadosParaSuporte}">
                         <buttons:SfButton.ImageSource>
                             <FontImageSource
                                 FontFamily="FontAwesomeSolid"

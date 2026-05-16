@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:local="clr-namespace:SilvaData.Pages.PopUps"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:DataType="local:PopUpDetalhesLoteViewModel"
@@ -56,7 +56,7 @@
                     <Label
                         FontSize="10"
                         Opacity="0.6"
-                        Text="{safe:Translate Regional}"
+                        Text="{localization:Translate Regional}"
                         TextColor="#333" />
                     <Label
                         FontAttributes="Bold"
@@ -71,7 +71,7 @@
                     <Label
                         FontSize="10"
                         Opacity="0.6"
-                        Text="{safe:Translate Propriedade}"
+                        Text="{localization:Translate Propriedade}"
                         TextColor="#333" />
                     <Label
                         FontAttributes="Bold"
@@ -86,7 +86,7 @@
                     <Label
                         FontSize="10"
                         Opacity="0.6"
-                        Text="{safe:Translate UnidadeEp}"
+                        Text="{localization:Translate UnidadeEp}"
                         TextColor="#333" />
                     <Label
                         FontAttributes="Bold"
@@ -101,7 +101,7 @@
                     <Label
                         FontSize="10"
                         Opacity="0.6"
-                        Text="{safe:Translate DataInicio}"
+                        Text="{localization:Translate DataInicio}"
                         TextColor="#333" />
                     <Label
                         FontAttributes="Bold"

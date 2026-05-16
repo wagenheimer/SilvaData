@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:SilvaData.Controls"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:viewmodels="clr-namespace:SilvaData.ViewModels">
 
     <ContentView.Content>
@@ -15,7 +15,7 @@
 
             <Label
                 Margin="0,10,0,10"
-                Text="{safe:Translate Observações}"
+                Text="{localization:Translate Observações}"
                 TextColor="{StaticResource PrimaryColor}" />
 
             <Editor
@@ -26,7 +26,7 @@
 
             <Label
                 Margin="0,10,0,10"
-                Text="{safe:Translate Fotos}"
+                Text="{localization:Translate Fotos}"
                 TextColor="{StaticResource PrimaryColor}"
                 VerticalOptions="Center" />
 

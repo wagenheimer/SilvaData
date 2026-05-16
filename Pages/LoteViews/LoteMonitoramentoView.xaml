@@ -6,7 +6,7 @@
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModels="clr-namespace:SilvaData.ViewModels"
     x:DataType="viewModels:LoteMonitoramentoViewModel"
@@ -37,7 +37,7 @@
                         <FormattedString>
                             <Span
                                 FontSize="Medium"
-                                Text="{safe:Translate Lote}"
+                                Text="{localization:Translate Lote}"
                                 TextColor="White" />
                             <Span Text=" " TextColor="White" />
                             <Span
@@ -122,7 +122,7 @@
                                     <Span
                                         FontAttributes="Bold"
                                         FontSize="Micro"
-                                        Text="{safe:Translate DataInicio}"
+                                        Text="{localization:Translate DataInicio}"
                                         TextColor="White" />
                                     <Span Text=": " TextColor="White" />
                                     <Span
@@ -139,7 +139,7 @@
                                     <Span
                                         FontAttributes="Bold"
                                         FontSize="Micro"
-                                        Text="{safe:Translate Propriedade}"
+                                        Text="{localization:Translate Propriedade}"
                                         TextColor="White" />
                                     <Span Text=": " TextColor="White" />
                                     <Span
@@ -156,7 +156,7 @@
                                     <Span
                                         FontAttributes="Bold"
                                         FontSize="Micro"
-                                        Text="{safe:Translate Regional}"
+                                        Text="{localization:Translate Regional}"
                                         TextColor="White" />
                                     <Span Text=": " TextColor="White" />
                                     <Span
@@ -173,7 +173,7 @@
                                     <Span
                                         FontAttributes="Bold"
                                         FontSize="Micro"
-                                        Text="{safe:Translate UnidadeEp}"
+                                        Text="{localization:Translate UnidadeEp}"
                                         TextColor="White" />
                                     <Span Text=": " TextColor="White" />
                                     <Span
@@ -213,7 +213,7 @@
                             FontAttributes="Bold"
                             FontSize="Medium"
                             HorizontalTextAlignment="Start"
-                            Text="{safe:Translate AvaliacoesDiversas}"
+                            Text="{localization:Translate AvaliacoesDiversas}"
                             TextColor="{StaticResource PrimaryColor}" />
 
                         <CollectionView ItemsSource="{Binding ParametrosGalpaoResumo}" SelectionMode="Single">
@@ -293,7 +293,7 @@
                             FontAttributes="Bold"
                             FontSize="Medium"
                             HorizontalTextAlignment="Start"
-                            Text="{safe:Translate OutrosMonitoramentos}"
+                            Text="{localization:Translate OutrosMonitoramentos}"
                             TextColor="{StaticResource PrimaryColor}" />
 
                         <buttons:SfButton
@@ -301,21 +301,21 @@
                             ImageSource="manejo.png"
                             IsVisible="{Binding IsManejoVisible}"
                             Style="{StaticResource SubMonitoramentoButton}"
-                            Text="{safe:Translate Manejo}" />
+                            Text="{localization:Translate Manejo}" />
 
                         <buttons:SfButton
                             Command="{Binding ZootecnicoCommand}"
                             ImageSource="zootecnico.png"
                             IsVisible="{Binding IsZootecnicoVisible}"
                             Style="{StaticResource SubMonitoramentoButton}"
-                            Text="{safe:Translate Zootécnico}" />
+                            Text="{localization:Translate Zootécnico}" />
 
                         <buttons:SfButton
                             Command="{Binding ISIMacroCommand}"
                             ImageSource="isimacro.png"
                             IsVisible="{Binding IsIsiMacroVisible}"
                             Style="{StaticResource SubMonitoramentoButton}"
-                            Text="{safe:Translate ISIMacro}" />
+                            Text="{localization:Translate ISIMacro}" />
 
                         <buttons:SfButton
                             Command="{Binding AvaliacoesGalpaoCommand}"
@@ -341,7 +341,7 @@
                                             FontAttributes="Bold"
                                             FontFamily="Nunito"
                                             FontSize="Small"
-                                            Text="{safe:Translate AvaliacoesNoGalpao}"
+                                            Text="{localization:Translate AvaliacoesNoGalpao}"
                                             TextColor="{StaticResource SecondaryColor}"
                                             VerticalOptions="Center" />
                                     </HorizontalStackLayout>
@@ -354,7 +354,7 @@
                             ImageSource="sanidade.png"
                             IsVisible="{Binding IsSanidadeVisible}"
                             Style="{StaticResource SubMonitoramentoButton}"
-                            Text="{safe:Translate Sanidade}" />
+                            Text="{localization:Translate Sanidade}" />
 
                         <VerticalStackLayout
                             Margin="20,5,10,0"
@@ -365,35 +365,35 @@
                                 ImageSource="diagnosticoenfermidade.png"
                                 IsVisible="{Binding IsDiagnosticoVisible}"
                                 Style="{StaticResource SubMonitoramentoButton}"
-                                Text="{safe:Translate DiagnósticoDeEnfermidades}" />
+                                Text="{localization:Translate DiagnósticoDeEnfermidades}" />
 
                             <buttons:SfButton
                                 Command="{Binding TratamentoCommand}"
                                 ImageSource="tratamentoviaagua.png"
                                 IsVisible="{Binding IsTratamentoVisible}"
                                 Style="{StaticResource SubMonitoramentoButton}"
-                                Text="{safe:Translate TratamentoViaÁgua}" />
+                                Text="{localization:Translate TratamentoViaÁgua}" />
 
                             <buttons:SfButton
                                 Command="{Binding SalmonellaCommand}"
                                 ImageSource="analisesalmonela.png"
                                 IsVisible="{Binding IsSalmonellaVisible}"
                                 Style="{StaticResource SubMonitoramentoButton}"
-                                Text="{safe:Translate AnáliseDeSalmonella}" />
+                                Text="{localization:Translate AnáliseDeSalmonella}" />
 
                             <buttons:SfButton
                                 Command="{Binding VacinasCommand}"
                                 ImageSource="vacinas.png"
                                 IsVisible="{Binding IsVacinasVisible}"
                                 Style="{StaticResource SubMonitoramentoButton}"
-                                Text="{safe:Translate Vacinas}" />
+                                Text="{localization:Translate Vacinas}" />
 
                             <buttons:SfButton
                                 Command="{Binding ISIMicroCommand}"
                                 ImageSource="isimicro.png"
                                 IsVisible="{Binding IsIsiMicroVisible}"
                                 Style="{StaticResource SubMonitoramentoButton}"
-                                Text="{safe:Translate ISIMicro}" />
+                                Text="{localization:Translate ISIMicro}" />
                         </VerticalStackLayout>
 
                         <buttons:SfButton
@@ -401,7 +401,7 @@
                             ImageSource="nutricao.png"
                             IsVisible="{Binding IsNutricaoVisible}"
                             Style="{StaticResource SubMonitoramentoButton}"
-                            Text="{safe:Translate Nutrição}" />
+                            Text="{localization:Translate Nutrição}" />
                     </VerticalStackLayout>
 
                 </VerticalStackLayout>

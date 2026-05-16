@@ -6,7 +6,7 @@
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:utils="clr-namespace:SilvaData.Utils"
     xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
     x:DataType="viewmodels:ProprietarioEditViewModel"
@@ -77,7 +77,7 @@
 
                     <controls:ISITextField
                         x:Name="nome"
-                        Title="{safe:Translate Nome}"
+                        Title="{localization:Translate Nome}"
                         IsReadOnly="{Binding ReadOnly, Mode=OneWay}"
                         Text="{Binding Proprietario.nome, Mode=TwoWay}" />
 
@@ -90,6 +90,6 @@
         <controls:LoadingView
             Grid.Row="1"
             IsVisible="{Binding IsBusy}"
-            Text="{safe:Translate Aguarde}" />
+            Text="{localization:Translate Aguarde}" />
     </Grid>
 </controls:ContentPageEdit>

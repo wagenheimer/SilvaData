@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:button="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     Padding="5">
 
     <ContentView.Content>
@@ -18,7 +18,7 @@
                 Command="{Binding SaveAndReturnCommand}"
                 IsVisible="{Binding NotReadOnly}"
                 Style="{StaticResource PrimaryButton}"
-                Text="{safe:Translate Salvar}" />
+                Text="{localization:Translate Salvar}" />
 
             <button:SfButton
                 x:Name="btEditar"
@@ -26,7 +26,7 @@
                 Command="{Binding EditCommand}"
                 IsVisible="{Binding ReadOnly}"
                 Style="{StaticResource PrimaryButton}"
-                Text="{safe:Translate Editar}" />
+                Text="{localization:Translate Editar}" />
 
         </Grid>
     </ContentView.Content>

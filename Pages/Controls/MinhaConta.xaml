@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:models="clr-namespace:SilvaData.Models"
     xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
     x:DataType="viewmodels:MinhaContaViewModel">
@@ -43,7 +43,7 @@
                         FontAttributes="Bold"
                         FontSize="15"
                         HorizontalTextAlignment="End"
-                        Text="{safe:Translate MinhaConta}"
+                        Text="{localization:Translate MinhaConta}"
                         TextColor="{StaticResource PrimaryColor}"
                         VerticalOptions="Center" />
                 </Grid>

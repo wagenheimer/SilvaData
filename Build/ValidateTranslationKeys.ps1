@@ -66,7 +66,7 @@ $xamlFiles = Get-ChildItem -Path $ProjectDir -Recurse -Filter "*.xaml" |
 foreach ($file in $xamlFiles) {
     $content = Get-Content $file.FullName -Raw -Encoding UTF8
     $rel = $file.FullName.Replace($projectDirResolved, "").TrimStart('\','/')
-    foreach ($m in [regex]::Matches($content, '\{safe:Translate\s+([\wÀ-ɏ]+)\}')) {
+    foreach ($m in [regex]::Matches($content, '\{localization:Translate\s+([\wÀ-ɏ]+)\}')) {
         $key = $m.Groups[1].Value
         if (-not $resxSet.Contains($key)) {
             $line = ($content.Substring(0, $m.Index) -split "`n").Count

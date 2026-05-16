@@ -6,7 +6,7 @@
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:models="clr-namespace:SilvaData.Models"
     xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
     x:Name="loteEditPage"
@@ -63,7 +63,7 @@
 
                     <controls:ISITextField
                         x:Name="campoNomeLote"
-                        Title="{safe:Translate Nome}"
+                        Title="{localization:Translate Nome}"
                         IsReadOnly="{Binding ReadOnly}"
                         IsRequired="True"
                         Text="{Binding Lote.numero, Mode=TwoWay}" />
@@ -77,14 +77,14 @@
                     <controls:ISIDatePicker
                         x:Name="dataInicio"
                         Data="{Binding Lote.dataInicio, Mode=TwoWay}"
-                        Hint="{safe:Translate DataDeInício}"
+                        Hint="{localization:Translate DataDeInício}"
                         IsReadOnly="{Binding ReadOnly}" />
 
                     <buttons:SfButton
                         Margin="0,10"
                         Command="{Binding AbrirLoteCommand}"
                         IsVisible="{Binding ReadOnly}"
-                        Text="{safe:Translate AbrirLote}" />
+                        Text="{localization:Translate AbrirLote}" />
 
                     <StackLayout
                         x:Name="camposaPreencherExtras"
@@ -108,6 +108,6 @@
         <controls:LoadingView
             Grid.Row="1"
             IsVisible="{Binding IsBusy}"
-            Text="{safe:Translate Aguarde}" />
+            Text="{localization:Translate Aguarde}" />
     </Grid>
 </controls:ContentPageEdit>

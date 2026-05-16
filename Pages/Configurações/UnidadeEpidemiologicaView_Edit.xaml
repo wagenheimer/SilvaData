@@ -6,7 +6,7 @@
     xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
     xmlns:controls="clr-namespace:SilvaData.Controls"
     xmlns:fontawesome="clr-namespace:SilvaData.FontAwesome"
-    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui" xmlns:safe="http://isisis.com.br/safe"
+    xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     xmlns:models="clr-namespace:SilvaData.Models"
     xmlns:utils="clr-namespace:SilvaData.Utils"
     xmlns:viewmodels="clr-namespace:SilvaData.ViewModels"
@@ -74,18 +74,18 @@
 
                     <controls:ISITextField
                         x:Name="nome"
-                        Title="{safe:Translate Nome}"
+                        Title="{localization:Translate Nome}"
                         IsReadOnly="{Binding ReadOnly, Mode=OneWay}"
                         IsRequired="True"
                         Text="{Binding UnidadeEpidemiologica.nome, Mode=TwoWay}" />
 
                     <Grid ColumnDefinitions="*,*" IsVisible="{x:Static models:Permissoes.PermissaoLoteDetalhado}">
                         <controls:ISITextField
-                            Title="{safe:Translate Latitude}"
+                            Title="{localization:Translate Latitude}"
                             IsReadOnly="True"
                             Text="{Binding UnidadeEpidemiologica.latitude}" />
                         <controls:ISITextField
-                            Title="{safe:Translate Longitude}"
+                            Title="{localization:Translate Longitude}"
                             Grid.Column="1"
                             IsReadOnly="True"
                             Text="{Binding UnidadeEpidemiologica.longitude}" />
@@ -110,6 +110,6 @@
         <controls:LoadingView
             Grid.Row="1"
             IsVisible="{Binding IsBusy}"
-            Text="{safe:Translate Aguarde}" />
+            Text="{localization:Translate Aguarde}" />
     </Grid>
 </controls:ContentPageEdit>
