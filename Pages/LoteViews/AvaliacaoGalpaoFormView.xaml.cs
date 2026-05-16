@@ -145,18 +145,21 @@ public partial class AvaliacaoGalpaoFormView : ContentPage
 
                 Debug.WriteLine($"[AvaliacaoGalpaoFormView] Sincronizando: {avaliacoes.Count} avaliações, {alternativas.Count} alternativas");
 
-                avaliacaoVM.ListaAvaliacoesGalpao.Clear();
                 avaliacaoVM.AlternativasParametroSelecionado.Clear();
-
-                foreach (var av in avaliacoes)
-                    avaliacaoVM.ListaAvaliacoesGalpao.Add(av);
-
                 foreach (var alt in alternativas)
                     avaliacaoVM.AlternativasParametroSelecionado.Add(alt);
 
+                // Calcula TotalLiberado ANTES de popular a lista para que cada Add
+                // via OnListaAvaliacoesGalpaoChanged → AtualizaComboBoxLista já use o valor correto.
+                int totalLiberado = avaliacoes.Count(a => a.AlternativaIds.Count > 0);
+                avaliacaoVM.TotalLiberado = totalLiberado > 0 ? totalLiberado : 1;
+
+                avaliacaoVM.ListaAvaliacoesGalpao.Clear();
+                foreach (var av in avaliacoes)
+                    avaliacaoVM.ListaAvaliacoesGalpao.Add(av);
+
                 if (alternativas.Any())
                 {
-                    avaliacaoVM.AtualizaTotalLiberado();
                     avaliacaoVM.AtualizaComboBoxLista();
                     // Marca as alternativas da resposta selecionada como IsSelected na carga inicial
                     avaliacaoVM.AtualizaRespostas();
